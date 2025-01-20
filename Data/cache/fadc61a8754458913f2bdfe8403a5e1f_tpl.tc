@@ -1,0 +1,78 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="/template/sysadmin/css/style.css" rel="stylesheet">
+	<link href="/template/sysadmin/css/home.css" rel="stylesheet">
+	<link href="/template/sysadmin/css/sy-index.css" rel="stylesheet">
+	<link rel="icon" href="icon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="icon.ico" type="image/x-icon">
+
+  </head>
+<body>
+	<div class="main">
+	<div class="minihead">
+	<div class="dataleft"><em>统计/服务器信息</em><span id='cpnmxx'>欢迎来到后台管理系统</span></div>
+
+	</div>
+	<div class="sy-index-lb" id="sy-index-lb">
+		<div class="sy-indexf" style="background:none;">
+		<div class="sy-config">
+			<div class="sy-config-sz">
+				<div class="sy-config-sz-z" style=" background: url(./template/sysadmin/image/usnum.png) bottom no-repeat;">
+					<b><?php echo $usnum['Znumber']?></b>
+					<em>会员总数</em>
+					<span></span>
+				</div>
+			</div>
+			<div class="sy-config-sz">
+				<div class="sy-config-sz-z" style=" background: url(./template/sysadmin/image/ushy.png) bottom no-repeat;">
+					<b><?php echo $ushy['Znumber']?></b>
+					<em>用户活跃数</em>
+					<span></span>
+				</div>
+			</div>
+
+			<div class="sy-config-sz">
+				<div class="sy-config-sz-z" style=" background: url(./template/sysadmin/image/tzus.png) bottom no-repeat;">
+					<b><?php echo $ltnum['Znumber']?></b>
+					<em>资讯总数</em>
+					<span></span>
+				</div>
+			</div>
+			
+		</div>
+
+		<div class="sy-config-xt">
+			<div class="sy-config-xt-tit"><i></i><span>服务器信息</span></div>
+			<div class="sy-config-xt-li">
+				<li style="width: 40%;">服务器版本：</li><li style="width: 60%;"><?php echo $fwqbb?></li>
+				<li style="width: 40%;">服务器系统：</li><li style="width: 60%;"><?php echo $fwqsys?></li>
+				<li style="width: 40%;">服务器域名</li><li style="width: 60%;"><?php echo $_SERVER['HTTP_HOST']?></li>
+				<li style="width: 40%;">服务器端口</li><li style="width: 60%;"><?php echo $_SERVER['SERVER_PORT']?></li>
+				<li style="width: 40%;">最大上传限制：</li><li style="width: 60%;"><?php echo $zdupxz?></li>
+				<li style="width: 40%;">最大执行时间：</li><li style="width: 60%;"><?php echo $yxzdtm?></li>
+				<li style="width: 40%;">Zend版本：</li><li style="width: 60%;"><?php echo $Zend?></li>
+				<li style="width: 40%;">Opcache：</li><li style="width: 60%;"><?php echo $opcache?></li>
+				<li style="width: 40%;">运行环境：</li><li style="width: 60%;"><?php echo $syss?></li>
+				<li style="width: 40%;">PHP版本：</li><li style="width: 60%;"><?php echo $phpbb?></li>
+				<li style="width: 40%;">运行方式：</li><li style="width: 60%;"><?php echo $yxfs?></li>
+				<li style="width: 40%;">服务器时间：</li><li style="width: 60%;"><?php echo $dates?></li>
+				
+			</div>
+			
+		</div>
+		
+		</div>
+	</div>
+
+    <div id="ajsuccess"></div>
+    <script src="/template/sysadmin/js/jquery.min.js" type="text/javascript"></script>
+
+	<script type="text/javascript">
+
+	</script>
+  </body>
+</html>

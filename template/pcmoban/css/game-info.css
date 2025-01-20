@@ -1,0 +1,412 @@
+/*轮播*/
+.swiper-container {
+  width: 100%;
+  height: 550px;
+}
+.swiper-slide img{
+	width: 100%;
+	height: 100%;
+  object-fit: cover;
+}
+.swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{
+	bottom: 30px !important;
+}
+.swiper-pagination-bullet{
+	width: 12px;
+	height: 12px;
+	background-color: #fff;
+	opacity: 1;
+}
+.swiper-pagination-bullet-active{
+	background-color: #fddd85;
+}
+
+/*热门、开服*/
+.content{
+	margin-top: 30px;
+}
+.header{
+  background-color: #1f272b !important;
+  padding: 15px 0;
+}
+.header-tab a p{
+  margin-top: 5px;
+  width: 32px;
+}
+.header-tab{
+  margin-top: 0;
+}
+.header-tab a{
+  color:#fff;
+  width: 20%;
+}
+
+.information-list{
+	background-color: #fff;
+	width: 820px;
+	padding: 35px 30px 50px;
+	border-radius: 5px;
+  min-height: 1234px;
+}
+.hot-information{
+	background-color: #fff;
+	width: 280px;
+	padding: 30px 0 0;
+	border-radius: 5px;
+}
+.information-list ul{
+	margin-top: 20px;
+}
+.game_gonglue li{
+	padding: 30px 0;
+	border-top: 1px solid #f5f6f5;
+	font-size: 0;
+}
+.game_gonglue li img{
+	width: 280px;
+	height: 156px;
+	border-radius: 5px;
+	margin-right: 30px;
+}
+.game_gonglue li div{
+	display: inline-block;
+	vertical-align: middle;
+	width: 510px;font-size: 14px;
+	color:#333;
+}
+.game_gonglue li div span{
+	display: inline-block;
+	width: 60px;height: 28px;
+	background: url(../images/zixun.png) no-repeat center center;
+	background-size: 100% 100%;
+	border-radius: 14px;
+	color: #fff;
+}
+.game_gonglue li div span.on{
+	background-image: url(../images/gonglue.png);
+}
+.game_gonglue li div span.on1{
+	background-image: url(../images/huodong.png);
+}
+.game_gonglue li div h3{
+	font-size: 18px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	margin: 15px 0 10px;
+}
+.game_gonglue li div p{
+	overflow : hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	line-height: 24px;
+	margin-bottom: 10px;
+	color:#666;
+}
+.game_gonglue li:last-child{
+	border-bottom: 1px solid #f5f6f5;
+}
+.game_gonglue li div i{
+	color:#999;
+}
+
+.hot-information h3{
+	font-size: 20px;
+	padding: 0 15px;
+	font-weight: bold;
+	margin-bottom: 30px;
+}
+.hot-information h3 i{
+	display: inline-block;
+	margin-right: 10px;
+	width: 4px;height: 23px;
+	background-color: #fddd85;
+	border-radius: 2px;
+	vertical-align: -5px;
+}
+.hot-information li{
+	padding: 18px 15px 12px;
+	border-top: 1px solid #f5f6f5;
+}
+.hot-information li img{
+	width: 250px;
+	height: 140px;
+	border-radius: 5px;
+}
+.hot-information li a{
+  display: block;
+}
+.hot-information li p{
+	color:#333;font-size: 16px;
+	text-overflow: ellipsis;overflow: hidden;
+	white-space: nowrap;
+	margin-top: 10px;
+}
+.hot-information li:last-child{
+	border-bottom: 1px solid #f5f6f5;
+}
+.hot-information h3.hot-game{
+	margin-top: 30px;
+}
+
+.kaifu li{
+	padding: 0;
+	border: 0 !important;
+}
+.kaifu li a{
+	display: block;
+	padding: 19px 15px;
+	border-top: 1px solid #f5f6f5;
+	color:#333;
+}
+.kaifu li a:hover{
+	background-color: #eee;
+}
+.kaifu a .right{
+	margin-top: 20px;
+	width: 15px;height: 28px;
+}
+.kaifu a img.left{
+	width: 68px;
+	height: 68px;
+	border-radius: 10px;
+}
+.kaifu a div{
+	margin-left: 10px;
+}
+.kaifu a div p{
+	margin-top: 5px;
+	font-size: 14px;
+	color:#999;
+}
+
+.main-info>img{
+  width: 100px;height: 100px;
+  border-radius: 20px;
+  margin-right: 30px;
+}
+.main-info .detail{
+  margin-top: 5px;
+}
+.main-info .detail h4{
+  font-size: 18px;
+  margin-bottom: 18px;
+}
+.main-info .detail p{
+  font-size: 14px;
+  color:#666;margin-bottom: 10px;
+}
+.main-info .imgs{
+  border:1px solid #f5f6f5;
+  width: 100px;height: 100px;
+  border-radius: 3px;
+  margin-right: 30px;
+  box-sizing: border-box;
+}
+.main-info .imgs img{
+  width: 98px;height: 98px;
+}
+.main-info .btns a{
+  display: block;
+  margin-bottom: 20px;
+}
+
+.swiper-container1{
+  height: 430px;
+  overflow: hidden;
+  width: 820px;
+  position: relative;
+}
+.swiper-container1 img{
+  cursor: pointer;
+}
+.swiper-button-next, .swiper-button-prev{
+  background-color: rgba(255,255,255,0.3)
+}
+
+.game-index h3{
+	font-size: 20px;
+	padding: 30px 0 0;
+	font-weight: bold;
+  margin: 30px 0;
+  border-top: 1px solid #f5f6f5;
+}
+.game-index h3 i{
+	display: inline-block;
+	margin-right: 10px;
+	width: 4px;height: 23px;
+	background-color: #fddd85;
+	border-radius: 2px;
+	vertical-align: -5px;
+}
+.game-index p{
+  line-height: 24px;
+  font-size: 14px;
+}
+.main-video ul{
+  font-size: 0;
+}
+.main-video li{
+  display: inline-block;
+  font-size: 14px;
+  margin-right: 30px;
+  margin-bottom: 30px;
+}
+.main-video li a{
+  display: block;
+  position: relative;
+  border-radius: 5px;
+}
+.main-video li a>img{
+  width: 280px;height: 172px;
+  object-fit: cover;
+}
+.main-video li p{
+  position: absolute;
+  width: 100%;height: 36px;
+  background-color: rgba(0,0,0,.7);
+  bottom: 0;left: 0;line-height: 36px;
+  color:#fff;border-radius: 0 0 5px 5px;
+}
+.main-video li p span{
+  width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 10px;
+}
+.main-video li p img{
+  margin-right: 10px;
+  margin-top: 8px;
+}
+
+.commit li>div{
+  width: 740px;
+  margin-left: 20px;
+  font-size: 14px;
+}
+.commit li div h4{
+  margin-bottom: 10px;
+  margin-top: 8px;
+}
+.commit li div span{
+  font-size: 12px;color:#999;
+}
+.commit li div p{
+  margin-top: 10px;
+}
+.commit li div p i{
+  color:#fddd85;
+  font-size: 16px;
+}
+.commit li div div{
+  background-color: #ededed;
+  padding: 10px;
+}
+.commit li div i{
+  color:#fddd85;
+}
+
+.kaifu_list li{
+	padding: 30px 0;
+	border-top: 1px solid #ededed;
+}
+.kaifu_list li>img{
+	width: 100px;height: 100px;
+	border-radius: 10px;
+	margin-right: 30px;
+}
+.kaifu_list li div{
+	display: inline-block;
+	vertical-align: middle;
+  width: 360px;
+}
+.kaifu_list li div h4{
+	font-size: 18px;
+}
+.kaifu_list li div p{
+	font-size: 14px;
+	color:#999;
+	margin-top: 16px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.kaifu_list li div p:last-child{
+  color:#fddd85;
+}
+.kaifu_list li .system{
+	margin-left: 60px;
+  width: auto;
+}
+.kaifu_list li .system img{
+	margin-right: 20px;
+}
+.kaifu_list li a{
+	width: 68px;height: 30px;
+	line-height: 30px;
+	border-radius: 3px;
+	border: 1px solid #fddd85;
+	color: #fddd85;
+	font-size: 12px;
+	text-align: center;
+	margin-top: 35px;
+  float: right;
+}
+.kaifu_list li a.lqlb{
+	border-color: #ff8cc2;
+	color: #ff8cc2;
+}
+.kaifu_list li a:hover{
+	color:#fff;
+	background-color: #fddd85;
+}
+.kaifu_list li .lqlb:hover{
+	color:#fff;
+	background-color: #ff8cc2;
+}
+
+.information-list>ul{
+  display: none;
+}
+.information-list>ul.on{
+  display: block;;
+}
+.game-index .commit img.left{
+  width: 60px;height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.game-index .commit li{
+  margin-bottom: 10px;
+}
+.game-index .commit>p{
+  text-align:center;margin-top:30px;font-size:16px;
+}
+.game-index .commit>p a{
+  color: #fddd85;
+}
+center{
+  font-size: 36px;color: #ddd; height: 300px; line-height: 300px; border-top: 1px solid #f5f6f5;
+}
+li.clearfix center{
+  color:#ddd;height:100px;line-height:100px;
+}
+.popup{
+  position: fixed;
+  width: 100%;height: 100%;
+  left: 0;top: 0;
+  background-color: rgba(0,0,0,.7);
+  z-index: 100;
+  display: none;
+  cursor: pointer;
+}
+.popup img{
+  display: block;
+  margin: 50px auto 0;
+  height: 80%;
+  object-fit: cover;
+}

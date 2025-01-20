@@ -1,0 +1,76 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><?php include $this->Template('header');?>
+
+<div class="main">
+	<div class="gm_gm_list">
+		<div id="gm_gm_list">
+			<?php if(is_array($lblist)===true){foreach($lblist AS $key => $value){ ?>
+			<div class="gm_gm_main_li">
+				<li>
+					<div class="kfion_s">
+						<a href="./mobile.php?to=libao_id&amp;id=<?php echo $value['id']?>">
+							<img src="./<?php echo $value['lblogo']?>" alt="<?php echo $value['lbname']?>">
+						</a>
+					</div>
+					<div class="kfcen_s">
+						<b><?php echo $value['gmname']?><?php echo $value['lbname']?><h5></h5></b>
+						<em>剩余：<?php echo $value['lbsy']?>枚</em>
+						<span><?php echo $value['lbjj']?></span>
+					</div>
+					<a href="./mobile.php?to=libao_id&amp;id=<?php echo $value['id']?>"><div class="kfdow_s"><span>领取</span></div></a>
+				</li>
+			</div>
+			<div class="gmgang"></div>
+			<?php }} ?>
+		</div>
+		<div class="ajaxjz" id="ajaxjz"></div>
+	</div>
+	
+</div>
+<input type="hidden" value="1" id="pages" loading="no">
+<input type="hidden" value="<?php echo $pagecount?>" id="pagenum">
+<script type="text/javascript">
+$(window).scroll(function(){
+    if($(document).scrollTop()>=$(document).height()-$(window).height()-100){
+	    var sscroll=$('#pages').attr('loading');
+        if(sscroll=="no"){
+		var pages=$("#pages").val()*1;
+			pages=pages+1;
+			$("#pages").val(pages);
+		var pagenum = $("#pagenum").val();
+		var htmls="";
+			if(pagenum>=pages){
+				$.ajax({
+					url:'./mobile.php?to=libao&op=getmore&libao=go&pages='+pages+'',
+					type:"GET",
+					dataType:"json",
+					beforeSend:function(){ 
+						$('#ajaxjz').html('努力加载中...') 
+					},success: function(data){
+						if(data){
+							$.each(data, function(kk, vv){
+								htmls+='<div class="gm_gm_main_li"><li><div class="kfion_s">'
+								htmls+='<a href="./mobile.php?to=libao_id&amp;id='+vv['id']+'"><img src="./'+vv['lblogo']+'" alt=""></a></div><div class="kfcen_s">'
+								htmls+='<b>'+vv['gmname']+''+vv['lbname']+'<h5></h5></b>'
+								htmls+='<em>剩余：'+vv['lbsy']+'枚</em>'
+								htmls+='<span>'+vv['lbjj']+'</span>'
+								htmls+='</div>'
+								htmls+='<a href="./mobile.php?to=libao_id&amp;id='+vv['id']+'"><div class="kfdow_s"><span>领取</span></div></a>'
+								htmls+='</li>'
+								htmls+='</div><div class="gmgang"></div>';
+							});
+						}
+						if(htmls!=""){
+							$("#gm_gm_list").append(htmls);
+							$('#ajaxjz').html('');
+						}
+					}
+				});	
+				//------
+			}else{
+				$('#ajaxjz').html('没有更多了');
+			}
+		}
+    }
+});
+</script>
+<?php include $this->Template('footer');?>

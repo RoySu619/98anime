@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="/template/sysadmin/css/style.css" rel="stylesheet">
+	<link href="/template/sysadmin/css/home.css" rel="stylesheet">
+	<link rel="icon" href="icon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="icon.ico" type="image/x-icon">
+  </head>
+<body>
+	<div class="main">
+	<div class="minihead">
+	<div class="dataleft"><em>游戏列表</em><span>游戏数据</span></div>
+	<div class="youke"><em id="yke">$tjgmnum['tnumber']</em><span>今日新上游戏</span></div>
+	<div class="vips"><em id="newhy">$ztjgmnum['Znumber']</em><span>总游戏数量</span></div>
+	</div>
+	<div class="userfk">
+	<div class="xzdata">
+		<a href="/sysadmin.php?to=data_con">
+			<div class="xzdata-input">新增游戏</div>
+		</a>
+		<!--{if $_GET[open]=='screen1'}-->
+			<a href="/sysadmin.php?to=data&type=$_GET['type']"><div class="xzdata-input" style="width: 70px; background: #FF5722;">取消</div></a>
+		<!--{else}-->
+			<a href="/sysadmin.php?to=data&type=$_GET['type']&open=screen1"><div class="xzdata-input" style="width: 78px;">APP图</div></a>
+		<!--{/if}-->
+		<!--{if $_GET[open]=='screen01'}-->
+			<a href="/sysadmin.php?to=data&type=$_GET['type']"><div class="xzdata-input" style="width: 70px; background: #FF5722;">取消</div></a>
+		<!--{else}-->
+			<a href="/sysadmin.php?to=data&type=$_GET['type']&open=screen01"><div class="xzdata-input" style="width: 70px;">PC图</div></a>
+		<!--{/if}-->
+		<!--{if $_GET[open]=='screen2'}-->
+			<a href="/sysadmin.php?to=data&type=$_GET['type']"><div class="xzdata-input" style="width: 80px; background: #FF5722;">取消</div></a>
+		<!--{else}-->
+			<a href="/sysadmin.php?to=data&type=$_GET['type']&open=screen2"><div class="xzdata-input" style="width: 80px;">APP展示</div></a>
+		<!--{/if}-->
+		<!--{if $_GET[open]=='screen3'}-->
+			<a href="/sysadmin.php?to=data&type=$_GET['type']"><div class="xzdata-input" style="width: 55px; background: #FF5722;">取消</div></a>
+		<!--{else}-->
+			<a href="/sysadmin.php?to=data&type=$_GET['type']&open=screen3"><div class="xzdata-input" style="width: 65px;">下载量</div></a>
+		<!--{/if}-->
+		<!--{if $_GET[open]=='screen4'}-->
+			<a href="/sysadmin.php?to=data&type=$_GET['type']"><div class="xzdata-input" style="width: 55px; background: #FF5722;">取消</div></a>
+		<!--{else}-->
+			<a href="/sysadmin.php?to=data&type=$_GET['type']&open=screen4"><div class="xzdata-input" style="width: 55px;">推荐</div></a>
+		<!--{/if}-->
+		<!--{if $_GET[open]=='screen5'}-->
+			<a href="/sysadmin.php?to=data&type=$_GET['type']"><div class="xzdata-input" style="width: 55px; background: #FF5722;">取消</div></a>
+		<!--{else}-->
+			<a href="/sysadmin.php?to=data&type=$_GET['type']&open=screen5"><div class="xzdata-input" style="width: 55px;">视频</div></a>
+		<!--{/if}-->
+		
+		<div class="xzdata-input" onclick="setbaidu();">推送百度</div>
+		
+	   <div class="plso">
+			<form class="form-horizontal" method="GET" action="" id="form"  enctype="multipart/form-data">
+				<input type="" name="soname" placeholder="请输入游戏名字，关键字" class="plsoinput">
+				<input type="submit"  value="搜索"  class="plsoan">
+				<input type="hidden" name="to" value="data" >
+				<input type="hidden" name="open" value="soso" >
+			</form>
+		</div>
+	</div>
+	<table class="">
+			<thead>
+				<tr>
+					<th style="width: 5%;">ID</th>
+					<th style="width: 5%;">类型</th>
+					<th style="width: 5%;">图标</th>
+					<th>游戏名字</th>
+					<th style="width: 5%;">视频</th>
+					<th>轮播图（默认电脑）</th>
+					<th style="width: 5%;">标签</th>
+					<th style="width: 8%;">下载次数</th>
+					<th style="width: 8%;">首页展示</th>
+					<th style="width: 5%;">推荐</th>
+					<th style="width: 5%;">时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody class="tbody" id="gmlb">	
+			<!--{loop $data $key $value}-->
+				<tr <!--{if $key==0 || $key==2 || $key==4 || $key==6 || $key==8 || $key==10 || $key==12 || $key==14}-->style="background: #f1f1f1;"<!--{/if}-->>
+					<td>$value['id']</td>
+					<td>
+					<!--{if $value['gmlx']=='1'}-->正版<!--{/if}-->
+					</td>	
+					<!--{if $value['gmlogo']!=''}-->
+					<td><img src="../$value['gmlogo']"></td>
+					<!--{else}-->
+					<td><img src="../sysadmin/image/wuioc.png"></td>
+					<!--{/if}-->
+					<td>$value['gmname']</td>
+					<!--{if $value['gmsp']==''}-->
+					<td>无</td>
+					<!--{else}-->
+					<td id="$value['gmsp']" onclick="opsp(this);"><img src="/template/sysadmin/image/pal.png" style="width: 30px; height: 30px;"></td>
+					<!--{/if}-->
+					<!--{if $_GET['open']=='screen01' || $_GET['open']==''}-->
+						<!--{if $value['gmpclbt']!=''}-->
+						<td><img src="./$value['gmpclbt']" style="width: 85px;height: 45px; border-radius: 5px;box-shadow: 0 0 2px #546e7a;"></td>
+						<!--{else}-->
+						<td><img src="/template/sysadmin/image/wutu.png" style="width: 85px;height: 45px; border-radius: 5px;box-shadow: 0 0 2px #546e7a;"></td>
+						<!--{/if}-->
+					<!--{else}-->
+						<!--{if $value['gmapplbt']!=''}-->
+						<td><img src="./$value['gmapplbt']" style="width: 85px;height: 45px; border-radius: 5px;box-shadow: 0 0 2px #546e7a;"></td>
+						<!--{else}-->
+						<!--{if $value['gmpclbt']!=''}-->
+						<td><img src="./$value['gmpclbt']" style="width: 85px;height: 45px; border-radius: 5px;box-shadow: 0 0 2px #546e7a;"></td>
+						<!--{else}-->
+						<td><img src="/template/sysadmin/image/wutu.png" style="width: 85px;height: 45px; border-radius: 5px;box-shadow: 0 0 2px #546e7a;"></td>
+						<!--{/if}-->
+						<!--{/if}-->
+					<!--{/if}-->
+					<td>$value['gmbq']</td>
+					<td>$value['gmdow']</td>
+					
+				    <!--{if $value['gmsy']=='1'}-->
+					<td id="s_$value['id']" onclick="opsyzs('$value['id']','$value['pid']',$value['gmsy']);" style="color: #3aabff;cursor: pointer;">排序:【$value['pid']】</td>
+					<!--{else}-->
+					<td id="s_$value['id']" onclick="opsyzs('$value['id']','$value['pid']',$value['gmsy']);" style="cursor: pointer;">否</td>
+					<!--{/if}-->
+				    <!--{if $value['gmtj']=='1'}-->
+				    <td id="t_$value['id']" onclick="settjgm('$value['id']',0);" style="cursor: pointer;">是</td>
+					<!--{else}-->
+					<td id="t_$value['id']" onclick="settjgm('$value['id']',1);" style="cursor: pointer;">否</td>
+					<!--{/if}-->
+					<td>$value['times']</td>
+					<td>
+					<a href="./sysadmin.php?to=data_lb&gmid=$value['id']&name=$value['gmname']" title="礼包">
+						<em><img src="/template/sysadmin/image/libao.png" style="width: 16px;height: 16px;">礼包</em>
+					</a>
+					<a href="./sysadmin.php?to=data_xg&type=$_GET['type']&open=$_GET['open']&pages=$_GET['pages']&gmid=$value['id']" title="编辑游戏">
+						<em><img src="/template/sysadmin/image/sz.png" style="width: 16px;height: 16px;"></em>
+					</a>
+					<a href="./sysadmin.php?to=data&op=delgm&degm=go&gmid=$value['id']" title="删除">
+						<span><img src="/template/sysadmin/image/del.png" style="width: 16px;height: 16px;"></span>
+					</a>
+					</td>
+				</tr>
+			<!--{/loop}-->
+			
+			</tbody>
+		</table>
+		<div class="page" id="page">$pagestr</div>
+	</div>
+    <div class="spyl" onclick="closesp();">
+	<em>
+	<video class="spylvideo" id="spsrc" controls='controls' autoplay="autoplay" src=''></video>
+	</em>
+	</div>
+	<div class="sylbtpx">
+	<div class="sylbtop">设置轮播图显示！</div>
+	<div class="sylbtjj">排序越小，首页就展示在第一，0 除外。</div>
+	<div class="sylbtnr">
+	<select class="data-conse" id="xsf" onchange="xzgg(this);"> 
+			<option value="0">不展示</option> 
+			<option value="1">展示</option> 
+			
+	</select> 
+	</div>
+	<input type="text" value="" id="sylbtpid" class="sylbtnr" maxlength="1" style="display:none;">
+	<input type="hidden" value="" id="gid"  maxlength="1">
+	<input type="button" value="取消" onclick="clsyzs();" class="databuttonf">
+	<input type="button" value="保存" onclick="yessyzs();"  class="databuttonb">
+	
+	</div>
+	<div id="ajcome"></div>
+	<div id="ajerro"></div>
+	<div id="ajsuccess"></div>
+	<div id="ajqr"></div>
+    <script src="/template/sysadmin/js/jquery.min.js"></script>
+	<script>
+	var opsp = function(obj){
+	    var sid = obj.id;
+		$("#spsrc").attr('src',sid); 
+	    $('.spyl').css('display','block');
+	}
+	var closesp = function(){
+	    $('.spyl').css('display','none');
+		$("#spsrc").attr('src','');
+	}
+	var optpye = function(obj){//类型选择
+		var xz = obj.value
+		window.location.href='../sysadmin.php?to=data&type='+xz+'';
+	}
+	//--------------设置推荐-------------//
+	var settjgm = function(id,setid){
+		$.ajax({
+		url:'./sysadmin.php?to=data&op=tjgm',
+		type:'POST', 
+		data:{
+		   'tj-gm':'go',
+		   'gmids':id,
+		   'tids':setid,
+		},
+		dataTyep:'json',
+		beforeSend:function(XMLHttpRequest){ 
+			$("#ajcome").html('<div class="axsucfk"><div class="axsuc"><span><img src="image/logins.png"></span><em>设置中 ...</em></div></div>');
+        }, 
+	    success:function(ret){ 
+		    $("#ajcome").html('');
+		    if(ret=='1'){
+				if(setid=='1'){
+					$("#ajsuccess").html('<div class="axerrfk"><div class="axerr"><span><img src="image/yes.png"></span><em>设置推荐成功！</em></div></div>');
+					setTimeout(function(){$("#ajsuccess").html('');clearTimeout(); },500);
+					$('#t_'+id+'').html('是');
+					$('#t_'+id+'').attr('onclick','settjgm(\''+id+'\',0);');
+				}else{
+					$("#ajsuccess").html('<div class="axerrfk"><div class="axerr"><span><img src="image/yes.png"></span><em>取消推荐成功！</em></div></div>');
+					setTimeout(function(){$("#ajsuccess").html('');clearTimeout(); },500);
+					$('#t_'+id+'').html('否');
+					$('#t_'+id+'').attr('onclick','settjgm(\''+id+'\',1);');
+				}
+				
+				
+			}
+		}
+	    });
+		
+	}
+	//--------------设置推荐-------------//
+	//--------------设置排序-------------//
+	var clsyzs = function(id){
+	    $(".sylbtpx").hide();
+		$("#gid").val('');
+	}
+	var xzgg = function(obj){
+	    var xzid = obj.value;
+		if(xzid==0){
+		$("#sylbtpid").val('0');
+		$("#sylbtpid").hide();
+		$("#sylbtpid").attr('readonly',true);
+		}
+		if(xzid==1){
+		$("#sylbtpid").val('');
+		$("#sylbtpid").show();
+		$("#sylbtpid").select();
+		$("#sylbtpid").attr('readonly',false);
+		}
+	}
+	var opsyzs = function(id,pi,lb){
+	    $(".sylbtpx").show();
+		$("#gid").val(id);
+		if(lb==1){
+		$("#sylbtpid").show();
+		}else{
+		$("#sylbtpid").hide();
+		}
+		$("#xsf").val(lb);
+		$("#sylbtpid").val(pi);
+	}
+	var yessyzs = function(){
+	    $(".sylbtpx").hide();
+	    var ggi = $("#gid").val();
+		var xsf = $("#xsf").val();
+		var pids = $("#sylbtpid").val();
+		if(pids!=''){
+	    $.ajax({
+		url:'./sysadmin.php?to=data&op=pxgm',
+		type:'POST', 
+		data:{
+		   'sy-gm':'go',
+		   'gmids':ggi,
+		   'pxi':pids,
+		   'tids':xsf,
+		},
+		dataTyep:'json',
+		beforeSend:function(XMLHttpRequest){ 
+			$("#ajcome").html('<div class="axsucfk"><div class="axsuc"><span><img src="image/logins.png"></span><em>设置中 ...</em></div></div>');
+        }, 
+	    success:function(ret){ 
+		    $("#ajcome").html('');
+		    if(ret=='"1"'){
+			    $("#ajsuccess").html('<div class="axerrfk"><div class="axerr"><span><img src="image/yes.png"></span><em>修改设置成功！</em></div></div>');
+		        setTimeout(function(){$("#ajsuccess").html('');clearTimeout(); },500);
+				if(xsf==1){
+				$('#s_'+ggi+'').html("排序:【"+pids+"】");
+				}else{
+				$('#s_'+ggi+'').html("否");
+				}
+				$('#s_'+ggi+'').attr('onclick','opsyzs(\''+ggi+'\',\''+pids+'\',\''+xsf+'\');');
+			}
+		}
+	    });
+		}else{
+		    $("#ajsuccess").html('<div class="axerrfk"><div class="axerr"><span><img src="image/jgao.png"></span><em>请填写排序号！</em></div></div>');
+		    setTimeout(function(){$("#ajsuccess").html('');clearTimeout(); },500);
+		}
+	}
+	//--------------设置排序-------------//
+	var setbaidu =function(){
+		$.ajax({
+			url:'./sysadmin.php?to=data&op=postbaidu',
+			type:'POST', 
+			data:{
+			   'bd':'go',
+			},
+			dataTyep:'json',
+			beforeSend:function(XMLHttpRequest){ 
+				$("#ajcome").html('<div class="axsucfk"><div class="axsuc"><span><img src="/template/sysadmin/image/logins.png"></span><em>正在推送中...</em></div></div>');
+			}, 
+			success:function(ret){
+				if(ret!=''){
+					$("#ajcome").html('');
+					$("#ajsuccess").html('<div class="axyesfk"><div class="axyes"><span><img src="/template/sysadmin/image/yes.png"></span><em>推送全部成功！</em></div></div>');
+					setTimeout(function(){$("#ajsuccess").html('');clearTimeout(); },1300);
+				}else{
+					$("#ajcome").html('');
+					$("#ajsuccess").html('<div class="axyesfk"><div class="axerr"><span><img src="/template/sysadmin/image/err.png"></span><em>没有游戏可推送！</em></div></div>');
+					setTimeout(function(){$("#ajsuccess").html('');clearTimeout(); },1300);
+				}
+			}
+		});
+	}
+	
+	</script>
+  </body>
+</html>

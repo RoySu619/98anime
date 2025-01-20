@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<!--{if $to=='index' || $to=='kefu' || $to=='search' || $to=='about'}-->
+	<title>$config['sy_title']</title>
+	<meta name="keywords" content="$config['sy_keyword']" />
+    <meta name="description" content="$config['sy_description']" />
+<!--{else if $to=='game'}-->
+	<title>$config['gm_title']</title>
+	<meta name="keywords" content="$config['gm_keyword']" />
+    <meta name="description" content="$config['gm_description']" />
+<!--{else if $to=='game_id'}-->
+	<title>$config['gmxx_title']</title>
+	<meta name="keywords" content="$config['gmxx_keyword']" />
+    <meta name="description" content="$config['gmxx_description']" />
+<!--{else if $to=='kaifu'}-->
+	<title>$config['gmkf_title']</title>
+	<meta name="keywords" content="$config['gmkf_keyword']" />
+    <meta name="description" content="$config['gmkf_description']" />
+<!--{else if $to=='gifts'}-->
+	<title>$config['gmlb_title']</title>
+	<meta name="keywords" content="$config['gmlb_keyword']" />
+    <meta name="description" content="$config['gmlb_description']" />
+<!--{else if $to=='gifts_id'}-->
+	<title>$config['lbxx_title']</title>
+	<meta name="keywords" content="$config['lbxx_keyword']" />
+    <meta name="description" content="$config['lbxx_description']" />
+<!--{else if $to=='news'}-->
+	<title>$config['news_title']</title>
+	<meta name="keywords" content="$config['news_keyword']" />
+    <meta name="description" content="$config['news_description']" />
+<!--{else if $to=='news_id'}-->
+	<title>$config['newsxx_title']</title>
+	<meta name="keywords" content="$config['newsxx_keyword']" />
+	<meta name="description" content="$config['newsxx_description']" />
+<!--{else if $to=='activity'}-->
+	<title>$config['activity_title']</title>
+	<meta name="keywords" content="$config['activity_keyword']" />
+    <meta name="description" content="$config['activity_description']" />
+<!--{else}-->
+	<title>$config['sy_title']</title>
+	<meta name="keywords" content="$config['sy_keyword']" />
+    <meta name="description" content="$config['sy_description']" />
+<!--{/if}-->
+<link rel="shortcut icon" href="../icon.ico" />
+<link rel="stylesheet" href="./template/pcmoban/css/base.css">
+<link rel="stylesheet" href="./template/pcmoban/kefu/kf.css">
+<link rel="stylesheet" href="./template/pcmoban/css/public.css">
+<!--{if $to=='index' || $to==''}-->
+<link rel="stylesheet" href="./template/pcmoban/css/swiper.min.css">
+<link rel="stylesheet" href="./template/pcmoban/css/index.css">
+<!--{/if}-->
+<!--{if $to=='game'}-->
+<link rel="stylesheet" href="./template/pcmoban/css/game_list.css">
+<!--{/if}-->
+<!--{if $to=='kaifu'}-->
+<link rel="stylesheet" href="./template/pcmoban/css/kaifu.css">
+<!--{/if}-->
+<!--{if $to=='activity'}-->
+<link rel="stylesheet" href="./template/pcmoban/css/information.css">
+<!--{/if}-->
+<!--{if $to=='gifts'}-->
+<link rel="stylesheet" href="./template/pcmoban/css/gifts.css">
+<!--{/if}-->
+<!--{if $to=='news'}-->
+<link rel="stylesheet" href="./template/pcmoban/css/information.css">
+<!--{/if}-->
+<!--{if $to=='news_id'}-->
+<link rel="stylesheet" href="./template/pcmoban/css/activity-info.css">
+<!--{/if}-->
+<!--{if $to=='gifts_id'}-->
+<link rel="stylesheet" href="./template/pcmoban/css/gift-info.css">
+<!--{/if}-->
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MJDVP2DS');</script>
+<!-- End Google Tag Manager -->
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://beastdatab.com/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MJDVP2DS"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+	<div class="header">
+        <div class="login">
+          <div class="banxin clearfix">
+            <p class="left">
+				<a href="./index.php?to=help" target="_blank">关于本站</a>
+				<span>|</span><a href="./index.php?to=help" target="_blank">联系我们</a>
+				<span>|</span><a href="./index.php?to=help" target="_blank">帮助中心</a>
+				<span>|</span><a href="./index.php?to=help" target="_blank">隐私政策</a>
+				<span>|</span><a href="./index.php?to=help" target="_blank">用户协议</a>
+				<span>|</span><a href="./index.php?to=appdow" target="_blank">APP下载</a>
+				<span>|</span><a href="./mobile.php" target="_blank">手机版</a>
+			</p>
+            <p class="right">
+			<!--{if $G_uid}-->
+				<a href="./index.php?to=user">
+					<!--{if $G_ulogo}-->
+					<img src="$G_ulogo">
+					<!--{else}-->
+					<img src="./template/pcmoban/images/head.png">
+					<!--{/if}-->
+				</a>
+				$G_unick
+				<a href="./index.php?to=user">个人中心</a>
+				<a href="./index.php?to=out&login=out">退出</a>
+			<!--{else}-->
+				<a href="./index.php?to=login">登录</a>
+				<a href="./index.php?to=register">注册</a>
+			<!--{/if}-->
+			</p>
+          </div>
+        </div>
+        <div class="header-con banxin">
+            <div class="header-top clearfix">
+               <h1 class="left"><img src="./image/logo.png" alt=""></h1>
+               <div class="header-top-right right">
+					<form accept="index.php?to=search">
+                   <div class="search">
+                       <input type="text" placeholder="请输入游戏名称" name="keyboard">
+					   <input type="submit" value="搜索">
+					   <input type="hidden" value="search" name="to">
+					   
+                   </div>
+				   </form>
+                   <p>热门搜索：
+					<!--{loop $sosolist $key $value}-->
+					<a href="index.php?to=game_id&id=$value['id']" target="_blank">$value['gmname']</a>
+					<!--{/loop}-->
+				   </p>
+               </div>
+            </div>
+            <div class="header-tab">
+                <a href="/"  <!--{if $to=='index' || $to==''}-->class="on"<!--{/if}-->>官方首页<p></p></a>
+                <a href="./index.php?to=game" <!--{if $to=='game'}-->class="on"<!--{/if}-->>游戏中心<p></p></a>
+                <a href="./index.php?to=kaifu" <!--{if $to=='kaifu'}-->class="on"<!--{/if}-->>开服列表<p></p></a>
+                <a href="./index.php?to=activity" <!--{if $to=='activity'}-->class="on"<!--{/if}-->>福利活动<p></p></a>
+                <a href="./index.php?to=gifts" <!--{if $to=='gifts'}-->class="on"<!--{/if}-->>礼包中心<p></p></a>
+                <a href="../index.php?to=news" <!--{if $to=='news'}-->class="on"<!--{/if}-->>资讯攻略<p></p></a>
+            </div>
+        </div>
+    </div>

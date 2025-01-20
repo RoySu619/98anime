@@ -1,0 +1,32 @@
+"use weex:vue";
+
+if (typeof Promise !== 'undefined' && !Promise.prototype.finally) {
+  Promise.prototype.finally = function(callback) {
+    const promise = this.constructor
+    return this.then(
+      value => promise.resolve(callback()).then(() => value),
+      reason => promise.resolve(callback()).then(() => {
+        throw reason
+      })
+    )
+  }
+};
+
+if (typeof uni !== 'undefined' && uni && uni.requireGlobal) {
+  const global = uni.requireGlobal()
+  ArrayBuffer = global.ArrayBuffer
+  Int8Array = global.Int8Array
+  Uint8Array = global.Uint8Array
+  Uint8ClampedArray = global.Uint8ClampedArray
+  Int16Array = global.Int16Array
+  Uint16Array = global.Uint16Array
+  Int32Array = global.Int32Array
+  Uint32Array = global.Uint32Array
+  Float32Array = global.Float32Array
+  Float64Array = global.Float64Array
+  BigInt64Array = global.BigInt64Array
+  BigUint64Array = global.BigUint64Array
+};
+
+
+(()=>{var b=Object.create;var d=Object.defineProperty;var w=Object.getOwnPropertyDescriptor;var y=Object.getOwnPropertyNames;var v=Object.getPrototypeOf,S=Object.prototype.hasOwnProperty;var z=(e,s)=>()=>(s||e((s={exports:{}}).exports,s),s.exports);var I=(e,s,o,n)=>{if(s&&typeof s=="object"||typeof s=="function")for(let i of y(s))!S.call(e,i)&&i!==o&&d(e,i,{get:()=>s[i],enumerable:!(n=w(s,i))||n.enumerable});return e};var C=(e,s,o)=>(o=e!=null?b(v(e)):{},I(s||!e||!e.__esModule?d(o,"default",{value:e,enumerable:!0}):o,e));var _=z((F,m)=>{m.exports=Vue});var u=(e,s)=>{let o=e.__vccOpts||e;for(let[n,i]of s)o[n]=i;return o},k="http://xxmbao.bacms.cn/",p=uni.getWindowInfo(),A=uni.getDeviceInfo().deviceBrand,W=uni.getDeviceInfo().deviceId,T=uni.getAppBaseInfo().appName,B=uni.getAppBaseInfo().appVersionCode,N=uni.getAppBaseInfo().appVersion,V=0,H=0,D=Number(p.screenWidth),h=Number(p.statusBarHeight),x=Number(p.screenHeight);p.safeAreaInsets.bottom>0&&uni.setStorageSync("appb",p.safeAreaInsets.bottom);var f=Number(uni.getStorageSync("appb"))?Number(uni.getStorageSync("appb")):0,j=x-h-f,l={ip:k,appsys:A,appdvid:W,appV:B,appVs:N,appname:T,appt:h,appb:f,appw:D,apph:x,appmain_h:j,issoso_zt:V,isgggd_zt:H};var t=C(_()),L={list:{"":{width:"750rpx",paddingTop:"20rpx"}},topsoso:{"":{width:"750rpx",height:"100rpx",paddingBottom:"15rpx",flexDirection:"row",flexWrap:"nowrap",justifyContent:"flex-start",alignItems:"flex-end"}},fh:{"":{width:"110rpx",height:"80rpx",lineHeight:"80rpx",fontFamily:"iconfont",fontSize:"40rpx",fontWeight:"300",textAlign:"center",paddingRight:"20rpx"}},soinput:{"":{fontFamily:"iconfont",backgroundColor:"rgba(0,0,0,0.05)",width:"600rpx",paddingLeft:"30rpx",height:"80rpx",lineHeight:"80rpx",borderRadius:"40rpx",fontSize:"28rpx"}},cell:{"":{width:"750rpx",paddingLeft:"30rpx",paddingRight:"30rpx"}},gm:{"":{width:"690rpx",height:"160rpx",flexDirection:"row",flexWrap:"nowrap",justifyContent:"space-between",alignItems:"flex-start"}},gm_i:{"":{width:"130rpx",height:"130rpx",borderRadius:"20rpx"}},gm_c:{"":{width:"450rpx",paddingLeft:"20rpx",flexDirection:"column",flexWrap:"nowrap",justifyContent:"center",alignItems:"flex-start"}},gm_c_t:{"":{width:"330rpx",height:"43rpx",lines:1,lineHeight:"43rpx",fontSize:"30rpx",fontWeight:"bold",paddingRight:"20rpx",color:"rgba(0,0,0,0.8)"}},gm_c_c:{"":{height:"43rpx",lineHeight:"50rpx",fontSize:"24rpx",color:"rgba(0,0,0,0.5)"}},gm_c_b:{"":{height:"43rpx",lineHeight:"43rpx",fontSize:"24rpx",lines:1,color:"rgba(0,0,0,0.5)"}},gm_r:{"":{marginTop:"30rpx",width:"100rpx",borderRadius:"15rpx",height:"60rpx",lineHeight:"60rpx",textAlign:"center",fontSize:"24rpx",backgroundImage:"linear-gradient(to top,#ffc30c,#ffda08)"}}},P={data(){return{ip:l.ip,appt:l.appt,sozt:0,sonr:"",list:[]}},methods:{clososo(){uni.hideKeyboard(),uni.navigateBack()},iswc(e){e.detail.value.length==0?(this.sonr="",this.sozt=0,uni.hideKeyboard()):(uni.hideKeyboard(),this.sozt=0,this.sosonr(1))},isval(e){e.detail.value.length==0?(this.sonr="",this.sozt=0,uni.hideKeyboard()):this.sonr=e.detail.value},opgm(e){uni.navigateTo({url:"../../pages/gm/gmxx?id="+e})},getdata(e){let s=this;uni.request({url:l.ip+"appapi.php?to=search",method:"GET",dataType:"json",enableCache:!1,defer:!1,data:{keyboard:s.sonr,id:1},success:o=>{uni.hideLoading(),o.data.data&&(s.list=o.data.data)}})},sosonr(){let e=this;if(e.list="",e.sonr&&e.list==""){uni.showLoading({title:"\u641C\u7D22\u4E2D"}),e.sozt=1;let s=setTimeout(()=>{e.getdata(1),clearTimeout(s)},180)}else e.sonr="",e.sozt=0,uni.showToast({icon:"none",title:"\u8BF7\u8F93\u5165\u641C\u7D22\u5185\u5BB9",duration:1e3,position:"center"})}}};function R(e,s,o,n,i,a){return(0,t.openBlock)(),(0,t.createElementBlock)("view",null,[(0,t.createElementVNode)("view",{class:"topsoso",onClick:s[2]||(s[2]=(...r)=>a.clososo&&a.clososo(...r)),style:(0,t.normalizeStyle)("height:"+(i.appt+55)+"px;"),renderWhole:!0},[(0,t.createElementVNode)("u-text",{class:"fh"},"\uE914"),(0,t.createElementVNode)("u-input",{class:"soinput",value:i.sonr,confirmType:"search",type:"text",placeholder:"\uE8EF \u641C\u7D22\u4F60\u60F3\u8981\u7684",onInput:s[0]||(s[0]=(...r)=>a.isval&&a.isval(...r)),onConfirm:s[1]||(s[1]=(...r)=>a.iswc&&a.iswc(...r))},null,40,["value"])],4),i.sozt==1?((0,t.openBlock)(),(0,t.createElementBlock)("list",{key:0,class:"list",loadmoreoffset:"9999999"},[((0,t.openBlock)(!0),(0,t.createElementBlock)(t.Fragment,null,(0,t.renderList)(i.list,(r,G)=>((0,t.openBlock)(),(0,t.createElementBlock)("cell",{class:"cell",key:r.id,onClick:K=>a.opgm(r.id)},[(0,t.createElementVNode)("view",{class:"gm",renderWhole:!0},[(0,t.createElementVNode)("u-image",{class:"gm_i",src:i.ip+r.gmlogo},null,8,["src"]),(0,t.createElementVNode)("view",{renderWhole:!0,class:"gm_c"},[(0,t.createElementVNode)("u-text",{class:"gm_c_t"},(0,t.toDisplayString)(r.gmname),1),(0,t.createElementVNode)("u-text",{class:"gm_c_c"},"\u7C7B\u578B\uFF1A"+(0,t.toDisplayString)(r.gmbq),1),(0,t.createElementVNode)("u-text",{class:"gm_c_b"},(0,t.toDisplayString)(r.gmjj),1)]),(0,t.createElementVNode)("u-text",{class:"gm_r"},"\u4E0B\u8F7D")])],8,["onClick"]))),128))])):(0,t.createCommentVNode)("",!0)])}var c=u(P,[["render",R],["styles",[L]]]);var g=plus.webview.currentWebview();if(g){let e=parseInt(g.id),s="pages/soso/soso",o={};try{o=JSON.parse(g.__query__)}catch(i){}c.mpType="page";let n=Vue.createPageApp(c,{$store:getApp({allowDefault:!0}).$store,__pageId:e,__pagePath:s,__pageQuery:o});n.provide("__globalStyles",Vue.useCssStyles([...__uniConfig.styles,...c.styles||[]])),n.mount("#root")}})();

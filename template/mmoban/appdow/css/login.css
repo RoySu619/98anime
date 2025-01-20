@@ -1,0 +1,179 @@
+body{
+    text-align: center;
+}
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    background-color: #f1f1f1 !important;
+	-webkit-box-shadow: 0 0 0px 1000px #f1f1f1 inset !important;
+    background-image: none !important;
+    color: rgb(0, 0, 0) !important;
+}
+.login{
+    max-width: 750px;
+    margin: auto;
+    height: auto;
+    margin-top: 12%;
+}
+.login h2{
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+}
+.loginti{
+    text-align: center;
+    height: 100px;
+    line-height: 100px;
+    font-size: 18px;
+    font-weight: bold;
+    width: 100%;
+    margin: auto;
+}
+.loginti em{
+	font-style: normal;
+    float: left;
+    width: 100%;
+}
+.loginti span{
+	float: right;
+    width: 66px;
+    height: 50px;
+    margin-top: 25px;
+    line-height: 50px;
+    font-size: 15px;
+    color: #e4007f;
+    cursor: pointer;
+}
+.loginnr{
+    width: 85%;
+    margin: auto;
+    height: 265px;
+}
+.zh{
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    background: #f1f1f1;
+    border-radius: 15px;
+    margin-bottom: 20px
+}
+.zh em{
+    float: left;
+    width: 20%;
+    height: 50px;
+    line-height: 50px;
+    background: url(../../images/us.png) 9px center no-repeat;
+    background-size: 30px;
+}
+.zh span{
+    float: left;
+    width:  80%;
+    height: 50px;
+}
+.zh span input{
+    float: left;
+    width: 80%;
+    height: 50px;
+    background: #f1f1f1;
+    font-size: 15px;
+	    border-radius: 0px 15px 15px 0px;
+}
+.mm{
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    background: #f1f1f1;
+    border-radius: 15px;
+	margin-bottom: 20px;
+}
+.mm em{
+    float: left;
+    width: 20%;
+    height: 50px;
+    line-height: 50px;
+    background: url(../../images/pas.png) 9px center no-repeat;
+    background-size: 30px;
+}
+.mm span{
+    float: left;
+    width: 80%;
+    height: 50px;
+}
+.mm span input{
+    float: left;
+    width: 100%;
+    height: 50px;
+    background: #f1f1f1;
+    border-radius: 0px 15px 15px 0px;
+    font-size: 15px;
+}
+input:-webkit-autofill {
+	-webkit-box-shadow: 0 0 0 1000px #f1f1f1 inset; 
+	background-color: #f1f1f1;
+	background-image: none;
+	color: #000;
+}
+.code{
+    float: left;
+    width: 40%;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 15px 0px 0px 15px;
+    font-size: 15px;
+	padding-left: 20%;
+    margin-bottom: 25px;
+    background: url(../../images/yzm.png)#f1f1f1  9px center no-repeat;
+    background-size: 30px;
+}
+.sxyzm{
+    float: left;
+    width: 30%;
+    padding-top: 10px;
+    background: #f1f1f1;
+    padding-bottom: 10px;
+    border-radius: 0px 15px 15px 0px;
+    padding-right: 20px;
+}
+.btn{
+	float: left;
+    width: 100%;
+    height: 50px;
+    background: #e4007f;
+    color: #fff;
+    font-size: 18px;
+    border: 0px;
+    border-radius: 15px;
+    margin-top: 25px;
+	    outline: none;
+}
+.myyzm{
+    float: left;
+    width: 40%;
+    height: 50px;
+    padding-top: 10px;
+    background: #e4007f;
+    padding-bottom: 10px;
+    border-radius: 0px 15px 15px 0px;
+    padding-right: 20px;
+    color: #fff;
+    font-size: 14px;
+	-webkit-appearance: none;
+}
+.log{
+    float: left;
+    width: 50%;
+    height: 25px;
+    line-height: 25px;
+    font-size: 15px;
+}
+.reg{
+    float: left;
+    width: 50%;
+    height: 25px;
+    line-height: 25px;
+    font-size: 15px;
+}
+.pas{
+    float: left;
+    width: 50%;
+    height: 25px;
+    line-height: 25px;
+    font-size: 15px;
+}

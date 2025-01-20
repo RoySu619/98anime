@@ -1,0 +1,187 @@
+body {
+	font-family: -apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",STHeiti,"Microsoft Yahei",Tahoma,Simsun,sans-serif;
+	background:url(../image/appbg.jpg) no-repeat;
+	margin: 0px;
+}
+
+.hide {
+	display: none
+}
+
+.con {
+	width: 100%;
+	background:  no-repeat;
+	background-position: top center
+}
+
+.container {
+	position: relative;
+	width: 1280px;
+	margin: 0 auto
+}
+
+.header {
+    width: 1280px;
+    margin: 0 auto;
+    height: 100px;
+}
+.header img{
+    width: 180px;
+    height: 55px;
+    margin-top: 35px;
+}
+.first-block {
+	position: relative;
+	padding-top: 660px
+}
+
+.first-block .first-block-title {
+	position: absolute;
+	top: 130px;
+	left: 94px;
+	z-index: 999;
+	width: 735px;
+	height: 146px;
+    font-size: 40px;
+	font-weight: bold;
+	color:#fddd85;
+	-webkit-background-size: contain;
+	background-size: contain;
+	background-position: center;
+	opacity: 0;
+	-webkit-transform: scale(2) translate(150px,150px);
+	-moz-transform: scale(2) translate(150px,150px);
+	-ms-transform: scale(2) translate(150px,150px);
+	transform: scale(2) translate(150px,150px);
+	-webkit-transition: all .5s ease-in;
+	-moz-transition: all .5s ease-in;
+	transition: all .5s ease-in
+}
+.first-block-title span{
+    width: 100%;
+    float: left;
+    font-size: 22px;
+    font-weight: 100;
+    height:100px;
+    line-height: 100px;
+    text-align: center;
+    color: #23df97;
+}
+.first-block .active {
+	opacity: 1;
+	-webkit-transform: scale(1) translate(0px,0);
+	-moz-transform: scale(1) translate(0px,0);
+	-ms-transform: scale(1) translate(0px,0);
+	transform: scale(1) translate(0px,0)
+}
+
+.first-block .first-block-content {
+	position: absolute;
+	top: 0;
+	right: -110px;
+	width: 531px;
+	height: 638px;
+}
+.first-block-content img{
+	width: 531px;
+	height: 638px;
+}
+.download {
+	position: absolute;
+	top: 322px;
+	left: 226px;
+	display: inline-block
+}
+
+.download .download-btn {
+	float: left;
+	display: inline-block
+}
+
+.download .ad-android-btn,.download .ad-ios-btn {
+	display: block;
+	width: 290px;
+	padding-top: 94px;
+	background-repeat: no-repeat;
+	-webkit-background-size: contain;
+	background-size: contain;
+	background-position: center;
+	cursor: pointer
+}
+
+.download .ad-android-btn {
+	margin-bottom: 12px;
+	background-image: url("../image/Android.png")
+}
+
+.download .ad-ios-btn {
+	background-image: url("../image/ios.png")
+}
+
+.download .qrcode,.qrcode-fixed {
+	display: inline-block;
+}
+
+.download .qrcode {
+	margin-left: 20px;
+}
+
+.qrcode p,.qrcode-fixed p {
+	padding-top: 6px;
+	color: #fff;
+	text-align: center;
+	line-height: 1
+}
+
+.qrcode-fixed {
+	position: fixed;
+	z-index: 999;
+	top: 30%;
+	right: 20px;
+	display: none
+}
+
+.second-block,.third-block,.fourth-block,.fifth-block {
+	width: 1240px;
+	height: 780px;
+	margin: 54px auto 0;
+	-webkit-background-size: contain;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center
+}
+
+.second-block {
+	background-image: url("../image/1.png")
+}
+
+.third-block {
+	background-image: url("../image/2.png")
+}
+
+.fourth-block {
+	background-image: url("../image/3.png")
+}
+
+/* .fifth-block {
+	background-image: url(http://bdtg.xxzhushou.cn/66v2/img/welcome/fifth-content_26112ad.png)
+} */
+
+.xx-footer {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.64);
+    color: gray;
+    font-size: 14px;
+    line-height: 24px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    z-index: 9999;
+}
+
+
+
+.xx-footer p {
+	display: none
+}

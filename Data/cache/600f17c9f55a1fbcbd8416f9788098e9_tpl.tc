@@ -1,0 +1,105 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="/template/sysadmin/css/style.css" rel="stylesheet">
+	<link href="/template/sysadmin/css/home.css" rel="stylesheet">
+	<link href="/template/sysadmin/css/sy-index.css" rel="stylesheet">
+	<link rel="icon" href="icon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="icon.ico" type="image/x-icon">
+  </head>
+<body>
+	<div class="main">
+	<div class="minihead">
+	<div class="dataleft"><em>系统设置</em><span id='cpnmxx'>LOGO 600*200（ PNG格式 ）</span></div>
+	<div class="youke" style="width: 180px;">
+	<em id="yke" style="font-size: 15px;">注意</em><span>请严格按照图片尺寸上传</span></div>
+	</div>
+	
+	<form class="form-horizontal" method="POST" action="" id="form"  enctype="multipart/form-data">
+	<div class="sy-index-szf">
+		<div class="sy-index-sz">
+		<div class="sy-index-szn">
+		<em>网站名字：</em>
+		<input type="text" value="<?php echo $config['wzname']?>" name="wname" class="sy-index-sztxt" placeholder="网站名字" style="border: 1px solid #ffd7cb;">
+		<em>官方网址：</em>
+		<input type="text" value="<?php echo $config['wzurl']?>" name="wurl" class="sy-index-sztxt" placeholder="你的网址，重要！" style="border: 1px solid #ffd7cb;">
+		<em>客服Q Q：</em>
+		<input type="text" value="<?php echo $config['wzkf1']?>" name="wqq1" class="sy-index-sztxt" placeholder="客服QQ1">
+		<em>客服Q Q：</em>
+		<input type="text" value="<?php echo $config['wzkf2']?>" name="wqq2" class="sy-index-sztxt" placeholder="客服QQ2">
+		<em>微信号：</em>
+		<input type="text" value="<?php echo $config['wzkf3']?>" name="wqq3" class="sy-index-sztxt" placeholder="客服QQ3">
+		<em>商务合作QQ：</em>
+		<input type="text" value="<?php echo $config['wzhzqq']?>" name="whzq" class="sy-index-sztxt" placeholder="渠道合作QQ">
+		<em>群号1：</em>
+		<input type="text" value="<?php echo $config['qunhao1']?>" name="qun1" class="sy-index-sztxt" placeholder="QQ群号1">
+		<em>群号2：</em>
+		<input type="text" value="<?php echo $config['qunhao2']?>" name="qun2" class="sy-index-sztxt" placeholder="QQ群号2">
+		
+		<em>客服电话：</em>
+		<input type="text" value="<?php echo $config['wztel']?>" name="wtel" class="sy-index-sztxt" placeholder="客服电话">
+		<em>版权信息：</em>
+		<input type="text" value="<?php echo $config['footinfos']?>" name="footinf" class="sy-index-sztxt" placeholder="客服电话">
+		
+		<em>微信二维码：</em>
+		<div class="sy-index-szfle" style="border: 1px solid #ffd7cb;width: 70%;">
+			<div class="sy-index-szfleimg" style="float: left;width: 98%;height: auto; background: #fcfcfc; border-radius: 5px; background-size: 100%; padding: 1%;">
+				<?php if($config['wzwxewm']==''){ ?>
+				<img src="/template/sysadmin/image/wuioc.png" style="height: 96px; width:96px;">
+				<?php } else { ?>
+				<img src="./<?php echo $config['wzwxewm']?>" style="height: 126px; width:126px;">
+				<?php } ?>
+			</div> 
+			<span class="sy-index-szbutton">
+				<span class="sy-index-szan" id="sy-fileanniu1">上传微信二维码</span>
+				<input type="file" value="" name='file2' accept="image/*">
+			</span>
+		</div>
+		
+		<em>网站图标：</em>
+		<div class="sy-index-szfle" style="border: 1px solid #ffd7cb;">
+		<div class="sy-index-szfleimg">
+		    <?php if($config['wzlogo']==''){ ?>
+			<img src="/template/sysadmin/image/wuioc.png"style="height: 66px; width:auto;">
+			<?php } else { ?>
+			<img src="./<?php echo $config['wzlogo']?>"style="height: 66px; width:auto;">
+			<?php } ?>
+		</div> 
+			<span class="sy-index-szbutton">
+				<span class="sy-index-szan" id="sy-fileanniu1">上传LOGO</span>
+				<input type="file" value="" name='file'  accept="image/*">
+				
+			</span>
+		</div>
+		
+		
+		<em>网站Icon：</em>
+		<div class="sy-index-szfle" style="border: 1px solid #ffd7cb;">
+			<div class="sy-index-szfleimg">
+				<?php if($config['wzico']==''){ ?>
+				<img src="/template/sysadmin/image/wuioc.png" style="height: 66px; width:66px;">
+				<?php } else { ?>
+				<img src="<?php echo $config['wzico']?>" style="height: 66px; width:66px;">
+				<?php } ?>
+			</div> 
+			<span class="sy-index-szbutton">
+				<span class="sy-index-szan" id="sy-fileanniu1">上传iocn</span>
+				<input type="file" value="" name='file1' accept="image/x-icon">
+			</span>
+		</div>
+		
+		</div>
+			<div class="data-conbutton">
+				<input type="button" value="还原" onClick="javascript :history.back(-1);" class="databuttonf">
+				<input type="submit" name="tsubmit" value="保存" class="databuttonb">
+			</div>
+		</div>
+		</div>
+		<input type="hidden" name="upup" value="sys">
+	</form>
+    <script src="/template/sysadmin/js/jquery.min.js" type="text/javascript"></script>
+  </body>
+</html>

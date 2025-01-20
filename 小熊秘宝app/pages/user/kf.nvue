@@ -1,0 +1,113 @@
+<template>
+	<list>
+		<cell class="li" v-if="kf1">
+			<text class="li_l">&#xe883;</text>
+			<text class="li_c">QQ: {{kf1}}</text>
+			<text class="li_r" @click="fz(1,kf1)">会话</text>
+		</cell>
+		<cell class="li" v-if="kf2">
+			<text class="li_l">&#xe883;</text>
+			<text class="li_c">QQ: {{kf2}}</text>
+			<text class="li_r" @click="fz(1,kf2)">会话</text>
+		</cell>
+		<cell class="li" v-if="kf3">
+			<text class="li_l">&#xe884;</text>
+			<text class="li_c">微信号: {{kf3}}</text>
+			<text class="li_r" @click="fz(2)">复制微信</text>
+		</cell>
+		<cell class="li" v-if="hz">
+			<text class="li_l">&#xe887;</text>
+			<text class="li_c">商务合作: {{hz}}</text>
+			<text class="li_r" @click="fz(1,hz)">会话</text>
+		</cell>
+		<cell class="li" v-if="qh1">
+			<text class="li_l">&#xe7ae;</text>
+			<text class="li_c">官方①群: {{qh1}}</text>
+			<text class="li_r" @click="fz(3,qh1)">进群</text>
+		</cell>
+		<cell class="li" v-if="qh2">
+			<text class="li_l">&#xe7ae;</text>
+			<text class="li_c">官方②群: {{qh2}}</text>
+			<text class="li_r" @click="fz(3,qh2)">进群</text>
+		</cell>
+	</list>
+</template>
+<script>
+	import G_APP from '@/common/ip.js'
+	export default {
+		name: "pl_list",
+		data() {
+			return {
+				appsys:G_APP.appsys,
+				apph: G_APP.apph,
+				kf1:"",
+				kf2:"",
+				kf3:"",
+				hz:"",
+				qh1:"",
+				qh2:""
+			};
+		},
+		onReady() {
+			this.getlist();
+		},
+		methods: {
+			fz(pd,qq){
+				let thi=this;
+				if(pd==1){
+					if (thi.appsys == 'apple') {
+						let url = 'mqq://im/chat?chat_type=wpa&uin=' + qq + '&version=1&src_type=web';
+						plus.runtime.openURL(url, function(res) {});
+					} else {
+						let url = 'mqqwpa://im/chat?chat_type=wpa&uin=' + qq + '';
+						plus.runtime.openURL(url, function(res) {});
+					}
+				}
+				if(pd==2){
+					uni.setClipboardData({
+						data: this.kf3,
+						success: function () {
+							uni.showToast({icon:"none",title:' 复制微信客服成功! ',mask: false,duration: 1500});  
+						}
+					});
+				}
+				if(pd==3){
+					let url = 'mqqapi://card/show_pslcard?src_type=internal&version=1&uin='+qq+'&card_type=group&source=qrcode';
+					plus.runtime.openURL(url, function(res) {});
+				}
+			},
+			getlist() {
+				let thi = this;
+				uni.request({
+					url: G_APP.ip + 'appapi.php?to=user&op=user_kf',
+					method: 'GET',
+					dataType: 'json',
+					enableCache: true, //缓存
+					defer: true, //控制当前请求是否延时至首屏内容渲染后发送
+					data: {
+						'myuskf': 'go'
+					},
+					success: (ret) => {
+						if (ret.data) {
+							thi.kf1=ret.data.kf1;
+							thi.kf2=ret.data.kf2;
+							thi.kf3=ret.data.kf3;
+							thi.hz=ret.data.hz;
+							thi.qh1=ret.data.qh1;
+							thi.qh2=ret.data.qh2;
+						}
+					}
+				});
+			},
+			kf_close(){
+				uni.navigateBack({
+					animationType: 'zoom-fade-in',
+					animationDuration: 300
+				});
+			}
+		}
+	}
+</script>
+<style>
+	@import "../../common/kf.css";
+</style>

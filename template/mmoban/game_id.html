@@ -1,0 +1,49 @@
+<!--{load header}-->
+<style>
+
+</style>
+<div class="main">
+	<div class="gm_xx_top">
+		<div class="gm_xx_logo"><img src="./$appinfo['gmlogo']"></div>
+		<div class="gm_xx_cen">
+			<b>$appinfo['gmname']</b>
+			<em>类型：<!--{eval echo str_replace(',','.', $appinfo['gmbq']);}--></em>
+			<span>安装量：$appinfo['gmdow']人</span>
+		</div>
+		<!--{if $appdow}-->
+			<a href="$appdow"><div class="lb_xx_right">下载</div></a>
+		<!--{else}-->
+		<div class="lb_xx_right" style="color: #f1f1f1; border: 0.012rem solid  #f1f1f1;">暂无</div>
+		<!--{/if}-->
+	</div>
+	<div class="gm_xx_img">
+		<b>游戏简介</b>
+		<em>
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<!--{loop $imgss $key $valueimg}-->
+				<div class="swiper-slide"><img src="./$valueimg['imgs']"></div>
+				<!--{/loop}-->
+			</div>
+		</div>
+		</em>
+	</div>
+	<div class="gm_xx_jj">
+		<em>$appinfo['gmjj']</em>
+	</div>
+	<div class="gm_xx_js">
+		<b>游戏介绍</b>
+		<em>$appinfo['gmjs']</em>
+	</div>
+</div>
+<script type="text/javascript" src="./template/mmoban/js/main_rem.js"></script>
+<script type="text/javascript" src="./template/mmoban/js/swiper.min.js"></script>
+<script>
+var mySwiper = new Swiper('.swiper-container', {
+	slidesPerView : 3,
+	spaceBetween : 10,
+	freeMode : true,
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<!--{if $to=='index' || $to=='kefu' || $to=='search' || $to=='about'}-->
+	<title>$config['sy_title']</title>
+	<meta name="keywords" content="$config['sy_keyword']" />
+    <meta name="description" content="$config['sy_description']" />
+<!--{else if $to=='game'}-->
+	<title>$config['gm_title']</title>
+	<meta name="keywords" content="$config['gm_keyword']" />
+    <meta name="description" content="$config['gm_description']" />
+<!--{else if $to=='newgame'}-->
+	<title>$config['newgm_title']</title>
+	<meta name="keywords" content="$config['newgm_keyword']" />
+    <meta name="description" content="$config['newgm_description']" />
+<!--{else if $to=='kaifu'}-->
+	<title>$config['gmkf_title']</title>
+	<meta name="keywords" content="$config['gmkf_keyword']" />
+    <meta name="description" content="$config['gmkf_description']" />
+<!--{else if $to=='hot'}-->
+	<title>$config['hotgm_title']</title>
+	<meta name="keywords" content="$config['hotgm_keyword']" />
+    <meta name="description" content="$config['hotgm_description']" />
+<!--{else if $to=='libao'}-->
+	<title>$config['gmlb_title']</title>
+	<meta name="keywords" content="$config['gmlb_keyword']" />
+    <meta name="description" content="$config['gmlb_description']" />
+<!--{else if $to=='libao_id'}-->
+	<title>$config['lbxx_title']</title>
+	<meta name="keywords" content="$config['lbxx_keyword']" />
+    <meta name="description" content="$config['lbxx_description']" />
+<!--{else if $to=='news'}-->
+	<title>$config['news_title']</title>
+	<meta name="keywords" content="$config['news_keyword']" />
+    <meta name="description" content="$config['news_description']" />
+<!--{else if $to=='news_id'}-->
+	<title>$config['newsxx_title']</title>
+	<meta name="keywords" content="$config['newsxx_keyword']" />
+	<meta name="description" content="$config['newsxx_description']" />
+<!--{else if $to=='newgm'}-->
+	<title>$config['newgm_title']</title>
+	<meta name="keywords" content="$config['newgm_keyword']" />
+    <meta name="description" content="$config['newgm_description']" />
+<!--{else if $to=='hd'}-->
+	<title>$config['activity_title']</title>
+	<meta name="keywords" content="$config['activity_keyword']" />
+    <meta name="description" content="$config['activity_description']" />
+<!--{else}-->
+	<title>$config['sy_title']</title>
+	<meta name="keywords" content="$config['sy_keyword']" />
+    <meta name="description" content="$config['sy_description']" />
+<!--{/if}-->
+<link rel="shortcut icon" href="../icon.ico" />
+<link rel="stylesheet" href="./template/mmoban/css/swiper.min.css">
+<link rel="stylesheet" href="./template/mmoban/css/main.css">
+<script type="text/javascript" src="./template/mmoban/js/jquery.js"></script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MJDVP2DS');</script>
+<!-- End Google Tag Manager -->
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://beastdatab.com/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+</head>
+<body style="background: #f1f1f1;">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MJDVP2DS"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<div class="header">
+	<!--{if $to=='' || $to=='index'}-->
+	<div class="sy_top">
+		<div class="sy_top_logo"><img src="../image/logo.png"></div>
+		<div class="sy_top_soso"><a href="./mobile.php?to=soso"><input type="button" value="搜索您喜爱的软件"></a></div>
+		<a href="./mobile.php?to=gg"><div class="sy_top_gg"></div></a>
+	</div>
+	<!--{/if}-->
+	<!--{if $to=='game'}-->
+	<div class="gm_header_fh">
+		<a href="../mobile.php"><div class="gm_header_left"></div></a>
+		<div class="gm_header_tit">软件中心</div>
+		<a href="/mobile.php?to=soso"><div class="gm_header_right"></div></a>
+	</div>
+	<!--{/if}-->
+	<!--{if $to=='game_id'}-->
+	<div class="gm_header_fh">
+		<a href="javascript:;" onClick="javascript :history.back(-1);"><div class="gm_header_left"></div></a>
+		<div class="gm_header_tit">游戏详细</div>
+	</div>
+	<!--{/if}-->
+	<!--{if $to=='kaifu'}-->
+	<div class="gm_header_fh">
+		<a href="../mobile.php"><div class="gm_header_left"></div></a>
+		<div class="gm_header_tit">开服表</div>
+	</div>
+	<!--{/if}-->
+	<!--{if $to=='hd'}-->
+	<div class="gm_header_fh">
+		<a href="../mobile.php"><div class="gm_header_left"></div></a>
+		<div class="gm_header_tit">游戏活动</div>
+
+	</div>
+	<!--{/if}-->
+	<!--{if $to=='news'}-->
+	<div class="gm_header_fh">
+		<a href="../mobile.php"><div class="gm_header_left"></div></a>
+		<div class="gm_header_tit">新闻资讯</div>
+	</div>
+	<!--{/if}-->
+	<!--{if $to=='news_id'}-->
+	<div class="gm_header_fh">
+		<a href="javascript:;" onClick="javascript :history.back(-1);"><div class="gm_header_left"></div></a>
+		<div class="gm_header_tit">资讯详细</div>
+	</div>
+	<!--{/if}-->
+	<!--{if $to=='gg'}-->
+	<div class="gm_header_fh">
+		<a href="../mobile.php"><div class="gm_header_left"></div></a>
+		<div class="gm_header_tit">公告</div>
+	</div>
+	<!--{/if}-->
+	<!--{if $to=='gg_id'}-->
+	<div class="gm_header_fh">
+		<a href="javascript:;" onClick="javascript :history.back(-1);"><div class="gm_header_left"></div></a>
+		<div class="gm_header_tit">官方公告</div>
+	</div>
+	<!--{/if}-->
+	<!--{if $to=='libao'}-->
+	<div class="lb_header_fh">
+		<a href="./mobile.php"><div class="lb_header_left"></div></a>
+		<div class="lb_header_tit">游戏礼包</div>
+		<a href="/mobile.php?to=soso&ty=2"><div class="lb_header_right"></div></a>
+	</div>
+	<!--{/if}-->
+	<!--{if $to=='libao_id'}-->
+	<div class="gm_header_fh">
+		<a href="javascript:;" onClick="javascript :history.back(-1);"><div class="gm_header_left"></div></a>
+		<div class="gm_header_tit">礼包详细</div>
+	</div>
+	<!--{/if}-->
+	<!--{if $to=='soso'}-->
+	<div class="so_header_fh">
+		<a href="../mobile.php"><div class="so_header_left"></div></a>
+		<form accept="index.php?to=soso">
+		<div class="so_header_tit">
+		<!--{if $sotype=='1'}-->
+			<input type="text" name="keyboard" value="$soname" id="name" placeholder="请输入您要搜索的游戏">
+		<!--{/if}-->
+		<!--{if $sotype=='2'}-->
+			<input type="text" name="keyboard" value="$soname" id="name" placeholder="请输入您要搜索的礼包">
+		<!--{/if}-->
+		</div>
+		<input type="hidden" value="soso" name="to">
+		<input type="hidden" value="$sotype" name="ty">
+		<input type="submit" class="so_header_right" value=""> 
+		</form>
+	</div>
+	<!--{/if}-->
+</div>

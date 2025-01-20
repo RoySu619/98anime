@@ -1,0 +1,100 @@
+<template>
+	<list class="list">
+		<cell class="top">
+			<text class="tit">{{tit}}</text>
+			<text class="tm">发布于: {{tm}}</text>
+		</cell>
+		<cell class="main">
+			<rich-text class="nr" :nodes="nr"></rich-text>
+		</cell>
+	</list>
+</template>
+<script>
+	import G_APP from '@/common/ip.js'
+	import parseHtml from '@/common/html-parse/html-parser.js'
+	export default {
+		data() {
+			return {
+				id:"0",
+				tit: "",
+				tm:"",
+				nr:"",
+			}
+		},
+		onLoad(obj) {
+			this.id=obj.id;
+		},
+		onReady() {
+			this.get()
+		},
+		methods: {
+			get() {
+				let thi = this;
+				uni.request({
+					url: G_APP.ip + 'appapi.php?to=newsxx',
+					method: "GET",
+					dataType: "json",
+					enableCache: true, //缓存
+					defer: true, //控制当前请求是否延时至首屏内容渲染后发送
+					data: {
+						id:thi.id
+					},
+					success: (ret) => {
+						if (ret.data) {
+							thi.tit = ret.data.newname;
+							thi.tm = ret.data.times;
+							let data = parseHtml(ret.data.newnr);
+							thi.nr=data;
+						}
+					}
+				});
+			}
+		},
+		onNavigationBarButtonTap(e) {
+			if (e.index == "0") {
+				uni.navigateBack();
+			}
+		}
+	}
+</script>
+<style>
+	.list{
+		width: 750rpx;
+		background-color: #fff;
+		flex: 1;
+	}
+	.top{
+		width: 750rpx;
+		padding-left: 30rpx;
+		padding-right: 30rpx;
+		background-color: #f9f9f9;
+	}
+	.main{
+		width: 750rpx;
+		padding: 30rpx;
+	}
+	.tit {
+		width: 690rpx;
+		line-height: 30rpx;
+		lines:2;
+		font-size: 30rpx;
+		text-align: center;
+		padding-top: 30rpx;
+	}
+	.tm {
+		color: rgba(0, 0, 0, 0.3);
+		width: 690rpx;
+		lines:1;
+		height: 80rpx;
+		line-height: 80rpx;
+		font-size: 26rpx;
+		text-align: center;
+		border-bottom: 0.5rpx solid rgba(0, 0, 0, 0.05);
+	}
+	.nr{
+		width: 690rpx;
+		font-size: 30rpx;
+
+		background-color: #fff;
+	}
+</style>

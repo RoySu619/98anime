@@ -1,0 +1,36 @@
+.li{
+	width: 750rpx;
+	padding-left: 30rpx;
+	padding-right: 30rpx;
+	height: 120rpx;
+	border-bottom: 0.5rpx solid rgba(0,0,0,0.05);
+	flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.li_l{
+	width: 60rpx;
+	height: 140rpx;
+	line-height: 140rpx;
+	font-size: 50rpx;
+	font-family:iconfont;
+	color: rgba(0,0,0,0.3);
+}
+.li_c{
+	width: 450rpx;
+	height: 140rpx;
+	line-height: 140rpx;
+	text-align: left;
+}
+.li_r{
+	width: 150rpx;
+	height: 60rpx;
+	line-height: 60rpx;
+	font-size: 26rpx;
+	text-align: center;
+	border-radius: 10rpx;
+	background-color: rgba(255, 170, 0, 0.05);
+	border: 0.5rpx solid #ffda08;
+	color: #000;
+}

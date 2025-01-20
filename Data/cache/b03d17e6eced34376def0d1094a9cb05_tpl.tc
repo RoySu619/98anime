@@ -1,0 +1,17 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><?php include $this->Template('header');?>
+
+<div class="main">
+		<div class="gg_main">
+			<?php if(is_array($gglist)===true){foreach($gglist AS $key => $value){ ?>
+			<a href="./mobile.php?to=gg_id&amp;id=<?php echo $value['id']?>">
+			<li>
+				<div class="gg_tit">
+					<em><?php echo $value['ggtp']?></em>
+					<b>发布时间: <?php echo $value['times']?></b>
+				</div>
+			</li>
+			</a>
+			<?php }} ?>
+		</div>
+</div>
+<?php include $this->Template('footer');?>

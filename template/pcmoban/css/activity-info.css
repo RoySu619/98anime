@@ -1,0 +1,163 @@
+.content{
+	margin-top: 30px;
+}
+
+.information-list{
+	background-color: #fff;
+	width: 820px;
+	padding: 35px 30px 50px;
+	border-radius: 5px;
+	min-height: 1483px;
+}
+.information-list>h3{
+	font-size: 20px;
+	text-align: center;
+}
+.information-list>p{
+	font-size: 12px;
+	color:#999;
+	text-align: center;
+}
+.information-list>p span{
+	margin: 15px;
+}
+.information-list .content{
+	font-size: 14px;
+	color:#333;
+	line-height: 26px;
+}
+.information-list .content img{
+	display: block;
+	margin: 15px auto;
+}
+.video-js {
+		margin-top: 20px;
+		width: 820px;
+    display: block;
+    vertical-align: top;
+    box-sizing: border-box;
+    color: #fff;
+    background-color: #000;
+    position: relative;
+    padding: 0;
+    font-size: 10px;
+    line-height: 1;
+    font-weight: 400;
+    font-style: normal;
+    font-family: Arial,Helvetica,sans-serif;
+    word-break: initial;
+}
+.vjs-no-js {
+    padding: 20px;
+    color: #fff;
+    background-color: #000;
+    font-size: 18px;
+    font-family: Arial,Helvetica,sans-serif;
+    text-align: center;
+    width: 300px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+.hot-information{
+	background-color: #fff;
+	width: 280px;
+	padding: 30px 0 0;
+	border-radius: 5px;
+}
+
+.hot-information h3{
+	font-size: 20px;
+	padding: 0 15px;
+	font-weight: bold;
+	margin-bottom: 30px;
+}
+.hot-information h3 i{
+	display: inline-block;
+	margin-right: 10px;
+	width: 4px;height: 23px;
+	background-color: #fddd85;
+	border-radius: 2px;
+	vertical-align: -5px;
+}
+.hot-information .hot-video li{
+	padding: 15px;
+	border-top: 1px solid #f5f6f5;
+	position: relative;
+	overflow: hidden;
+}
+.hot-information .hot-video li:hover i{
+	top: 15px;
+}
+.hot-information li img{
+	width: 250px;
+	height: 140px;
+	border-radius: 5px;
+}
+.hot-information .hot-video p{
+	position: absolute;width: 250px;
+	height: 36px;background-color: rgba(0,0,0,0.7);
+	color:#fff;font-size: 14px;
+	border-radius: 0 0 5px 5px;
+	margin-top: 10px;bottom: 15px;left: 15px;
+}
+.hot-information .hot-video p img{
+	width: 20px;height: 20px;
+	margin-top: 8px;margin-right: 10px;
+}
+.hot-information .hot-video p span{
+	width: 220px;line-height: 36px;text-indent: 1em;
+	overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.hot-information .hot-video i{
+	position: absolute;
+  width: 250px;
+  height: 140px;
+  background: url(../images/video1.png) no-repeat center center;
+  -webkit-background-size: 50px 50px;
+  background-size: 50px 50px;
+  top: -235px;
+  left: 15px;
+  transition: all 0.5s;
+  background-color: rgba(0,0,0,0.7);
+  border-radius: 5px;
+}
+.hot-information li:last-child{
+	border-bottom: 1px solid #f5f6f5;
+}
+.hot-information h3.hot-game{
+	margin-top: 30px;
+}
+
+.kaifu li{
+	padding: 0;
+	border: 0 !important;
+}
+.kaifu li a{
+	display: block;
+	padding: 19px 15px;
+	border-top: 1px solid #f5f6f5;
+	color:#333;
+}
+.kaifu li a:hover{
+	background-color: #eee;
+}
+.kaifu a .right{
+	margin-top: 20px;
+	width: 15px;height: 28px;
+}
+.kaifu a img.left{
+	width: 68px;
+	height: 68px;
+	border-radius: 10px;
+}
+.kaifu a div{
+	margin-left: 10px;
+}
+.kaifu a div p{
+	margin-top: 5px;
+	font-size: 14px;
+	color:#999;
+}

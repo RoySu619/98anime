@@ -1,0 +1,187 @@
+<template>
+<list>
+	<cell class="top">
+		<image class="top_i" src="../../static/uslogo.png"></image>
+	</cell>
+	<cell class="li">
+		<view class="lis">
+			<view class="li_tell">
+				<text class="li_tell_l">&#xe7b2;</text>
+				<input class="li_input" :value="tell" @input="telljt" @focus="settellqcshow" @blur="settellqchide" type="number" maxlength="11" placeholder="请输入手机号"  confirm-type="next" controlled="true" auto-blur="true" hold-keyboard="true" />
+				<text class="li_tell_x" v-if="qctellshow" @click="qctell">&#xe7fc;</text>
+			</view>
+			<view class="li_tell">
+				<text class="li_tell_l">&#xe7d0;</text>
+				<input class="li_input" :value="pass"  @input="passjt" @focus="setpassqcshow" @blur="setpassqchide" type="password" maxlength="18" placeholder="请输入密码" confirm-type="next" controlled="true" auto-blur="true" hold-keyboard="true" />
+				<text class="li_tell_x" v-if="qcpassshow"  @click="qcpass">&#xe7fc;</text>
+			</view>
+		</view>
+	</cell>
+	<cell class="pas_ys">
+		<label class="label" @click="setxyzt">
+		<radio value="0" :checked="isxyzt" style="transform:scale(0.7)" color="#ff008a" disabled />
+		</label>
+		<text class="txt_txt" @click="setxyzt">已阅读并同意</text>
+		<text class="txt_url" @click="opllq(2)">用户协议</text>
+		<text class="txt_txt" @click="setxyzt">和</text>
+		<text class="txt_url" @click="opllq(1)">隐私政策</text>
+	</cell>
+	<cell class="op">
+		<text class="op_t1" @click="openzhpas">找回密码</text>
+		<text class="op_t2" @click="opzc">立即注册</text>
+	</cell>
+	<cell class="an">
+		<text class="pot" @click="potdata">立即登录</text>
+	</cell>
+	
+</list>
+</template>
+<script>
+import G_APP from '@/common/ip.js'
+export default {
+	name:"login_pas",
+    data() {
+		return {
+			tell:"",
+			pass:"",
+			qctellshow:false,
+			qcpassshow:false,
+			isxtpt:1,
+			isxyzt:false
+		}
+    },
+    methods: {
+		setxyzt(){
+			uni.hideKeyboard()
+			if(this.isxyzt==false){
+				this.isxyzt=true;
+			}else{
+				this.isxyzt=false;
+			}
+		},
+		opllq(pd){
+			if(pd==1){
+				uni.navigateTo({
+					url: '../../pages/llq/index?url=yszc&tit=隐私政策&pd=1',
+				});
+			}
+			if(pd==2){
+				uni.navigateTo({
+					url: '../../pages/llq/index?url=fwxy&tit=服务协议&pd=1',
+				});
+			}
+		},
+		opzc(){
+			uni.navigateTo({
+				url: '../../pages/login/login_zc'
+			});
+		},
+		openzhpas(){
+			uni.navigateTo({
+				url: '../../pages/login/login_zpas'
+			});
+		},
+		potdata(){
+			let thi=this;
+			if(thi.isxyzt){
+			if(thi.tell && thi.pass){
+				uni.showLoading({
+					title: '登录中',
+					mask:true
+				});
+				uni.hideKeyboard()
+				uni.request({
+					    url: G_APP.ip+'appapi.php?to=login',
+						method:"POST",
+						header: {
+						    'content-type': 'application/x-www-form-urlencoded'
+						},
+						dataType:"json",
+						enableCache:false,//缓存
+						defer:false,//控制当前请求是否延时至首屏内容渲染后发送
+					    data: {
+					        logins: 'go',
+							uname:thi.tell,
+							upass:thi.pass
+					    },
+						success: (res) => {
+							uni.hideLoading();
+							if(res.data[0]=='0'){
+								uni.showToast({icon:"none",title: ' 登录信息不完整，请重试！ ',duration: 2000});
+							}
+							if(res.data[0]=='1'){
+								uni.showToast({icon:"none",title: ' 登录账号不存在 ',duration: 2000});
+							}
+							if(res.data[0]=='2'){
+								uni.showToast({icon:"none",title: ' 登录密码错误 ',duration: 2000});
+							}
+							if(res.data[0]=='66'){
+								uni.$emit('login',{msg:'yes'});
+								setTimeout(()=>{uni.navigateBack();},1000);
+								uni.showToast({icon:"none",title: ' 登录成功 ',duration: 2000});
+							}
+							if(res.data[0]=='99'){
+								uni.showToast({icon:"none",title: ' 该账号因违规已经封禁，如有疑问请联系客服 ',duration: 2000});
+							}
+					    }
+					});
+			}else{
+				if(thi.tell==''){
+					uni.showToast({icon:"none",title: ' 请输入登录手机号 ',duration: 2000});
+				}else if(thi.pass==''){
+					uni.showToast({icon:"none",title: ' 请输入登录密码 ',duration: 2000});
+				}
+			}
+			}else{
+				uni.showToast({icon:"none",title: ' 您未同意用户协议,服务协议,请认真阅读并勾选同意全部协议 ',duration: 2000});
+			} 
+		},
+		qctell(){
+			this.qctellshow=false;
+			this.tell= '';
+		},
+		qcpass(){
+			this.qcpassshow=false;
+			this.pass= '';
+		},
+		telljt(e){
+			this.tell=e.detail.value;
+			if(e.detail.value==''){
+				this.qctellshow=false;
+			}
+			if(e.detail.cursor==1){
+				this.qctellshow=true
+			}
+		},
+		passjt(e){
+			this.pass=e.detail.value;
+			if(e.detail.value==''){
+				this.qcpassshow=false;
+			}
+			if(e.detail.cursor==1){
+				this.qcpassshow=true
+			}
+		},
+		settellqcshow(){
+			if(this.tell){this.qctellshow=true;}
+		},
+		settellqchide(){
+			if(this.tell){this.qctellshow=false;}
+		},
+		setpassqcshow(){
+			if(this.pass){this.qcpassshow=true;}
+		},
+		setpassqchide(){
+			if(this.pass){this.qcpassshow=false;}
+		},
+    },
+	onNavigationBarButtonTap(e){
+		if(e.index==0){
+			uni.navigateBack();
+		}
+	}
+}
+</script>
+<style>
+@import "../../common/login.css";
+</style>

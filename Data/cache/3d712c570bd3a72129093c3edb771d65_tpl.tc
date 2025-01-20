@@ -1,0 +1,112 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="/template/sysadmin/css/style.css" rel="stylesheet">
+	<link href="/template/sysadmin/css/home.css" rel="stylesheet">
+	<link rel="icon" href="icon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="icon.ico" type="image/x-icon">
+  </head>
+<body >
+	<div class="main">
+	<div class="minihead">
+	<div class="dataleft">
+	<em>新增礼包</em>
+	<span id="xzlban">增加游戏礼包</span>
+	</div>
+	
+	</div>
+	<div class="gmbqfk">
+	<div class="xzdata">
+	<a href="./sysadmin.php?to=data"><div class="xzdata-input">返回</div></a>
+	<a href="./sysadmin.php?to=data_lb&amp;op=lb_con&amp;gmid=<?php echo $_GET['gmid']?>&amp;name=<?php echo $_GET['name']?>"><div class="xzdata-input">新增礼包</div></a>
+	</div>
+	<table class="">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>所属游戏</th>
+					<th>礼包名字</th>
+					<th>领取要求</th>
+					<th>适用系统</th>
+					<th>礼包状态</th>
+					<th>截止时间</th>
+					<th>上传时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody class="tbody" id="ptlb">	
+			<?php if(is_array($lblist)===true){foreach($lblist AS $key => $value){ ?>
+				<tr id="d_<?php echo $value['id']?>" <?php if($key==0 || $key==2 || $key==4 || $key==6 || $key==8 || $key==10 || $key==12 || $key==14){ ?>style="background: #f1f1f1;"<?php } ?>>
+					<td><?php echo $value["id"]?></td>
+					<td><?php echo $value["gmname"]?></td>
+					<td><?php echo $value["lbname"]?></td>
+					<td><?php echo $value["lqfs"]?> <?php echo $value["lbxh"]?></td>
+					<td><?php echo $value["lbxt"]?></td>
+					<?php if($value["lbsy"]!="0" && $value["lbsy"]!=""){ ?>
+					<td>已上线</td>
+					<?php } else { ?>
+					<td style="color:#ddd;">已下线</td>
+					<?php } ?>
+					<td><?php echo $value["jtimes"]?></td>
+					<td><?php echo $value["times"]?></td>
+					<td>
+					<a href="./sysadmin.php?to=data_lb&amp;op=lb_bj&amp;gmid=<?php echo $value['gid']?>&amp;lid=<?php echo $value['id']?>&amp;name=<?php echo $_GET['name']?>">
+						<em>
+							<img src="/template/sysadmin/image/sz.png" style="width: 16px;height: 16px;margin-right:20px;">
+						</em>
+					</a>
+					<span onclick="del('<?php echo $value['id']?>','<?php echo $value['keyid']?>','<?php echo $value['gid']?>');">
+						<img src="/template/sysadmin/image/del.png" style="width: 16px;height: 16px;">
+					</span>
+					</td>
+				</tr>
+			<?php }} ?>
+			</tbody>
+		</table>
+		<div class="page" id="page"></div>
+	</div>
+ 
+    <div id="ajcome"></div>
+	<div id="ajerro"></div>
+	<div id="ajsuccess"></div>
+	<div id="ajqr"></div>
+	</div>
+    <script src="/template/sysadmin/js/jquery.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	//------------删除礼包------------//
+	var del = function(id,ky,gi){
+		$("#ajqr").html('<div class="ajqrfk" style="z-index: 99;"><div class="ajqr"><span><img src="/template/sysadmin/image/wen.png"></span><em>确定删除这个吗？</em><b onclick="closew();">取消</b><p onclick="yesdel(\''+id+'\',\''+ky+'\',\''+gi+'\');">确定</p></div></div>');
+	}
+	var closew = function(){
+	    $("#ajqr").html('');
+	}
+	var yesdel = function(id,ky,gi){
+		$.ajax({
+			url:'/sysadmin.php?to=data_lb&op=dellb',
+			type:'POST', 
+			data:{
+			   'del-lb':'go',
+			   'did':id,
+			   'dky':ky,
+			   'gid':gi,
+			},
+			dataTyep:'json',
+			beforeSend:function(XMLHttpRequest){ 
+				$("#ajcome").html('<div class="axsucfk"><div class="axsuc"><span><img src="/template/sysadmin/image/logins.png"></span><em>加载中 ...</em></div></div>');
+			}, 
+			success:function(ret){
+				$("#ajcome").html('');
+				$("#ajqr").html('');
+				$("#ajsuccess").html('<div class="axyesfk"><div class="axyes"><span><img src="/template/sysadmin/image/yes.png"></span><em>删除成功！</em></div></div>');
+				setTimeout(function(){$("#ajsuccess").html('');clearTimeout(); },1000);
+				$("#d_"+id+"").remove();
+			}
+		});
+	}
+	//------------删除礼包------------//
+	</script>
+  </body>
+</html>

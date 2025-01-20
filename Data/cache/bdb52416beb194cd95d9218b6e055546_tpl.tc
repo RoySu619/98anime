@@ -1,0 +1,88 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><!DOCTYPE html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<title><?php echo $config['sy_title']?></title>
+<meta name="keywords" content="<?php echo $config['sy_keyword']?>" />
+<meta name="description" content="<?php echo $config['sy_description']?>" />
+<link rel="shortcut icon" href="../icon.ico" />
+<link rel="stylesheet" href="./template/mmoban/css/main.css">
+</head>
+<body style="background: #f1f1f1;">
+<div class="header">
+	<div class="us_xx_header_fh">
+		<a href="./mobile.php?to=user"><div class="us_xx_header_left"></div></a>
+		<div class="us_xx_header_tit">客服中心</div>
+		<div class="us_xx_header_right"></div>
+	</div>
+</div>
+<div class="main">
+	<div class="kf_list">
+		<div class="kf_main_li">
+			<li>
+				<img src="./template/mmoban/images/us_kefu.png">
+				<em>客服1QQ: <?php echo $config['wzkf1']?></em>
+				<a href="http://wpa.qq.com/msgrd?v=3&amp;uin=<?php echo $config['wzkf1']?>" target="_blank">联系</a>
+			</li>
+		</div>	
+		<div class="kf_main_li">
+			<li>
+				<img src="./template/mmoban/images/us_kefu.png">
+				<em>客服2QQ: <?php echo $config['wzkf2']?></em>
+				<a href="http://wpa.qq.com/msgrd?v=3&amp;uin=<?php echo $config['wzkf2']?>" target="_blank">联系</a>
+			</li>
+		</div>	
+		<div class="kf_main_li">
+			<li>
+				<img src="./template/mmoban/images/us_kefu.png">
+				<em>微信号: <?php echo $config['wzkf3']?></em>
+				<button data-clipboard-text="<?php echo $config['wzkf3']?>" onclick="btns()">复制</button>
+			</li>
+		</div>	
+		<div class="kf_main_li">
+			<li>
+				<img src="./template/mmoban/images/us_kefu.png">
+				<em>合作QQ: <?php echo $config['wzhzqq']?></em>
+				<a href="http://wpa.qq.com/msgrd?v=3&amp;uin=<?php echo $config['wzhzqq']?>" target="_blank">联系</a>
+			</li>
+		</div>	
+		<?php if($config['qunhao1']){ ?>
+		<div class="kf_main_li">
+			<li>
+				<img src="./template/mmoban/images/us_kefu.png">
+				<em>官方群1：<?php echo $config['qunhao1']?></em>
+				<button data-clipboard-text="<?php echo $config['qunhao1']?>" onclick="btns()">复制</button>
+			</li>
+		</div>	
+		<?php } ?>
+		<div class="kf_main_li">
+			<li>
+				<img src="./template/mmoban/images/us_kefu.png">
+				<em>官方群2：<?php echo $config['qunhao2']?></em>
+				<button data-clipboard-text="<?php echo $config['qunhao2']?>" onclick="btns()">复制</button>
+			</li>
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		
+	</div>
+</div>
+<script src="./template/pcmoban/js/clipboard.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+var btns = document.querySelectorAll('button');
+var clipboard = new ClipboardJS(btns);
+	clipboard.on('success', function(e) {
+		alert('复制成功！');
+	});
+	clipboard.on('error', function(e) {
+		alert('复制失败！请手动复制');
+	})
+</script>
+
+<?php include $this->Template('footer');?>

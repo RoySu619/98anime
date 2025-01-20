@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="/template/sysadmin/css/style.css" rel="stylesheet">
+	<link href="/template/sysadmin/css/home.css" rel="stylesheet">
+	<link rel="icon" href="icon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="icon.ico" type="image/x-icon">
+  </head>
+<body>
+	<div class="main">
+	<div class="minihead">
+	<div class="dataleft"><em>添加游戏</em><span>添加新游戏</span></div>
+	
+	</div>
+	<form id="frm"  enctype="multipart/form-data" method="post">
+	<div class="data-confk">
+	<div class="data-connr">
+	<div class="xzdata"><a href="/sysadmin.php?to=data"><div class="xzdata-input">游戏列表</div></a></div>
+	<div class="data-conxx">
+	<em>游戏名字 :</em>
+	<input type="text" value="$value['gmname']" class="data-txt" id="gmname"  placeholder="请输入游戏名字" style="border: 1px solid #ffd9ce;">
+
+	<em>游戏标签 :</em>
+		<div class="data-bqdx" >
+			<!--{loop $gmbq $key $valueb}-->
+				<li>
+					<input type="checkbox" value="$valueb['bqname']" id="x_$valueb['bqname']" name="test"> 
+					<label for="x_$valueb['bqname']" >$valueb['bqname']</label>
+				</li>
+			<!--{/loop}-->
+		</div>
+	
+	<div id="gmsize">
+	<em>游戏大小 :</em>
+	<input type="text" value="$value['gmmb']" class="data-txt" id="gmmb"  placeholder="游戏大小 如：258 显示效果：258MB" style="border: 1px solid #ffd9ce;">
+	</div>
+
+	<em>游戏简介 :</em>
+	<textarea class="data-textarea" id="gmjj" placeholder="请输入简介" style="border: 1px solid #ffd9ce;">$value['gmjj']</textarea>
+	<em>游戏介绍 :</em>
+	<textarea class="data-textarea" id="gmjs" placeholder="请输入介绍" style="border: 1px solid #ffd9ce;">$value['gmjs']</textarea>
+	<em>链接类型 :</em>
+	<div class="data-txt">
+		<select class="data-conse" id="urllx"> 
+		<option value="0" <!--{if $value['urlpd']=='0'}-->selected<!--{/if}-->>站内链接</option> 
+		<option value="1" <!--{if $value['urlpd']=='1'}-->selected<!--{/if}-->>站外链接</option> 
+		</select> 
+	</div>
+	<div id="gmurls">
+	<em>安卓链接 :</em>
+	<input type="text" value="$value['Android']" class="data-txt" id="aur"  placeholder="安卓游戏链接" style="border: 1px solid #ffd9ce;">
+	<em>苹果链接 :</em>
+	<input type="text" value="$value['ios']" class="data-txt" id="iur"  placeholder="IOS游戏链接" style="border: 1px solid #ffd9ce;">
+	</div>
+	<em>游戏图标 :</em>
+	<div  class="data-txt">
+	<span class="fileinput-button">
+	<span class="fileanniu" style="background: linear-gradient(#f9f9f9, #ffd9ce);">上传游戏图标 </span>
+	<input type="file" value="" id="gmlogo"  name='file' onchange="upimgs(this)" accept="image/jpeg,image/jpg,image/png">
+	</span>
+	</div>
+	<!--{if $value['gmlogo']}-->
+	<div class="fileimg" id="gmlogolist" style="display:block;"><img src="../$value['gmlogo']"></div>
+	<!--{else}-->
+	<div class="fileimg" id="gmlogolist"></div>
+	<!--{/if}-->
+	<em>电脑版 Banner :</em>
+	<div  class="data-txt">
+		<span class="fileinput-button">
+		<span class="fileanniu">上传电脑版 Banner（ 尺寸 宽1920:高590,jpg格式,小于300KB,请严格按要求上传）</span>
+		<input type="file" value="" id="gmpc"  name='file' onchange="upimgs(this)" accept="image/jpeg,image/jpg,image/png">
+		</span>
+	</div>
+	<!--{if $value['gmpclbt']}-->
+	<div class="fileimglb" id="gmpclist" style="display:block;"><img src="../$value['gmpclbt']"></div>
+	<!--{else}-->
+	<div class="fileimglb" id="gmpclist"></div>
+	<!--{/if}-->
+	
+	
+	<em>APP Banner :</em>
+	<div  class="data-txt">
+		<span class="fileinput-button">
+		<span class="fileanniu">上传APP Banner（ 尺寸 宽690:高280,jpg格式,小于300KB,请严格按要求上传）</span>
+		<input type="file" value="" id="gmapp"  name='file' onchange="upimgs(this)" accept="image/jpeg,image/jpg,image/png">
+		</span>
+	</div>
+	<!--{if $value['gmapplbt']}-->
+	<div class="fileimglb" id="gmapplist" style="display:block;"><img src="../$value['gmapplbt']"></div>
+	<!--{else}-->
+	<div class="fileimglb" id="gmapplist"></div>
+	<!--{/if}-->
+	
+	<em>游戏截图 :</em>
+	<div  class="data-txt">
+	<span class="fileinput-button">
+	<span class="fileanniu">上传游戏截图（建议5张内，最好3张，图片越多越影响加载速度）</span>
+	<input type="file"  multiple="multiple" name="jtimg[]" value=""  id="jtimg" onchange="setImagePreviews();" accept="image/jpeg,image/jpg,image/png" >
+	</span>
+	</div>
+	<div class="data-conimg">
+		<!--{if $gmimg}-->
+		<div class="data-conimgxx" id="imglb" >
+		<!--{loop $gmimg $key $valueimg}-->
+			<div class="imgxx" id="colse_$valueimg['id']" >
+			<input type="hidden" value="$valueimg['id']" name="模板$valueimg['id']" id="imurl_$valueimg['id']"  class='yuanimgval'>
+			<img style="width:100%;" src="../$valueimg['imgs']"/>
+			<div class="imgsc" id="$valueimg['id']" onclick="delimg(this);">删除</div>
+			</div>
+		<!--{/loop}-->
+		</div>
+		<!--{else}-->
+		<div class="data-conimgxx" id="imglb" >
+		</div>
+		<!--{/if}-->
+	</div>
+	
+	<em>游戏下载次数 :</em>
+	<input type="text" value="$value['gmdow']" class="data-txt" id="gmdow"  placeholder="作假时填写 如：1680 , 默认0">
+	<em>游戏点击次数 :</em>
+	<input type="text" value="$value['gmdj']" class="data-txt" id="gmdj"  placeholder="作假时填写 如：3580 , 默认0">
+    <em>游戏评分 :</em>
+	<input type="text" value="$value['gmpf']" class="data-txt" id="gmpf"  placeholder="作假时填写 如：5 ，5即时满星，默认3星">
+	
+	
+	</div>
+	</div>
+	    <input class="gmlogourl" type="hidden" value="$value['gmlogo']" id="gmlogourl">
+		<input class="gmpcurl" type="hidden" value="$value['gmpclbt']" id="gmpcurl">
+		<input class="gmappurl" type="hidden" value="$value['gmapplbt']" id="gmappurl">
+		<input class="data-txt" type="hidden" value="$value['gmtuid']" id="gmjtu">
+	    <input class="data-txt" type="hidden" value="" id="delid">
+		<input class="data-txt" type="hidden" value="0" id="fks">
+		<input class="data-txt"  type="hidden" value="0" id="yesbc">
+		<div class="data-conbutton">
+			<input type="button" value="返回" onClick="javascript :history.back(-1); " class="databuttonf">
+			<input type="button" value="保存" onclick="bc();" class="databuttonb">		
+		</div>
+	</div>
+	</div>
+	
+    </form>
+	
+    <div id="ajcome"></div>
+	<div id="ajerro"></div>
+	<div id="ajsuccess"></div> 
+    <script src="/template/sysadmin/js/jquery.min.js"></script>
+	<script src="/template/sysadmin/script/upimg.js"></script>
+    <script src="/template/sysadmin/script/upvideo.js"></script>
+ 
+	<script>
+	$(function(){
+		var	data = "$value['gmbq']";
+		var str = data.split(',');
+		for (var i=0;i<str.length;i++){ 
+			$("#x_"+str[i]+"").attr("checked","checked");
+		}	
+	});
+	
+	var delimg = function(obj){
+	var did = obj.id;
+	$.ajax({
+		url:'./sysadmin.php?to=data_xg&op=delimg',
+		type:'POST', 
+		data:{
+		   'delimg':'go',
+		   'imid':did,
+		},
+		dataTyep:'json',
+		beforeSend:function(XMLHttpRequest){ 
+			$("#ajcome").html('<div class="axsucfk"><div class="axsuc"><span><img src="image/logins.png"></span><em>加载中 ...</em></div></div>');
+        }, 
+	    success:function(ret){ 
+		    $("#ajcome").html('');
+		    $("#ajsuccess").html('<div class="axyesfk"><div class="axyes"><span><img src="image/yes.png"></span><em>删除图片成功！</em></div></div>');
+			setTimeout(function(){$("#ajsuccess").html('');clearTimeout(); },300);
+			$('#colse_'+did+'').remove();
+	    }  
+		});
+	
+	}
+	
+	var bc = function(){
+	obj = document.getElementsByName("test");
+	check_val = [];
+		for(k in obj){
+			if(obj[k].checked)
+            check_val.push(obj[k].value);
+		}
+	var xzbq = check_val;
+	var duotus=$(".imgxx").length; 
+	if(duotus>50){
+	   alert('图片太多啦！不超过50张哦。');
+	}else{
+		var gfbtxz = $("#gfbt").prop('checked');
+		if(gfbtxz){	
+			var btxz = 1;
+		}else{
+			var btxz = 0;
+		}
+		var flbqxz = $("#czfl").prop('checked');
+		if(flbqxz){	
+			var czfls = 1;
+		}else{
+			var czfls = 0;
+		}
+		var dantu= $('#file').val();
+		var duotu= $('#jtimg').val(); 
+		if($("#gmname").val()!=''){
+		if(xzbq!=''){
+			if($("#gmmb").val()!=''){
+				if($("#gmjj").val()!=''){
+					if($("#gmjs").val()!=''){
+							if($("#fks").val()!='0'){
+							var formData = new FormData();
+								var cpgxjj = $("#gmjj").val();
+								var clgmjj=cpgxjj.replace(/\s+/g,'').replace('"','').replace('`','').replace('&','').replace('\\','').replace('、','').replace(/\n/g,'');
+								var cpgxnr = $("#gmjs").val();
+								var clgmjs=cpgxnr.replace(/\s+/g,'').replace('"','').replace('`','').replace('&','').replace('\\','').replace('、','').replace(/\n/g,'<br>');
+								formData.append("gid",'$value["id"]'); 
+								formData.append("gmlogo",$("#gmlogourl").val()); 
+								formData.append("pctu", $("#gmpcurl").val());
+								formData.append("apptu", $("#gmappurl").val());
+								formData.append("gmimg",$("#gmjtu").val());
+								formData.append("gmname",$("#gmname").val());
+								formData.append("gmbq", xzbq);
+								formData.append("gmlx", $("#gmlx").val());
+								formData.append("gmmb", $("#gmmb").val());
+								formData.append("gmdow", $("#gmdow").val());
+								formData.append("gmdj", $("#gmdj").val());
+								formData.append("gmpf", $("#gmpf").val());
+								formData.append("gmjj", clgmjj);
+								formData.append("gmjs", clgmjs);
+								formData.append("anurl", $("#aur").val());
+								formData.append("iourl", $("#iur").val());
+								formData.append("urlx", $("#urllx").val());
+								formData.append("data-xg", 'go');
+								formData.append("key", '0');
+								$.ajax({
+									url:'../sysadmin.php?to=data_xg&op=setdata',
+									type:'POST', 
+									dataType:'json',
+									data:formData,
+									processData: false,
+									contentType: false,
+									beforeSend:function(XMLHttpRequest){ 
+									  $("#ajcome").html('<div class="axsucfk"><div class="axsuc"><span><img src="image/logins.png"></span><em>加载中 ...</em></div></div>');
+									   
+									}, 
+									success:function(ret){
+										//alert(JSON.stringify(ret));
+										if(ret==3){
+											$("#ajcome").html('');
+											$("#ajsuccess").html('<div class="axyesfk"><div class="axyes"><span><img src="image/yes.png"></span><em>更新游戏成功！</em></div></div>');
+											setTimeout(function(){$("#ajsuccess").html('');clearTimeout(); window.location.href='../sysadmin.php?to=data&type=$_GET["type"]&open=$_GET["open"]&pages=$_GET["pages"]'; },300); 
+											//
+										}	
+									}  
+						
+								});
+							}else{
+								cc();
+							}
+					}else{
+						$("#ajsuccess").html('<div class="axyesfk"><div class="axyes"><span><img src="image/jgao.png"></span><em>请输入介绍！</em></div></div>');
+						setTimeout(function(){$("#ajsuccess").html('');clearTimeout(); },600); 
+					}
+				}else{
+					$("#ajsuccess").html('<div class="axyesfk"><div class="axyes"><span><img src="image/jgao.png"></span><em>请输入游戏简介！</em></div></div>');
+					setTimeout(function(){$("#ajsuccess").html('');clearTimeout(); },600); 
+				}
+			}else{
+				$("#ajsuccess").html('<div class="axyesfk"><div class="axyes"><span><img src="image/jgao.png"></span><em>请输入游戏大小！</em></div></div>');
+				setTimeout(function(){$("#ajsuccess").html('');clearTimeout(); },600); 
+			}
+		}else{
+			$("#ajsuccess").html('<div class="axyesfk"><div class="axyes"><span><img src="image/jgao.png"></span><em>请选择游戏标签！</em></div></div>');
+			setTimeout(function(){$("#ajsuccess").html('');clearTimeout(); },600); 
+					
+		}
+		}else{
+			$("#ajsuccess").html('<div class="axyesfk"><div class="axyes"><span><img src="image/jgao.png"></span><em>请输入游戏名字！</em></div></div>');
+			setTimeout(function(){$("#ajsuccess").html('');clearTimeout(); },600); 
+					
+		}
+	}
+	}
+	var colsewin = function(){
+		$("#ajerro").html('');
+	}
+	var xg = function(obj){
+		var names = obj.value;
+		var iidds = obj.id;
+		$('input[id="imurl_'+iidds+'"]').attr("name",names);
+	}
+	var cc = function(){
+		var foo= $("input[class='imgval']"); 
+		if(foo.length=='0'){
+			$('#fks').val('1');
+			bc();
+		}else{
+			$(foo).each(function(){
+				var val = this.value; 
+					$.ajax({
+						url:'../sysadmin.php?to=data_xg&op=xgimg',
+						type:'POST', 
+						dataType:'json',
+						data:{
+							'xzimg':'go',
+							'logs':val,
+							'tid':'$value["gmtuid"]'
+						},
+						success:function(ret){ 
+							$('#fks').val('1');
+							$('#gmjtu').val(ret);
+							var yeslength = $("#yesbc").val();
+							var mylength = parseInt(yeslength) + 1 ;
+							$("#yesbc").val(mylength);
+							if(mylength==foo.length){
+								bc();
+							}
+						}
+					});
+			});
+		}
+	}
+</script>
+</body>
+</html>

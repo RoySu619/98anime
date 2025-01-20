@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<title>$config['sy_title']</title>
+<meta name="keywords" content="$config['sy_keyword']" />
+<meta name="description" content="$config['sy_description']" />
+<link rel="shortcut icon" href="../icon.ico" />
+<link rel="stylesheet" href="./template/mmoban/css/main.css">
+</head>
+<body style="background: #f1f1f1;">
+<div class="header">
+	<div class="us_xx_header_fh">
+		<a href="./mobile.php?to=user"><div class="us_xx_header_left"></div></a>
+		<div class="us_xx_header_tit">我的礼包</div>
+		<div class="us_xx_header_right"></div>
+	</div>
+</div>
+<div class="main">
+	<div class="gm_gm_list">
+		<!--{loop $data $key $value}-->
+		<div class="gm_gm_main_li">
+			<li>
+				<div class="kfion_s">
+					<a href="">
+						<img src="./$value['gmlogo']" alt="$value['lbname']">
+					</a>
+				</div>
+				<div class="kfcen_s">
+					<b>{$value['gmname']}$value['lbname']<h5></h5></b>
+					<em>到期时间：$value['lbtm']</em>
+					<span>兑换码：$value['lbkey']</span>
+				</div>
+				<div class="kfdow_s"><button data-clipboard-text="$value['lbkey']" onclick="btns()">复制</button></div>
+			</li>
+		</div>
+		<div class="gmgang"></div>
+		<!--{/loop}-->
+	</div>
+</div>
+<script src="./template/pcmoban/js/clipboard.min.js"></script>
+<script>
+var btns = document.querySelectorAll('button');
+var clipboard = new ClipboardJS(btns);
+	clipboard.on('success', function(e) {
+		alert('复制成功！');
+	});
+	clipboard.on('error', function(e) {
+		alert('复制失败！请手动复制');
+	})
+var getfz = function(){
+	var btns = document.querySelectorAll('button');
+	var clipboard = new ClipboardJS(btns);
+		clipboard.on('success', function(e) {
+			alert('复制成功！');
+		});
+		clipboard.on('error', function(e) {
+			alert('复制失败！请手动复制');
+	})
+}
+</script>
+<!--{load footer}-->

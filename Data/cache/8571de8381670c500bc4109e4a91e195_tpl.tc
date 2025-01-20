@@ -1,0 +1,278 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./template/pcmoban/css/base.css">
+  <link rel="stylesheet" href="./template/pcmoban/css/public.css">
+  <link rel="stylesheet" href="./template/pcmoban/css/swiper.min.css">
+  <link rel="stylesheet" href="./template/pcmoban/css/game-info.css">
+  <link rel="stylesheet" href="./template/pcmoban/kefu/kf.css">
+	<title><?php echo $config['gmxx_title']?></title>
+	<meta name="keywords" content="<?php echo $config['gmxx_keyword']?>" />
+    <meta name="description" content="<?php echo $config['gmxx_description']?>" />
+</head>
+<body>
+	<div class="header" style="padding:0; ">
+        <div class="login" style="margin-bottom: 0px;">
+          <div class="banxin clearfix">
+            <p class="left">
+				<a href="/">首页</a>
+				<span>|</span><a href="./index.php?to=game">游戏中心</a>
+				<span>|</span><a href="./index.php?to=gifts">礼包中心</a>
+				<span>|</span><a href="./index.php?to=news">资讯攻略</a>
+				<span>|</span><a href="./index.php?to=kaifu">开服表</a>
+				<span>|</span><a href="./index.php?to=activity">福利活动</a>
+				<span>|</span><a href="./mobile.php" target="_blank">手机版</a>
+			</p>
+            <p class="right">
+			<?php if($G_uid){ ?>
+				<a href="./index.php?to=user">
+					<?php if($G_ulogo){ ?>
+					<img src="<?php echo $G_ulogo?>">
+					<?php } else { ?>
+					<img src="./template/pcmoban/images/head.png">
+					<?php } ?>
+				</a>
+				<?php echo $G_unick?>
+				<a href="./index.php?to=user">个人中心</a>
+				<a href="./index.php?to=out&amp;login=out">退出</a>
+			<?php } else { ?>
+				<a href="./index.php?to=login">登录</a>
+				<a href="./index.php?to=register">注册</a>
+			<?php } ?>
+			</p>
+          </div>
+        </div>
+
+    </div>
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="<?php echo $appinfo['gmpclbt']?>" alt=""></div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+    <div class="header">
+        <div class="header-con banxin">
+            <div class="header-tab">
+                <a href="javascript:;" class="on">游戏官网<p></p></a>
+                <a href="javascript:;">游戏资讯<p></p></a>
+                <a href="javascript:;">游戏攻略<p></p></a>
+                <a href="javascript:;">游戏活动<p></p></a>
+                <a href="javascript:;">领取礼包<p></p></a>
+            </div>
+        </div>
+    </div>
+    <div class="banxin content clearfix">
+      <div class="left information-list">
+          <div class="main-info clearfix">
+              <img src="./<?php echo $appinfo['gmlogo']?>" class="left" alt="<?php echo $appinfo['gmname']?>">
+              <div class="detail left">
+                  <h4><?php echo $appinfo['gmname']?></h4>
+                  <p>标签：<?php echo $appinfo['gmbq']?></p>
+                  <p>
+					<?php if($appinfo['gmmb']>1000){ ?>
+					<?php echo round(($appinfo['gmmb'] / 1024),2); ?>GB
+					<?php } else { ?>
+					<?php echo $appinfo['gmmb']?> MB  
+					<?php } ?>
+					下载次数：
+					<?php if($appinfo['gmdow']>100000){ ?>
+					<?php echo mb_substr($appinfo['gmdow'],0,2,'utf8'); ?>万+
+					<?php }else if($appinfo['gmdow']>1000000){ ?>
+					<?php echo mb_substr($appinfo['gmdow'],0,3,'utf8'); ?>万+次
+					<?php } else { ?>
+					<?php echo $appinfo['gmdow']?>次
+					<?php } ?>
+					</p>
+              </div>
+              <div class="right btns">
+				<?php if($appinfo['ios']){ ?>
+                  <a href="<?php echo $appinfo['ios']?>"><img src="./template/pcmoban/images/down-ios.png"></a>
+				<?php } else { ?>
+				 <a href=""><img src="./template/pcmoban/images/down-ios1.png"></a>
+				<?php } ?>
+				<?php if($appinfo['Android']){ ?>
+                  <a href="<?php echo $appinfo['Android']?>"><img src="./template/pcmoban/images/down-an.png"></a>
+				<?php } else { ?>
+				 <a href=""><img src="./template/pcmoban/images/down-an1.png"></a>
+				<?php } ?>
+              </div>
+              <div class="imgs right">
+                  <img src="../image/appdow.png" alt="" id="down_ewm">
+              </div>
+          </div>
+          <ul class="game-index on">
+              <li>
+                  <h3><i></i>游戏简介</h3>
+                  <p> <?php echo $appinfo['gmjj']?></p>
+              </li>
+              <li>
+                  <h3><i></i>游戏截图</h3>
+                  <div class="swiper-container1">
+                      <div class="swiper-wrapper">
+						<?php if(is_array($imgss)===true){foreach($imgss AS $key => $valueimg){ ?>
+                          <div class="swiper-slide"><img src="./<?php echo $valueimg['imgs']?>"></div>
+						<?php }} ?>
+                      </div>
+                      <div class="swiper-button-next"></div>
+                      <div class="swiper-button-prev"></div>
+                  </div>
+              </li>
+              <li>
+                  <h3><i></i>游戏特色</h3>
+                  <div>
+                      <?php echo $appinfo['gmjs']?>
+                  </div>
+              </li>
+			  <?php if($splist){ ?>
+              <li class="main-video">
+                  <h3><i></i>游戏视频</h3>
+                  <ul>
+					
+					<?php if(is_array($splist)===true){foreach($splist AS $key => $valuesp){ ?>
+                      <li title="<?php echo $valuesp['zxname']?>">
+                          <a href="./index.php?to=news_id&amp;id=<?php echo $valuesp['id']?>">
+                              <img src="<?php echo $valuesp['zxlogo']?>">
+                              <p class="clearfix"><span class="left"><?php echo $valuesp['zxname']?></span><img src="./template/pcmoban/images/video.png" class="right"></p>
+                          </a>
+                      </li>
+                    <?php }} ?>
+					
+                  </ul>
+              </li>
+			  <?php } ?>
+              
+          </ul>
+          <ul class="game_gonglue">
+			<?php if($gmzxlist){ ?>
+			<?php if(is_array($gmzxlist)===true){foreach($gmzxlist AS $key => $value){ ?>
+              <li>
+                  <a href="./index.php?to=news_id&amp;id=<?php echo $value['id']?>" target="_blank">
+                      <img src="<?php echo $value['zxlogo']?>">
+                      <div>
+                          <span></span>
+                          <h3><?php echo $value['zxname']?></h3>
+                          <p><?php echo $value['zxjj']?></p>
+                          <i><?php echo $value['times']?></i>
+                      </div>
+                  </a>
+              </li>
+            <?php }} ?>
+			<?php } else { ?>
+			<center>暂无资讯</center>
+			<?php } ?>
+          </ul>
+          <ul class="game_gonglue">
+			<?php if($gmgllist){ ?>
+			<?php if(is_array($gmgllist)===true){foreach($gmgllist AS $key => $value){ ?>
+              <li>
+                  <a href="./index.php?to=news_id&amp;id=<?php echo $value['id']?>" target="_blank">
+                      <img src="<?php echo $value['zxlogo']?>">
+                      <div>
+                          <span class="on"></span>
+                          <h3><?php echo $value['zxname']?></h3>
+                          <p><?php echo $value['zxjj']?></p>
+                          <i><?php echo $value['times']?></i>
+                      </div>
+                  </a>
+              </li>
+			<?php }} ?>
+			<?php } else { ?>
+			<center>暂无攻略</center>
+			<?php } ?>
+          </ul>
+          <ul class="game_gonglue">
+			<?php if($gmhdlist){ ?>
+			<?php if(is_array($gmhdlist)===true){foreach($gmhdlist AS $key => $value){ ?>
+              <li>
+                  <a href="./index.php?to=news_id&amp;id=<?php echo $value['id']?>" target="_blank">
+                      <img src="<?php echo $value['zxlogo']?>">
+                      <div>
+                          <span class="on1"></span>
+                          <h3><?php echo $value['zxname']?></h3>
+                          <p><?php echo $value['zxjj']?></p>
+                          <i><?php echo $value['times']?></i>
+                      </div>
+                  </a>
+              </li>
+			<?php }} ?>
+			<?php } else { ?>
+			<center>暂无活动</center>
+			<?php } ?>
+          </ul>
+          <ul class="kaifu_list">
+			<?php if($lblb){ ?>
+			<?php if(is_array($lblb)===true){foreach($lblb AS $key => $value){ ?>
+            <li>
+                <img src="<?php echo $value['lblogo']?>" >
+                <div class="info">
+                    <h4><?php echo $value['gmname']?><?php echo $value['lbname']?></h4>
+                    <p><?php echo $value['lbjj']?></p>
+                    <p>剩余：<?php echo mb_substr((($value['lbsy'] / $value['lbzs'])*100),0,4,'utf8'); ?>%</p>
+                </div>
+                <div class="system">
+				<?php if($value['lbxt']=='通用'){ ?>
+                <img src="./template/pcmoban/images/ios.png" >
+				<img src="./template/pcmoban/images/an.png" >
+				<?php } ?>
+				<?php if($value['lbxt']=='安卓'){ ?>
+				<img src="./template/pcmoban/images/an.png" >
+				<?php } ?>
+				<?php if($value['lbxt']=='苹果'){ ?>
+                <img src="./template/pcmoban/images/ios.png" >
+				<?php } ?>
+                </div>
+                <a href="./index.php?to=gifts_id&amp;id=<?php echo $value['id']?>" class="right lqlb">领取礼包</a>
+            </li>
+			<?php }} ?>
+			<?php } else { ?>
+			<center>暂无礼包</center>
+			<?php } ?>
+          </ul>
+      </div>
+      <div class="right hot-information">
+          <h3><i></i>热门资讯</h3>
+          <ul>
+			<?php if(is_array($zxlist)===true){foreach($zxlist AS $key => $value){ ?>
+              <li>
+                  <a href="./index.php?to=news_id&amp;id=<?php echo $value['id']?>" target="_blank">
+                      <img src="<?php echo $value['zxlogo']?>">
+                      <p><?php echo $value['zxname']?></p>
+                  </a>
+              </li>
+			<?php }} ?>
+          </ul>
+          <h3 class="hot-game"><i></i>热门游戏</h3>
+          <ul class="kaifu">
+				<?php if(is_array($sosolist)===true){foreach($sosolist AS $key => $value){ ?>
+              <li>
+                <a href="./index.php?to=game_id&amp;id=<?php echo $value['id']?>" target="_blank" class="clearfix">
+                  <img src="<?php echo $value['gmlogo']?>" class="left">
+                  <div class="left">
+                    <h4><?php echo $value['gmname']?></h4>
+                    <p><?php echo $value['gmbq']?></p>
+                    <p><?php echo $value['gmmb']?>M</p>
+                  </div>
+                  <img src="./template/pcmoban/images/right1.png" class="right">
+                </a>
+              </li>
+			  <?php }} ?>
+          </ul>
+      </div>
+    </div>
+	<div class="popup"> <img src="" ></div>
+	<?php include $this->Template('footer');?>
+
+	<script type="text/javascript">
+	$(document).on('click','.swiper-container1 img',function(){
+          var imgs = $(this).attr('src');
+          console.log(imgs);
+          $('.popup img').attr('src',imgs);
+          $('.popup').show();
+      })
+      $(document).on('click','.popup',function(){
+          $(this).hide();
+      })
+	</script>

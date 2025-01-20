@@ -1,0 +1,35 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="template/sysadmin/css/style.css" rel="stylesheet">
+	<link href="template/sysadmin/css/home.css" rel="stylesheet">
+	<link rel="icon" href="icon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="icon.ico" type="image/x-icon">
+  </head>
+<body >
+	<div class="main">
+		<div class="minihead">
+			<div class="dataleft">
+				<em>新增公告</em>
+				<span>发布新的公告</span>
+			</div>
+		</div>
+		<div class="ggfk">
+			<form class="form-horizontal" method="POST" action="" id="form">
+				<input type="hidden" name="xggg" value="go">
+				<em>公告标题：</em>
+				<input class="gg-txt" type="text" value="<?php echo $ggxx['ggtp']?>" name="ggtit" placeholder="请输入公告标题">
+				<em>公告内容：</em>
+				<textarea class="data-textarea" name="ggnr" placeholder="请输入公告内容"><?php echo $ggxx['mygg']?></textarea>
+				<div class="data-conbutton">
+					<input type="button" value="返回" onClick="javascript :history.back(-1);" class="databuttonf">
+					<input type="submit" value="保存"  class="databuttonb">
+				</div>
+			</form>
+		</div>
+	</div>
+  </body>
+</html>

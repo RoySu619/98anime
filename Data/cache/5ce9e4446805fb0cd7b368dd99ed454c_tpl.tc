@@ -1,0 +1,70 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><?php include $this->Template('header');?>
+
+<div class="main">
+	<div class="hd_list">
+		<div class="hd_main">
+			<div id="hd_main">
+				<?php if(is_array($nelist)===true){foreach($nelist AS $key => $value){ ?>
+				<a href="./mobile.php?to=news_id&amp;id=<?php echo $value['id']?>">
+				<li>
+					<div class="hd_tit">
+						<em><?php echo $value['zxname']?></em>
+						<span><?php echo $value['zxjj']?></span>
+						<b>发布时间: <?php echo $value['times']?></b>
+					</div>
+				</li>
+				</a>
+				<?php }} ?>
+			</div>
+			<div class="ajaxjz" id="ajaxjz"></div>
+		</div>
+	</div>
+</div>
+<input type="hidden" value="1" id="pages" loading="no">
+<input type="hidden" value="<?php echo $pagecount?>" id="pagenum">
+<script type="text/javascript">
+$(window).scroll(function(){
+    if($(document).scrollTop()>=$(document).height()-$(window).height()-100){
+	    var sscroll=$('#pages').attr('loading');
+        if(sscroll=="no"){
+		var pages=$("#pages").val()*1;
+			pages=pages+1;
+			$("#pages").val(pages);
+		var pagenum = $("#pagenum").val();
+		var htmls="";
+			if(pagenum>=pages){
+				$.ajax({
+					url:'./mobile.php?to=news&op=getmore&n=go&pages='+pages+'',
+					type:"GET",
+					dataType:"json",
+					beforeSend:function(){ 
+						$('#ajaxjz').html('努力加载中...') 
+					},success: function(data){
+						if(data){
+							$.each(data, function(kk, vv){
+								htmls+='<a href="./mobile.php?to=news_id&amp;id='+vv['id']+'">'
+								htmls+='<li>'
+								htmls+='<div class="hd_tit">'
+								htmls+='<em>'+vv['zxname']+'</em>'
+								htmls+='<span>'+vv['zxjj']+'</span>'
+								htmls+='<b>发布时间: '+vv['times']+'</b>'
+								htmls+='</div>'
+								htmls+='</li>'
+								htmls+='</a>';
+							});
+						}
+						if(htmls!=""){
+							$("#hd_main").append(htmls);
+							$('#ajaxjz').html('');
+						}
+					}
+				});	
+				//------
+			}else{
+				$('#ajaxjz').html('没有更多了');
+			}
+		}
+    }
+});
+</script>
+<?php include $this->Template('footer');?>

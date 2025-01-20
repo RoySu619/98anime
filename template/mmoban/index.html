@@ -1,0 +1,175 @@
+<!--{load header}-->
+<div class="main">
+	<div class="lbt">
+	<div class="swiper-container">
+		  <div class="swiper-wrapper">
+			<!--{loop $sylbt $key $value}-->
+			<div class="swiper-slide"><a href="./mobile.php?to=game_id&id=$value['gid']"><img src="$value['gmapplbt']" ></a></div>
+			<!--{/loop}-->
+		  </div>
+		<div class="swiper-pagination"></div>
+	</div>
+	</div>
+	<div class="menu">
+		<a href="./mobile.php?to=libao"><li class="li-1">礼包中心</li></a>
+		<a href="./mobile.php?to=kaifu"><li class="li-2">站长推荐</li></a>
+		<a href="./mobile.php?to=hd"><li class="li-3">最新活动</li></a>
+		<a href="./mobile.php?to=news"><li class="li-4">热门新闻</li></a>
+	</div>
+	<div class="sy_gm_hot">
+		<div class="sy_gm_tit">热门推荐</div>
+		<div class="sy_gm_main">
+			<!--{eval $i=1}-->
+			<!--{loop $hotlist $key $value}-->
+			<!--{if $i<4}-->
+			<li>
+				<a href="./mobile.php?to=game_id&id=$value['id']">
+					<div class="gmion_s">
+						<img src="./$value['gmlogo']" alt="$value['gmname']">
+					</div>
+				</a>
+				<div class="gmcen_s">
+					<b>$value['gmname']</b>
+					<em>类型：<!--{eval echo str_replace(',','.', $value['gmbq']);}--> </em>
+					<span>$value['gmjj']</span>
+				</div>
+				<a href="./mobile.php?to=game_id&id=$value['id']"><div class="gmdow_s"><span>下载</span></div></a>
+			</li>
+			
+			<!--{if $i<4}--><div class="gmgang"></div><!--{/if}-->
+			<!--{/if}-->
+			<!--{eval $i++}-->
+			<!--{if $i==4}-->
+			<div class="gmimg_tj">
+				<div class="gmimg_tj_img">
+				<a href="./mobile.php?to=game_id&id=$value['id']"><img src="$value['gmapplbt']"></a>
+				<div class="gmimg_tj_main">$value['gmjj']</div>
+				</div>
+			</div>
+			<!--{/if}-->
+			<!--{/loop}-->
+		</div>
+	</div>
+	
+	
+	
+	<div class="sy_gm_hot">
+		<div class="sy_gm_tit">最多人下载 </div>
+		<div class="sy_gm_main">
+			<!--{eval $i=1}-->
+			<!--{loop $jplist $key $value}-->
+			<!--{if $i<4}-->
+			<li>
+				<a href="./mobile.php?to=game_id&id=$value['id']">
+					<div class="gmion_s">
+						<img src="./$value['gmlogo']" alt="$value['gmname']">
+					</div>
+				</a>
+				<div class="gmcen_s">
+					<b>$value['gmname']</b>
+					<em>类型：<!--{eval echo str_replace(',','.', $value['gmbq']);}--> </em>
+					<span>$value['gmjj']</span>
+				</div>
+				<a href="./mobile.php?to=game_id&id=$value['id']"><div class="gmdow_s"><span>下载</span></div></a>
+			</li>
+			<!--{if $i<4}--><div class="gmgang"></div><!--{/if}-->
+			<!--{/if}-->
+			<!--{if $i==4}-->
+			<div class="gmimg_tj">
+				<div class="gmimg_tj_img">
+				<a href="./mobile.php?to=game_id&id=$value['id']"><img src="$value['gmapplbt']"></a>
+				<div class="gmimg_tj_main">$value['gmjj']</div>
+				</div>
+			</div>
+			<!--{/if}-->
+			<!--{eval $i++}-->
+			<!--{/loop}-->
+			
+		</div>
+	</div>
+
+	
+	<div class="sy_gm_hot">
+		<div class="sy_gm_tit">最受欢迎</div>
+		<div class="sy_gm_main">
+			<!--{eval $i=1}-->
+			<!--{loop $hylist $key $value}-->
+			<!--{if $i<4}-->
+			<li>
+				<a href="./mobile.php?to=game_id&id=$value['id']">
+					<div class="gmion_s">
+						<img src="./$value['gmlogo']" alt="$value['gmname']">
+					</div>
+				</a>
+				<div class="gmcen_s">
+					<b>$value['gmname']</b>
+					<em>类型：<!--{eval echo str_replace(',','.', $value['gmbq']);}--> </em>
+					<span>$value['gmjj']</span>
+				</div>
+				<a href="./mobile.php?to=game_id&id=$value['id']"><div class="gmdow_s"><span>下载</span></div></a>
+			</li>
+			
+			<!--{if $i<4}--><div class="gmgang"></div><!--{/if}-->
+			<!--{/if}-->
+			<!--{if $i==4}-->
+			<div class="gmimg_tj">
+				<div class="gmimg_tj_img">
+				<a href="./mobile.php?to=game_id&id=$value['id']"><img src="$value['gmapplbt']"></a>
+				<div class="gmimg_tj_main">$value['gmjj']</div>
+				</div>
+			</div>
+			<!--{/if}-->
+			<!--{eval $i++}-->
+			<!--{/loop}-->
+		</div>
+	</div>
+		
+	<div class="sy_gm_hot">
+		<div class="sy_gm_tit">最新上架推荐</div>
+		<div class="sy_gm_main">
+			<!--{eval $i=1}-->
+			<!--{loop $nuplist $key $value}-->
+			<!--{if $i<4}-->
+			<li>
+				<a href="./mobile.php?to=game_id&id=$value['id']">
+					<div class="gmion_s">
+						<img src="./$value['gmlogo']" alt="$value['gmname']">
+					</div>
+				</a>
+				<div class="gmcen_s">
+					<b>$value['gmname']</b>
+					<em><!--{if  $value['gmbb']}-->版本: $value['gmbb'] | <!--{/if}-->类型：<!--{eval echo str_replace(',','.', $value['gmbq']);}--> </em>
+					<span>在线人数: $value['gmdj']人</span>
+				</div>
+				<a href="./mobile.php?to=game_id&id=$value['id']"><div class="gmdow_s"><span>下载</span></div></a>
+			</li>
+			
+			<!--{if $i<4}--><div class="gmgang"></div><!--{/if}-->
+			<!--{/if}-->
+			<!--{if $i==4}-->
+			<div class="gmimg_tj">
+				<div class="gmimg_tj_img">
+				<a href="./mobile.php?to=game_id&id=$value['id']"><img src="$value['gmapplbt']"></a>
+				<div class="gmimg_tj_main">$value['gmjj']</div>
+				</div>
+			</div>
+			<!--{/if}-->
+			<!--{eval $i++}-->
+			<!--{/loop}-->
+		</div>
+	</div>
+	
+	
+	
+	<div class="sy_index_fl">
+		<div class="sy_index_tit">据说下载了官方APP的人都很帅</div>
+		<div class="sy_index_main">
+			<a href="./mobile.php?to=appdow"><img src="./template/mmoban/images/appbg.png"></a>
+		</div>
+	</div>
+	<br>
+
+</div>
+
+
+<!--{load footer}-->

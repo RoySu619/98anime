@@ -1,0 +1,102 @@
+<template>
+	<list>
+		<cell class="m">
+			<image class="img" :src="img" @click="opurl" mode="aspectFill"></image>
+			<text class="tm" @click="clwin">{{num}} 跳过</text>
+		</cell>
+	</list>
+</template>
+<script>
+	import G_APP from '@/common/ip.js';
+	export default {
+		data() {
+			return {
+				img: "",
+				imgtp:"",
+				url:"",
+				num:5,
+				timer:""
+			}
+		},
+		onReady() {
+			this.get();
+			let optmdeltm=setTimeout(() => {
+				uni.navigateBack();
+				clearTimeout(optmdeltm)
+			}, 8000);
+		},
+		methods: {
+			clwin(){
+				clearInterval(this.timer);
+				uni.navigateBack();
+			},
+			gototm(){
+				let thi=this;
+				thi.timer = setInterval(() => {
+					if(thi.num>0){
+						thi.num=thi.num-1;
+					}else{
+						uni.navigateBack();
+						clearInterval(this.timer);
+					}
+				}, 1000);
+			},
+			opurl(){
+				uni.navigateTo({
+					url: '../../pages/gm/gmxx?id='+this.url,
+				});
+			},
+			get() {
+				let thi = this;
+				uni.request({
+					url: G_APP.ip + 'appapi.php?to=appqd',
+					method: "GET",
+					dataType: "json",
+					enableCache: true, //缓存
+					defer: true, //控制当前请求是否延时至首屏内容渲染后发送
+					data: {
+						'syspt':'go'
+					},
+					success: (ret) => {
+						if(ret.data){
+							thi.img=G_APP.ip+ret.data.imgurl;
+							thi.url=ret.data.urls;
+							thi.imgtp=ret.data.imgtp;
+							const qdtshowtm= setTimeout(() => {
+								thi.gototm();
+								plus.navigator.closeSplashscreen();
+								clearTimeout(qdtshowtm);
+							},500);
+						}
+					}
+				});
+			},
+		}
+	}
+</script>
+<style>
+.m{
+	width: 750rpx;
+	flex: 1;
+	position: relative;
+}
+.tm{
+	position: absolute;
+	right: 20rpx;
+	top: 100rpx;
+	width: 150rpx;
+	height: 60rpx;
+	line-height: 60rpx;
+	color: #fff;
+	font-size: 26rpx;
+	background-color: rgba(0, 0, 0, 0.5);
+	text-align: center;
+	border-radius: 30rpx;
+	z-index: 9999;
+}
+.img{
+	position: absolute;
+	z-index: 1;
+	flex: 1;
+}
+</style>

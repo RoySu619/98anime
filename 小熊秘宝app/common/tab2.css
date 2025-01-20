@@ -1,0 +1,142 @@
+.nodata{
+	width: 750rpx;
+	height: 600rpx;
+	flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+.nodata_i{
+	width: 400rpx;
+	height: 300rpx;
+}
+.hed{
+	width: 750rpx;
+	position: sticky;
+}
+.heds{
+	width: 750rpx;
+	padding-right: 30rpx;
+	background-color: #ffda08;
+	padding-bottom: 20rpx;
+	flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.hed_l{
+	width:70rpx;
+	height: 70rpx;
+	line-height: 70rpx;
+	font-size: 28rpx;
+}
+.hed_c{
+	width:250rpx;
+	border-radius: 50rpx;
+	text-align: center;
+	font-size: 35rpx;
+	font-weight: bold;
+	height: 75rpx;
+	line-height: 75rpx;
+}
+.hed_r{
+	width: 70rpx;
+	font-size: 45rpx;
+	text-align: center;
+	height: 70rpx;
+	line-height: 70rpx;
+	color: rgba(0,0,0,0.7);
+	font-family:iconfont;
+	background-color: rgba(0,0,0,0.05);
+	border-radius: 37.5rpx;
+}
+.tp{
+	width: 750rpx;
+	padding-top: 30rpx;
+	padding-left: 30rpx;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+	background-color: #f9f9f9;
+}
+.tp_li{
+	width: 156.5rpx;
+	margin-right: 20rpx;
+	margin-bottom: 30rpx;
+	height: 60rpx;
+	line-height: 60rpx;
+	text-align: center;
+	font-size: 26rpx;
+	border-radius: 10rpx;
+	background-color: rgba(255,255,255,1);
+}
+.tp_li_cur{
+	background-color: #ffda08;
+}
+
+.list{
+	width: 750rpx;
+	padding-top: 30rpx;
+	padding-left: 30rpx;
+	padding-right: 30rpx;	
+}
+.list_b{
+	width: 750rpx;
+	height: 30rpx;
+}
+.gm{
+	width: 690rpx;
+	height: 130rpx;
+	flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.gm_i{
+	width: 130rpx;
+	height: 130rpx;
+	border-radius: 20rpx;
+}
+.gm_c{
+	width: 450rpx;
+	padding-left: 20rpx;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-start;	
+}
+.gm_c_t{
+	width: 330rpx;
+	height: 43rpx;
+	lines:1;
+	line-height: 43rpx;
+	font-size: 30rpx;
+	font-weight: bold;
+	padding-right: 20rpx;
+	color: rgba(0,0,0,0.8);
+}
+
+.gm_c_c{
+	height: 43rpx;
+	line-height: 50rpx;
+	font-size: 24rpx;
+	color: rgba(0,0,0,0.5);
+}
+.gm_c_b{
+	lines:1;
+	height: 43rpx;
+	line-height: 43rpx;
+	font-size: 24rpx;
+	color: rgba(0,0,0,0.5);
+}
+.gm_r{
+	margin-top: 30rpx;
+	width: 100rpx;
+	border-radius: 15rpx;
+	height: 60rpx;
+	line-height: 60rpx;
+	text-align: center;
+	font-size: 24rpx;
+	background-image: linear-gradient(to top,#ffc30c,#ffda08);
+}

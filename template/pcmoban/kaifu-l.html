@@ -1,0 +1,57 @@
+<!--{load header}-->
+    <div class="banxin content">
+      <div class="hot-new">
+          <span>
+              <a href="./index.php?to=kaifu">今日开服</a>
+              <p></p>
+          </span>
+          <span>
+              <a href="./index.php?to=kaifu&op=kaifu-m">明日开服</a>
+              <p></p>
+          </span>
+          <span class="cur">
+              历史开服
+              <p></p>
+          </span>
+          <i class="right">当前时间：$dqtms</i>
+      </div>
+      <div class="contain">
+
+          <ul class="history">
+			<!--{eval $i='1'}-->
+			<!--{loop $xflb2 $key $value}-->
+              <li>
+                  <i>$i</i>
+                  <img src="$value['gmlogo']" >
+                  <div class="info">
+                      <h4>$value['gmname']</h4>
+                      <p>$value['gmbq']</p>
+                      <p>开服时间：$value['kftimes']</p>
+                  </div>
+                  <em>$value['xfname']</em>
+                  <div class="system">
+                    <!--{if $value['iosan']=='安卓'}-->
+                      <img src="./template/pcmoban/images/an.png" >
+					<!--{/if}-->
+					<!--{if $value['iosan']=='苹果'}-->
+					  <img src="./template/pcmoban/images/ios.png" >
+					<!--{/if}-->
+					<!--{if $value['iosan']=='双端'}-->
+						<img src="./template/pcmoban/images/ios.png" >
+					  <img src="./template/pcmoban/images/an.png" >
+					<!--{/if}-->
+                  </div>
+                  <a href="./index.php?to=gift-info&id=$value['gid']" class="right lqlb">领取礼包</a>
+                  <a href="./index.php?to=game_id&id=$value['gid']" class="right">进入专区</a>
+              </li>
+			  <!--{eval $i++}-->
+            <!--{/loop}-->
+          </ul>
+          <div class="page">
+				<a href="./index.php?to=kaifu&op=kaifu-l&pages=$pagestrL"><span></span></a>
+				<b>$pagestrC/$pagenum</b>
+				<a href="./index.php?to=kaifu&op=kaifu-l&pages=$pagestrR"><span class="next"></span></a>
+            </div>
+      </div>
+    </div>
+<!--{load footer}-->

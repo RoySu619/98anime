@@ -1,0 +1,148 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="/template/sysadmin/css/style.css" rel="stylesheet">
+	<link href="/template/sysadmin/css/home.css" rel="stylesheet">
+	<link href="/template/sysadmin/baidu/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
+	<link href="/template/sysadmin/js/zhcs/jquery.searchableSelect.css" rel="stylesheet" type="text/css">
+  </head>
+<body>
+	<div class="main">
+	<div class="minihead">
+	<div class="dataleft"><em>添加资讯</em><span>添加新的资讯</span></div>
+	</div>
+	<form id="frm"  enctype="multipart/form-data" method="post">
+	<div class="data-confk">
+	<div class="data-connr">
+	<div class="xzdata">
+	<a href="./sysadmin.php?to=news"><div class="xzdata-input">资讯列表</div></a>
+	</div>
+	<div class="data-conxx">
+	<em>资讯标题 :</em>
+	<input type="text" value="" class="data-txt" id="newsname" placeholder="请填写新闻资讯标题" style="border: 1px solid #ffd9ce;">
+	<em>点击次数 :</em>
+	<input type="text" value="" class="data-txt" id="nellcs" placeholder="点击次数，默认为 0 作假填写">
+	<em>选择类别 :</em>
+	<div  class="data-txt">
+		<select class="data-conse" id="zxlbie"> 
+			<?php if(is_array($bqlist)===true){foreach($bqlist AS $key => $value){ ?>
+			<option value="<?php echo $value['bqname']?>"><?php echo $value['bqname']?></option> 
+			<?php }} ?>
+		</select> 
+	</div>
+	<em>游戏名字 :</em>
+	<div  class="data-txt">
+		<select class="data-conse" id="gmnmss"> 
+		     <option value="0">关联时游戏选取，（关键词查询）</option> 
+			 <?php if(is_array($gmlist)===true){foreach($gmlist AS $key => $value){ ?>
+		     <option value="<?php echo $value['gmname']?>"><?php echo $value['gmname']?></option> 
+			 <?php }} ?>
+		</select> 
+	</div>
+	<em>是否推荐 :</em>
+	<div  class="data-txt">
+		<select class="data-conse" id="zxsftj"> 
+			 <option>正常</option> 
+			 <option>推荐</option> 
+		</select> 
+	</div>
+	<em>上传图片 :</em>
+	<div class="data-txt">
+		<span class="fileinput-button">
+		<span class="fileanniu">上传图片（ 尺寸 宽600:高300，不按尺寸上传，会显示参差不齐）</span>
+		<input type="file" value="" id="newsad"  name='file' onchange="upimgs(this)" accept="image/jpeg,image/jpg">
+		</span>
+	</div>
+	<div class="fileimglb" id="newsadlist"></div>
+	
+	<em>资讯视频 :</em>
+	<input type="text" value="<?php echo $newsxx['spurl']?>" class="data-txt" id="newspurl" placeholder="视频链接，要求MP4格式！">
+	<em>资讯简介 :</em>
+		<textarea class="data-textarea" id="newsjj" onkeyup="newjj();" onblur="newjj();" placeholder="请输入资讯简介" style="border: 1px solid #ffd9ce;"></textarea>
+	<em>资讯内容 :</em>
+	<div class="data-txt">重要提示：上传图片后一定要拉动图片至显示完整否则导致APP无法显示！</div>
+	<em></em>
+		<script type="text/plain" id="myEditor" style="height:240px;" style="border: 1px solid #ffd9ce;"></script>
+	</div>
+	</div>
+		<input type="hidden" value="" class="newsadurl" id="newsadurl">
+		<div class="data-conbutton">
+			<input type="button" value="返回" onClick="javascript :history.back(-1); "class="databuttonf">
+			<input type="button" value="保存" onclick="baocun();" class="databuttonb">		
+		</div>
+	</div>
+	</div>
+    </form>
+    <div id="ajcome"></div>
+	<div id="ajerro"></div>
+	<div id="ajsuccess"></div> 
+	
+	<script src="/template/sysadmin/js/jquery.min.js" type="text/javascript"></script>
+	<script src="/template/sysadmin/script/upimg.js" type="text/javascript"></script>
+	<script src="/template/sysadmin/js/zhcs/jquery.searchableSelect.js" type="text/javascript"></script>
+	<script src="/template/sysadmin/baidu/umeditor.config.js" type="text/javascript"></script>
+    <script src="/template/sysadmin/baidu/umeditor.min.js" type="text/javascript"></script>
+	<script src="/template/sysadmin/baidu/lang/zh-cn/zh-cn.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	var newjj = function(){
+		var cnewjj = $("#newsjj").val();
+		var clnewjj=cnewjj.replace(/\n/g,'');
+		$("#newsjj").val(clnewjj);
+	}
+	var um = UM.getEditor('myEditor');
+	function getContent() {
+        arr.push(UM.getEditor('myEditor'));
+    }
+	$('#gmnmss').searchableSelect();
+	
+	var baocun = function(){
+	    var arr = [];
+        arr.push(UM.getEditor('myEditor').getContent());
+        var newnr = arr.join("\n");
+	    var gmnm = $("#gmnmss").val();
+	    var newnm = $("#newsname").val();
+		var llcs = $("#nellcs").val();
+		var spul = $("#newspurl").val();
+		var zxlb = $("#zxlbie").val();
+		var sftj = $("#zxsftj").val();
+	    var zlogo = $("#newsadurl").val();
+		var newjj = $("#newsjj").val();
+		$.ajax({
+		url:'./sysadmin.php?to=news&op=add_news',
+		type:'POST', 
+		data:{
+		   'xdata':'go',
+		   'key':0,
+		   'gmnms':gmnm,
+		   'newnms':newnm,
+		   'newllcs':llcs,
+		   'newlb':zxlb,
+		   'newsp':spul,
+		   'nesftj':sftj,
+		   'zlogos':zlogo,
+		   'newjjs':newjj,
+		   'newnrs':newnr
+		},
+		dataTyep:'json',
+		beforeSend:function(XMLHttpRequest){ 
+			$("#ajcome").html('<div class="axsucfk"><div class="axsuc"><span><img src="image/logins.png"></span><em>请稍后 ...</em></div></div>');
+        }, 
+	    success:function(ret){ 
+		    $("#ajcome").html('');
+			if(ret=="3"){
+			$("#ajsuccess").html('<div class="axerrfk"><div class="axerr"><span><img src="image/yes.png"></span><em>添加资讯成功！</em></div></div>');
+		    setTimeout(function(){$("#ajsuccess").html('');clearTimeout();  window.location.replace('sysadmin.php?to=news');},200);
+			}
+			if(ret=="2"){
+			$("#ajsuccess").html('<div class="axerrfk"><div class="axerr"><span><img src="image/err.png"></span><em>请完整填写必填项！</em></div></div>');
+		    setTimeout(function(){$("#ajsuccess").html('');clearTimeout(); },200);
+			}
+		}
+		});
+	}
+	</script>
+  </body>
+</html>

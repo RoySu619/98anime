@@ -1,0 +1,321 @@
+<template>
+	<list>
+		<cell class="li">
+			<text class="li_l">资料设置</text>
+			<view class="li_r" @click="openlogoset">
+				<image class="li_r_img" :src="ulogo"></image>
+				<text class="li_r_i">&#xe630;</text>
+			</view>
+		</cell>
+		<cell class="li">
+			<text class="li_l">昵称</text>
+			<view class="li_r" @click="opennickset">
+				<text class="li_r_t">{{nick}}</text>
+				<text class="li_r_i">&#xe630;</text>
+			</view>
+		</cell>
+		<cell class="li">
+			<text class="li_l">修改密码</text>
+			<view class="li_r" @click="openpasset">
+				<text class="li_r_t">修改APP登录密码</text>
+				<text class="li_r_i">&#xe630;</text>
+			</view>
+		</cell>
+		<cell class="lis" @click="delus">
+			<text class="li_l">注销账号</text>
+			<view class="li_r">
+				<text class="li_r_t">注销后将彻底清除</text>
+				<text class="li_r_i">&#xe630;</text>
+			</view>
+		</cell>
+		<cell style="height: 150rpx;"></cell>
+		
+		<cell class="lis" @click="out">
+			<text class="li_l">退出登录</text>
+			<view class="li_r">
+				<text class="li_r_t"></text>
+				<text class="li_r_i">&#xe630;</text>
+			</view>
+		</cell>
+	</list>
+	<uni-popup type="dialog" ref="nickmain" :is-mask-click="false" :render-whole="true">
+		<uni-popup-dialog  mode="input" confirmText="确定修改" title="修改昵称" placeholder="请输入您的个性昵称,最多8个字" @confirm="setnick"></uni-popup-dialog>
+		
+	</uni-popup>
+	<uni-popup type="dialog" ref="passmain" :is-mask-click="false" :render-whole="true">
+		<uni-popup-dialog v-if="pass1==''" before-close mode="input" confirmText="下一步" title="修改登录密码" placeholder="请输入原密码" @confirm="setpass1" @close="clospass"></uni-popup-dialog>
+		<uni-popup-dialog v-if="pass1 && pass2==''" mode="input" confirmText="确定修改" title="修改登录密码" placeholder="请输入新密码" @confirm="setpass2" @close="clospass"></uni-popup-dialog>
+	</uni-popup>
+</template>
+<script>
+	import G_APP from '@/common/ip.js';
+	export default {
+		data() {
+			return {
+				ip:G_APP.ip,
+				ulogo: "../../static/uslogo.png",
+				nick:"",
+				pass1:"",
+				pass2:""
+			}
+		},
+		onLoad() {
+
+		},
+		onReady() {
+			this.get();
+		},
+		methods: {
+			delus(){
+				let thi=this;
+				uni.showModal({
+					title: '温馨提示！',
+					content: '你确定要注销该账号吗？\n注销后账号后\n1.不可再次登陆\n2.账号资料全部清除\n3.APP登陆记录全部清除\n点击确定注销立即生效，生效后无法找回，谨慎操作！',
+					confirmText:"确定注销",
+					confirmColor:"#33ffb4",
+					placeholderText:this.nick,
+					success: function (res) {
+						if (res.confirm) {
+							uni.request({
+								url: G_APP.ip+'appapi.php?to=user&op=uszxdll',
+								method:"POST",
+								header: {
+									'content-type': 'application/x-www-form-urlencoded'
+								},
+								dataType:"json",
+								enableCache:false,
+								defer:false,
+								data: {
+									'ddel': 'go'
+								},
+								success: (ret) => {
+									console.log(ret)
+									if(ret.data.msg==66){
+										thi.out();
+										uni.showToast({icon:"none",title: ' 已为您注销成功！ ',   mask: false,  duration: 1500});  
+									}
+								}
+							});
+						}
+					}
+				})
+			},
+			openpasset(){
+				this.$refs.passmain.open();
+			},
+			clospass(){
+				this.$refs.passmain.close();
+				this.pass1="";
+				this.pass2="";
+			},
+			setpass1(e){
+				if(e.length>=6){
+					this.pass1=e;
+				}else{
+					this.pass1="";
+					uni.showToast({icon: "none",title: ' 密码最小6位！ ',duration: 2000});
+				}
+			},
+			setpass2(e){
+				let thi=this;
+				if(e.length>=6){
+					if(thi.pass1!=e){
+						uni.request({
+							url: G_APP.ip+'appapi.php?to=user&op=user_xpas',
+							method:"POST",
+							header: {
+								'content-type': 'application/x-www-form-urlencoded'
+							},
+							dataType:"json",
+							enableCache:false,
+							defer:false,
+							data: {
+								'xpass':'go',
+								'mypass1':thi.pass1,
+								'mypass2':e,
+							},
+							success: (ret) => {
+								let db = JSON.parse(ret.data);
+								if(db==4){
+									thi.pass1="";
+									thi.pass2="";
+									uni.showToast({icon:"none",title: ' 原密码错误！ ',   mask: false,  duration: 1500});  
+								}
+								if(db!=4 &&　db!=66){
+									thi.pass1="";
+									thi.pass2="";
+									uni.showToast({icon:"none",title: ' 修改失败 ',   mask: false,  duration: 1500});  
+								}
+								if(db==66){
+									thi.pass1="";
+									thi.pass2="";
+									thi.out();
+									uni.showToast({icon:"none",title: ' 密码修改成,请重新登录！ ',   mask: false,  duration: 1500});  
+								}
+							}
+						});
+					}else{
+						thi.pass1="";
+						thi.pass2="";
+						uni.showToast({icon: "none",title: ' 旧密码和新密码相同！ ',duration: 2000});
+					}
+				}else{
+					thi.pass2="";
+					uni.showToast({icon: "none",title: ' 新密码最小6位！ ',duration: 2000});
+				}
+			},
+			opennickset(){
+				this.$refs.nickmain.open();
+			},
+			setnick(e){
+				let thi=this;
+				if(e.length>1 && e.length<9){
+					uni.request({
+						url: G_APP.ip+'appapi.php?to=user&op=user_nick',
+						method:"POST",
+						header: {
+							'content-type': 'application/x-www-form-urlencoded'
+						},
+						dataType:"json",
+						enableCache:false,
+						defer:false,
+						data: {
+							'xnick':'go',
+							'mynick':e
+						},
+						success: (ret) => {
+							let db = JSON.parse(ret.data);
+							if(db==1){
+								uni.showToast({icon:"none",title: ' 请先登录 ',   mask: false,  duration: 1500});  
+							}
+							if(db==2){
+								uni.showToast({icon:"none",title: ' 昵称不能为空 ',   mask: false,  duration: 1500});  
+							}
+							if(db==66){
+								uni.$emit('login', {msg: 'yes'});
+								thi.nick=e;
+								uni.showToast({icon:"none",title: ' 修改昵称成功！ ',   mask: false,  duration: 1500});  
+							}
+						}
+					});
+				}
+			},
+			openlogoset() {
+				let thi=this;
+				uni.chooseImage({
+					count: 1,
+					crop: {
+						quality: 80,
+						width: 200,
+						height: 200
+					},
+					sizeType: ['original', 'compressed'],
+					success: function(res) {
+						if (res.tempFilePaths) {
+							uni.showLoading({
+								title: '正在上传中',
+								//mask:true,
+							});
+							uni.uploadFile({
+								url: G_APP.ip +'appapi.php?to=user&op=user_logo',
+								filePath: res.tempFilePaths[0],
+								name: 'upfile',
+								formData: {
+									'xlogo': 'go',
+								},
+								success: (uploadFileRes) => {
+									if(uploadFileRes.data){
+										let db = JSON.parse(uploadFileRes.data);
+										if (db[0] == 66) {
+											uni.$emit('login', {msg: 'yes'});
+											thi.ulogo = res.tempFilePaths[0]
+											uni.showToast({
+												icon: "none",
+												title: ' 修改成功 ',
+												duration: 2000
+											});
+											uni.hideLoading();
+										}
+										if (db[0] == 2) {
+											uni.showToast({
+												icon: "none",
+												title: ' 上传失败了。 ',
+												duration: 2000
+											});
+											uni.hideLoading();
+										}
+										if (db[0] == 1) {
+											uni.showToast({
+												icon: "none",
+												title: ' 上传失败！ ',
+												duration: 2000
+											});
+											uni.hideLoading();
+										}
+									}else{
+										uni.showToast({icon:"none",title: ' 上传失败，请稍后再试！ ',duration: 2000});
+									}
+								}
+							});
+						}
+					}
+				});
+			},
+			get() {
+				let thi = this;
+				uni.request({
+					url: G_APP.ip + 'appapi.php?to=user',
+					method: "GET",
+					dataType: "json",
+					enableCache: true, //缓存
+					defer: true, //控制当前请求是否延时至首屏内容渲染后发送
+					data: {
+						'myusapp': 'go'
+					},
+					success: (ret) => {
+						if(ret.data.msg=='yes'){
+							if(ret.data.ulogo){thi.ulogo = thi.ip+ret.data.ulogo;}
+							if(ret.data.unick){thi.nick=ret.data.unick}
+						}
+					}
+				});
+			},
+			out() {
+				let thi=this;
+				uni.showLoading({
+					title: '正在登录退出'
+				});
+				uni.request({
+					url: thi.ip+'appapi.php?to=out',
+					method:"POST",
+					header: {
+						'content-type': 'application/x-www-form-urlencoded'
+					},
+					dataType:"json",
+					enableCache:false,
+					defer:false,
+					data: {
+						'login': 'out',
+					},
+					success: (res) => {
+						if (res.data == 'ok') {
+							uni.$emit('login', {msg: 'yes'});
+							setTimeout(function() {
+								uni.hideLoading();
+								uni.showToast({
+									icon: "none",
+									title: ' 退出成功。 ',
+									duration: 2000
+								});
+								uni.navigateBack();
+							}, 1000);
+						}
+					}
+				});
+			}
+		}
+	}
+</script>
+<style>
+	@import "../../common/set.css";
+</style>

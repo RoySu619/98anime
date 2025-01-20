@@ -1,0 +1,108 @@
+<template>
+	<list class="m">
+		<cell class="ml" v-for="(item,index) in list" :key="item.id" @click="openxx(item.id)">
+			<view class="li">
+			<text class="li_l">{{item.ggtp}}</text>
+			<text class="li_r">查看详细 &#xe630;</text>
+			</view>
+		</cell>
+	</list>
+</template>
+<script>
+	import G_APP from '@/common/ip.js'
+	export default {
+		data() {
+			return {
+				ip:G_APP.ip,
+				appt:G_APP.appt,
+				appb:G_APP.appb,
+				list: [],
+				pag:0,
+				zpag:1
+			}
+		},
+		onReady() {
+			this.get(1);
+		},
+		methods: {
+			openxx(id) {
+				uni.navigateTo({
+					url: '../user/msgxx?id='+id,
+				});
+			},
+			get(pd) {
+				let thi = this;
+				let npag=Number(thi.pag)+1;
+				thi.pag=npag;
+				if(npag<=thi.zpag){
+					uni.request({
+						url: G_APP.ip + 'appapi.php?to=sys',
+						method: "GET",
+						dataType: "json",
+						enableCache: true, //缓存
+						defer: true, //控制当前请求是否延时至首屏内容渲染后发送
+						data: {
+							'pages': npag,
+						},
+						success: (ret) => {
+							if(ret.data.data){
+								if(pd==1){
+									thi.list=ret.data.data;
+									thi.zpag=ret.data.pagenum;
+								}
+								if(pd==2){
+									thi.list=thi.list.concat(ret.data.data);
+								}
+							}else{
+								thi.list=[];
+								uni.hideLoading();
+							}
+						}
+					});
+				}
+			}
+		}
+	}
+</script>
+<style>
+	.m{
+		width: 750rpx;
+	}
+	.ml{
+		flex-direction: row;
+		flex-wrap: nowrap;
+		justify-content: space-between;
+		align-items: center;
+		width: 750rpx;
+		border-radius: 20rpx;
+		height: 120rpx;
+	}
+	.li {
+		flex-direction: row;
+		flex-wrap: nowrap;
+		justify-content: space-between;
+		align-items: center;
+		width: 750rpx;
+		height: 120rpx;
+		border-bottom: 0.5rpx solid rgba(0, 0, 0, 0.05);
+	}
+
+	.li_l {
+		width: 490rpx;
+		height: 50rpx;
+		line-height: 50rpx;
+		lines:1;
+		font-size: 26rpx;
+		padding-left: 30rpx;
+		color: rgba(0, 0, 0, 0.5);
+	}
+
+	.li_r {
+		width: 150rpx;
+		height: 50rpx;
+		line-height: 50rpx;
+		font-size: 26rpx;
+		font-family:iconfont;
+		text-align: center;
+	}
+</style>

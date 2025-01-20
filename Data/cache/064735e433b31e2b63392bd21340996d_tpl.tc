@@ -1,0 +1,96 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><?php include $this->Template('header');?>
+
+    <div class="banxin content clearfix">
+      <div class="left information-list">
+          <div class="hot-new">
+            <span  <?php if($lbsyss=='qb'){ ?>class="cur"<?php } ?>>
+                <a href="/index.php?to=gifts">全部礼包</a>
+                <p></p>
+            </span>
+            <span <?php if($lbsyss=='an'){ ?>class="cur"<?php } ?>>
+                <a href="/index.php?to=gifts&amp;type=an">安卓礼包</a>
+                <p></p>
+            </span>
+            <span <?php if($lbsyss=='ios'){ ?>class="cur"<?php } ?>>
+                <a href="/index.php?to=gifts&amp;type=ios">IOS礼包</a>
+                <p></p>
+            </span>
+        </div>
+          <ul>	
+			<?php if(is_array($lblb)===true){foreach($lblb AS $key => $value){ ?>
+              <li>
+                    <img src="<?php echo $value['lblogo']?>">
+                    <div>
+                        <h3><?php echo $value['gmname']?><?php echo $value['lbname']?></h3>
+                        <p><?php echo $value['lbjj']?></p>
+                        <i>剩余：<?php echo mb_substr(($value['lbsy'] / $value['lbzs']) * 100,0,4,'utf8'); ?>%</i>
+                    </div>
+                    <div class="system">
+					<?php if($value['lbxt']=='苹果'){ ?>
+                        <img src="./template/pcmoban/images/ios.png">
+					<?php } ?>	
+					<?php if($value['lbxt']=='安卓'){ ?>
+                        <img src="./template/pcmoban/images/an.png">
+					<?php } ?>
+					<?php if($value['lbxt']=='通用'){ ?>
+						<img src="./template/pcmoban/images/ios.png">
+                        <img src="./template/pcmoban/images/an.png">
+					<?php } ?>
+                    </div>
+                    <a href="./index.php?to=gifts_id&amp;id=<?php echo $value['id']?>" target="_blank" class="right">领取礼包</a>
+              </li>
+			  <?php }} ?>
+          </ul>
+          <div class="page">
+            <a href="./index.php?to=gifts&amp;type=<?php echo $lbsyss?>&amp;pages=<?php echo $pagestrL?>"><span></span></a>
+				<b><?php echo $pagestrC?>/<?php echo $pagenum?></b>
+			<a href="./index.php?to=gifts&amp;type=<?php echo $lbsyss?>&amp;pages=<?php echo $pagestrR?>"><span class="next"></span></a>
+          </div>
+      </div>
+      <div class="right hot-information">
+          <h3><i></i>热门礼包</h3>
+          <ul class="hot-gifts">
+			<?php if(is_array($hotgmlb)===true){foreach($hotgmlb AS $key => $value){ ?>
+              <li <?php if($key=='0'){ ?>class="on"<?php } ?>>
+                  <a href="./index.php?to=gifts_id&amp;id=<?php echo $value['id']?>" target="_blank">
+                      <p><?php echo $value['gmname']?><?php echo $value['lbname']?><span class="right">领取</span></p>
+                      <div>
+                          <img src="<?php echo $value['lblogo']?>">
+                          <em>
+                              <h4><?php echo $value['gmname']?><?php echo $value['lbname']?></h4>
+                              <i>剩余：<?php echo mb_substr(($value['lbsy'] / $value['lbzs']) * 100,0,4,'utf8'); ?>%</i>
+                          </em>
+                      </div>
+                  </a>
+              </li>
+            <?php }} ?>
+          </ul>
+          <h3 class="hot-game"><i></i>热门游戏</h3>
+          <ul class="kaifu">
+              <?php if(is_array($sosolist)===true){foreach($sosolist AS $key => $value){ ?>
+              <li>
+                <a href="./index.php?to=game_id&amp;id=<?php echo $value['id']?>" class="clearfix">
+                  <img src="<?php echo $value['gmlogo']?>" class="left">
+                  <div class="left">
+                    <h4><?php echo $value['gmname']?></h4>
+                    <p><?php echo $value['gmbq']?></p>
+                    <p><?php echo $value['gmmb']?>M <?php echo mb_substr($value['gmjj'],0,10,'utf8'); ?></p>
+                  </div>
+                  <img src="./template/pcmoban/images/right1.png" class="right">
+                </a>
+              </li>
+			<?php }} ?>
+          </ul>
+      </div>
+    </div>
+
+<?php include $this->Template('footer');?>
+
+ 	<script type="text/javascript">
+        $(document).on('click','.hot-new span',function(){
+            $(this).addClass('cur').siblings().removeClass('cur');
+        })
+        $(document).on('mouseover','.hot-gifts li',function(){
+            $(this).addClass('on').siblings().removeClass('on');
+        })
+    </script>

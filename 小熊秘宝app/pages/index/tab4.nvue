@@ -1,0 +1,193 @@
+<template>
+	<list>
+		<cell class="top" :render-whole="true">
+			<image class="top_l" :src="ulogo" @click="opset"></image>
+			<view class="top_c" @click="opset" :render-whole="true">
+				<text class="top_c_t">{{unick}}</text>
+				<text class="top_c_b">ID: {{uid}}</text>
+			</view>
+			<text class="top_r" @click="opset">&#xe78e;</text>
+		</cell>
+		
+		<cell class="li" @click="opmsg">
+			<view class="lis" :render-whole="true">
+				<image class="lis_l" src="../../static/us_msg.png"></image>
+				<text class="lis_c">我的消息</text>
+				<text class="lis_r">官方公告活动 &#xe630;</text>
+			</view>
+		</cell>
+		<cell class="li" @click="oplb">
+			<view class="lis" :render-whole="true">
+				<image class="lis_l" src="../../static/us_libao.png"></image>
+				<text class="lis_c">我的礼包</text>
+				<text class="lis_r">领取礼包记录 &#xe630;</text>
+			</view>
+		</cell>
+		<cell class="li" @click="opdow">
+			<view class="lis" :render-whole="true">
+				<image class="lis_l" src="../../static/us_dow.png"></image>
+				<text class="lis_c">下载管理</text>
+				<text class="lis_r">游戏安装包管理 &#xe630;</text>
+			</view>
+		</cell>
+		<cell class="li" @click="opkf">
+			<view class="lis" :render-whole="true">
+				<image class="lis_l" src="../../static/us_kf.png"></image>
+				<text class="lis_c">客服中心</text>
+				<text class="lis_r">官方唯一客服 &#xe630;</text>
+			</view>
+		</cell>
+		<cell class="li" @click="opllq(1)">
+			<view class="lis" :render-whole="true">
+				<image class="lis_l" src="../../static/us_yhxy.png"></image>
+				<text class="lis_c">隐私政策</text>
+				<text class="lis_r">&#xe630;</text>
+			</view>
+		</cell>
+		<cell class="li" @click="opllq(2)">
+			<view class="lis" :render-whole="true">
+				<image class="lis_l" src="../../static/us_fwxy.png"></image>
+				<text class="lis_c">服务协议</text>
+				<text class="lis_r">&#xe630;</text>
+			</view>
+		</cell>
+		<cell class="tis">
+			<text class="tis_t">海口龙华茂绅优选贸易商行版权所有\n当前APP版本：v{{appv}}</text>
+		</cell>
+		
+	</list>
+</template>
+<script>
+	import G_APP from '@/common/ip.js';
+	export default {
+		data() {
+			return {
+				ip:G_APP.ip,
+				appv:G_APP.appVs,
+				appt:G_APP.appt,
+				appb:G_APP.appb,
+				ulogo:"../../static/uslogo.png",
+				uid:"0000",
+				unick:"登陆领取专属礼包",
+			}
+		},
+		onReady() {
+			this.get();
+		},
+		onShow() {
+			uni.$off('login');
+		},
+		onHide() {
+			let thi=this;
+			uni.$on('login', function(data) {
+				thi.get();
+			});
+		},
+		methods: {
+			opllq(pd){
+				if(pd==1){
+					uni.navigateTo({
+						url: '../../pages/llq/index?url=yszc&tit=隐私政策&pd=1',
+					});
+				}
+				if(pd==2){
+					uni.navigateTo({
+						url: '../../pages/llq/index?url=fwxy&tit=服务协议&pd=1',
+					});
+				}
+			},
+			opdow(){
+				uni.navigateTo({
+					url: '../user/dow',
+				});
+			},
+			opmsg(){
+				if(this.uid>0){
+					uni.navigateTo({
+						url: '../user/msg',
+					});
+				}else{
+					uni.navigateTo({
+						url: '../login/login',
+					});
+				}
+			},
+			oplb(){
+				if(this.uid>0){
+					uni.navigateTo({
+						url: '../user/ckx',
+					});
+				}else{
+					uni.navigateTo({
+						url: '../login/login',
+					});
+				}
+			},
+			opkf(){
+				if(this.uid>0){
+					uni.navigateTo({
+						url: '../user/kf',
+					});
+				}else{
+					uni.navigateTo({
+						url: '../login/login',
+					});
+				}
+			},
+			opset(){
+				if(this.uid>0){
+					uni.navigateTo({
+						url: '../user/set',
+					});
+				}else{
+					uni.navigateTo({
+						url: '../login/login',
+					});
+				}
+			},
+			get(){
+			let thi=this;
+				uni.request({
+					url: G_APP.ip + 'appapi.php?to=user',
+					method: "GET",
+					dataType: "json",
+					enableCache: true, //缓存
+					defer: true, //控制当前请求是否延时至首屏内容渲染后发送
+					data: {
+						'myusapp':'go',
+					},
+					success: (ret) => {
+						uni.stopPullDownRefresh();
+						if(ret.data.msg=='yes'){
+							let data={
+								"uid":ret.data.id,
+								"unick":ret.data.unick,
+								"ulogo":thi.ip+ret.data.ulogo,
+							}
+							uni.setStorageSync('user', data);
+							if(ret.data.ulogo){thi.ulogo=thi.ip+ret.data.ulogo;}
+							if(ret.data.unick){thi.unick=ret.data.unick;}
+							if(ret.data.id){thi.uid=ret.data.id;}
+						}else{
+							let data={
+								"uid":"0",
+								"unick":"",
+								"ulogo":"../../static/uslogo.png",
+							}
+							uni.setStorageSync('user', data);
+							thi.ulogo="../../static/uslogo.png";
+							thi.unick="登陆领取专属礼包";
+							thi.uid="0000";
+						}
+					}
+				});
+			},
+		},
+		onPullDownRefresh() {
+			this.get()
+		}
+	}
+</script>
+<style>
+	@import "../../common/tab4.css";
+</style>

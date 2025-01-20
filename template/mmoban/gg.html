@@ -1,0 +1,16 @@
+<!--{load header}-->
+<div class="main">
+		<div class="gg_main">
+			<!--{loop $gglist $key $value}-->
+			<a href="./mobile.php?to=gg_id&id=$value['id']">
+			<li>
+				<div class="gg_tit">
+					<em>$value['ggtp']</em>
+					<b>发布时间: $value['times']</b>
+				</div>
+			</li>
+			</a>
+			<!--{/loop}-->
+		</div>
+</div>
+<!--{load footer}-->

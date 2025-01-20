@@ -1,0 +1,75 @@
+<!--{load header}-->
+<div class="main">
+	<div class="gm_gm_list">
+		<div id="gm_gm_list">
+			<!--{loop $lblist $key $value}-->
+			<div class="gm_gm_main_li">
+				<li>
+					<div class="kfion_s">
+						<a href="./mobile.php?to=libao_id&id=$value['id']">
+							<img src="./$value['lblogo']" alt="$value['lbname']">
+						</a>
+					</div>
+					<div class="kfcen_s">
+						<b>{$value['gmname']}$value['lbname']<h5></h5></b>
+						<em>剩余：$value['lbsy']枚</em>
+						<span>$value['lbjj']</span>
+					</div>
+					<a href="./mobile.php?to=libao_id&id=$value['id']"><div class="kfdow_s"><span>领取</span></div></a>
+				</li>
+			</div>
+			<div class="gmgang"></div>
+			<!--{/loop}-->
+		</div>
+		<div class="ajaxjz" id="ajaxjz"></div>
+	</div>
+	
+</div>
+<input type="hidden" value="1" id="pages" loading="no">
+<input type="hidden" value="$pagecount" id="pagenum">
+<script>
+$(window).scroll(function(){
+    if($(document).scrollTop()>=$(document).height()-$(window).height()-100){
+	    var sscroll=$('#pages').attr('loading');
+        if(sscroll=="no"){
+		var pages=$("#pages").val()*1;
+			pages=pages+1;
+			$("#pages").val(pages);
+		var pagenum = $("#pagenum").val();
+		var htmls="";
+			if(pagenum>=pages){
+				$.ajax({
+					url:'./mobile.php?to=libao&op=getmore&libao=go&pages='+pages+'',
+					type:"GET",
+					dataType:"json",
+					beforeSend:function(){ 
+						$('#ajaxjz').html('努力加载中...') 
+					},success: function(data){
+						if(data){
+							$.each(data, function(kk, vv){
+								htmls+='<div class="gm_gm_main_li"><li><div class="kfion_s">'
+								htmls+='<a href="./mobile.php?to=libao_id&id='+vv['id']+'"><img src="./'+vv['lblogo']+'" alt=""></a></div><div class="kfcen_s">'
+								htmls+='<b>'+vv['gmname']+''+vv['lbname']+'<h5></h5></b>'
+								htmls+='<em>剩余：'+vv['lbsy']+'枚</em>'
+								htmls+='<span>'+vv['lbjj']+'</span>'
+								htmls+='</div>'
+								htmls+='<a href="./mobile.php?to=libao_id&id='+vv['id']+'"><div class="kfdow_s"><span>领取</span></div></a>'
+								htmls+='</li>'
+								htmls+='</div><div class="gmgang"></div>';
+							});
+						}
+						if(htmls!=""){
+							$("#gm_gm_list").append(htmls);
+							$('#ajaxjz').html('');
+						}
+					}
+				});	
+				//------
+			}else{
+				$('#ajaxjz').html('没有更多了');
+			}
+		}
+    }
+});
+</script>
+<!--{load footer}-->

@@ -1,0 +1,66 @@
+<!--{load header}-->
+    <div class="banxin content">
+        <div class="selectbox clearfix">
+            <div class="left">
+                <h3>游戏平台：</h3>
+                <h3>游戏类型：</h3>
+            </div>
+            <div class="left class">
+                <p>
+                    <a href="./index.php?to=game&type=$get_type&sort=$get_gmsort"><span <!--{if $get_gmxt=='1'}-->class="on"<!--{/if}-->>全部</span></a>
+                    <a href="./index.php?to=game&gmsys=an&type=$get_type&sort=$get_gmsort"><span <!--{if $get_gmxt=='an'}-->class="on"<!--{/if}-->>安卓</span></a>
+                    <a href="./index.php?to=game&gmsys=ios&type=$get_type&sort=$get_gmsort"><span <!--{if $get_gmxt=='ios'}-->class="on"<!--{/if}-->>IOS</span></a>
+                </p>
+                <p>
+                    <a href="./index.php?to=game&gmsys=$get_gmxt&sort=$get_gmsort"><span <!--{if $get_type=='1'}-->class="on"<!--{/if}-->>全部</span></a>
+					<!--{loop $gmbqlist $key $value}-->
+                    <a href="./index.php?to=game&gmsys=$get_gmxt&type=$value['bqname']&sort=$get_gmsort"><span <!--{if $get_type==$value['bqname']}-->class="on"<!--{/if}-->>$value['bqname']</span></a>
+					<!--{/loop}-->
+                </p>
+            </div>
+        </div>
+        <div class="hot-new">
+            <span <!--{if $get_gmsort=='1'}-->class="cur"<!--{/if}-->>
+                <a href="./index.php?to=game&gmsys=$get_gmxt&type=$get_type">最新</a>
+                <p></p>
+            </span>
+            <span <!--{if $get_gmsort=='hot'}-->class="cur"<!--{/if}-->>
+               <a href="./index.php?to=game&gmsys=$get_gmxt&type=$get_type&sort=hot">热门</a>
+                <p></p>
+
+            </span>
+            <span <!--{if $get_gmsort=='tj'}-->class="cur"<!--{/if}-->>
+                <a href="./index.php?to=game&gmsys=$get_gmxt&type=$get_type&sort=tj">推荐</a>
+                <p></p>
+            </span>
+        </div>
+        <div class="contain">
+            <ul>
+				<!--{loop $gmlb $key $value}-->
+                <li>
+                    <img src="./$value['gmlogo']">
+                    <h3>$value['gmname']</h3>
+					<p>$value['gmbq'] | $value['gmmb']M </p>
+                    <p>
+					<!--{if $value['ios']}-->
+					<img src="./template/pcmoban/images/ios.png" >
+					<!--{/if}-->
+					<!--{if $value['Android']}-->
+					<img src="./template/pcmoban/images/an.png" >
+					<!--{/if}-->
+					</p>
+                    <h4>
+						<a href="./index.php?to=game_id&id=$value['id']" class="left">进入专区</a>
+						<a class="right" href="$value['Android']">下载游戏</a>
+					</h4>
+                </li>
+                <!--{/loop}-->
+            </ul>
+            <div class="page">
+				<a href="./index.php?to=game&sort=$get_gmsort&gmsys=$get_gmxt&gmfl=&type=$get_type&pages=$pagestrL"><span></span></a>
+				<b>$pagestrC/$pagenum</b>
+				<a href="./index.php?to=game&sort=$get_gmsort&gmsys=$get_gmxt&gmfl=&type=$get_type&pages=$pagestrR"><span class="next"></span></a>
+            </div>
+        </div>
+    </div>
+<!--{load footer}-->

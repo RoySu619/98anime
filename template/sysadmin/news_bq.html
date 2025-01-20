@@ -1,0 +1,171 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="/template/sysadmin/css/style.css" rel="stylesheet">
+	<link href="/template/sysadmin/css/home.css" rel="stylesheet">
+	<link rel="icon" href="icon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="icon.ico" type="image/x-icon">
+  </head>
+<body >
+	<div class="main">
+	<div class="minihead">
+	<div class="dataleft">
+	<em>资讯标签</em>
+	<span>增加资讯标签</span>
+	</div>
+	
+	</div>
+	<div class="gmbqfk">
+	<div class="xzdata"><div class="xzdata-input" onclick="optc();">新增标签</div></div>
+	<table class="">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>标签名字</th>
+					<th>添加时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody class="tbody" id="bqlb">	
+			    <!--{loop $newbqlist $key $value}-->
+				<tr id="d_$value['id']" <!--{if $key==0 || $key==2 || $key==4 || $key==6 || $key==8 || $key==10 || $key==12 || $key==14}-->style="background: #f1f1f1;"<!--{/if}-->>
+				<td>$value['id']</td>
+				<td id="nm_$value['id']">$value['bqname']</td>
+				<td>$value['times']</td>
+				<td>
+				<em onclick="opbj('$value['id']','$value['bqname']');">
+					<img src="/template/sysadmin/image/sz.png" style="width: 16px;height: 16px;margin-right:20px;">
+				</em>
+				<span id="$value['id']" onclick="del(this);">
+					<img src="/template/sysadmin/image/del.png" style="width: 16px;height: 16px;">
+				</span>
+				</td>
+				</tr>
+				<!--{/loop}-->
+			</tbody>
+		</table>
+	</div>
+	<div class="gmbqtc">
+	<div class="gmbqzz"  onclick="closetc();"></div>
+	<div class="gmbqtcfk">
+	<em>添加资讯标签</em>
+	<input class="bq-txt" type="text" value="" id="bqnames" placeholder="请输入标签名字">
+	<div class="data-conbutton">
+			<input type="button" value="关闭" onClick="closetc();" class="databuttonf">
+			<input type="button" value="保存" onclick="tjiaobq();" id="xgf" class="databuttonb">
+	</div>
+	</div>
+	</div>
+	
+	
+    <div id="ajcome"></div>
+	<div id="ajerro"></div>
+	<div id="ajsuccess"></div>
+	<div id="ajqr"></div>
+	</div>
+    <script src="/template/sysadmin/js/jquery.min.js"></script>
+	<script>
+	var opbj = function(id,name){
+	    $(".gmbqtc").css('display','block');
+	    $("#bqnames").val(name);
+		var gmbq = $("#bqnames").val();
+		$("#xgf").attr("onclick","xgbaoc(\""+id+"\",\""+name+"\");");
+	}
+	var optc = function(){
+	    $(".gmbqtc").css('display','block');
+		$("#xgf").attr("onclick","tjiaobq();");
+		$("#bqnames").val('');
+	}
+	var closetc = function(){ 
+	    $(".gmbqtc").css('display','none');
+	}
+	var tjiaobq = function(){
+	    var gmbq = $("#bqnames").val();
+		$.ajax({
+		url:'./sysadmin.php?to=news_bq&op=add',
+		type:'POST', 
+		data:{
+		   'xnewsbq':'go',
+		   'key':0,
+		   'bqname':gmbq
+		},
+		dataTyep:'json',
+		beforeSend:function(){ 
+			$("#ajcome").html('<div class="axsucfk"><div class="axsuc"><span><img src="image/logins.png"></span><em>加载中 ...</em></div></div>');
+        }, 
+	    success:function(ret){ 
+			$("#ajcome").html('');
+			if(ret=="3"){
+				$("#ajsuccess").html('<div class="axerrfk"><div class="axerr"><span><img src="image/yes.png"></span><em>添加标签成功！</em></div></div>');
+				setTimeout(function(){$("#ajsuccess").html('');clearTimeout();  window.location.replace('./sysadmin.php?to=news_bq');},200);
+			}
+			if(ret=="2"){
+				$("#ajsuccess").html('<div class="axerrfk"><div class="axerr"><span><img src="image/err.png"></span><em>请输入标签名字！</em></div></div>');
+				setTimeout(function(){$("#ajsuccess").html('');clearTimeout(); },200);
+			}
+		}
+		});
+	}
+	
+	var xgbaoc = function(id){
+	var gmbq = $("#bqnames").val();
+	$.ajax({
+		url:'./sysadmin.php?to=news_bq&op=mod',
+		type:'POST', 
+		data:{
+		   'bq-xg':'go',
+		   'key':0,
+		   'bqname':gmbq,
+		   'bqid':id
+		},
+		dataTyep:'json',
+		beforeSend:function(XMLHttpRequest){ 
+			$("#ajcome").html('<div class="axsucfk"><div class="axsuc"><span><img src="image/logins.png"></span><em>加载中 ...</em></div></div>');
+        }, 
+	    success:function(ret){
+		    $("#ajcome").html('');
+			if(ret=="3"){
+			$("#ajsuccess").html('<div class="axerrfk"><div class="axerr"><span><img src="image/yes.png"></span><em>修改标签成功！</em></div></div>');
+		    setTimeout(function(){$("#ajsuccess").html('');clearTimeout(); },200);
+			$("#nm_"+id+"").html(gmbq);
+			$(".gmbqtc").css('display','none');
+			
+			}
+			if(ret=="2"){
+			$("#ajsuccess").html('<div class="axerrfk"><div class="axerr"><span><img src="image/err.png"></span><em>请输入标签名字！</em></div></div>');
+		    setTimeout(function(){$("#ajsuccess").html('');clearTimeout(); },500);
+			}
+		}
+	});
+	}
+	
+	var del = function(obj){
+	    var ids = obj.id;
+	    $.ajax({
+		url:'./sysadmin.php?to=news_bq&op=dell',
+		type:'POST', 
+		data:{
+		   'del-bq':'go',
+		   'did':ids
+		},
+		dataTyep:'json',
+		beforeSend:function(XMLHttpRequest){ 
+			$("#ajcome").html('<div class="axsucfk"><div class="axsuc"><span><img src="image/logins.png"></span><em>加载中 ...</em></div></div>');
+        },success:function(ret){ 
+		    $("#ajcome").html('');
+			$("#d_"+ids+"").remove();
+			if(ret=="1"){
+				$("#ajsuccess").html('<div class="axerrfk"><div class="axerr"><span><img src="image/yes.png"></span><em>删除成功！</em></div></div>');
+				setTimeout(function(){$("#ajsuccess").html('');clearTimeout(); },500);
+			}
+			
+		}
+		});
+	
+	}
+	</script>
+  </body>
+</html>

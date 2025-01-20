@@ -1,0 +1,77 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><!DOCTYPE html>
+<html  style="font-size: 28.8px;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title><?php echo $config['wzname']?>APP下载,<?php echo $config['wzname']?>APP</title>
+<meta name="keywords" content="<?php echo $config['wzname']?>下载,<?php echo $config['wzname']?>,手游app下载">
+<meta name="description" content="<?php echo $config['wzname']?>手游下载站为手游玩家提供最新折扣游戏、等各类好玩的手机游戏，尽在<?php echo $config['wzname']?>手游平台！">
+<meta content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" name="viewport">
+<meta name="wap-font-scale" content="no">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta content="telephone=no" name="format-detection">
+<meta name="x5-orientation" content="portrait">
+<meta name="screen-orientation" content="portrait">
+<link rel="stylesheet" type="text/css" href="./template/mmoban/appdow/css/m.css">
+
+</head>
+<body>
+<div class="container">
+<div class="logo">
+ 
+</div>
+<div class="first-block">
+<em><?php echo $config['wzname']?>APP专注手游</em>
+<span>为游戏而生，简洁方便，还漂亮！</span>
+<img src="./template/mmoban/appdow/image/1.png">
+</div>
+<div class="second-block">
+<em>精品游戏，任您选！</em>
+<span>分类清晰 , 智能查找 , 玩到开心</span>
+<img src="./template/mmoban/appdow/image/2.png">
+</div>
+<div class="third-block">
+<em>海量礼包，任你选，一应俱全</em>
+<span>超多福利送不停 , 一大波福利领到手软</span>
+<img src="./template/mmoban/appdow/image/4.png">
+</div>
+<!-- <div class="fourth-block"> -->
+
+
+<!--<div class="footer" style="">-->
+<!--	<p class="copy-right">-->
+<!--		©2019 <?php echo $config['wzname']?>网络科技有限公司<br>-->
+<!--		<br><?php echo $config['footinfos']?>-->
+<!--	</p>-->
+<!--</div>-->
+<a href="<?php echo $dows?>"><div class="dows"></div></a>
+<a class="download-btn" href="<?php echo $dows?>"></a>
+</div>
+
+
+<script src="./template/mmoban/appdow/js/jquery.js" type="text/javascript"></script>
+
+<script src="./template/mmoban/appdow/js/swipe.js" type="text/javascript"></script>
+<script type="text/javascript">
+(function (doc, win) {
+    var docEl = doc.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        recalc = function () {
+            var clientWidth = docEl.clientWidth;
+            if (!clientWidth) return;
+            if(clientWidth>=750){
+                docEl.style.fontSize = '50px';
+            }else{
+                docEl.style.fontSize = 30 * (clientWidth / 750) + 'px';
+            }
+        };
+
+    if (!doc.addEventListener) return;
+    win.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window);
+
+</script>
+
+
+</body>
+</html>

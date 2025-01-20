@@ -1,0 +1,199 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="/template/sysadmin/css/style.css" rel="stylesheet">
+	<link href="/template/sysadmin/css/home.css" rel="stylesheet">
+	<link rel="icon" href="icon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="icon.ico" type="image/x-icon">
+</head>
+<style type="text/css">
+.layinput{
+	float: left;
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+    text-indent: 15px;
+    color: #000;
+    cursor: pointer;
+}
+</style>
+<body>
+	<div class="main">
+	<div class="minihead">
+	<div class="dataleft"><em>添加版本</em><span>添加新游戏版本</span></div>
+	</div>
+	<div class="data-confk">
+	<div class="data-connr">
+	<div class="xzdata"><a href="sysadmin.php?to=data_lb&amp;gmid=<?php echo $_GET['gmid']?>&amp;name=<?php echo $_GET['name']?>"><div class="xzdata-input" >礼包列表</div></a></div>
+	<div class="data-conxx">
+	<em>礼包名字 :</em>
+	<input type="text" value="" class="data-txt" id="lbname"  placeholder="如：豪华礼包">
+
+    <em>领取方式 :</em>
+	<div class="data-txt">
+		<select class="data-conse" id="lbfs"> 
+			 <option id="1">积分</option> 
+			 <option id="2">平台币</option> 
+		</select> 
+	</div>
+	<em>领取消耗 :</em>
+	<input type="text" value="" class="data-txt" id="lbxh"  placeholder="根据上方领取方式 ，消耗如：100 ，消耗100积分 ,留空不消耗">
+	<em>适用系统 :</em>
+	<div class="data-txt">
+		<select class="data-conse" id="syxt"> 
+			 <option id="0">通用</option> 
+			 <option id="1">安卓</option> 
+			 <option id="2">苹果</option> 
+		</select> 
+	</div>
+	
+	<em>开始时间 :</em>
+	<div class="data-txt">
+	<input readonly class="layinput" value=""   placeholder="选择开始时间段" name="fczsj" id="ktm" >
+	</div>
+	
+	<em>结束时间 :</em>
+	<div class="data-txt">
+	<input readonly class="layinput" value=""  placeholder="选择开始时间段" name="fczsj" id="jtm">
+	</div>
+    <em>礼包简介 :</em>
+	<textarea class="data-textarea" id="lbjj" onblur="xxjj();" onkeyup="xxjj();" placeholder="请输入简介"></textarea>
+	<em>礼包说明 :</em>
+	<textarea class="data-textarea" id="lbsm" onblur="xxjs();" onkeyup="xxjs();" placeholder="请输入说明"></textarea>
+
+	<em>上传卡号 :</em>
+	<div class="data-txt">
+	<span class="fileinput-button">
+	<span class="fileanniu">上传礼包卡号 </span>
+	<input type="file" value="" id="filetxts"  name='file'  onchange="filetxt()">
+	</span>
+	</div>
+	<em>礼包上传样式：</em><a href="/template/sysadmin/text/key.zip"><div class="data-txt">下载样式</div></a>
+			
+	
+	</div>
+	</div>
+		<div id="fkkk"><input class="data-txt" type="hidden" value="" id="fks"></div>
+		<input type="hidden" value="" class="data-txt" id="kmsl" readonly="readonly">
+		<input type="hidden" value="" class="data-txt" id="txtkey"  readonly="readonly">
+		<div class="data-conbutton">
+			<input type="button" value="返回" onClick="javascript :history.back(-1); " class="databuttonf">
+			<input type="button" value="保存" onclick="bc();" class="databuttonb">		
+		</div>
+	</div>
+	</div>
+    <div id="ajcome"></div>
+	<div id="ajerro"></div>
+	<div id="ajsuccess"></div> 
+	<script src="/template/sysadmin/js/jquery.min.js" type="text/javascript"></script>
+	<script src="/template/sysadmin/js/jHsDate.js" type="text/javascript"></script>
+	<script type="text/javascript"> 
+	$('#ktm').jHsDate({
+		format: 'yyyy-MM-dd'
+	});
+	$('#jtm').jHsDate({
+		format: 'yyyy-MM-dd'
+	});
+	var filetxt = function(){
+	var formData = new FormData();
+	formData.append("file", $("#filetxts")[0].files[0]);
+	formData.append("txtupup", 'on');
+	$.ajax({
+		url:'./sysadmin.php?to=uptxt&op=txtup',
+		type:'POST', 
+		dataType:'html',
+		data: formData,
+		processData: false,
+		contentType: false,
+		beforeSend:function(XMLHttpRequest){ 
+			$("#ajcome").html('<div class="axsucfk"><div class="axsuc"><span><img src="image/logins.png"></span><em>上传卡号中 ...</em></div></div>');
+        },success:function(ret){
+		    if(ret=='"err"'){
+			    window.location.href="login.html"; 
+			}else{
+		    if(ret){
+            $("#ajcome").html('');			
+			var arr=new Array();
+			arr=ret.split('|');
+			for(var i=0;i<arr.length;i++){
+			var rr = arr[0];
+			var kd = arr[1];
+			var kkey = kd.replace('"', '').replace('"', '');
+			var kesl = rr.replace('"', '').replace('"', '');
+			}
+			$("#txtkey").val(kkey);
+			$("#kmsl").val(parseInt(kesl));
+			$(".fileanniu").html('上传卡号成功');
+			}
+			}
+	    }
+	});
+	}
+	
+	var bc =function(){
+	//var lx = $("#lblx").val();
+	var sl = parseInt($("#kmsl").val());
+	var tx = $("#txtkey").val();
+	var nm = $("#lbname").val();
+	var fs = $("#lbfs").val();
+	var jj = $("#lbjj").val();
+	var sm = $("#lbsm").val();
+	var xh = $("#lbxh").val();
+	var xt = $("#syxt").val();
+	var ktm = $("#ktm").val();
+	var jtm = $("#jtm").val();
+	var gi = $("#jtm").val();
+	$.ajax({
+		url:'./sysadmin.php?to=data_lb&op=lb_con_con',
+		type:'POST', 
+		data:{
+		   'x-lb':'go',
+		   'key':0,
+		   'tke':tx,
+		   'gmname':'<?php echo $gmxx["gmname"]?>',
+		   'gmlx':'<?php echo $gmxx["gmlx"]?>',
+		   'lbnm':nm,
+		   'lqfs':fs,
+		   'lqxh':xh,
+		   'lqxt':xt,
+		   'lqjj':jj,
+		   'lqsm':sm,
+		   'kstm':ktm,
+		   'jstm':jtm,
+		   'kmsl':sl,
+		   'gmid':'<?php echo $gmxx["id"]?>',
+		   'lblog':'<?php echo $gmxx["gmlogo"]?>'
+		},
+		dataTyep:'json',
+		beforeSend:function(XMLHttpRequest){ 
+			$("#ajcome").html('<div class="axsucfk"><div class="axsuc"><span><img src="image/logins.png"></span><em>加载中 ...</em></div></div>');
+        }, 
+	    success:function(ret){ 
+		    $("#ajcome").html('');
+			if(ret=="3"){
+			$("#ajsuccess").html('<div class="axerrfk"><div class="axerr"><span><img src="image/yes.png"></span><em>添加礼包成功！</em></div></div>');
+		    setTimeout(function(){$("#ajsuccess").html('');clearTimeout(); window.location.href='./sysadmin.php?to=data_lb&gmid=<?php echo $_GET['gmid']?>&name=<?php echo $_GET['name']?>'; },300);
+			}
+			if(ret=="2"){
+			$("#ajsuccess").html('<div class="axerrfk"><div class="axerr"><span><img src="image/err.png"></span><em>请认真填写相关信息！</em></div></div>');
+		    setTimeout(function(){$("#ajsuccess").html('');clearTimeout(); },300);
+			}
+		}
+	});
+	}
+	var xxjj = function(){
+		var str01 = $("#lbjj").val();
+		var str02 = str01.replace(/\s+/g,'').replace('"','').replace('`','').replace('&','').replace('\\','').replace('、','').replace(/\n/g,'');
+		$("#lbjj").val(str02);
+	}
+	var xxjs = function(){
+		var str01 = $("#lbjs").val();
+		var str02 = str01.replace(/\s+/g,'').replace('"','').replace('`','').replace('&','').replace('\\','').replace('、','').replace(/\n/g,'');
+		$("#lbjs").val(str02);
+	}
+    </script>
+  </body>
+</html>

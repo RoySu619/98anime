@@ -1,0 +1,142 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="/template/sysadmin/css/style.css" rel="stylesheet">
+	<link href="/template/sysadmin/css/home.css" rel="stylesheet">
+	<link href="/template/sysadmin/css/sy-index.css" rel="stylesheet">
+
+  </head>
+<body>
+<div class="main">
+	<div class="minihead">
+	<div class="dataleft"><em>APP启动广告图</em><span id='cpnmxx'>图片尺寸 1080*1920 （ jpg格式 ）</span></div>
+	<div class="youke" style="width: 180px;">
+	<em id="yke" style="font-size: 15px;">注意</em><span>请严格按照图片尺寸上传</span></div>
+	</div>
+
+	<div class="sy-index-lb" id="sy-index-lb">
+		<div class="sy-indexf">
+		<?php $i='1'; ?>
+		<?php if(is_array($data_appopen)===true){foreach($data_appopen AS $key => $value){ ?>
+			<em style="    width: 300px;">
+				<div class="sy-fileimg" id="file<?php echo $i?>"> 
+					<?php if($value['imgurl']==''){ ?>
+					<img src="template/sysadmin/image/wu.jpg">
+					<?php } else { ?>
+					<img src="../<?php echo $value['imgurl']?>">
+					<?php } ?>
+				</div> 
+				<div  class="sy-index-txt">
+					<span class="sy-fileinput-button">
+						<span class="sy-fileanniu" id="sy-fileanniu<?php echo $i?>">更换广告图</span>
+						<input type="file" value="" id="files<?php echo $i?>"  name="file" onchange="filelogo(this,'<?php echo $i?>')" accept="image/*">
+					</span>
+				</div>
+				<div class="sy-textleft">游戏ID：</div>
+					<input class="sy-textid" type="text" value="<?php echo $value['urls']?>" id="urls<?php echo $i?>" placeholder="请输入游戏ID">
+					<input class="sy-textbutton" type="button" value="确定" id="<?php echo $i?>" onclick="baochun(this);">
+			</em>
+		<?php $i++; ?>
+		<?php }} ?>
+		</div>
+	</div>
+	<div id="ajcome"></div>
+	<div id="ajerro"></div>
+	<div id="ajsuccess"></div> 
+</div>
+<script src="/template/sysadmin/js/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+	var baochun = function(obj){
+			var ids = obj.id;
+			var urls = $("#urls"+ids).val();
+			$.ajax({
+				url:'../sysadmin.php?to=sys&op=tjgmid_appopen',
+				type:'POST', 
+				dataType:'json',
+				data:{
+					'id':ids,
+					'xurls':urls,
+					'tjid':'go'
+				},
+				success:function(ret){ 
+					if(ret==1){
+						$("#ajsuccess").html('<div class="axerrfk"><div class="axerr"><span><img src="image/yes.png"></span><em>设置成功！</em></div></div>');
+						setTimeout(function(){$("#ajsuccess").html('');clearTimeout();  window.location.replace('sysadmin.php?to=sys&op=appopen');},500);
+			
+					}
+					if(ret==2){
+						$("#ajerro").html('<div class="axerrfk"><div class="axerr"><span><img src="image/yes.png"></span><em>设置错误！！</em></div></div>');
+						setTimeout(function(){$("#ajsuccess").html('');clearTimeout();  window.location.replace('sysadmin.php?to=sys&op=appopen');},500);
+					}
+				}
+			});
+		
+	}
+		
+	function filelogo(file,id) {
+		
+		//获取LOGO
+		var formData = new FormData();
+		formData.append("file", $("#files"+id)[0].files[0]);
+		formData.append("uptjgg", 'on');
+		$.ajax({
+			url:'../sysadmin.php?to=upimg&op=appspgg',
+			type:'POST', 
+			dataType:'json',
+			data: formData,
+			processData: false,
+			contentType: false,
+			beforeSend:function(XMLHttpRequest){ 
+				$("#ajcome").html('<div class="axsucfk"><div class="axsuc"><span><img src="image/logins.png"></span><em>请稍后...</em></div></div>');
+			}, 
+			success:function(ret){ 
+				if(ret.yes==1){
+					$("#ajsuccess").html('');
+					$.ajax({
+						url:'../sysadmin.php?to=sys&op=tupian_appopen',
+						type:'POST', 
+						dataType:'json',
+						data:{
+							'img':ret.lgurl,
+							'imgid':id,
+							'lbtimg':'go'
+						},
+						success:function(ret){ 
+							if(ret==1){
+								var prevDiv = document.getElementById('file'+id);
+									prevDiv.style.display='block';
+								if (file.files && file.files[0]){
+								var reader = new FileReader();
+									reader.onload = function(evt) {
+										prevDiv.innerHTML = '<img src="' + evt.target.result + '" />';
+									}
+									reader.readAsDataURL(file.files[0]);
+								}else{
+									prevDiv.innerHTML = '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';  
+								}
+								$("#ajsuccess").html('<div class="axerrfk"><div class="axerr"><span><img src="image/yes.png"></span><em>更新图片成功！</em></div></div>');
+								setTimeout(function(){$("#ajsuccess").html('');clearTimeout();  window.location.replace('sysadmin.php?to=sys&op=appopen');},200);
+							}
+						}
+					});
+				}else{
+					$("#ajerro").html('<div class="axerrfk"><div class="axerr"><span><img src="image/yes.png"></span><em>图片大于500KB！</em></div></div>');
+					setTimeout(function(){$("#ajsuccess").html('');clearTimeout();  window.location.replace('sysadmin.php?to=sys&op=appopen');},500);
+				}
+			},error: function (err) {  
+				var erro = err.responseText;
+				if(erro==1){
+					$("#ajerro").html('<div class="axerrfk"><div class="axerr"><span><img src="image/yes.png"></span><em>传失败！</em></div></div>');
+					setTimeout(function(){$("#ajsuccess").html('');clearTimeout();  window.location.replace('sysadmin.php?to=sys&op=appopen');},500);
+				}	
+				
+			}  
+		
+		});	
+	}	
+	</script>
+  </body>
+</html>

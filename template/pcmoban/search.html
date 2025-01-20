@@ -1,0 +1,29 @@
+<!--{load header}-->
+	  <link rel="stylesheet" href="./template/pcmoban/css/game_list.css">
+    <div class="banxin content">
+        <div class="contain" style="margin:0;min-height:500px">
+            <p style="margin-bottom:30px;">搜索到与“<span style="color:#23dfbe">$_GET['keyboard']</span>”相关的游戏 <span style="color:#23dfbe">$sosonum['sonum']</span> 个</p>
+            <ul>
+				<!--{loop $sogmlist $key $value}-->
+                <li>
+                    <img src="./$value['gmlogo']">
+                    <h3>$value['gmname']</h3>
+                    <p>$value['gmbq'] | $value['gmmb']M | $value['gmdow']次下载</p>
+                    <p>
+					<!--{if $value['ios']}-->
+						<img src="./template/pcmoban/images/ios.png">
+					<!--{/if}-->
+					<!--{if $value['Android']}-->
+						<img src="./template/pcmoban/images/an.png">
+					<!--{/if}-->
+					</p>
+                    <h4><a href="./index.php?to=game_id&id=$value['id']" class="left">进入专区</a>
+						<a class="right" href="./index.php?to=game_id&id=$value['id']">下载游戏</a>
+					</h4>
+                </li>
+				<!--{/loop}-->
+            </ul>
+        </div>
+    </div>
+<!--{load footer}-->
+

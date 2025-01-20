@@ -1,0 +1,93 @@
+.list {
+	width: 750rpx;
+	padding-top: 20rpx;
+}
+.topsoso{
+	width: 750rpx;
+	height: 100rpx;
+	padding-bottom: 15rpx;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+.fh{
+	width: 110rpx;
+	height: 80rpx;
+	line-height: 80rpx;
+	font-family:iconfont;
+	font-size: 40rpx;
+	font-weight: 300;
+	text-align: center;
+	padding-right: 20rpx;
+}
+.soinput{
+	font-family:iconfont;
+	background-color: rgba(0, 0, 0, 0.05);
+	width: 600rpx;
+	padding-left: 30rpx;
+	height: 80rpx;
+	line-height: 80rpx;
+	border-radius: 40rpx;
+	font-size: 28rpx;
+}
+.cell{
+	width: 750rpx;
+	padding-left: 30rpx;
+	padding-right: 30rpx;
+}
+.gm{
+	width: 690rpx;
+	height: 160rpx;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.gm_i{
+	width: 130rpx;
+	height: 130rpx;
+	border-radius: 20rpx;
+}
+.gm_c{
+	width: 450rpx;
+	padding-left: 20rpx;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-start;	
+}
+.gm_c_t{
+	width: 330rpx;
+	height: 43rpx;
+	lines:1;
+	line-height: 43rpx;
+	font-size: 30rpx;
+	font-weight: bold;
+	padding-right: 20rpx;
+	color: rgba(0,0,0,0.8);
+}
+
+.gm_c_c{
+	height: 43rpx;
+	line-height: 50rpx;
+	font-size: 24rpx;
+	color: rgba(0,0,0,0.5);
+}
+.gm_c_b{
+	height: 43rpx;
+	line-height: 43rpx;
+	font-size: 24rpx;
+	lines:1;
+	color: rgba(0,0,0,0.5);
+}
+.gm_r{
+	margin-top: 30rpx;
+	width: 100rpx;
+	border-radius: 15rpx;
+	height: 60rpx;
+	line-height: 60rpx;
+	text-align: center;
+	font-size: 24rpx;
+	background-image: linear-gradient(to top,#ffc30c,#ffda08);
+}

@@ -1,0 +1,191 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><?php include $this->Template('header');?>
+
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+		<?php if(is_array($sylbt)===true){foreach($sylbt AS $key => $value){ ?>
+        <div class="swiper-slide"><a href="./index.php?to=game_id&amp;id=<?php echo $value['id']?>"><img src="<?php echo $value['gmpclbt']?>" alt="<?php echo $value['gmname']?>"></a></div>
+		<?php }} ?>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+    <div class="content">
+      <div class="hotlist banxin clearfix">
+        <div class="hot_game left">
+            <h3><i></i>热门游戏<a href="./index.php?to=game" class="right" target="_blank">更多+</a></h3>
+            <ul>
+				<?php if(is_array($hotlist)===true){foreach($hotlist AS $key => $value){ ?>
+                <li>
+                    <a href="./index.php?to=game_id&amp;id=<?php echo $value['id']?>"><img src="./<?php echo $value['gmpclbt']?>" alt="<?php echo $value['gmname']?>"></a>
+                    <h4><?php echo $value['gmname']?></h4>
+                    <p><?php echo $value['gmjj']?></p>
+                    <div><a href="./index.php?to=game_id&amp;id=<?php echo $value['id']?>">进入专区 <span>→</span></a></div>
+                </li>
+				<?php }} ?>
+            </ul>
+        </div>
+        <div class="kaifu right">
+            <h3><i></i>新游开服<a href="./index.php?to=kaifu" class="right" target="_blank">更多+</a></h3>
+            <ul>
+			<?php if(is_array($kflist)===true){foreach($kflist AS $key => $value){ ?>
+              <li>
+                <a href="./index.php?to=game_id&amp;id=<?php echo $value['gid']?>" class="clearfix" target="_blank">
+                  <img src="<?php echo $value['gmlogo']?>" class="left"  alt="<?php echo $value['gmname']?>">
+                  <div class="left">
+                    <h4><?php echo $value['gmname']?></h4>
+                    <p><?php echo $value['xfname']?></p>
+                    <p><?php echo mb_substr($value['kftimes'],5,11,'utf8'); ?></p>
+                  </div>
+                  <img src="./template/pcmoban/images/right1.png" class="right">
+                </a>
+              </li>
+			  <?php }} ?>
+
+            </ul>
+        </div>
+      </div>
+      <div class="banxin game-infos">
+          <h3><i></i>游戏资讯<a href="./index.php?to=news" class="right" target="_blank">更多+</a></h3>
+          <div class="game-lists clearfix">
+              <div class="game-info left clearfix">
+                  <div class="game-news left">
+					<?php if(is_array($news)===true){foreach($news AS $key => $value){ ?>
+					<?php if($key<5){ ?>
+                      <a href="javascript:;" title="<?php echo $value['zxname']?>" <?php if($key==0){ ?>class="cur"<?php } ?>>
+                          <img src="./<?php echo $value['zxlogo']?>">
+                          <em>
+                              <span><?php echo $value['zxname']?></span>
+                              <i><?php echo $value['zxjj']?></i>
+                          </em>
+                          <i class="i-triangle"></i>
+                      </a>
+					<?php } ?>
+					<?php }} ?>
+                    
+                  </div>
+                  <div class="big-img left">
+					<?php if(is_array($news)===true){foreach($news AS $key => $value){ ?>
+					<?php if($key<5){ ?>
+                      <a title="<?php echo $value['zxname']?>" href="./index.php?to=news_id&amp;id=<?php echo $value['id']?>" style="background-image: url('./<?php echo $value['zxlogo']?>')" target="_blank"></a>
+					<?php } ?>
+					<?php }} ?>
+                  </div>
+              </div>
+              <div class="news-info left">
+                  <a href="./index.php?to=news_id&amp;id=<?php echo $value['id']?>" title="<?php echo $tjnews['zxname']?>" target="_blank" class="first-info">
+					<?php echo $tjnews['zxname']?>
+				  </a>
+				  
+                  <ul>
+					<?php if(is_array($news)===true){foreach($news AS $key => $value){ ?>
+						<?php if($key>5){ ?>
+						<li>
+						  <a href="./index.php?to=news_id&amp;id=<?php echo $value['id']?>" title="<?php echo $value['zxname']?>" target="_blank">
+							<?php echo $value['zxname']?>
+						  </a>
+						  <span>12-05</span>
+						</li>
+						<?php } ?>
+					<?php }} ?>
+                  </ul>
+              </div>
+          </div>
+      </div>
+      <div class="banxin groom clearfix">
+          <div class="groom-list left">
+              <h3><i></i>精品推荐<a href="./index.php?to=game" class="right" target="_blank">更多+</a></h3>
+              <ul>
+                  <?php if(is_array($jplist)===true){foreach($jplist AS $key => $value){ ?>
+                  <li>
+                      <a href="./index.php?to=game_id&amp;id=<?php echo $value['id']?>" target="_blank" title="<?php echo $value['gmname']?>">
+                          <img src="./<?php echo $value['gmlogo']?>">
+                          <h4><?php echo $value['gmname']?></h4>
+                          <span>下载游戏</span>
+                      </a>
+                  </li>
+				  <?php }} ?>
+              </ul>
+          </div>
+          <div class="activity right">
+              <h3><i></i>热门活动<a href="./index.php?to=activity" class="right" target="_blank">更多+</a></h3>
+              <ul>
+				<?php if(is_array($rmnew)===true){foreach($rmnew AS $key => $value){ ?>
+                  <li>
+                      <a href="./index.php?to=news_id&amp;id=<?php echo $value['id']?>" title="<?php echo $value['zxname']?>" target="_blank">
+                          <img src="./<?php echo $value['zxlogo']?>" alt="<?php echo $value['zxname']?>">
+                          <p><?php echo $value['zxname']?></p>
+                      </a>
+                  </li>
+                  <?php }} ?>
+              </ul>
+          </div>
+      </div>
+      <div class="video banxin">
+          <h3><i></i>游戏视频</h3>
+          <ul>
+			<?php if(is_array($newgmvd)===true){foreach($newgmvd AS $key => $value){ ?>
+              <li>
+                  <a href="./index.php?to=news_id&amp;id=<?php echo $value['id']?>" target="_blank" title="<?php echo $value['zxname']?>">
+                      <img src="./<?php echo $value['zxlogo']?>" alt="<?php echo $value['zxname']?>">
+                      <p><?php echo $value['zxname']?></p>
+                      <span></span>
+                      <i></i>
+                  </a>
+              </li>
+            <?php }} ?>
+          </ul>
+      </div>
+      <div class="game-phb banxin">
+          <h3><i></i>游戏排行榜</h3>
+          <ul>
+              <li>
+                  <h4>热游榜单</h4>
+				  <?php $i='1'; ?>
+				  <?php if(is_array($hotgmbd)===true){foreach($hotgmbd AS $key => $value){ ?>
+                  <div>
+                      <i><?php echo $i?></i>
+                      <a href="./index.php?to=game_id&amp;id=<?php echo $value['id']?>" target="_blank" ><img src="./<?php echo $value['gmlogo']?>" alt="<?php echo $value['gmname']?>"></a>
+                      <p>
+                          <b><?php echo $value['gmname']?></b>
+                          <em><?php echo $value['gmbq']?></em>
+                      </p>
+                      <a href="./index.php?to=game_id&amp;id=<?php echo $value['id']?>" class="right" target="_blank" ><span>下载</span></a>
+                  </div>
+				   <?php $i++; ?>
+                  <?php }} ?>
+              </li>
+              <li>
+                  <h4>好评榜单</h4>
+				  <?php $i='1'; ?>
+				  <?php if(is_array($newdowlb)===true){foreach($newdowlb AS $key => $value){ ?>
+                  <div>
+                      <i><?php echo $i?></i>
+                      <a href="./index.php?to=game_id&amp;id=<?php echo $value['id']?>" target="_blank" ><img src="./<?php echo $value['gmlogo']?>" alt="<?php echo $value['gmname']?>"></a>
+                      <p>
+                          <b><?php echo $value['gmname']?></b>
+                          <em><?php echo $value['gmbq']?></em>
+                      </p>
+                      <a href="./index.php?to=game_id&amp;id=<?php echo $value['id']?>" class="right" target="_blank" ><span>下载</span></a>
+                  </div>
+				  <?php $i++; ?>
+                  <?php }} ?>
+              </li>
+              <li>
+                <h4>下载榜单</h4>
+				<?php $i='1'; ?>
+				<?php if(is_array($gmdowlb)===true){foreach($gmdowlb AS $key => $value){ ?>
+                  <div>
+                      <i><?php echo $i?></i>
+                     <a href="./index.php?to=game_id&amp;id=<?php echo $value['id']?>" target="_blank" ><img src="./<?php echo $value['gmlogo']?>" alt="<?php echo $value['gmname']?>"></a>
+                      <p>
+                          <b><?php echo $value['gmname']?></b>
+                          <em><?php echo $value['gmbq']?></em>
+                      </p>
+                      <a href="./index.php?to=game_id&amp;id=<?php echo $value['id']?>" class="right" target="_blank" ><span>下载</span></a>
+                  </div>
+				  <?php $i++; ?>
+                  <?php }} ?>
+              </li>
+          </ul>
+      </div>
+    </div>
+<?php include $this->Template('footer');?>

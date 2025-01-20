@@ -1,0 +1,403 @@
+<template>
+	<list class="m" @loadmore="moerdata">
+		<cell class="m_t">
+			<image class="m_t_l" :src="gmlogo"></image>
+			<view class="m_t_c" :render-whole="true">
+				<text class="m_t_c_t1">{{gmname}}</text>
+				<text class="m_t_c_t2">{{gmbq}} . {{gmmb}}</text>
+				<text class="m_t_c_t3" v-if="gmpf=='1'">&#xe86a; {{gmpf}}分</text>
+				<text class="m_t_c_t3" v-if="gmpf=='2'">&#xe86a; &#xe86a; {{gmpf}}分</text>
+				<text class="m_t_c_t3" v-if="gmpf=='3'">&#xe86a; &#xe86a; &#xe86a; {{gmpf}}分</text>
+				<text class="m_t_c_t3" v-if="gmpf=='4'">&#xe86a; &#xe86a; &#xe86a; &#xe86a; {{gmpf}}分</text>
+				<text class="m_t_c_t3" v-if="gmpf=='5'">&#xe86a; &#xe86a; &#xe86a; &#xe86a; &#xe86a; {{gmpf}}分</text>
+			</view>
+			<text class="m_t_r">{{gmdow}}次下载</text>
+		</cell>
+		<cell class="cell_qun" v-if="gmqun" :render-whole="true">
+			<view class="cell_quns" :render-whole="true">
+			<view class="cell_qun_l" :render-whole="true">
+				<text class="cell_qun_l_t">已有{{gmdow}}人在玩</text>
+				<text class="cell_qun_l_b">&#xe7ae; 加入玩家交流群,找到更多志同道合的好友.</text>
+			</view>
+			<text class="cell_qun_r" @click="opqun">一键加群</text>
+			</view>
+		</cell>
+		<cell class="cell_tp" >
+			<view class="cell_tps" @click="settab(1)" :render-whole="true">
+				<text class="cell_tp_t">详细</text>
+				<text class="cell_tp_b" v-if="tabid==1"></text>
+			</view>
+			<view class="cell_tps" @click="settab(2)" :render-whole="true">
+				<text class="cell_tp_t">礼包</text>
+				<text class="cell_tp_b" v-if="tabid==2"></text>
+			</view>
+			<view class="cell_tps" @click="settab(3)" :render-whole="true">
+				<text class="cell_tp_t">攻略</text>
+				<text class="cell_tp_b" v-if="tabid==3"></text>
+			</view>
+		</cell>
+		<cell class="cell" v-if="tabid==1">
+			<scroll-view :render-whole="true" class="gmimg" scroll-x="true" show-scrollbar="false">
+			<image class="gmimg_i" mode="heightFix" v-for="(item,index) in gmimg" :key="index" :src="ip+item.imgs"></image>
+			</scroll-view>
+			<text class="jj">{{gmjj}}</text>
+			<text class="tit">-- 游戏介绍 --</text>
+			<text class="jj">{{gmjs}}</text>
+		</cell>
+		<cell class="cell" v-if="tabid==2 && lblist">
+			<view class="lbli" @click="oplbxx(item.id)" v-for="(item,index) in lblist" :key="item.id" :render-whole="true">
+				<view class="lbli_l" :render-whole="true">
+					<text class="lbli_l_t1">{{item.lbname}}</text>
+					<text class="lbli_l_t2">{{item.lbjj}}</text>
+					<text class="lbli_l_t3">剩余：{{item.lbsy}}枚</text>
+				</view>
+				<text class="lbli_r">领取</text>
+			</view>
+		</cell>
+		<cell class="nodata" :render-whole="true" v-if="tabid==2 && lblist==''">
+			<image class="nodata_i" src="../../static/nodata.png"></image>
+		</cell>
+		
+		<cell class="cell" v-if="tabid==3 && nelist">
+			<view class="neli" @click="opzxxx(item.id)" v-for="(item,index) in nelist" :key="item.id" :render-whole="true">
+				<text class="neli_t1">{{item.zxname}}</text>
+				<text class="neli_t2">{{item.zxjj}}</text>
+				<text class="neli_t3">{{item.times}}</text>
+			</view>
+		</cell>
+		<cell class="nodata"  v-if="tabid==3 && nelist==''">
+			<image class="nodata_i" src="../../static/nodata.png"></image>
+		</cell>
+	</list>
+	<view class="dow" :style="'height:'+(appb+60)+'px'" @click="gotodow" :render-whole="true">
+		<text class="dow_bg" :style="'width:'+dowbg+'rpx;'"></text>
+		<text class="dow_an">{{dowzttis}}</text>
+	</view>
+</template>
+<script>
+import G_APP from '@/common/ip.js'
+export default {
+    data() {
+		return {
+			ip:G_APP.ip,
+			appb:G_APP.appb,
+			id:"",
+			tabid:1,
+			gmlogo:"",
+			gmname:"",
+			gmdow:0,
+			gmpf:3,
+			gmbq:"",
+			gmmb:"",
+			gmqun:"",
+			gmimg:[],
+			gmjj:"",
+			gmjs:"",
+			gmurl:"",
+			lblist:[],
+			nelist:[],
+			nepag:0,
+			nezpag:1,
+			aurl:"",
+			iurl:"",
+			urlpd:0,
+			//---------//
+			gmfd:"",
+			dowtm:0,
+			dowjd:0,
+			dowbg:690,
+			dowzttis:"下载游戏",
+			dowzt:0,//0未下载 1准备下载 2 正在下载 99下载失败 98暂停下载 97继续下载 66 下载完成
+		}
+    },
+	onLoad(option){
+		this.id=option.id;
+	},
+	onReady() {
+		this.get();
+	},
+    methods: {
+		oplbxx(id){
+			uni.navigateTo({
+				url: '../libao/lb?id='+id,
+			});
+		},
+		opzxxx(id){
+			uni.navigateTo({
+				url: '../../pages/gm/newsxx?id='+id,
+			});
+		},
+		opqun(){
+			if(this.gmqun){
+				let url = 'mqqapi://card/show_pslcard?src_type=internal&version=1&uin='+this.gmqun+'&card_type=group&source=qrcode';
+				plus.runtime.openURL(url, function(res) {});
+			}else{
+				uni.showToast({
+					icon:"none",
+					title: ' 游戏群还未创建，请联系客服 ',
+					duration: 2000
+				});
+			}
+		},
+		gotodow(){
+			let thi=this;
+			if(thi.appsys=='apple'){
+				if(thi.iurl){
+					plus.runtime.openURL(thi.iurl, function(res) {
+					});
+				}else{
+					uni.showToast({
+						icon:"none",
+						title: ' 下载链接失效了 ',
+						duration: 2000
+					});
+				}
+			}else{
+				if(thi.aurl){
+					if(thi.urlpd==0){
+						if(thi.dowzt==66){
+							plus.runtime.install(thi.gmfd,{force:true},{},function(error){
+								uni.showToast({icon:"none",title: '安装失败',   mask: false,  duration: 1500});  
+							})
+						}
+						if(thi.dowzt==0){//第一次下载
+							plus.sqlite.executeSql({
+								name: 'dowlist',
+								sql: 'create table if not exists dowgmlist("dow_id" INT(11),"dow_zt" INT(1),"dow_name" VARCHAR(30),"dow_jd" INT(11),"dow_mb" VARCHAR(20),"dow_fd" VARCHAR(100),"dow_url" VARCHAR(300))',
+								success: function(e){
+									plus.sqlite.executeSql({
+										name: 'dowlist',
+										sql: "insert into dowgmlist values('"+thi.id+"','0','"+thi.gmname+"','0','0','0','"+thi.aurl+"')",//状态1是正在下载 0未下载，66完成
+										success: function(e){
+											thi.dowzttis="获取下载中....";
+											thi.dowzt=1;
+											thi.dowbg=0;
+											thi.gotodowtm();
+										}
+									});
+								}
+							});
+						}
+						if(thi.dowzt==1 || thi.dowzt==2){
+							plus.sqlite.executeSql({
+								name: 'dowlist',
+								sql: "UPDATE dowgmlist set dow_zt='98' where dow_id='"+thi.id+"'",
+								success: function(e){
+									clearInterval(thi.dowtm);
+									thi.dowzttis="已暂停下载";
+									thi.dowzt=4;
+									uni.$emit('updowzt',{msg:'暂停游戏ID'+thi.id})
+								}
+							});
+						}
+						if(thi.dowzt==98){//暂停恢复下载
+							clearInterval(thi.dowtm);
+							plus.sqlite.executeSql({
+								name: 'dowlist',
+								sql: "UPDATE dowgmlist set dow_zt='97' where dow_id='"+thi.id+"'",
+								success: function(e){
+									thi.dowzt=1;
+									thi.dowzttis="正在恢复下载";
+									thi.gotodowtm()
+								}
+							});
+						}
+					}else{
+						plus.runtime.openURL(thi.aurl, function(res) {
+						});
+					}
+				}else{
+					uni.showToast({
+						icon:"none",
+						title: ' 下载链接失效了 ',
+						duration: 2000
+					});
+				}
+			}
+		},
+		gotodowtm(){
+			let thi=this;
+			thi.dowtm= setInterval(() => {
+				plus.sqlite.selectSql({
+					name: 'dowlist',
+					sql: 'select dow_jd,dow_zt from dowgmlist where dow_id='+thi.id+'',
+					success: function(data){
+						if(data[0].dow_jd==100){
+							thi.dowjd=690;
+							thi.dowbg=690;
+							thi.dowzt=66;
+							thi.dowzttis="安装游戏";
+							clearInterval(thi.dowtm);
+						}else{
+							if(data[0].dow_jd==0){
+								thi.dowzttis="已加入下载队列，请稍后....";
+							}else{
+								thi.dowjd=data[0].dow_jd;
+								thi.dowzttis=data[0].dow_jd+"%";
+								thi.dowbg=data[0].dow_jd * 6.9;
+							}
+						}
+					}
+				});
+			}, 1000);
+		},
+		settab(id){
+			if(this.tabid!=id){
+				this.tabid=id;
+			}
+			if(this.lblist.length==0 && id==2){
+				this.getlb()
+			}
+			if(this.nelist.length==0 && id==3){
+				this.getne(1)
+			}
+		},
+		moerdata(){
+			this.getne(2);
+		},
+		getne(pd){
+			let thi=this;
+			let npag=Number(thi.nepag)+1;
+			thi.nepag=npag;
+			if(npag<=thi.nezpag){
+				uni.request({
+					url: G_APP.ip + 'appapi.php?to=gmxx&op=gmxx_zx',
+					method: "GET",
+					dataType: "json",
+					enableCache: true, //缓存
+					defer: true, //控制当前请求是否延时至首屏内容渲染后发送
+					data: {
+						id: thi.id,
+						pages:npag
+					},
+					success: (ret) => {
+						thi.nezpag=ret.data.pagenum;
+						if(ret.data.nelist){
+							if(pd==1){
+								thi.nelist=ret.data.nelist;
+							}
+							if(pd==2){
+								thi.nelist=thi.nelist.concat(ret.data.nelist);
+							}
+						}
+					}
+				});
+			}
+		},
+		getlb(){
+			let thi=this;
+			uni.request({
+				url: G_APP.ip + 'appapi.php?to=gmxx&op=gmxx_lb',
+				method: "GET",
+				dataType: "json",
+				enableCache: true, //缓存
+				defer: true, //控制当前请求是否延时至首屏内容渲染后发送
+				data: {
+					id: thi.id,
+				},
+				success: (ret) => {
+					if(ret.data.lblist){
+						thi.lblist=ret.data.lblist;
+					}
+				}
+			});
+		},
+		get(){
+			let thi=this;
+			uni.request({
+				url: G_APP.ip + 'appapi.php?to=gmxx',
+				method: "GET",
+				dataType: "json",
+				enableCache: true, //缓存
+				defer: true, //控制当前请求是否延时至首屏内容渲染后发送
+				data: {
+					id: thi.id,
+				},
+				success: (ret) => {
+					if(ret.data.gm[0]){
+						thi.gmlogo=thi.ip+ret.data.gm[0].gmlogo;
+						thi.gmname=ret.data.gm[0].gmname;
+						thi.gmjj=ret.data.gm[0].gmjj;
+						thi.gmjs=ret.data.gm[0].gmjs;
+						thi.gmbq=ret.data.gm[0].gmbq;
+						thi.gmqun=ret.data.gm[0].qun;
+						let downum=Number(ret.data.gm[0].gmdow);
+						if(downum>9999){
+							let num1=downum / 10000;
+							let num2 = num1.toFixed(2);
+							thi.gmdow = num2+'万';
+						}else{
+							thi.gmdow=downum;
+						}
+						let mgnum=Number(ret.data.gm[0].gmmb);
+						if(mgnum>1024){
+							let num1=mgnum / 1024;
+							let num2 = num1.toFixed(2);
+							thi.gmmb = num2+'G';
+						}else{
+							thi.gmmb=mgnum+'M';
+						}
+						if(ret.data.gm[0].gmpf<1.99){thi.gmpf="1";}
+						if(ret.data.gm[0].gmpf<2.99 && ret.data.gm[0].gmpf>1.99){thi.gmpf="2";}
+						if(ret.data.gm[0].gmpf<3.99 && ret.data.gm[0].gmpf>2.99){thi.gmpf="3";}
+						if(ret.data.gm[0].gmpf<4.5 && ret.data.gm[0].gmpf>3.99){thi.gmpf="4";}
+						if(ret.data.gm[0].gmpf>4.5){thi.gmpf="5";}
+						thi.gmimg=ret.data.img;
+						thi.aurl=ret.data.gm[0].Android;
+						thi.iurl=ret.data.gm[0].ios;
+						thi.urlpd=ret.data.gm[0].urlpd;
+					}
+				}
+			});
+		}
+    },
+	onShow() {
+		let thi=this;
+		plus.sqlite.selectSql({
+			name: 'dowlist',
+			sql: 'select dow_jd,dow_zt,dow_fd from dowgmlist where dow_id='+thi.id+'',
+			success: function(data){
+				if(data.length>0){
+					if(data[0].dow_zt==66){
+						thi.gmfd=data[0].dow_fd;
+						thi.dowzt=66;
+						thi.dowzttis="安装游戏";
+					}else{
+						if(data[0].dow_zt==0){
+							if(data[0].dow_jd==0){
+								thi.dowzttis="已加入下载队列，请稍后....";
+								thi.gotodowtm(2);
+							}else{
+								thi.dowjd=data[0].dow_jd;
+								thi.dowzttis=data[0].dow_jd+"%";
+								thi.dowzt=1;
+								thi.dowbg=data[0].dow_jd * 6.9;
+								thi.gotodowtm(2);
+							}
+						}
+						if(data[0].dow_zt==98){
+							thi.dowzttis="继续下载";
+							thi.dowzt=98;
+							thi.dowjd=data[0].dow_jd;
+							thi.dowbg=data[0].dow_jd * 6.9;
+						}
+					}
+				}
+			}
+		});
+	},
+	onHide() {
+		clearInterval(this.dowtm);//下载管理器
+	},
+	onNavigationBarButtonTap(e) {
+		if(e.index==0){
+			uni.navigateTo({
+				url: '../../pages/user/dow',
+			});
+		}
+	}
+}
+</script>
+<style>
+@import "../../common/gmxx.css";
+</style>

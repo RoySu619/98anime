@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./template/pcmoban/css/base.css">
+  <link rel="stylesheet" href="./template/pcmoban/css/public.css">
+  <link rel="stylesheet" href="./template/pcmoban/css/swiper.min.css">
+  <link rel="stylesheet" href="./template/pcmoban/css/game-info.css">
+  <link rel="stylesheet" href="./template/pcmoban/kefu/kf.css">
+	<title>$config['gmxx_title']</title>
+	<meta name="keywords" content="$config['gmxx_keyword']" />
+    <meta name="description" content="$config['gmxx_description']" />
+</head>
+<body>
+	<div class="header" style="padding:0; ">
+        <div class="login" style="margin-bottom: 0px;">
+          <div class="banxin clearfix">
+            <p class="left">
+				<a href="/">首页</a>
+				<span>|</span><a href="./index.php?to=game">游戏中心</a>
+				<span>|</span><a href="./index.php?to=gifts">礼包中心</a>
+				<span>|</span><a href="./index.php?to=news">资讯攻略</a>
+				<span>|</span><a href="./index.php?to=kaifu">开服表</a>
+				<span>|</span><a href="./index.php?to=activity">福利活动</a>
+				<span>|</span><a href="./mobile.php" target="_blank">手机版</a>
+			</p>
+            <p class="right">
+			<!--{if $G_uid}-->
+				<a href="./index.php?to=user">
+					<!--{if $G_ulogo}-->
+					<img src="$G_ulogo">
+					<!--{else}-->
+					<img src="./template/pcmoban/images/head.png">
+					<!--{/if}-->
+				</a>
+				$G_unick
+				<a href="./index.php?to=user">个人中心</a>
+				<a href="./index.php?to=out&login=out">退出</a>
+			<!--{else}-->
+				<a href="./index.php?to=login">登录</a>
+				<a href="./index.php?to=register">注册</a>
+			<!--{/if}-->
+			</p>
+          </div>
+        </div>
+
+    </div>
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="$appinfo['gmpclbt']" alt=""></div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+    <div class="header">
+        <div class="header-con banxin">
+            <div class="header-tab">
+                <a href="javascript:;" class="on">游戏官网<p></p></a>
+                <a href="javascript:;">游戏资讯<p></p></a>
+                <a href="javascript:;">游戏攻略<p></p></a>
+                <a href="javascript:;">游戏活动<p></p></a>
+                <a href="javascript:;">领取礼包<p></p></a>
+            </div>
+        </div>
+    </div>
+    <div class="banxin content clearfix">
+      <div class="left information-list">
+          <div class="main-info clearfix">
+              <img src="./$appinfo['gmlogo']" class="left" alt="$appinfo['gmname']">
+              <div class="detail left">
+                  <h4>$appinfo['gmname']</h4>
+                  <p>标签：$appinfo['gmbq']</p>
+                  <p>
+					<!--{if $appinfo['gmmb']>1000}-->
+					<!--{eval echo round(($appinfo['gmmb'] / 1024),2)}-->GB
+					<!--{else}-->
+					{$appinfo['gmmb']} MB  
+					<!--{/if}-->
+					下载次数：
+					<!--{if $appinfo['gmdow']>100000}-->
+					<!--{eval echo mb_substr($appinfo['gmdow'],0,2,'utf8')}-->万+
+					<!--{else if $appinfo['gmdow']>1000000}-->
+					<!--{eval echo mb_substr($appinfo['gmdow'],0,3,'utf8')}-->万+次
+					<!--{else}-->
+					$appinfo['gmdow']次
+					<!--{/if}-->
+					</p>
+              </div>
+              <div class="right btns">
+				<!--{if $appinfo['ios']}-->
+                  <a href="$appinfo['ios']"><img src="./template/pcmoban/images/down-ios.png"></a>
+				<!--{else}-->
+				 <a href=""><img src="./template/pcmoban/images/down-ios1.png"></a>
+				<!--{/if}-->
+				<!--{if $appinfo['Android']}-->
+                  <a href="$appinfo['Android']"><img src="./template/pcmoban/images/down-an.png"></a>
+				<!--{else}-->
+				 <a href=""><img src="./template/pcmoban/images/down-an1.png"></a>
+				<!--{/if}-->
+              </div>
+              <div class="imgs right">
+                  <img src="../image/appdow.png" alt="" id="down_ewm">
+              </div>
+          </div>
+          <ul class="game-index on">
+              <li>
+                  <h3><i></i>游戏简介</h3>
+                  <p> $appinfo['gmjj']</p>
+              </li>
+              <li>
+                  <h3><i></i>游戏截图</h3>
+                  <div class="swiper-container1">
+                      <div class="swiper-wrapper">
+						<!--{loop $imgss $key $valueimg}-->
+                          <div class="swiper-slide"><img src="./$valueimg['imgs']"></div>
+						<!--{/loop}-->
+                      </div>
+                      <div class="swiper-button-next"></div>
+                      <div class="swiper-button-prev"></div>
+                  </div>
+              </li>
+              <li>
+                  <h3><i></i>游戏特色</h3>
+                  <div>
+                      $appinfo['gmjs']
+                  </div>
+              </li>
+			  <!--{if $splist}-->
+              <li class="main-video">
+                  <h3><i></i>游戏视频</h3>
+                  <ul>
+					
+					<!--{loop $splist $key $valuesp}-->
+                      <li title="$valuesp['zxname']">
+                          <a href="./index.php?to=news_id&id=$valuesp['id']">
+                              <img src="$valuesp['zxlogo']">
+                              <p class="clearfix"><span class="left">$valuesp['zxname']</span><img src="./template/pcmoban/images/video.png" class="right"></p>
+                          </a>
+                      </li>
+                    <!--{/loop}-->
+					
+                  </ul>
+              </li>
+			  <!--{/if}-->
+              
+          </ul>
+          <ul class="game_gonglue">
+			<!--{if $gmzxlist}-->
+			<!--{loop $gmzxlist $key $value}-->
+              <li>
+                  <a href="./index.php?to=news_id&id=$value['id']" target="_blank">
+                      <img src="$value['zxlogo']">
+                      <div>
+                          <span></span>
+                          <h3>$value['zxname']</h3>
+                          <p>$value['zxjj']</p>
+                          <i>$value['times']</i>
+                      </div>
+                  </a>
+              </li>
+            <!--{/loop}-->
+			<!--{else}-->
+			<center>暂无资讯</center>
+			<!--{/if}-->
+          </ul>
+          <ul class="game_gonglue">
+			<!--{if $gmgllist}-->
+			<!--{loop $gmgllist $key $value}-->
+              <li>
+                  <a href="./index.php?to=news_id&id=$value['id']" target="_blank">
+                      <img src="$value['zxlogo']">
+                      <div>
+                          <span class="on"></span>
+                          <h3>$value['zxname']</h3>
+                          <p>$value['zxjj']</p>
+                          <i>$value['times']</i>
+                      </div>
+                  </a>
+              </li>
+			<!--{/loop}-->
+			<!--{else}-->
+			<center>暂无攻略</center>
+			<!--{/if}-->
+          </ul>
+          <ul class="game_gonglue">
+			<!--{if $gmhdlist}-->
+			<!--{loop $gmhdlist $key $value}-->
+              <li>
+                  <a href="./index.php?to=news_id&id=$value['id']" target="_blank">
+                      <img src="$value['zxlogo']">
+                      <div>
+                          <span class="on1"></span>
+                          <h3>$value['zxname']</h3>
+                          <p>$value['zxjj']</p>
+                          <i>$value['times']</i>
+                      </div>
+                  </a>
+              </li>
+			<!--{/loop}-->
+			<!--{else}-->
+			<center>暂无活动</center>
+			<!--{/if}-->
+          </ul>
+          <ul class="kaifu_list">
+			<!--{if $lblb}-->
+			<!--{loop $lblb $key $value}-->
+            <li>
+                <img src="$value['lblogo']" >
+                <div class="info">
+                    <h4>$value['gmname']{$value['lbname']}</h4>
+                    <p>$value['lbjj']</p>
+                    <p>剩余：<!--{eval echo mb_substr((($value['lbsy'] / $value['lbzs'])*100),0,4,'utf8')}-->%</p>
+                </div>
+                <div class="system">
+				<!--{if $value['lbxt']=='通用'}-->
+                <img src="./template/pcmoban/images/ios.png" >
+				<img src="./template/pcmoban/images/an.png" >
+				<!--{/if}-->
+				<!--{if $value['lbxt']=='安卓'}-->
+				<img src="./template/pcmoban/images/an.png" >
+				<!--{/if}-->
+				<!--{if $value['lbxt']=='苹果'}-->
+                <img src="./template/pcmoban/images/ios.png" >
+				<!--{/if}-->
+                </div>
+                <a href="./index.php?to=gifts_id&id=$value['id']" class="right lqlb">领取礼包</a>
+            </li>
+			<!--{/loop}-->
+			<!--{else}-->
+			<center>暂无礼包</center>
+			<!--{/if}-->
+          </ul>
+      </div>
+      <div class="right hot-information">
+          <h3><i></i>热门资讯</h3>
+          <ul>
+			<!--{loop $zxlist $key $value}-->
+              <li>
+                  <a href="./index.php?to=news_id&id=$value['id']" target="_blank">
+                      <img src="$value['zxlogo']">
+                      <p>$value['zxname']</p>
+                  </a>
+              </li>
+			<!--{/loop}-->
+          </ul>
+          <h3 class="hot-game"><i></i>热门游戏</h3>
+          <ul class="kaifu">
+				<!--{loop $sosolist $key $value}-->
+              <li>
+                <a href="./index.php?to=game_id&id=$value['id']" target="_blank" class="clearfix">
+                  <img src="$value['gmlogo']" class="left">
+                  <div class="left">
+                    <h4>$value['gmname']</h4>
+                    <p>$value['gmbq']</p>
+                    <p>$value['gmmb']M</p>
+                  </div>
+                  <img src="./template/pcmoban/images/right1.png" class="right">
+                </a>
+              </li>
+			  <!--{/loop}-->
+          </ul>
+      </div>
+    </div>
+	<div class="popup"> <img src="" ></div>
+	<!--{load footer}-->
+	<script>
+	$(document).on('click','.swiper-container1 img',function(){
+          var imgs = $(this).attr('src');
+          console.log(imgs);
+          $('.popup img').attr('src',imgs);
+          $('.popup').show();
+      })
+      $(document).on('click','.popup',function(){
+          $(this).hide();
+      })
+	</script>

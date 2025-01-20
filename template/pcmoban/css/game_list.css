@@ -1,0 +1,147 @@
+.content{
+	padding: 40px 30px;
+	box-sizing: border-box;
+	background-color: #fff;
+	margin-top: 30px;
+	border-radius: 5px;
+}
+.selectbox h3{
+	line-height: 38px;
+	font-size: 18px;
+	font-weight: 600;
+	margin-bottom: 30px;
+}
+.selectbox .class{
+	width: 968px;
+}
+.selectbox p{
+	line-height: 36px;
+	margin-bottom: 15px;
+	font-size: 0;
+}
+.selectbox p span{
+	width: 68px;height: 36px;
+	background-color: #f5f6fa;
+	line-height: 36px;
+	text-align: center;
+	display: inline-block;
+	font-size: 16px;
+	margin-left: 20px;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+.selectbox p span.on{
+	background-color: #fddd85;
+	color: #fff;
+}
+
+.hot-new span{
+	font-size: 18px;
+	margin-right: 40px;
+	cursor: pointer;
+}
+.hot-new span.cur a{
+	color: #fddd85;
+}
+.hot-new p{
+	width: 22px;height: 5px;
+	border-radius: 2px;
+	background-color: #fddd85;
+	margin: 10px auto 0;
+	display: none;
+}
+.hot-new span.cur p{
+	display: block;
+}
+.contain{
+	margin-top: 40px;
+}
+.contain ul{
+	font-size: 0;
+}
+.contain li{
+	border:1px solid rgba(187, 187, 187, 0.3);
+	width: 158px;
+	margin-right: 30px;
+	border-radius: 5px;
+	height: 257px;
+	margin-bottom: 30px;
+	text-align: center;
+	padding: 30px 20px;
+	font-size: 12px;
+	display: inline-block;
+}
+.contain li:hover{
+	box-shadow: 0 0 10px 5px rgba(44,134,118,0.1);
+}
+.contain li:nth-child(5n){
+	margin-right: 0;
+}
+.contain li>img{
+	width: 100px;height: 100px;
+	border-radius: 20px;
+	margin-bottom: 18px;
+}
+.contain li h3{
+	font-size: 16px;
+	margin-bottom: 10px;
+	overflow : hidden;
+	text-overflow : ellipsis;
+	white-space : nowrap;
+}
+.contain li p img{
+	width: 20px;height: 20px;
+	margin: 15px 10px 30px;
+}
+.contain li p{
+	overflow : hidden;
+	text-overflow : ellipsis;
+	white-space : nowrap;
+}
+.contain li h4 a{
+	width: 68px;height: 30px;
+	line-height: 30px;
+	color:#fddd85;
+	border:1px solid #fddd85;
+	border-radius: 3px;
+	font-size: 12px;
+	font-weight: normal;
+}
+.contain li h4 a.right{
+	border-color:#fd9465;
+	color: #fd9465;
+}
+.contain li h4 .left:hover{
+	background-color:#fd9465;
+	color:#fff;
+}
+.contain li h4 .right:hover{
+	background-color:#fd9465;
+	color:#fff;
+}
+.page{
+	text-align: center;
+	margin-top: 50px;
+}
+.page span{
+	display: inline-block;
+	width: 30px;height: 30px;
+	background: url(../images/more.png) no-repeat;
+	background-size: 100% 100%;
+	vertical-align: middle;
+	cursor: pointer;
+}
+.page b{
+	display: inline-block;
+	vertical-align: middle;
+	width: 70px;height: 30px;
+	line-height: 30px;
+	font-size: 14px;
+	font-weight: normal;
+}
+.page span.next{
+	transform: rotateZ(180deg);
+}
+.page span:hover{
+	background-image: url(../images/more1.png);
+}

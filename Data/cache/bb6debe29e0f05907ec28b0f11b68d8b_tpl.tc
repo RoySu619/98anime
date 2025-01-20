@@ -1,0 +1,68 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><?php include $this->Template('header');?>
+
+    <div class="banxin content">
+        <div class="selectbox clearfix">
+            <div class="left">
+                <h3>游戏平台：</h3>
+                <h3>游戏类型：</h3>
+            </div>
+            <div class="left class">
+                <p>
+                    <a href="./index.php?to=game&amp;type=<?php echo $get_type?>&amp;sort=<?php echo $get_gmsort?>"><span <?php if($get_gmxt=='1'){ ?>class="on"<?php } ?>>全部</span></a>
+                    <a href="./index.php?to=game&amp;gmsys=an&amp;type=<?php echo $get_type?>&amp;sort=<?php echo $get_gmsort?>"><span <?php if($get_gmxt=='an'){ ?>class="on"<?php } ?>>安卓</span></a>
+                    <a href="./index.php?to=game&amp;gmsys=ios&amp;type=<?php echo $get_type?>&amp;sort=<?php echo $get_gmsort?>"><span <?php if($get_gmxt=='ios'){ ?>class="on"<?php } ?>>IOS</span></a>
+                </p>
+                <p>
+                    <a href="./index.php?to=game&amp;gmsys=<?php echo $get_gmxt?>&amp;sort=<?php echo $get_gmsort?>"><span <?php if($get_type=='1'){ ?>class="on"<?php } ?>>全部</span></a>
+					<?php if(is_array($gmbqlist)===true){foreach($gmbqlist AS $key => $value){ ?>
+                    <a href="./index.php?to=game&amp;gmsys=<?php echo $get_gmxt?>&amp;type=<?php echo $value['bqname']?>&amp;sort=<?php echo $get_gmsort?>"><span <?php if($get_type==$value['bqname']){ ?>class="on"<?php } ?>><?php echo $value['bqname']?></span></a>
+					<?php }} ?>
+                </p>
+            </div>
+        </div>
+        <div class="hot-new">
+            <span <?php if($get_gmsort=='1'){ ?>class="cur"<?php } ?>>
+                <a href="./index.php?to=game&amp;gmsys=<?php echo $get_gmxt?>&amp;type=<?php echo $get_type?>">最新</a>
+                <p></p>
+            </span>
+            <span <?php if($get_gmsort=='hot'){ ?>class="cur"<?php } ?>>
+               <a href="./index.php?to=game&amp;gmsys=<?php echo $get_gmxt?>&amp;type=<?php echo $get_type?>&amp;sort=hot">热门</a>
+                <p></p>
+
+            </span>
+            <span <?php if($get_gmsort=='tj'){ ?>class="cur"<?php } ?>>
+                <a href="./index.php?to=game&amp;gmsys=<?php echo $get_gmxt?>&amp;type=<?php echo $get_type?>&amp;sort=tj">推荐</a>
+                <p></p>
+            </span>
+        </div>
+        <div class="contain">
+            <ul>
+				<?php if(is_array($gmlb)===true){foreach($gmlb AS $key => $value){ ?>
+                <li>
+                    <img src="./<?php echo $value['gmlogo']?>">
+                    <h3><?php echo $value['gmname']?></h3>
+					<p><?php echo $value['gmbq']?> | <?php echo $value['gmmb']?>M </p>
+                    <p>
+					<?php if($value['ios']){ ?>
+					<img src="./template/pcmoban/images/ios.png" >
+					<?php } ?>
+					<?php if($value['Android']){ ?>
+					<img src="./template/pcmoban/images/an.png" >
+					<?php } ?>
+					</p>
+                    <h4>
+						<a href="./index.php?to=game_id&amp;id=<?php echo $value['id']?>" class="left">进入专区</a>
+						<a class="right" href="<?php echo $value['Android']?>">下载游戏</a>
+					</h4>
+                </li>
+                <?php }} ?>
+            </ul>
+            <div class="page">
+				<a href="./index.php?to=game&amp;sort=<?php echo $get_gmsort?>&amp;gmsys=<?php echo $get_gmxt?>&amp;gmfl=&amp;type=<?php echo $get_type?>&amp;pages=<?php echo $pagestrL?>"><span></span></a>
+				<b><?php echo $pagestrC?>/<?php echo $pagenum?></b>
+				<a href="./index.php?to=game&amp;sort=<?php echo $get_gmsort?>&amp;gmsys=<?php echo $get_gmxt?>&amp;gmfl=&amp;type=<?php echo $get_type?>&amp;pages=<?php echo $pagestrR?>"><span class="next"></span></a>
+            </div>
+        </div>
+    </div>
+<?php include $this->Template('footer');?>
+

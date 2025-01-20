@@ -1,0 +1,66 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><?php include $this->Template('header');?>
+
+    <div class="banxin content clearfix">
+      <div class="left information-list">
+          <div class="hot-new">
+            <span <?php if($sort=='new'){ ?>class="cur"<?php } ?>>
+                <a href="./index.php?to=activity">最新活动</a>
+                <p></p>
+            </span>
+            <span <?php if($sort=='hot'){ ?>class="cur"<?php } ?>>
+                <a href="./index.php?to=activity&amp;sort=hot">最热活动</a>
+                <p></p>
+            </span>
+        </div>
+          <ul>
+			<?php if(is_array($hdlb)===true){foreach($hdlb AS $key => $value){ ?>
+              <li>
+                  <a href="./index.php?to=news_id&amp;id=<?php echo $value['id']?>" target="_blank">
+                      <img src="<?php echo $value['zxlogo']?>">
+                      <div>
+                          <span class="on1"></span>
+                          <h3><?php echo $value['zxname']?></h3>
+                          <p><?php echo $value['zxjj']?></p>
+                          <i><?php echo $value['times']?></i>
+                      </div>
+                  </a>
+              </li>
+              <?php }} ?>
+          </ul>
+          <div class="page">
+              <a href="./index.php?to=activity&amp;sort=<?php echo $sort?>&amp;pages=<?php echo $pagestrL?>"><span></span></a>
+			  <b><?php echo $pagestrC?>/<?php echo $pagenum?></b>
+			  <a href="./index.php?to=activity&amp;sort=<?php echo $sort?>&amp;pages=<?php echo $pagestrR?>"><span class="next"></span></a>
+          </div>
+      </div>
+      <div class="right hot-information">
+          <h3><i></i>热门资讯</h3>
+          <ul>
+			<?php if(is_array($hotnewlb)===true){foreach($hotnewlb AS $key => $value){ ?>
+              <li>
+                  <a href="./index.php?to=news_id&amp;id=<?php echo $value['id']?>" target="_blank">
+                      <img src="<?php echo $value['zxlogo']?>">
+                      <p><?php echo $value['zxname']?></p>
+                  </a>
+              </li>
+			  <?php }} ?>
+          </ul>
+          <h3 class="hot-game"><i></i>热门游戏</h3>
+          <ul class="kaifu">
+			<?php if(is_array($xflb)===true){foreach($xflb AS $key => $value){ ?>
+              <li>
+                <a href="./index.php?to=game_id&amp;id=<?php echo $value['id']?>" class="clearfix">
+                  <img src="<?php echo $value['gmlogo']?>" class="left">
+                  <div class="left">
+                    <h4><?php echo $value['gmname']?></h4>
+                    <p><?php echo $value['xfname']?></p>
+                    <p><?php echo $value['kftimes']?></p>
+                  </div>
+                  <img src="./template/pcmoban/images/right1.png" class="right">
+                </a>
+              </li>
+			  <?php }} ?>
+          </ul>
+      </div>
+    </div>
+<?php include $this->Template('footer');?>

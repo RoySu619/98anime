@@ -1,0 +1,126 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="/template/sysadmin/css/style.css" rel="stylesheet">
+	<link href="/template/sysadmin/css/home.css" rel="stylesheet">
+	<link href="/template/sysadmin/css/sy-index.css" rel="stylesheet">
+	<link rel="icon" href="icon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="icon.ico" type="image/x-icon">
+  </head>
+<body>
+	<div class="main">
+	<div class="minihead">
+	<div class="dataleft" style="width: auto; "><em>网站关键词</em>
+	<span id='cpnmxx'>
+	注：设置时请下载查考设置参数 <a href="/template/sysadmin/text/SEO设置参数.zip" style="color:#f6ff07;" >【参数文档下载】</a>
+	</span>
+	</div>
+	<div class="youke" style="width: 180px;">
+	<em id="yke" style="font-size: 15px;">注意</em><span>勿添加特殊符号</span></div>
+	</div>
+	
+	<form class="form-horizontal" method="POST" action="sysadmin.php?to=sys&amp;op=sys_seo" id="form">
+	<div class="sy-index-szf">
+		<div class="sy-index-sz">
+		<div class="sy-index-szn">
+		<em>title - 首页:</em>
+		<input type="text" value="<?php echo $config['sy_title']?>" name="sy_titles" id="sy_titles" onkeyup="settext(this)"  class="sy-index-sztxt" style="border: 1px solid #ffd7cb;">
+		<em>keyword - 首页:</em>
+		<textarea class="sy-index-textarea" name="sy_keywords"  id="sy_keywords" onkeyup="settext(this)" ><?php echo $config['sy_keyword']?></textarea>
+		<em>description - 首页:</em>
+		<textarea class="sy-index-textarea" name="sy_descriptions"  id="sy_descriptions" onkeyup="settext(this)" ><?php echo $config['sy_description']?></textarea>
+
+		<em>title - 游戏中心:</em>
+		<input type="text" value="<?php echo $config['gm_title']?>" name="gm_titles" id="gm_titles" onkeyup="settext(this)" class="sy-index-sztxt" style="border: 1px solid #ffd7cb;">
+		<em>keyword - 游戏中心:</em>
+		<textarea class="sy-index-textarea" name="gm_keywords"  id="gm_keywords" onkeyup="settext(this)" ><?php echo $config['gm_keyword']?></textarea>
+		<em>description - 游戏中心:</em>
+		<textarea class="sy-index-textarea" name="gm_descriptions"  id="gm_descriptions" onkeyup="settext(this)" ><?php echo $config['gm_description']?></textarea>
+		
+		<em>title - 游戏详细:</em>
+		<input type="text" value="<?php echo $config['gmxx_title']?>" name="gmxx_titles" id="gmxx_titles" onkeyup="settext(this)" class="sy-index-sztxt" style="border: 1px solid #ffd7cb;">
+		<em>keyword - 游戏详细:</em>
+		<textarea class="sy-index-textarea" name="gmxx_keywords"  id="gmxx_keywords" onkeyup="settext(this)" ><?php echo $config['gmxx_keyword']?></textarea>
+		<em>description - 游戏详细:</em>
+		<textarea class="sy-index-textarea" name="gmxx_descriptions"  id="gmxx_descriptions" onkeyup="settext(this)" ><?php echo $config['gmxx_description']?></textarea>
+		
+		<em>title - 开服页:</em>
+		<input type="text" value="<?php echo $config['gmkf_title']?>" name="gmkf_titles" id="gmkf_titles" onkeyup="settext(this)" class="sy-index-sztxt" style="border: 1px solid #ffd7cb;">
+		<em>keyword - 开服页:</em>
+		<textarea class="sy-index-textarea" name="gmkf_keywords"  id="gmkf_keywords" onkeyup="settext(this)" ><?php echo $config['gmkf_keyword']?></textarea>
+		<em>description - 开服页:</em>
+		<textarea class="sy-index-textarea" name="gmkf_descriptions"  id="gmkf_descriptions" onkeyup="settext(this)" ><?php echo $config['gmkf_description']?></textarea>
+		
+		<em>title - 礼包页:</em>
+		<input type="text" value="<?php echo $config['gmlb_title']?>" name="gmlb_titles" id="gmlb_titles" onkeyup="settext(this)" class="sy-index-sztxt" style="border: 1px solid #ffd7cb;">
+		<em>keyword - 礼包页:</em>
+		<textarea class="sy-index-textarea" name="gmlb_keywords"  id="gmlb_keywords" onkeyup="settext(this)" ><?php echo $config['gmlb_keyword']?></textarea>
+		<em>description - 礼包页:</em>
+		<textarea class="sy-index-textarea" name="gmlb_descriptions"  id="gmlb_descriptions" onkeyup="settext(this)" ><?php echo $config['gmlb_description']?></textarea>
+		
+		<em>title - 礼包详细:</em>
+		<input type="text" value="<?php echo $config['lbxx_title']?>" name="lbxx_titles" id="lbxx_titles" onkeyup="settext(this)" class="sy-index-sztxt" style="border: 1px solid #ffd7cb;">
+		<em>keyword - 礼包详细:</em>
+		<textarea class="sy-index-textarea" name="lbxx_keywords"  id="lbxx_keywords" onkeyup="settext(this)" ><?php echo $config['lbxx_keyword']?></textarea>
+		<em>description - 礼包详细:</em>
+		<textarea class="sy-index-textarea" name="lbxx_descriptions"  id="lbxx_descriptions" onkeyup="settext(this)" ><?php echo $config['lbxx_description']?></textarea>
+		
+
+		<em>title - 新闻页:</em>
+		<input type="text" value="<?php echo $config['news_title']?>" name="news_titles" id="news_titles" onkeyup="settext(this)" class="sy-index-sztxt" style="border: 1px solid #ffd7cb;">
+		<em>keyword - 新闻页:</em>
+		<textarea class="sy-index-textarea" name="news_keywords"  id="news_keywords" onkeyup="settext(this)" ><?php echo $config['news_keyword']?></textarea>
+		<em>description - 新闻页:</em>
+		<textarea class="sy-index-textarea" name="news_descriptions"  id="news_descriptions" onkeyup="settext(this)" ><?php echo $config['news_description']?></textarea>
+		
+		<em>title - 新闻详细:</em>
+		<input type="text" value="<?php echo $config['newsxx_title']?>" name="newsxx_titles" id="newsxx_titles" onkeyup="settext(this)" class="sy-index-sztxt" style="border: 1px solid #ffd7cb;">
+		<em>keyword - 新闻详细:</em>
+		<textarea class="sy-index-textarea" name="newsxx_keywords"  id="newsxx_keywords" onkeyup="settext(this)" ><?php echo $config['newsxx_keyword']?></textarea>
+		<em>description - 新闻详细:</em>
+		<textarea class="sy-index-textarea" name="newsxx_descriptions"  id="newsxx_descriptions" onkeyup="settext(this)" ><?php echo $config['newsxx_description']?></textarea>
+		
+		<em>title - 活动福利页:</em>
+		<input type="text" value="<?php echo $config['activity_title']?>" name="activity_titles" id="activity_titles" onkeyup="settext(this)" class="sy-index-sztxt" style="border: 1px solid #ffd7cb;">
+		<em>keyword - 活动福利页:</em>
+		<textarea class="sy-index-textarea" name="activity_keywords"  id="activity_keywords" onkeyup="settext(this)" ><?php echo $config['activity_keyword']?></textarea>
+		<em>description - 活动福利页:</em>
+		<textarea class="sy-index-textarea" name="activity_descriptions"  id="activity_descriptions" onkeyup="settext(this)" ><?php echo $config['activity_description']?></textarea>
+		
+		<em>title - 活动详细:</em>
+		<input type="text" value="<?php echo $config['activityxx_title']?>" name="activityxx_titles" id="activityxx_titles" onkeyup="settext(this)" class="sy-index-sztxt" style="border: 1px solid #ffd7cb;">
+		<em>keyword - 活动详细:</em>
+		<textarea class="sy-index-textarea" name="activityxx_keywords"  id="activityxx_keywords" onkeyup="settext(this)" ><?php echo $config['activityxx_keyword']?></textarea>
+		<em>description - 活动详细:</em>
+		<textarea class="sy-index-textarea" name="activityxx_descriptions"  id="activityxx_descriptions" onkeyup="settext(this)" ><?php echo $config['activityxx_description']?></textarea>
+		
+		</div>
+			<div class="data-conbutton">
+				<input type="button" value="还原" onClick="javascript :history.back(-1);" class="databuttonf">
+				<input type="submit" name="tsubmit" value="保存" class="databuttonb">
+			</div>
+		</div>
+		</div>
+	</form>
+    <script src="/template/sysadmin/js/jquery.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	var settext = function(obj){
+		var id = obj.id;
+		var gxnr = $("#"+id+"").val();
+		if(gxnr){
+		var reg = /^[\_\。\！\!\【\】\、\,\，\|\？\?\.\-\——\)\(\0-9\a-z\A-Z\u4e00-\u9fa5]{1,500}$/;
+			if (!reg.test(gxnr)) {
+				alert('含有特殊符号！');
+				$("#"+id+"").val('');
+			}else{
+				var settxt  = gxnr.replace(/\n/g,'');
+				$("#"+id+"").val(settxt);
+			}
+		}
+	}
+	</script>
+  </body>
+</html>

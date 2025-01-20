@@ -1,0 +1,176 @@
+<!--{load header}-->
+    <div class="banxin content clearfix">
+      <div class="left information-list">
+            <div class="gift-info">
+                <img src="./$lbxx['lblogo']">
+                <div>
+                      <h3>{$lbxx['gmname']}{$lbxx['lbname']}</h3>
+                      <p>$lbxx['lbjj']</p>
+                      <i>剩余：<!--{eval echo mb_substr(($lbxx['lbsy'] / $lbxx['lbzs']) * 100,0,4,'utf8')}-->%</i>
+                </div>
+                <div class="system">
+					<!--{if $lbkey['lbkey']}-->
+					<span class="libaoxx_key"  style="font-size: 11px;">卡密：$lbkey['lbkey']</span>
+					
+					<!--{else}-->
+					<span class="libaoxx_key" id="keylogin" style="font-size: 11px;"></span>
+					<!--{/if}-->
+					
+                </div>
+				<span id="lqans" style="float: right;">
+				<!--{if $lbxx['lbsy']>0}-->
+					<!--{if $lbkey['lbkey']}-->
+						<button data-clipboard-text="$lbkey['lbkey']" class="right" onclick="btns()">复制</button>
+					<!--{else}-->
+						<button id="llogin" class="right" onclick="getlbkeys('$lbxx['keyid']','$lbxx['id']');">领取</button>
+					<!--{/if}-->
+				<!--{else}-->
+					<div class="right"style="background:#ddd;">领完了</div>
+				<!--{/if}-->
+				</span>
+            </div>
+            <div class="intro">
+                <h3><i></i>礼包简介</h3>
+                <p>$lbxx['lbjj']</p>
+            </div>
+            <div class="intro">
+                <h3><i></i>礼包说明</h3>
+                <p>$lbxx['lbsm']</p>
+            </div>
+            <div class="intro">
+                <h3><i></i>游戏简介</h3>
+                <p>$appinfo['gmjj']</p>
+            </div>
+            <div class="intro">
+                <h3><i></i>相关礼包</h3>
+                <ul>
+					<!--{loop $xglb $key $value}-->
+                    <li>
+                        <img src="$value['lblogo']">
+                        <div>
+                            <h3>{$value['gmname']}{$value['lbname']}</h3>
+                            <p>$value['lbjj']</p>
+                            <i>剩余：<!--{eval echo mb_substr(($value['lbsy'] / $value['lbzs']) * 100,0,4,'utf8')}-->%</i>
+                        </div>
+                        <div class="system">
+                            <!--{if $lbxx['lbxt']=='通用'}-->
+							  <img src="./template/pcmoban/images/ios.png">
+							  <img src="./template/pcmoban/images/an.png">
+							<!--{/if}-->
+							<!--{if $lbxx['lbxt']=='安卓'}-->
+							  <img src="./template/pcmoban/images/an.png">
+							<!--{/if}-->
+							<!--{if $lbxx['lbxt']=='苹果'}-->
+							  <img src="./template/pcmoban/images/ios.png">
+							<!--{/if}-->
+                        </div>
+                        <a href="./index.php?to=gifts_id&id=$value['id']" target="_blank" class="right">领取礼包</a>
+                    </li>
+					<!--{/loop}-->
+                </ul>
+            </div>
+      </div>
+      <div class="right hot-information">
+          <h3><i></i>热门礼包</h3>
+          <ul class="hot-gifts">
+				<!--{loop $hotgmlb $key $value}-->
+				<li <!--{if $key=='0'}-->class="on"<!--{/if}-->>
+                  <a href="./index.php?to=gifts_id&id=$value['id']" target="_blank">
+                      <p>{$value['gmname']}{$value['lbname']}<span class="right">领取</span></p>
+                      <div>
+                          <img src="./$value['lblogo']">
+                          <em>
+                              <h4>梦幻大唐星耀版星耀礼包</h4>
+                              <i>剩余：98% </i>
+                          </em>
+                      </div>
+                  </a>
+				</li>
+				<!--{/loop}-->
+          </ul>
+          <h3 class="hot-game"><i></i>热门游戏</h3>
+          <ul class="kaifu">
+              <!--{loop $sosolist $key $value}-->
+              <li>
+                <a href="./index.php?to=game_id&id=$value['id']" class="clearfix">
+                  <img src="$value['gmlogo']" class="left">
+                  <div class="left">
+                    <h4>$value['gmname']</h4>
+                    <p>$value['gmbq']</p>
+                    <p>{$value['gmmb']}M <!--{eval echo mb_substr($value['gmjj'],0,10,'utf8')}--></p>
+                  </div>
+                  <img src="./template/pcmoban/images/right1.png" class="right">
+                </a>
+              </li>
+			<!--{/loop}-->
+          </ul>
+      </div>
+    </div>
+	
+<!--{load footer}-->
+<script src="./template/pcmoban/js/clipboard.min.js"></script>
+<script>
+var btns = document.querySelectorAll('button');
+var clipboard = new ClipboardJS(btns);
+	clipboard.on('success', function(e) {
+		alert('复制成功！');
+	});
+	clipboard.on('error', function(e) {
+		alert('复制失败！请手动复制');
+	})
+var getfz = function(){
+	var btns = document.querySelectorAll('button');
+	var clipboard = new ClipboardJS(btns);
+		clipboard.on('success', function(e) {
+			alert('复制成功！');
+		});
+		clipboard.on('error', function(e) {
+			alert('复制失败！请手动复制');
+	})
+}
+var getlbkeys = function(lkey,id){
+	$.ajax({
+		url:'./index.php?to=gifts_id&op=gelibao',
+		type:'POST', 
+		dataType:'json',
+		data:{
+			'golq':'go',
+			'lbkey':lkey,
+			'lbid':id
+		},
+		beforeSend:function(XMLHttpRequest){ 
+			$("#keylogin").html('正在获取礼包KEY，请稍等...');
+		}, 
+		success:function(ret){
+			if(ret.msg==66){
+				$("#keylogin").html('卡密：'+ret.keys);
+				$("#lqans").html('<button data-clipboard-text="'+ret.keys+'" class="right">复制</button>');
+				getfz();
+			}
+			if(ret.msg==1){
+				$("#keylogin").html('卡密：'+ret.keys);
+				$("#lqan").html('复制');
+			}
+			if(ret==3){
+				$("#keylogin").html('领取条件不满足！');
+				$("#lqans").html('<div class="libaoxx_an">领取失败</div>');
+				$("#libaoxx_an").css('background','#ddd');
+			}
+			if(ret==2){
+				$("#keylogin").html('礼包被领取完了');
+				$("#lqans").html('<div class="libaoxx_an">领完了</div>');
+				$("#libaoxx_an").css('background','#ddd');
+			}
+			if(ret==0){
+				window.location.href="./index.php?to=login"; 
+			}
+		}  
+	});
+}
+$(document).on('click','.hot-new span',function(){
+	$(this).addClass('cur').siblings().removeClass('cur');
+})
+$(document).on('mouseover','.hot-gifts li',function(){
+    $(this).addClass('on').siblings().removeClass('on');
+})
+</script>

@@ -1,0 +1,317 @@
+{
+	"pages": [
+		{
+			"path": "pages/index/tab1",
+			"style": {
+				"app-plus": {
+					"background": "#FFFFFF",
+					"enablePullDownRefresh":true,
+					"titleNView": false
+				}
+			}
+		}, {
+			"path": "pages/index/tab2",
+			"style": {
+				"navigationBarTitleText": "tab2",
+				"app-plus": {
+					"background": "#FFFFFF",
+					"enablePullDownRefresh":true,
+					"titleNView": false
+				}
+			}
+		}, {
+			"path": "pages/index/tab3",
+			"style": {
+				"navigationBarTitleText": "tab3",
+				"app-plus": {
+					"background": "#FFFFFF",
+					"enablePullDownRefresh":true,
+					"titleNView": false
+				}
+			}
+		}, {
+			"path": "pages/index/tab4",
+			"style": {
+				"navigationBarTitleText": "tab4",
+				"app-plus": {
+					"background": "#FFFFFF",
+					"enablePullDownRefresh":true,
+					"titleNView": false
+				}
+			}
+		},{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "会员登录",
+				"app-plus": {
+					"background": "#fff",
+					"bounce": "none",
+					"titleNView": {
+						"type": "float",
+						"backgroundColor": "rgba(0,0,0,0)",
+						"titleText": "会员登录"
+					}
+				}
+			}
+		},{
+			"path": "pages/login/login_zpas",
+			"style": {
+				"navigationBarTitleText": "找回密码",
+				"app-plus": {
+					"background": "#fff",
+					"bounce": "none"
+				}
+			}
+		},{
+			"path": "pages/login/login_zc",
+			"style": {
+				"navigationBarTitleText": "注册账号",
+				"app-plus": {
+					"background": "#fff",
+					"bounce": "none"
+				}
+			}
+		},{
+			"path": "pages/user/set",
+			"style": {
+				"navigationBarTitleText": "设置",
+				"navigationBarBackgroundColor": "#ffda08",
+				"app-plus": {
+					"background": "#fff",
+					"bounce": "none"
+				}
+			}
+		},{
+			"path": "pages/user/msg",
+			"style": {
+				"navigationBarTitleText": "消息列表",
+				"navigationBarBackgroundColor": "#ffda08",
+				"app-plus": {
+					"background": "#fff",
+					"bounce": "none"
+				}
+			}
+		},{
+			"path": "pages/user/msgxx",
+			"style": {
+				"navigationBarTitleText": "消息详细",
+				"navigationBarBackgroundColor": "#ffda08",
+				"app-plus": {
+					"background": "#fff",
+					"bounce": "none"
+				}
+			}
+		},{
+			"path": "pages/libao/lb",
+			"style": {
+				"navigationBarTitleText": "礼包详情",
+				"navigationBarBackgroundColor": "#ffda08",
+				"app-plus": {
+					"background": "#fff",
+					"bounce": "none"
+				}
+			}
+		},{
+			"path": "pages/user/ckx",
+			"style": {
+				"navigationBarTitleText": "我的礼包",
+				"navigationBarBackgroundColor": "#ffda08",
+				"app-plus": {
+					"background": "#fff",
+					"bounce": "none"
+				}
+			}
+		},{
+			"path": "pages/user/kf",
+			"style": {
+				"navigationBarTitleText": "在线客服",
+				"navigationBarBackgroundColor": "#ffda08",
+				"app-plus": {
+					"background": "#fff",
+					"bounce": "none"
+				}
+			}
+		},{
+			"path": "pages/soso/soso",
+			"style": {
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"background": "#fff",
+					"bounce": "none",
+					"titleNView": false
+				}
+			}
+		},{
+			"path": "pages/gm/gmxx",
+			"style": {
+				"navigationBarTitleText": "游戏详情",
+				"navigationBarBackgroundColor": "#ffda08",
+				"app-plus": {
+					"background": "#fff",
+					"bounce": "none",
+					"titleNView": {
+						"buttons": [{
+							"float": "right",
+							"width": 60,
+							"text": "\ue7ef",
+							"fontSize": 24,
+							"fontSrc": "/static/iconfont.ttf",
+							"color": "rgba(0,0,0,0.7)",
+							"background":"rgba(0,0,0,0)"
+						}]
+					}
+				}
+			}
+		},{
+			"path": "pages/user/dow",
+			"style": {
+				"navigationBarTitleText": "下载管理",
+				"navigationBarBackgroundColor": "#ffda08",
+				"app-plus": {
+					"background": "#f1f1f1",
+					"bounce": "none"
+				}
+			}
+		},{
+			"path": "pages/gm/gmtop",
+			"style": {
+				"navigationBarTitleText": "游戏榜单",
+				"navigationBarBackgroundColor": "#ffda08",
+				"app-plus": {
+					"background": "#fff",
+					"bounce": "none",
+					"titleNView": {
+						"buttons": [{
+							"float": "right",
+							"width": 60,
+							"text": "\ue7ef",
+							"fontSize": 24,
+							"fontSrc": "/static/iconfont.ttf",
+							"color": "rgba(0,0,0,0.7)",
+							"background":"rgba(0,0,0,0)"
+						}]
+					}
+				}
+			}
+		},{
+			"path": "pages/gm/news",
+			"style": {
+				"navigationBarTitleText": "资讯列表",
+				"navigationBarBackgroundColor": "#ffda08",
+				"app-plus": {
+					"background": "#f1f1f1",
+					"bounce": "none"
+				}
+			}
+		},{
+			"path": "pages/gm/newsxx",
+			"style": {
+				"navigationBarTitleText": "资讯详细",
+				"navigationBarBackgroundColor": "#ffda08",
+				"app-plus": {
+					"background": "#f1f1f1",
+					"bounce": "none"
+				}
+			}
+		},{
+			"path": "pages/gm/hd",
+			"style": {
+				"navigationBarTitleText": "游戏活动",
+				"navigationBarBackgroundColor": "#ffda08",
+				"app-plus": {
+					"background": "#f1f1f1",
+					"bounce": "none"
+				}
+			}
+		},{
+			"path": "pages/gm/gmxf",
+			"style": {
+				"navigationBarTitleText": "站长推荐",
+				"navigationBarBackgroundColor": "#ffda08",
+				"app-plus": {
+					"background": "#fff",
+					"bounce": "none"
+				}
+			}
+		},
+		{ //浏览器
+			"path": "pages/llq/index",
+			"style": {
+				"disableSwipeBack": true,
+				"navigationBarTitleText": ""
+			}
+		},{//启动广告
+			"path": "pages/open/index",
+			"style": {
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"background": "#fff",
+					"bounce": "none",
+					"titleNView": false
+				}
+			}
+		}
+		
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"backgroundColor": "#FFFFFF"
+	},
+	"tabBar": {
+		"color": "#ddd",
+		"borderStyle": "#ececec",
+		"selectedColor": "#ffda08",
+		"backgroundColor": "#fff",
+		"height": "59px",
+		"iconfontSrc": "/static/iconfont.ttf",
+		"fontSize":"11px",
+		"iconWidth": "28px",
+		"spacing": "3px",
+		"list": [{
+				"pagePath": "pages/index/tab1", //页面1
+				"text": "首页",
+				"iconfont": {
+					"color": "#ddd",
+					"fontSize": "26px",
+					"selectedColor": "#ffda08",
+					"text": "\ue7ce",
+					"selectedText": "\ue86b"
+				}
+			},{
+				"pagePath": "pages/index/tab2",
+				"text": "分类",
+				"iconfont": {
+					"color": "#ddd",
+					"fontSize": "26px",
+					"selectedColor": "#ffda08",
+					"text": "\ue792",
+					"selectedText": "\ue853"
+				}
+			},{
+				"pagePath": "pages/index/tab3",
+				"text": "礼包",
+				"iconfont": {
+					"color": "#ddd",
+					"fontSize": "26px",
+					"selectedColor": "#ffda08",
+					"text": "\ue843",
+					"selectedText": "\ue866"
+				}
+			},
+			{
+				"pagePath": "pages/index/tab4",
+				"text": "我的",
+				"iconfont": {
+					"color": "#ddd",
+					"fontSize": "26px",
+					"selectedColor": "#ffda08",
+					"text": "\ue783",
+					"selectedText": "\ue847"
+				}
+			}
+		]
+	},
+	"uniIdRouter": {}
+}

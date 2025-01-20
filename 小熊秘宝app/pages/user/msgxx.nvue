@@ -1,0 +1,94 @@
+<template>
+	<list class="m">
+		<cell style="background-color: #f9f9f9;">
+			<text class="tit">{{tit}}</text>
+			<text class="tm">发布于: {{tm}}</text>
+		</cell>
+		<cell>
+			<text class="nr">{{nr}}</text>
+		</cell>
+	</list>
+</template>
+<script>
+	import G_APP from '@/common/ip.js'
+	export default {
+		data() {
+			return {
+				id:"0",
+				tit: "",
+				tm:"",
+				nr:""
+			}
+		},
+		onLoad(obj) {
+			this.id=obj.id;
+		},
+		onReady() {
+			this.get()
+		},
+		methods: {
+			get() {
+				let thi = this;
+				uni.request({
+					url: G_APP.ip + 'appapi.php?to=sys',
+					method: "GET",
+					dataType: "json",
+					enableCache: true, //缓存
+					defer: true, //控制当前请求是否延时至首屏内容渲染后发送
+					data: {
+						op:'sys_gg_xx',
+						id:thi.id
+					},
+					success: (ret) => {
+						if (ret.data) {
+							thi.tit = ret.data.name;
+							thi.tm = ret.data.times;
+							thi.nr = ret.data.nr;
+
+						}
+					}
+				});
+			}
+		},
+		onNavigationBarButtonTap(e) {
+			if (e.index == "0") {
+				uni.navigateBack();
+			}
+		}
+	}
+</script>
+<style>
+	.m{
+		width: 750rpx;
+	}
+	.tit {
+		width: 750rpx;
+		line-height: 30rpx;
+		padding-left: 30rpx;
+		padding-right: 30rpx;
+		lines:2;
+		font-size: 30rpx;
+		text-align: center;
+		padding-top: 30rpx;
+	}
+	.tm {
+		color: rgba(0, 0, 0, 0.3);
+		width: 750rpx;
+		padding-left: 30rpx;
+		padding-right: 30rpx;
+		lines:1;
+		height: 80rpx;
+		line-height: 80rpx;
+		font-size: 26rpx;
+		text-align: center;
+		border-bottom: 0.5rpx solid rgba(0, 0, 0, 0.05);
+	}
+	.nr{
+		padding-left: 30rpx;
+		padding-right: 30rpx;
+		font-size: 30rpx;
+		line-height: 40rpx;
+		padding-top: 30rpx;
+		background-color: #fff;
+	}
+</style>

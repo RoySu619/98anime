@@ -1,0 +1,163 @@
+<template>
+	<list @loadmore="getgmlist(2)" loadmoreoffset="10">
+	    <header class="hed" :render-whole="true">
+			<view class="heds" :render-whole="true" :style="'height: '+(appt+55)+'px;'">
+				<text class="hed_l"></text>
+				<text class="hed_l"></text>
+				<text class="hed_c">软件中心</text>
+				<text class="hed_r" @click="opsoso">&#xe8ef;</text>
+				<text class="hed_r" @click="opdow">&#xe7ef;</text>
+			</view>
+		</header>
+		<cell :render-whole="true" class="tp" show-scrollbar="true" >
+			<text class="tp_li" :class="{'tp_li_cur':istpid==999999999}" @click="setbq(1,999999999)">全部</text>
+			<text class="tp_li" v-for="(item,index) in bqlist" :key="item.id" :class="{'tp_li_cur':istpid==item.id}" @click="setbq(item.bqname,item.id)">{{item.bqname}}</text>
+		</cell>
+		<cell class="list" v-if="gmlist" v-for="(item,index) in gmlist" :key="item.id" @click="opgm(item.id)">
+			<view class="gm" :render-whole="true">
+				<image class="gm_i" :src="ip+item.gmlogo"></image>
+				<view :render-whole="true" class="gm_c">
+					<text class="gm_c_t">{{item.gmname}}</text>
+					<text class="gm_c_c">类型： {{item.gmbq}}</text>
+					<text class="gm_c_b">{{item.gmjj}}</text>
+				</view>
+				<text  class="gm_r">下载</text>
+			</view>
+	    </cell>
+		<cell class="nodata" v-if="gmlist==''">
+			<image class="nodata_i" src="../../static/nodata.png"></image>
+		</cell>
+		<cell class="list_b" :render-whole="true"></cell>
+	</list>
+</template>
+<script>
+	import G_APP from '@/common/ip.js';
+	const domModule = uni.requireNativePlugin('dom');
+	export default {
+		data() {
+			return {
+				ip:G_APP.ip,
+				appt:G_APP.appt,
+				appb:G_APP.appb,
+				istpid:999999999,
+				bqlist:[],
+				istpname:"",
+				gmlist:[],
+				pag:0,
+				zpag:1
+			}
+		},
+		onPullDownRefresh() {
+			this.pag=0;
+			this.zpag=1;
+			this.getgmlist(1);
+		},
+		onLoad() {
+			domModule.addRule('fontFace', {
+				'fontFamily': "iconfont",
+				'src': "url('http://www.268yx.cn/ttf/iconfontd.ttf')"
+			});
+		},
+		onReady() {
+			this.getbq();
+			this.getgmlist(1);
+		},
+		methods: {
+			opgm(id){
+				uni.navigateTo({
+					url: '../../pages/gm/gmxx?id='+id,
+				});
+			},
+			setbq(name,id){
+				uni.showLoading({
+					title: '加载中'
+				});
+				this.istpname=name;
+				this.istpid=id;
+				this.zpag=1;
+				this.pag=0;
+				this.getgmlist(1);
+			},
+			getgmlist(pd){
+				let thi=this;
+				let npag=Number(thi.pag)+1;
+				thi.pag=npag;
+				if(npag<=thi.zpag){
+					uni.request({
+						url: G_APP.ip + 'appapi.php?to=game',
+						method: "GET",
+						dataType: "json",
+						enableCache: true, //缓存
+						defer: true, //控制当前请求是否延时至首屏内容渲染后发送
+						data: {
+							'gmlist':'go',
+							'type':thi.istpname,
+							'gmtp':thi.istpid,
+							'pages':npag
+						},
+						success: (ret) => {
+							if(ret.data.data){
+								uni.hideLoading();
+								if(pd==1){
+									thi.gmlist=ret.data.data;
+									thi.zpag=ret.data.pagenum;
+									uni.stopPullDownRefresh();
+								}
+								if(pd==2){
+									thi.gmlist=thi.gmlist.concat(ret.data.data);
+								}
+							}else{
+								thi.gmlist=[];
+								uni.hideLoading();
+							}
+						}
+					});
+				}
+			},
+			getbq(){
+				let thi=this;
+				uni.request({
+					url: G_APP.ip + 'appapi.php?to=game&op=game_bq',
+					method: "GET",
+					dataType: "json",
+					enableCache: true, //缓存
+					defer: true, //控制当前请求是否延时至首屏内容渲染后发送
+					data: {
+						'game_bq':'go',
+					},
+					success: (ret) => {
+						if(ret.data.data){
+							thi.bqlist=ret.data.data;
+						}
+					}
+				});
+			},
+			opdow(){
+				uni.navigateTo({
+					url: '../../pages/user/dow',
+				});
+			},
+			opgg(){
+				uni.navigateTo({
+					url: '../../pages/user/msg',
+				});
+			},
+			opsoso(){
+				uni.navigateTo({
+					url: '../../pages/soso/soso',
+				});
+			},
+			settab(id){
+				if(id!=2){
+					uni.switchTab({
+					url: '/pages/index/tab'+id,
+					success: function(e) {}
+					});
+				}
+			}
+		}
+	}
+</script>
+<style>
+	@import "../../common/tab2.css";
+</style>

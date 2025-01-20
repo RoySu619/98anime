@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html data-date="20180807"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="keywords" content="{$config['wzname']}下载,{$config['wzname']},手游app下载">
+<meta name="description" content="{$config['wzname']}手游下载站为手游玩家提供最新折扣游戏、等各类好玩的手机游戏，尽在{$config['wzname']}手游平台！">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="{$config['wzname']}">
+<meta content="telephone=no" name="format-detection">
+<meta name="wap-font-scale" content="no">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<title>{$config['wzname']}APP下载,{$config['wzname']}APP</title>
+<link rel="shortcut icon" href="../icon.ico" />
+<link rel="stylesheet" type="text/css" href="./template/pcmoban/appdow/css/welcome.css">
+<link rel="stylesheet" href="./template/pcmoban/appdow/css/swiper.min.css">
+</head>
+<body style="overflow: hidden;">
+<div class="con">
+	<div class="header">
+		<img src="../image/logo.png">
+	</div>
+	<div class="swiper-container">
+    <div class="swiper-wrapper">
+		<div class="swiper-slide">
+			<div class="container">
+				<div class="first-block">
+					<h1 class="first-block-title active">
+					{$config['wzname']}专注手游，为手游而生的专业APP
+					<span>简洁方便，不失专业，还漂亮！</span>
+					</h1>
+					<div class="first-block-content">
+						<img src="./template/pcmoban/appdow/image/banner.png" alt="{$config['wzname']}APP">
+					</div>
+					<div class="download">
+						<div class="download-btn">
+							<a class="ad-android-btn" href="$app['aurl']"></a>
+							<a class="ad-ios-btn" href="$app['iurl']"></a>
+						</div>
+						<div class="qrcode">
+
+						<a class="ad-qrcode" title=""> 
+						<img style="width: 130px;margin-top: 17px;" src="../image/appdow.png" alt="{$config['wzname']}APP下载"></a>
+						<p>打开手机扫一扫</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="qrcode-fixed">
+				<a class="ad-qrcode" title=""></a>
+				<p>扫一扫下载$config['wzname']APP</p>
+			</div>
+        </div>
+		
+        <div class="swiper-slide">
+		
+			<div class="container">
+				<div class="first-block">
+					<h1 class="first-block-title active">
+					海量礼包，任你选，一应俱全
+					<span>独家礼包，特殊礼包，助你快速进阶</span>
+					</h1>
+					<div class="first-block-content">
+						<img src="./template/pcmoban/appdow/image/01.png" alt="{$config['wzname']}APP">
+					</div>
+					<div class="download">
+						<div class="download-btn">
+							<a class="ad-android-btn" href="$app['aurl']"></a>
+							<a class="ad-ios-btn" href="$app['iurl']"></a>
+						</div>
+						<div class="qrcode">
+							<a class="ad-qrcode" title=""> 
+								<img style="width: 115px;margin-top: 17px;" src="../image/appdow.png" alt="{$config['wzname']}APP下载">
+							</a>
+							<p>打开手机扫一扫</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		
+		
+		</div>
+        <div class="swiper-slide">
+			<div class="container">
+				<div class="first-block">
+					<h1 class="first-block-title active">
+					各类型游戏任你选，爱玩啥就玩啥
+					<span>何止于方便 智能搜索更快捷</span>
+					</h1>
+					<div class="first-block-content">
+						<img src="./template/pcmoban/appdow/image/02.png" alt="{$config['wzname']}APP">
+					</div>
+					<div class="download">
+						<div class="download-btn">
+							<a class="ad-android-btn" href="$app['aurl']"></a>
+							<a class="ad-ios-btn" href="$app['iurl']"></a>
+						</div>
+						<div class="qrcode">
+
+						<a class="ad-qrcode" title=""> 
+						<img style="width: 115px;margin-top: 17px;" src="../image/appdow.png" alt="{$config['wzname']}APP下载"></a>
+						<p>打开手机扫一扫</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		
+		</div>
+    </div>
+
+    </div>
+	
+	
+	<div class="xx-footer">
+		<p style="display: block;">©2019 $config['wzname']网络科技有限公司</p>
+		<p style="display: block;">健康游戏忠告：抵制不良游戏 拒绝盗版游戏 注意自我保护 谨防上当受骗 适度游戏益脑 沉迷游戏伤身 合理安排时间 享受健康生活</p>
+		<p style="display: block;">$config['footinfos']</p>
+	</div>
+</div>
+<script type="text/javascript" src="../template/pcmoban/appdow/js/jquery.js"></script>
+<script type="text/javascript" src="../template/pcmoban/appdow/js/swiper.min.js"></script>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        direction: 'horizontal',
+        slidesPerView: 1,
+        spaceBetween: 30,
+		speed:300,
+		autoplay : {
+			delay:3000,
+			disableOnInteraction: false,
+		},
+        mousewheel: true,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+    });
+</script>
+</body>
+</html>

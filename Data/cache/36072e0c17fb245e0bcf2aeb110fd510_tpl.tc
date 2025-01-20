@@ -1,0 +1,176 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><?php include $this->Template('header');?>
+
+<div class="main">
+	<div class="lbt">
+	<div class="swiper-container">
+		  <div class="swiper-wrapper">
+			<?php if(is_array($sylbt)===true){foreach($sylbt AS $key => $value){ ?>
+			<div class="swiper-slide"><a href="./mobile.php?to=game_id&amp;id=<?php echo $value['gid']?>"><img src="<?php echo $value['gmapplbt']?>" ></a></div>
+			<?php }} ?>
+		  </div>
+		<div class="swiper-pagination"></div>
+	</div>
+	</div>
+	<div class="menu">
+		<a href="./mobile.php?to=libao"><li class="li-1">礼包中心</li></a>
+		<a href="./mobile.php?to=kaifu"><li class="li-2">开服列表</li></a>
+		<a href="./mobile.php?to=hd"><li class="li-3">游戏活动</li></a>
+		<a href="./mobile.php?to=news"><li class="li-4">新闻资讯</li></a>
+	</div>
+	<div class="sy_gm_hot">
+		<div class="sy_gm_tit">热门游戏推荐</div>
+		<div class="sy_gm_main">
+			<?php $i=1; ?>
+			<?php if(is_array($hotlist)===true){foreach($hotlist AS $key => $value){ ?>
+			<?php if($i<4){ ?>
+			<li>
+				<a href="./mobile.php?to=game_id&amp;id=<?php echo $value['id']?>">
+					<div class="gmion_s">
+						<img src="./<?php echo $value['gmlogo']?>" alt="<?php echo $value['gmname']?>">
+					</div>
+				</a>
+				<div class="gmcen_s">
+					<b><?php echo $value['gmname']?></b>
+					<em>类型：<?php echo str_replace(',','.', $value['gmbq']); ?> </em>
+					<span><?php echo $value['gmjj']?></span>
+				</div>
+				<a href="./mobile.php?to=game_id&amp;id=<?php echo $value['id']?>"><div class="gmdow_s"><span>下载</span></div></a>
+			</li>
+			
+			<?php if($i<4){ ?><div class="gmgang"></div><?php } ?>
+			<?php } ?>
+			<?php $i++; ?>
+			<?php if($i==4){ ?>
+			<div class="gmimg_tj">
+				<div class="gmimg_tj_img">
+				<a href="./mobile.php?to=game_id&amp;id=<?php echo $value['id']?>"><img src="<?php echo $value['gmapplbt']?>"></a>
+				<div class="gmimg_tj_main"><?php echo $value['gmjj']?></div>
+				</div>
+			</div>
+			<?php } ?>
+			<?php }} ?>
+		</div>
+	</div>
+	
+	
+	
+	<div class="sy_gm_hot">
+		<div class="sy_gm_tit">精品游戏推荐 </div>
+		<div class="sy_gm_main">
+			<?php $i=1; ?>
+			<?php if(is_array($jplist)===true){foreach($jplist AS $key => $value){ ?>
+			<?php if($i<4){ ?>
+			<li>
+				<a href="./mobile.php?to=game_id&amp;id=<?php echo $value['id']?>">
+					<div class="gmion_s">
+						<img src="./<?php echo $value['gmlogo']?>" alt="<?php echo $value['gmname']?>">
+					</div>
+				</a>
+				<div class="gmcen_s">
+					<b><?php echo $value['gmname']?></b>
+					<em>类型：<?php echo str_replace(',','.', $value['gmbq']); ?> </em>
+					<span><?php echo $value['gmjj']?></span>
+				</div>
+				<a href="./mobile.php?to=game_id&amp;id=<?php echo $value['id']?>"><div class="gmdow_s"><span>下载</span></div></a>
+			</li>
+			<?php if($i<4){ ?><div class="gmgang"></div><?php } ?>
+			<?php } ?>
+			<?php if($i==4){ ?>
+			<div class="gmimg_tj">
+				<div class="gmimg_tj_img">
+				<a href="./mobile.php?to=game_id&amp;id=<?php echo $value['id']?>"><img src="<?php echo $value['gmapplbt']?>"></a>
+				<div class="gmimg_tj_main"><?php echo $value['gmjj']?></div>
+				</div>
+			</div>
+			<?php } ?>
+			<?php $i++; ?>
+			<?php }} ?>
+			
+		</div>
+	</div>
+
+	
+	<div class="sy_gm_hot">
+		<div class="sy_gm_tit">最受欢迎游戏</div>
+		<div class="sy_gm_main">
+			<?php $i=1; ?>
+			<?php if(is_array($hylist)===true){foreach($hylist AS $key => $value){ ?>
+			<?php if($i<4){ ?>
+			<li>
+				<a href="./mobile.php?to=game_id&amp;id=<?php echo $value['id']?>">
+					<div class="gmion_s">
+						<img src="./<?php echo $value['gmlogo']?>" alt="<?php echo $value['gmname']?>">
+					</div>
+				</a>
+				<div class="gmcen_s">
+					<b><?php echo $value['gmname']?></b>
+					<em>类型：<?php echo str_replace(',','.', $value['gmbq']); ?> </em>
+					<span><?php echo $value['gmjj']?></span>
+				</div>
+				<a href="./mobile.php?to=game_id&amp;id=<?php echo $value['id']?>"><div class="gmdow_s"><span>下载</span></div></a>
+			</li>
+			
+			<?php if($i<4){ ?><div class="gmgang"></div><?php } ?>
+			<?php } ?>
+			<?php if($i==4){ ?>
+			<div class="gmimg_tj">
+				<div class="gmimg_tj_img">
+				<a href="./mobile.php?to=game_id&amp;id=<?php echo $value['id']?>"><img src="<?php echo $value['gmapplbt']?>"></a>
+				<div class="gmimg_tj_main"><?php echo $value['gmjj']?></div>
+				</div>
+			</div>
+			<?php } ?>
+			<?php $i++; ?>
+			<?php }} ?>
+		</div>
+	</div>
+		
+	<div class="sy_gm_hot">
+		<div class="sy_gm_tit">最新上架推荐</div>
+		<div class="sy_gm_main">
+			<?php $i=1; ?>
+			<?php if(is_array($nuplist)===true){foreach($nuplist AS $key => $value){ ?>
+			<?php if($i<4){ ?>
+			<li>
+				<a href="./mobile.php?to=game_id&amp;id=<?php echo $value['id']?>">
+					<div class="gmion_s">
+						<img src="./<?php echo $value['gmlogo']?>" alt="<?php echo $value['gmname']?>">
+					</div>
+				</a>
+				<div class="gmcen_s">
+					<b><?php echo $value['gmname']?></b>
+					<em><?php if($value['gmbb']){ ?>版本: <?php echo $value['gmbb']?> | <?php } ?>类型：<?php echo str_replace(',','.', $value['gmbq']); ?> </em>
+					<span>在线人数: <?php echo $value['gmdj']?>人</span>
+				</div>
+				<a href="./mobile.php?to=game_id&amp;id=<?php echo $value['id']?>"><div class="gmdow_s"><span>下载</span></div></a>
+			</li>
+			
+			<?php if($i<4){ ?><div class="gmgang"></div><?php } ?>
+			<?php } ?>
+			<?php if($i==4){ ?>
+			<div class="gmimg_tj">
+				<div class="gmimg_tj_img">
+				<a href="./mobile.php?to=game_id&amp;id=<?php echo $value['id']?>"><img src="<?php echo $value['gmapplbt']?>"></a>
+				<div class="gmimg_tj_main"><?php echo $value['gmjj']?></div>
+				</div>
+			</div>
+			<?php } ?>
+			<?php $i++; ?>
+			<?php }} ?>
+		</div>
+	</div>
+	
+	
+	
+	<div class="sy_index_fl">
+		<div class="sy_index_tit">据说下载了官方APP的人都很帅</div>
+		<div class="sy_index_main">
+			<a href="./mobile.php?to=appdow"><img src="./template/mmoban/images/appbg.png"></a>
+		</div>
+	</div>
+	<br>
+
+</div>
+
+
+<?php include $this->Template('footer');?>

@@ -1,0 +1,173 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="/template/sysadmin/css/style.css" rel="stylesheet">
+	<link href="/template/sysadmin/css/home.css" rel="stylesheet">
+	<link rel="icon" href="icon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="icon.ico" type="image/x-icon">
+  </head>
+  <style type="text/css">
+  .sewma{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+  }
+  .sewma canvas{
+      width: 100px;
+    height: 100px;
+  }
+  </style>
+<body >
+	<div class="main">
+	<div class="minihead">
+	<div class="dataleft">
+	<em>APP更新</em>
+	<span>APP更新地址</span>
+	</div>
+	
+	</div>
+	<div class="gmbqfk">
+	<table class="">
+			<thead>
+				<tr>
+					<th>渠道号ID</th>
+					<th>安卓更新地址</th>
+					<th>苹果更新地址</th>
+					<th>APP版本</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody class="tbody" id="bqlb">	
+				<?php if(is_array($channellist)===true){foreach($channellist AS $key => $value){ ?>
+				<tr>
+					<td><?php echo $value['id']?></td>
+					<td><?php echo $value['aurl']?></td>
+					<td><?php echo $value['iurl']?></td>
+					<td><?php echo $value['appv']?></td>
+					<td>
+					<em id="x_<?php echo $value['id']?>" onclick='opbj(2,"<?php echo $value["id"]?>","<?php echo $value["wbname"]?>","<?php echo $value["wbdz"]?>","<?php echo $value["wbtell"]?>","<?php echo $value["aurl"]?>","<?php echo $value["iurl"]?>","<?php echo $value["appv"]?>");'>
+					<img src="/template/sysadmin/image/sz.png" style="width: 16px;height: 16px;">
+					</em>
+					</td>
+				</tr>
+				<?php }} ?>
+			</tbody>
+		</table>
+	</div>
+	<div class="gmbqtc" id="set1">
+	<div class="gmbqzz"  onclick="closetc('1');"></div>
+	<div class="gmbqtcfk">
+	<em>添加更新地址信息</em>
+	<input class="bq-txt" type="text" value="" id="wban1" placeholder="安卓下载地址" style="margin-top: 10px; margin-bottom: 10px;">
+	<input class="bq-txt" type="text" value="" id="wbios1" placeholder="苹果下载地址" style="margin-top: 10px; margin-bottom: 10px;">
+	<input class="bq-txt" type="text" value="" id="wbv1" placeholder="APP版本" style="margin-top: 10px; margin-bottom: 10px;">
+	<div class="data-conbutton">
+			<input type="button" value="关闭" onClick="closetc('1');" class="databuttonf">
+			<input type="button" value="保存" onclick="tjiaobq();" id="xgf1" class="databuttonb">
+	</div>
+	</div>
+	</div>
+	
+	<div class="gmbqtc" id="set2">
+	<div class="gmbqzz"  onclick="closetc('2');"></div>
+	<div class="gmbqtcfk">
+	<em>修改更新地址</em>
+	<input class="bq-txt" type="text" value="" id="wban2" placeholder="安卓下载地址" style="margin-top: 10px; margin-bottom: 10px;">
+	<input class="bq-txt" type="text" value="" id="wbios2" placeholder="苹果下载地址" style="margin-top: 10px; margin-bottom: 10px;">
+	<input class="bq-txt" type="text" value="" id="wbv2" placeholder="APP版本" style="margin-top: 10px; margin-bottom: 10px;">
+	<div class="data-conbutton">
+			<input type="button" value="关闭" onClick="closetc('2');" class="databuttonf">
+			<input type="button" value="保存" onclick="tjiaobq();" id="xgf2" class="databuttonb">
+	</div>
+	</div>
+	</div>
+	
+    <div id="ajcome"></div>
+	<div id="ajerro"></div>
+	<div id="ajsuccess"></div>
+	<div id="ajqr"></div>
+	</div>
+    <script src="/template/sysadmin/js/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+	var opbj = function(cid,id,name,dz,tel,an,ios,appv){
+	    $("#set"+cid).css('display','block');
+		$("#wbname"+cid).val(name);
+		$("#wbtell"+cid).val(tel);
+		$("#wbdz"+cid).val(dz);
+		$("#wban"+cid).val(an);
+		$("#wbios"+cid).val(ios);
+		$("#wbv"+cid).val(appv);
+		if(cid==2){
+			$("#xgf"+cid).attr("onclick","xgbaoc(\""+id+"\");");
+		}else{
+			$("#xgf"+cid).attr("onclick","xzbaoc();");
+		}
+	}
+	
+	var closetc = function(id){ 
+	    $("#set"+id).css('display','none');
+	}
+	var xzbaoc = function(){
+	    var wbans = $("#wban1").val();
+	    var wbios = $("#wbios1").val();
+	    var wbvs = $("#wbv1").val();
+		$.ajax({
+		url:'./sysadmin.php?to=appsys&op=setwb',
+		type:'POST', 
+		data:{
+		   'set-wbs':'go',
+		   'key':0,
+		   'wan':wbans,
+		   'wios':wbios,
+		   'wvs':wbvs,
+		},
+		dataTyep:'json',
+		beforeSend:function(XMLHttpRequest){ 
+			$("#ajcome").html('<div class="axsucfk"><div class="axsuc"><span><img src="image/logins.png"></span><em>加载中 ...</em></div></div>');
+        },
+	    success:function(ret){ 
+		    $("#ajcome").html('');
+			if(ret=="1"){
+				$("#ajsuccess").html('<div class="axerrfk"><div class="axerr"><span><img src="image/yes.png"></span><em>新增成功！</em></div></div>');
+				setTimeout(function(){$("#ajsuccess").html('');window.location.reload();clearTimeout(); },300);
+				$("#set1").css('display','none');
+			}
+		}
+		});
+	}
+	var xgbaoc = function(sid){
+	    var wbans = $("#wban2").val();
+	    var wbios = $("#wbios2").val();
+		var wbvs = $("#wbv2").val();
+		$.ajax({
+		url:'./sysadmin.php?to=appsys&op=xgwb',
+		type:'POST', 
+		data:{
+		   'xg-wbs':'go',
+		   'key':0,
+		   'sid':sid,
+		   'wan':wbans,
+		   'wios':wbios,
+		   'wvs':wbvs,
+		},
+		dataTyep:'json',
+		beforeSend:function(XMLHttpRequest){ 
+			$("#ajcome").html('<div class="axsucfk"><div class="axsuc"><span><img src="image/logins.png"></span><em>加载中 ...</em></div></div>');
+        },
+	    success:function(ret){ 
+		    $("#ajcome").html('');
+			if(ret=="1"){
+				$("#ajsuccess").html('<div class="axerrfk"><div class="axerr"><span><img src="image/yes.png"></span><em>修改成功！</em></div></div>');
+				setTimeout(function(){$("#ajsuccess").html('');window.location.reload();clearTimeout(); },300);
+				$("#set2").css('display','none');
+			}
+		}
+		});
+	}
+	</script>
+  </body>
+</html>

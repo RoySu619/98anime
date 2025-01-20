@@ -1,0 +1,128 @@
+.content{
+	padding: 40px 30px;
+	box-sizing: border-box;
+	background-color: #fff;
+	margin-top: 30px;
+	border-radius: 5px;
+}
+.hot-new span{
+	font-size: 18px;
+	margin-right: 40px;
+	cursor: pointer;
+}
+.hot-new span.cur{
+	color: #fddd85;
+}
+.hot-new p{
+	width: 35px;height: 5px;
+	border-radius: 2px;
+	background-color: #fddd85;
+	margin: 10px auto 0;
+	display: none;
+}
+.hot-new span.cur p{
+	display: block;
+}
+.hot-new i{
+	font-size: 16px;
+	color:#555;
+}
+.contain ul{
+	margin-top: 40px;
+}
+.contain li{
+	padding: 30px 0;
+	border-top: 1px solid #ededed;
+}
+.contain li i{
+	display: inline-block;
+	font-size: 18px;
+	vertical-align: middle;
+	margin-right: 35px;
+}
+.contain li>img{
+	width: 100px;height: 100px;
+	border-radius: 20px;
+	margin-right: 30px;
+}
+.contain li div{
+	display: inline-block;
+	vertical-align: middle;
+}
+.contain li div h4{
+	font-size: 18px;
+}
+.contain li div p{
+	font-size: 14px;
+	color:#999;
+	margin-top: 16px;
+}
+.contain li em{
+	width: 80px;
+	font-size: 16px;
+	font-weight: normal;
+	margin-left: 130px;
+	display: inline-block;
+	vertical-align: middle;
+}
+.contain li .system{
+	margin-left: 135px;
+}
+.contain li .system img{
+	margin-right: 20px;
+}
+.contain li a{
+	width: 68px;height: 30px;
+	line-height: 30px;
+	border-radius: 3px;
+	border: 1px solid #fddd85;
+	color: #fddd85;
+	font-size: 12px;
+	text-align: center;
+	margin-top: 35px;
+}
+.contain li a.lqlb{
+	margin-left: 80px;
+	border-color: #ff8cc2;
+	color: #ff8cc2;
+}
+.contain li a:hover{
+	color:#fff;
+	background-color: #fddd85;
+}
+.contain li .lqlb:hover{
+	color:#fff;
+	background-color: #ff8cc2;
+}
+.contain .title{
+	border-top: 1px solid #ededed;
+	padding: 40px 0 10px;
+	font-size: 22px;
+	font-weight: bold;
+}
+.page{
+	text-align: center;
+	margin-top: 50px;
+}
+.page span{
+	display: inline-block;
+	width: 30px;height: 30px;
+	background: url(../images/more.png) no-repeat;
+	background-size: 100% 100%;
+	vertical-align: middle;
+	cursor: pointer;
+}
+.page b{
+	display: inline-block;
+	vertical-align: middle;
+	width: 70px;height: 30px;
+	line-height: 30px;
+	font-size: 14px;
+	font-weight: normal;
+}
+.page span.next{
+	transform: rotateZ(180deg);
+}
+.page span:hover{
+	background-image: url(../images/more1.png);
+}

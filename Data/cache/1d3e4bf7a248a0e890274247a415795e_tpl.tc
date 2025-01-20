@@ -1,0 +1,14 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><?php include $this->Template('header');?>
+
+<div class="main">
+	<div class="ne_xx_main">
+		<div class="ne_xx_tit">
+			<b><?php echo $neinfo['zxname']?></b>
+			<span><?php echo $neinfo['times']?></span>
+		</div>
+		<div class="ne_xx_nr">
+			<?php echo $neinfo['zxnr']?>
+		</div>
+	</div>
+</div>
+<?php include $this->Template('footer');?>

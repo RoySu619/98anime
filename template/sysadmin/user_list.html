@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="/template/sysadmin/css/style.css" rel="stylesheet">
+	<link href="/template/sysadmin/css/home.css" rel="stylesheet">
+	<link rel="icon" href="icon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="icon.ico" type="image/x-icon">
+  </head>
+<body >
+	<div class="main">
+	<div class="minihead">
+	<div class="dataleft"><em>用户列表</em><span>用户列表详细</span></div>
+	
+	</div>
+	<div class="userfk">
+	<table class="">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>用户头像</th>
+					<th>用户账号</th>
+					<th>昵称</th>
+					<th>账号类型</th>
+					<th>积分</th>
+					<th>余额</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody class="tbody" id="uslbtr">	
+				<!--{loop $userlist $key $value}-->
+				<tr id="d_$value['uid']">
+				<td>$value['uid']</td>
+				<!--{if $value['userlogo']==''}-->
+				<td><img src="../template/sysadmin/image/admin.png">
+				<!--{else}-->
+				<td><img src="../$value['userlogo']">
+				<!--{/if}-->
+				</td>
+				<td>$value['username']</td>
+				<!--{if $value['nickname']==''}-->
+				<td>未设置</td>
+				<!--{else}-->
+				<td>$value['nickname']</td>
+				<!--{/if}-->
+				
+				<td>会员</td>
+				
+				<td id="t_$value['uid']">$value['jifen']</td>
+				<td id="t_$value['uid']">$value['qian']元</td>
+
+				<td>
+				<!--{if $G_isadm!=1}-->
+				<span id="$value['uid']" onclick="del(this);">删除</span>
+				<!--{/if}-->
+				</td>
+				</tr>
+				<!--{/loop}-->
+			</tbody>
+		</table>
+		<div class="page" id="page">$pagestr</div>
+	</div>
+	<div id="ajcome"></div>
+	<div id="ajerro"></div>
+	<div id="ajsuccess"></div>
+	<div id="ajqr"></div>
+	</div>
+	
+    <script src="/template/sysadmin/js/jquery.min.js"></script>
+	<script>
+	var del = function(obj){
+		var id =  obj.id;
+	    $("#ajqr").html('<div class="ajqrfk" style="z-index: 99;"><div class="ajqr"><span><img src="image/jgao.png"></span><em>是否真的要删除？</em><b onclick="closew();">取消</b><p id='+id+' onclick="yesdel(this);">确定</p></div></div>');
+	}
+	var closew = function(){
+	    $("#ajqr").html('');
+	}
+	var yesdel = function(obj){
+	    var uids = obj.id;
+		if(uids==1){
+		   $("#ajerro").html('<div class="axerrfk"><div class="axerr"><b onclick="colsewin();"></b><span><img src="image/err.png"></span><em>不能删除的账号</em></div></div>');
+		}else{
+			$.ajax({
+				url:'./sysadmin.php?to=user&op=dell',
+				type:'POST', 
+				data:{
+				   'user-del':'go',
+				   'ids': uids,
+				},
+				dataTyep:'json',
+				beforeSend:function(XMLHttpRequest){ 
+					$("#ajcome").html('<div class="axsucfk"><div class="axsuc"><span><img src="image/logins.png"></span><em>加载中 ...</em></div></div>');
+				},
+				success:function(ret){
+					if(ret==1){
+						$("#ajcome").html('');
+						$(".xigaifk").hide();
+						$("#ajsuccess").html('<div class="axyesfk"><div class="axyes"><span><img src="image/yes.png"></span><em>删除成功！</em></div></div>');
+						setTimeout(function(){$("#ajsuccess").html('');clearTimeout(); },1000);
+						$("#d_"+uids+"").remove();
+						$("#ajqr").html('');
+					}
+				}
+			});
+		}
+	}
+	var jyus = function(obj,qjy){
+	    var uids = obj.id;
+		var udiss = uids.substring(2);
+		$.ajax({
+			url:'../sysadmin.php?to=user&op=add',
+			type:'POST', 
+			data:{
+			   'user-qy':'go',
+			   'ids': udiss,
+			   'qid': qjy,
+			},
+			dataTyep:'json',
+			beforeSend:function(XMLHttpRequest){ 
+				$("#ajcome").html('<div class="axsucfk"><div class="axsuc"><span><img src="image/logins.png"></span><em>加载中 ...</em></div></div>');
+			},
+			success:function(ret){
+				if(ret==1){
+					$("#ajcome").html('');
+					if(qjy==1){
+						$("#ajsuccess").html('<div class="axyesfk"><div class="axyes"><span><img src="image/yes.png"></span><em>禁用成功！</em></div></div>');
+						setTimeout(function(){$("#ajsuccess").html('');clearTimeout(); },500);
+						$("#"+uids+"").html('启用');
+						$("#"+uids+"").attr("onclick","jyus(this,0);");
+					}
+					if(qjy==0){
+						$("#ajsuccess").html('<div class="axyesfk"><div class="axyes"><span><img src="image/yes.png"></span><em>启用成功！</em></div></div>');
+						setTimeout(function(){$("#ajsuccess").html('');clearTimeout(); },500);
+						$("#"+uids+"").html('禁用');
+						$("#"+uids+"").attr("onclick","jyus(this,1);");
+					}
+				}
+			}
+		});
+	}
+	</script>
+
+
+  </body>
+</html>

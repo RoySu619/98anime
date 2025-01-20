@@ -1,0 +1,49 @@
+<!--{load header}-->
+    <div class="banxin content clearfix">
+      <div class="left information-list">
+          <h3>$newsxx['zxname']</h3>
+          <p><span>$newsxx['times']</span><span>来源： $config['wzname']</span><span>作者：官方小编</span></p>
+			<!--{if $newsxx['spurl']}-->
+			<video id="my-video" class="video-js vjs-big-play-centered" controls="" preload="auto" width="860" height="440" poster="$newsxx['zxlogo']">
+              <source id="boxvideo" src="$newsxx['spurl']" type="video/mp4">
+              <p class="vjs-no-js">
+              <a href="http://videojs.com/html5-video-support/" target="_blank"></a>
+              </p>
+			</video>
+			<!--{/if}-->
+			<div class="content">$newsxx['zxnr']</div>
+      </div>
+      <div class="right hot-information">
+          <h3><i></i>热门视频</h3>
+          <ul class="hot-video">
+			<!--{loop $hotnewlb $key $value}-->
+              <li>
+                  <a href="./index.php?to=news_id&id=$value['id']" target="_blank">
+                      <img src="$value['zxlogo']">
+                      <p><span>$value['zxname']</span>
+						<img src="./template/pcmoban/images/video.png" class="right">
+					  </p>
+                      <i></i>
+                  </a>
+              </li>
+			  <!--{/loop}-->
+          </ul>
+          <h3 class="hot-game"><i></i>热门游戏</h3>
+          <ul class="kaifu">
+			<!--{loop $sosolist $key $value}-->
+              <li>
+                <a href="./index.php?to=game_id&id=$value['id']" class="clearfix">
+                  <img src="./$value['gmlogo']" class="left">
+                  <div class="left">
+                    <h4>$value['gmname']</h4>
+                    <p>$value['gmbq']</p>
+                    <p>$value['gmmb']M</p>
+                  </div>
+                  <img src="./template/pcmoban/images/right1.png" class="right">
+                </a>
+              </li>
+			  <!--{/loop}-->
+          </ul>
+      </div>
+    </div>
+<!--{load footer}-->

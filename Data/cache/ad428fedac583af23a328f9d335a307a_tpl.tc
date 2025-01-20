@@ -1,0 +1,56 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="../template/sysadmin/css/style.css" rel="stylesheet">
+	<link href="../template/sysadmin/css/home.css" rel="stylesheet">
+  </head>
+<body >
+<div class="main">
+		<div class="minihead">
+			<div class="dataleft">
+				<em>注意！</em>
+				<span>请不要随便输入特殊符号</span>
+			</div>
+		</div>
+		<div class="ggfk">
+			<form class="form-horizontal" method="POST" action="" id="form">
+				<input type="hidden" name="xg" value="go">
+				<em></em>
+				<div class="gg-txt" style="font-size: 16px;border: 0px solid #ddd;">
+				<?php if($xx['tp']==1){ ?>
+				用户服务协议
+				<?php }else if($xx['tp']==2){ ?>
+				隐私政策
+				<?php }else if($xx['tp']==3){ ?>
+				家长监护
+				<?php }else if($xx['tp']==4){ ?>
+				帮助中心
+				<?php }else if($xx['tp']==5){ ?>
+				论坛规则
+				<?php }else if($xx['tp']==6){ ?>
+				关于我们
+				<?php }else if($xx['tp']==7){ ?>
+				卖家常见问题
+				<?php }else if($xx['tp']==8){ ?>
+				买家常见问题
+				<?php }else if($xx['tp']==9){ ?>
+				客服介入说明
+				<?php }else if($xx['tp']==10){ ?>
+				试玩帮助
+				<?php } ?>
+				</div>
+				<em></em>
+				<textarea class="data-textarea" id="nr" name="nr" placeholder="请输入公告内容"><?php echo $xx['nr']?></textarea>
+				<div class="data-conbutton">
+					<input type="button" value="返回" onClick="javascript :history.back(-1);" class="databuttonf">
+					<input type="submit" value="保存"  class="databuttonb">
+				</div>
+			</form>
+		</div>
+</div>
+<script src="../template/sysadmin/js/jquery.min.js" type="text/javascript"></script>
+</body>
+</html>

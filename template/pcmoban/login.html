@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./template/pcmoban/css/base.css">
+  <link rel="stylesheet" href="./template/pcmoban/css/login.css">
+  <link rel="stylesheet" href="./template/pcmoban/css/sweetalert.css">
+  <title>登录</title>
+</head>
+<body>
+    <h2><img src="./image/logo.png" alt=""></h2>
+    <div class="wrapper">
+        <p>用户名/手机号</p>
+        <input type="text" id="uname" maxlength="11" placeholder="请输入用户名">
+        <p>密码</p>
+        <input type="password" id="upass" placeholder="请输入密码">
+        <div class="forget"><a href="./index.php?to=forget">忘记密码？</a></div>
+        <div class="login" onclick="loginbutton()">登 录</div>
+        <div class="register"><a href="./index.php?to=register">还没有账号，去注册</a></div>
+    </div>
+	<script src="../template/pcmoban/js/jquery-1.11.3.min.js"></script>
+	<script src="../template/pcmoban/js/login.js"></script>
+	<script src="./template/pcmoban/js/sweetalert.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<template>
+	<list class="list" :render-whole="true" show-scrollbar="false" bounce="false">
+		<header class="hed" :style="'height: '+(appt+55)+'px;'" :render-whole="true">
+			<view :render-whole="true" class="heds" :style="'height: '+(appt+55)+'px;'">
+				<text class="hed_c" @click="opsoso">&#xe8ef; 搜索你想玩的游戏</text>
+				<text class="hed_r" @click="opdow">&#xe7ef;</text>
+			</view>
+		</header>
+		<cell class="lbt">
+			<swiper class="lbtm" circular="true" :render-whole="true" indicator-active-color="#ffda08" indicator-color="rgba(255,255,255,0.5)" indicator-dots="true" autoplay="true">
+				<swiper-item v-for="(item,index) in lbt" :key="item.id" @click="opgm(item.id)" :render-whole="true" class="lbtm_i">
+					<image mode="aspectFill" class="lbtm_img" :src="ip+item.gmapplbt"></image>
+				</swiper-item>
+			</swiper>
+		</cell>
+		<cell class="mue">
+			<view :render-whole="true" class="mue_li" @click="optopgm">
+				<image class="mue_li_i" src="../../static/01.png"></image>
+				<text class="mue_li_t">游戏榜单</text>
+			</view>
+			<view :render-whole="true" class="mue_li" @click="opnews">
+				<image class="mue_li_i" src="../../static/02.png"></image>
+				<text class="mue_li_t">游戏资讯</text>
+			</view>
+			<view :render-whole="true" class="mue_li" @click="opxf">
+				<image class="mue_li_i" src="../../static/03.png"></image>
+				<text class="mue_li_t">站长推荐</text>
+			</view>
+			<view :render-whole="true" class="mue_li" @click="ophd">
+				<image class="mue_li_i" src="../../static/04.png"></image>
+				<text class="mue_li_t">游戏活动</text>
+			</view>
+		</cell>
+		<cell class="tit"><text class="tit_t">热门游戏推荐</text></cell>
+		<cell class="cell" v-for="(item,index) in hotlist" :key="item.id" @click="opgm(item.id)">
+			<view class="gm" :render-whole="true">
+				<image class="gm_i" :src="ip+item.gmlogo"></image>
+				<view :render-whole="true" class="gm_c">
+					<text class="gm_c_t">{{item.gmname}}</text>
+					<text class="gm_c_c">类型：{{item.gmbq}}</text>
+					<text class="gm_c_b">{{item.gmjj}}</text>
+				</view>
+				<text  class="gm_r">下载</text>
+			</view>
+		</cell>
+		
+		<cell class="tit"><text class="tit_t">精品游戏推荐</text></cell>
+		<cell class="cell" v-for="(item,index) in jplist" :key="item.id" @click="opgm(item.id)">
+			<view class="gm" :render-whole="true">
+				<image class="gm_i" :src="ip+item.gmlogo"></image>
+				<view :render-whole="true" class="gm_c">
+					<text class="gm_c_t">{{item.gmname}}</text>
+					<text class="gm_c_c">类型：{{item.gmbq}}</text>
+					<text class="gm_c_b">{{item.gmjj}}</text>
+				</view>
+				<text  class="gm_r">下载</text>
+			</view>
+		</cell>
+		<cell class="tit"><text class="tit_t">最受欢迎游戏</text></cell>
+		<cell class="cell" v-for="(item,index) in hylist" :key="item.id" @click="opgm(item.id)">
+			<view class="gm" :render-whole="true">
+				<image class="gm_i" :src="ip+item.gmlogo"></image>
+				<view :render-whole="true" class="gm_c">
+					<text class="gm_c_t">{{item.gmname}}</text>
+					<text class="gm_c_c">类型：{{item.gmbq}}</text>
+					<text class="gm_c_b">{{item.gmjj}}</text>
+				</view>
+				<text  class="gm_r">下载</text>
+			</view>
+		</cell>
+		<cell class="tit"><text class="tit_t">最新上架游戏</text></cell>
+		<cell class="cell" v-for="(item,index) in nelist" :key="item.id" @click="opgm(item.id)">
+			<view class="gm" :render-whole="true">
+				<image class="gm_i" :src="ip+item.gmlogo"></image>
+				<view :render-whole="true" class="gm_c">
+					<text class="gm_c_t">{{item.gmname}}</text>
+					<text class="gm_c_c">类型：{{item.gmbq}}</text>
+					<text class="gm_c_b">{{item.gmjj}}</text>
+				</view>
+				<text class="gm_r">下载</text>
+			</view>
+		</cell>
+	</list>
+
+	<uni-popup type="center" ref="tkmain" v-if="tk_main==1" :is-mask-click="false" :mask-click="false" :render-whole="true">
+		<view :render-whole="true" class="tkmain">
+			<text class="tkmain_t">服务协议和隐私政策</text>
+			<view  class="tkmain_c" :render-whole="true">
+				<text class="tkmain_c_t">请你务必审慎阅读、充分理解“服务协议”和“隐私政策”各条款，包括但不限于：为了更好的向你提供服务，我们需要收集你的设备标识、操作日志等信息用于分析、优化应用性能。</text>
+				<text class="tkmain_c_t2" @click="opllq(1)">《 点击阅读服务协议详细信息 》</text>
+				<text class="tkmain_c_t2" @click="opllq(2)">《 点击阅读隐私政策详细信息 》</text>
+				<text class="tkmain_c_t">如果你同意，请点击下面按钮接受我们的服务。</text>
+			</view>
+			<view class="tkmain_b" :render-whole="true">
+				<text class="tkmain_b_l" @click="tk_no">不接受</text>
+				<text class="tkmain_b_r" @click="tk_yes">同意并接受</text>
+			</view>
+		</view>
+	</uni-popup>
+	<uni-popup type="bottom" ref="appupmain" v-if="appup_main==1" :is-mask-click="false" :mask-click="false" :render-whole="true">
+		<view :render-whole="true" class="appupmain" :style="'padding-bottom:'+appb+'px;'">
+			<text class="appupmain_t">{{appup_tit}}</text>
+			<view class="appupmain_c" v-if="appup_zt==0" :render-whole="true">
+				<text class="appupmain_c_t">优化体验，修复已知问题，赶快点击下载吧！</text>
+				<text class="appupmain_c_t" >温馨提示！请保持新版本，旧版本可能会影响您的体验和部分功能无法使用的问题。</text>
+			</view>
+			<text class="appupmain_t" v-if="appup_zt==1" >已下载</text>
+			<view class="appupmain_progress" v-if="appup_zt==1">
+				<progress :percent="appdow_jd" stroke-width="20" active-mode="forwards" activeColor="#ff008a" backgroundColor="#2d3648" ></progress>
+			</view>
+			<view class="appupmain_bx" v-if="appup_zt==1 && appdow_fd!=''" :render-whole="true">
+				<text class="appupmain_b_l" @click="appup_goapp">重新安装</text>
+			</view>
+			<view class="appupmain_b" v-if="appup_zt==0" :render-whole="true">
+				<text class="appupmain_b_l" @click="appup_yes">立即升级</text>
+				<text class="appupmain_b_r" @click="appup_no">等待下次再升级</text>
+			</view>
+		</view>
+	</uni-popup>
+</template>
+<script>
+	import G_APP from '@/common/ip.js';
+	const domModule = uni.requireNativePlugin('dom');
+	export default {
+		data() {
+			return {
+				ip:G_APP.ip,
+				appsys:G_APP.appsys,
+				appt:G_APP.appt,
+				appb:G_APP.appb,
+				apph:G_APP.apph,
+				hedbg:"rgba(255,255,255,0)",
+				tk_main:0,//条款
+				appup_main:0,//APP 弹窗
+				appup_tit:"有更新啦！",
+				appup_zt:0,
+				appup_url:"",
+				appdow_jd:0,//下载进度
+				appdow_fd:"",//下载的APP包
+				lbt:[],
+				hotlist: [],
+				jplist: [],
+				hylist: [],
+				nelist: [],
+				peg:0,
+				zpeg:1,
+			}
+		},
+		onLoad() {
+			domModule.addRule('fontFace', {
+				'fontFamily': "iconfont",
+				'src': "url('"+this.ip+"/ttf/iconfont.ttf')"
+			});
+		},
+		onReady() {
+			this.get();
+		},
+		methods: {
+			opxf(){
+				uni.navigateTo({
+					url: '../../pages/gm/gmxf',
+				});
+			},
+			ophd(){
+				uni.navigateTo({
+					url: '../../pages/gm/hd',
+				});
+			},
+			opnews(){
+				uni.navigateTo({
+					url: '../../pages/gm/news',
+				});
+			},
+			optopgm(){
+				uni.navigateTo({
+					url: '../../pages/gm/gmtop',
+				});
+			},
+			opdow(){
+				uni.navigateTo({
+					url: '../../pages/user/dow',
+				});
+			},
+			opgm(id){
+				uni.navigateTo({
+					url: '../../pages/gm/gmxx?id='+id,
+				});
+			},
+			opsoso(){
+				uni.navigateTo({
+					url: '../../pages/soso/soso',
+				});
+			},
+			get() {
+				let thi = this;
+				uni.request({
+				url: G_APP.ip + 'appapi.php?topgm=go',
+					method: "GET",
+					dataType: "json",
+					enableCache: true, //缓存
+					defer: true, //控制当前请求是否延时至首屏内容渲染后发送
+					data: {
+						sylbt: 'go',
+					},
+					success: (ret) => {
+						uni.stopPullDownRefresh();
+						if(ret.data.lbt){
+							thi.lbt = ret.data.lbt;
+						}
+						if(ret.data.hotgm){
+							thi.hotlist = ret.data.hotgm;
+						}
+						if(ret.data.jp){
+							thi.jplist = ret.data.jp;
+						}
+						if(ret.data.hy){
+							thi.hylist = ret.data.hy;
+						}
+						if(ret.data.ne){
+							thi.nelist = ret.data.ne;
+						}
+					}
+				});
+			},
+			appup_get(){
+				let appupshow = uni.getStorageSync('appup');
+				if(appupshow){
+					if(appupshow[0].upzt=='1'){
+						this.appup_main=1;
+						this.appup_url=appupshow[0].url;
+						const tkshowtm= setTimeout(() => {
+							this.$refs.appupmain.open();
+						},2000);
+					}
+				}
+			},
+			appup_goapp(){//重新安装APP
+				plus.runtime.install(this.appdow_fd,{force:true},{},function(error){
+				    uni.showToast({icon:"none",title: '安装失败',   mask: false,  duration: 1500});  
+				}) 
+			},
+			appup_yes(){
+				let thi=this;
+				thi.appup_tit='新版本正在下载';
+				thi.appup_zt=1;
+				const downloadTask = uni.downloadFile({
+					url: thi.appup_url,
+					filePath:"appup",
+					success: (res) => {
+						if (res.statusCode === 200) {
+							thi.appdow_fd=res.tempFilePath;
+							plus.runtime.install(res.tempFilePath,{force:true},{},function(error){
+							    uni.showToast({icon:"none",title: '安装失败',   mask: false,  duration: 1500});  
+							})
+						}
+					}
+				});
+				downloadTask.onProgressUpdate((ress) => {
+					if(ress.progress>0){thi.appdow_jd=ress.progress;}
+				});
+			},
+			appup_no(){
+				this.$refs.appupmain.close();
+				uni.showTabBar();//显示导航栏
+			},
+			tk_open(){
+				this.$refs.tkmain.open();
+			},
+			tk_yes(){//同意条款
+				this.$refs.tkmain.close();
+				uni.setStorage({
+					key: 'tkyes',
+					data: "1"
+				});
+				uni.showTabBar();//显示导航栏
+				this.appup_get();
+			},
+			tk_no(){//不同意
+				uni.setStorage({
+					key: 'tkyes',data: "0"});
+				if(G_APP.appsys=='apple'){
+					plus.ios.import("UIApplication").sharedApplication().performSelector("exit");  
+				}else{  
+					plus.runtime.quit(); 
+				}
+			},
+		},
+		onPullDownRefresh() {
+			this.get()
+		}
+	}
+</script>
+
+<style>
+	@import "../../common/tab1.css";
+</style>

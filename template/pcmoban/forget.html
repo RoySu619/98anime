@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./template/pcmoban/css/base.css">
+  <link rel="stylesheet" href="./template/pcmoban/css/login.css">
+  <link rel="stylesheet" href="./template/pcmoban/css/sweetalert.css">
+  <title>注册</title>
+</head>
+<body>
+    <h2><img src="./image/logo.png" alt=""></h2>
+    <div class="wrapper">
+        <p>用户名/手机号</p>
+        <input type="text" id="uname" placeholder="请输入用户名">
+        <p>验证码</p>
+        <div class="yzm">
+          <input type="text" id="autoyz" placeholder="请输入验证码">
+          <input type="button" class="hqyzm" id="myyzm" onclick="postYzmfs()" value="获取验证码" style="color:#fff;background-color: #23dfbe;margin-top: 0px; height: 40px; width: 104px; text-align: center;"> 
+        </div>
+        <p>新密码</p>
+        <input type="password" id="upass" placeholder="请输入新密码">
+        <p>确认新密码</p>
+        <input type="password" id="upasss" placeholder="请输入确认密码">
+        <div class="login" onclick="regbutton()">重 置</div>
+    </div>
+	<script src="../template/pcmoban/js/jquery-1.11.3.min.js"></script>
+	<script src="../template/pcmoban/js/forget.js"></script>
+	<script src="./template/pcmoban/js/sweetalert.min.js"></script>
+</body>
+</html>

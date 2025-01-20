@@ -1,0 +1,94 @@
+<!--{load header}-->
+<div class="main">
+	<div class="lb_xx_top">
+		<div class="lb_xx_logo"><img src="./$lbinfo['lblogo']"></div>
+		<div class="lb_xx_cen">
+			<b>{$lbinfo['lbname']}</b>
+			<em>$lbinfo['gmname'] | 剩余：$lbinfo['lbsy']个</em>
+			<!--{if $lbkey['lbkey']}-->
+			<span id="keylogin">卡密：$lbkey['lbkey']</span>
+			<!--{else}-->
+			<span id="keylogin">系统：$lbinfo['lbxt']</span>
+			<!--{/if}-->
+		</div>
+		<div id="lqzt">
+		<!--{if $lbkey['lbkey']}-->
+			<button data-clipboard-text="$lbkey['lbkey']" class="lb_xx_right"  onclick="btns()">复制</button>
+		<!--{else}-->
+			<div class="lb_xx_right" onclick="getlbkeys('$lbinfo['keyid']','$lbinfo['id']');">领取</div>
+		<!--{/if}-->
+		</div>
+	</div>
+	<div class="lb_xx_jj">
+		<b>礼包简介</b>
+		<em>$lbinfo['lbjj']</em>
+	</div>
+	<div class="lb_xx_js">
+		<b>礼包介绍</b>
+		<em>$lbinfo['lbsm']</em>
+	</div>
+	<div class="lb_xx_gm">
+		<b>游戏介绍</b>
+		<em>$appinfo['gmjj']</em>
+	</div>
+</div>
+<script type="text/javascript" src="./template/mmoban/js/main_rem.js"></script>
+<script src="./template/pcmoban/js/clipboard.min.js"></script>
+<script>
+var btns = document.querySelectorAll('button');
+var clipboard = new ClipboardJS(btns);
+	clipboard.on('success', function(e) {
+		alert('复制成功！');
+	});
+	clipboard.on('error', function(e) {
+		alert('复制失败！请手动复制');
+	})
+var getfz = function(){
+	var btns = document.querySelectorAll('button');
+	var clipboard = new ClipboardJS(btns);
+		clipboard.on('success', function(e) {
+			alert('复制成功！');
+		});
+		clipboard.on('error', function(e) {
+			alert('复制失败！请手动复制');
+	})
+}
+var getlbkeys = function(lkey,id){
+	$.ajax({
+		url:'./mobile.php?to=libao_id&op=gelibao',
+		type:'POST', 
+		dataType:'json',
+		data:{
+			'golq':'go',
+			'lbkey':lkey,
+			'lbid':id
+		},
+		beforeSend:function(XMLHttpRequest){ 
+			$(".lb_xx_right").html('领取中');
+		}, 
+		success:function(ret){
+			if(ret.msg==66){
+				$("#keylogin").html('卡密：'+ret.keys);
+				$("#lqzt").html('<button data-clipboard-text="'+ret.keys+'" class="lb_xx_right">复制</button>');
+				getfz();
+			}
+			if(ret.msg==1){
+				$(".lb_xx_right").html('复制');
+			}
+			if(ret==3){
+				$(".lb_xx_right").html('失败');
+				$(".lb_xx_right").css('background','#ddd');
+			}
+			if(ret==2){
+				$(".lb_xx_right").html('领完了');
+				$(".lb_xx_right").css('background','#ddd');
+			}
+			if(ret==0){
+				window.location.href="./mobile.php?to=login"; 
+			}
+		}  
+	});
+}
+</script>
+
+

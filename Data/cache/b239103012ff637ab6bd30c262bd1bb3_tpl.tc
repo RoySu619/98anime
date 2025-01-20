@@ -1,0 +1,40 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="template/sysadmin/css/style.css" rel="stylesheet">
+	<link href="template/sysadmin/css/login.css" rel="stylesheet">
+	<link rel="icon" href="icon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="icon.ico" type="image/x-icon">
+  </head>
+  <body>
+	  <div class="login">
+		        <h2 class="loginti">请登录 <em> - TcCmsV0.0.02 </em></h2>
+		        <div class="loginnr">
+		            <div class="zh">
+					<em></em>
+					<span>
+					<input type="text" id="uname" onkeyup="yesus();"  value="" placeholder="请输入登陆账号" >
+					<i id="noname"></i>
+					</span>
+					</div>
+		            <div class="mm">
+					<em></em>
+					<span>
+		            <input type="password" id="upass"  onkeyup="yesmm();"  value="" placeholder="请输入登陆密码">
+					<i id="nopas"></i>
+					</span>
+					</div>
+					
+		            <input type="text" class="code" id="autoyz" onkeyup="yesau();" maxlength="4" value="" placeholder="请输入验证码">
+					<img  title="点击刷新" src="../api/seccode.php" align="absbottom" id="sxyzm" onclick="this.src='../api/seccode.php?'+Math.random();"></img>
+		            <div class="error" id="error"><em></em><span id="msg"></span></div>
+				</div>
+				<button class="btn" onclick="loginbutton();" type="submit">登陆</button>
+	  </div>
+    <script src="template/sysadmin/js/jquery.min.js" type="text/javascript"></script>
+	<script src="template/sysadmin/data/login.js" type="text/javascript"></script>
+  </body>
+</html>

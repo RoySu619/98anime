@@ -1,0 +1,51 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><?php include $this->Template('header');?>
+
+    <div class="banxin content clearfix">
+      <div class="left information-list">
+          <h3><?php echo $newsxx['zxname']?></h3>
+          <p><span><?php echo $newsxx['times']?></span><span>来源： <?php echo $config['wzname']?></span><span>作者：官方小编</span></p>
+			<?php if($newsxx['spurl']){ ?>
+			<video id="my-video" class="video-js vjs-big-play-centered" controls="" preload="auto" width="860" height="440" poster="<?php echo $newsxx['zxlogo']?>">
+              <source id="boxvideo" src="<?php echo $newsxx['spurl']?>" type="video/mp4">
+              <p class="vjs-no-js">
+              <a href="http://videojs.com/html5-video-support/" target="_blank"></a>
+              </p>
+			</video>
+			<?php } ?>
+			<div class="content"><?php echo $newsxx['zxnr']?></div>
+      </div>
+      <div class="right hot-information">
+          <h3><i></i>热门视频</h3>
+          <ul class="hot-video">
+			<?php if(is_array($hotnewlb)===true){foreach($hotnewlb AS $key => $value){ ?>
+              <li>
+                  <a href="./index.php?to=news_id&amp;id=<?php echo $value['id']?>" target="_blank">
+                      <img src="<?php echo $value['zxlogo']?>">
+                      <p><span><?php echo $value['zxname']?></span>
+						<img src="./template/pcmoban/images/video.png" class="right">
+					  </p>
+                      <i></i>
+                  </a>
+              </li>
+			  <?php }} ?>
+          </ul>
+          <h3 class="hot-game"><i></i>热门游戏</h3>
+          <ul class="kaifu">
+			<?php if(is_array($sosolist)===true){foreach($sosolist AS $key => $value){ ?>
+              <li>
+                <a href="./index.php?to=game_id&amp;id=<?php echo $value['id']?>" class="clearfix">
+                  <img src="./<?php echo $value['gmlogo']?>" class="left">
+                  <div class="left">
+                    <h4><?php echo $value['gmname']?></h4>
+                    <p><?php echo $value['gmbq']?></p>
+                    <p><?php echo $value['gmmb']?>M</p>
+                  </div>
+                  <img src="./template/pcmoban/images/right1.png" class="right">
+                </a>
+              </li>
+			  <?php }} ?>
+          </ul>
+      </div>
+    </div>
+<?php include $this->Template('footer');?>
+

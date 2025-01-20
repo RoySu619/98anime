@@ -1,0 +1,90 @@
+<!--{load header}-->
+<div class="main">
+	<div class="kaifu_fl">
+		<div class="kaifu_fl_main">
+			<a href="./mobile.php?to=kaifu"><li <!--{if $open=='' || $open=='t' }-->class="cur"<!--{/if}-->>今日推荐</li></a>
+			<a href="./mobile.php?to=kaifu&open=m"><li <!--{if $open=='m' }-->class="cur"<!--{/if}-->>明日新服</li></a>
+			<a href="./mobile.php?to=kaifu&open=l"><li <!--{if $open=='l' }-->class="cur"<!--{/if}-->>历史推荐</li></a>
+		</div>
+	</div>
+	<div class="gm_gm_list">
+		<div id="gm_gm_list">
+			<!--{loop $data $key $value}-->
+				<div class="gm_gm_main_li">
+					<li>
+						<div class="kfion_s">
+							<a href="">
+								<img src="./$value['gmlogo']" alt="$value['gmname']">
+							</a>
+						</div>
+						<div class="kfcen_s">
+							<b>
+							$value['gmname'] <h5></h5>
+							</b>
+							<em>区服：$value['xfname'] </em>
+							<span>开服时间: $value['kftimes']</span>
+						</div>
+						<a href="./mobile.php?to=game_id&id=$value['gid']"><div class="kfdow_s"><span>下载</span></div></a>
+					</li>
+				</div>
+				<div class="gmgang"></div>
+			<!--{/loop}-->
+		</div>
+		<!--{if $open=='l' }-->
+		<div class="ajaxjz" id="ajaxjz"></div>
+		<!--{else}-->
+		<div class="ajaxjz">没有更多了</div>
+		<!--{/if}-->
+	</div>
+</div>
+<input type="hidden" value="1" id="pages" loading="no">
+<input type="hidden" value="$pagecount" id="pagenum">
+<script>
+if('$open'=='l'){
+$(window).scroll(function(){
+    if($(document).scrollTop()>=$(document).height()-$(window).height()-100){
+	    var sscroll=$('#pages').attr('loading');
+        if(sscroll=="no"){
+		var pages=$("#pages").val()*1;
+			pages=pages+1;
+			$("#pages").val(pages);
+		var pagenum = $("#pagenum").val();
+		var htmls="";
+			if(pagenum>=pages){
+				$.ajax({
+					url:'./mobile.php?to=kaifu&op=getmore&f=go&pages='+pages+'',
+					type:"GET",
+					dataType:"json",
+					beforeSend:function(){ 
+						$('#ajaxjz').html('努力加载中...') 
+					},success: function(data){
+						if(data){
+							$.each(data, function(kk, vv){
+								htmls+='<div class="gm_gm_main_li"><li>'
+								htmls+='<div class="kfion_s"><img src="./'+vv['gmlogo']+'"></div>'
+								htmls+='<div class="kfcen_s">'
+								htmls+='<b>'+vv['gmname']+'</b>'
+								htmls+='<em>区服：'+vv['xfname']+'</em>'
+								htmls+='<span>开服时间:  '+vv['kftimes']+'</span>'
+								htmls+='</div>'
+								htmls+='<a href="./mobile.php?to=game_id&id='+vv['id']+'"><div class="gmdow_s"><span>下载</span></div></a>'
+								htmls+='</li>'
+								htmls+='</div><div class="gmgang"></div>';
+							});
+						}
+						if(htmls!=""){
+							$("#gm_gm_list").append(htmls);
+							$('#ajaxjz').html('');
+						}
+					}
+				});	
+				//------
+			}else{
+				$('#ajaxjz').html('没有更多了');
+			}
+		}
+    }
+});
+}
+</script>
+<!--{load footer}-->

@@ -1,0 +1,220 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link href="/template/sysadmin/css/bui/bui-min.css" rel="stylesheet" type="text/css" />
+	<link href="/template/sysadmin/css/bui/main-min.css" rel="stylesheet" type="text/css" />
+	<link href="/template/sysadmin/css/style.css" rel="stylesheet" type="text/css" />
+	<link href="/template/sysadmin/css/header.css" rel="stylesheet" type="text/css" />
+	<link rel="icon" href="icon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="icon.ico" type="image/x-icon">
+	
+</head>
+<body >
+    <div class="spinnerfk" id="disnone" style="display:none;">
+    <div class="spinner">
+    <div class="double-bounce"></div>
+    </div>
+	</div>
+    <!---------->
+	<div class="msglistfk" onclick="opfk();" id="fankui">
+		<div class="msglist"><div class="msgtop"><i></i></div>
+				<!--{if $msglb}-->
+				<!--{loop $msglb $key $values}-->
+				
+				<div class="msglistnr" onclick="opusfkxx('$values['id']');">
+					<div class="msguslogo">
+					<img src="../$values['uslogo']"></div>
+					<span><p>来着$values['usnick']</p> <i><!--{eval echo mb_substr($values['times'],0,11,'utf8')}--></i></span>
+					<b>$values['umsg']</b>
+				</div>
+				
+				<!--{/loop}-->
+				<!--{else}-->
+				<div class="msglistnr">
+					<center style="float: left;width: 100%; height: 65px; line-height: 65px;">暂无反馈信息</center>
+					 
+				</div>
+				<!--{/if}-->
+		</div>
+	</div>
+	<!------------头部------------->
+	<ul id="J_NavContent" class="dl-tab-conten">
+	</ul>
+
+    <div class="myuright">
+	<div class="myutop">修改资料</div>
+	<div class="myutext">
+	<em><img src="/template/sysadmin/image/sctx.png"></em>
+	<span class="fileinput-button">
+	<div class="fileimg" id="uslogolist">
+	<!--{if $G_ulogo==''}-->
+	<img src="/template/sysadmin/image/admin.png" id="uimg">
+	<!--{else}-->
+	<img src="../$G_ulogo" id="uimg">
+	<!--{/if}-->
+	</div>
+	<span class="fileanniu">上传头像</span>
+	<input type="file" value="" id="uslogo"  name='file' onchange="upimgs(this)" accept="image/jpeg,image/jpg">
+	</span>
+	</div>
+	<div class="myutext"><em><img src="/template/sysadmin/image/nick.png"></em>
+	<input type="text" value="$myadmin['nickname']" maxlengli="10" id="nicks" onblur="nicks();" placeholder="您的昵称"></div>
+	<div class="myutext"><em><img src="/template/sysadmin/image/tel.png"></em>
+	<input type="text" value="$myadmin['tell']" maxlengli="11" id="tel" onkeyup="tell();" placeholder="电话"></div>
+	<div class="myutext"><em><img src="/template/sysadmin/image/qq.png"></em>
+	<input type="text" value="$myadmin['qq']" maxlengli="13" id="qq" onkeyup="qq();" placeholder="QQ"></div>
+	<div class="myutext"><em><img src="/template/sysadmin/image/wx.png"></em>
+	<input type="text" value="$myadmin['weixi']" maxlengli="20" id="wx" onkeyup="wx();"placeholder="微信号"></div>
+	<div class="myutext"><em><img src="/template/sysadmin/image/ml.png"></em>
+	<input type="text" value="$myadmin['email']" maxlengli="30" id="ml" onkeyup="ml();" placeholder="邮箱"></div>
+	<div class="myubaoc">
+	<input type="button" onclick="xmylogo();" value="关闭" class="myubaoc-c">
+	<input type="button" onclick="usbc();" value="保存" class="myubaoc-b">
+	</div>
+	</div>	
+	<div class="appusfk" id="appfklist" style="display:none;">
+		<div class="appusfkbg"></div>
+		<div class="appusfklist"> 
+			<div class="appusfktop">
+				<em id="fkuslogo"><img src="/template/sysadmin/image/admin.png"></em>
+				<span id="fkusname"></span>
+			</div>
+			<div class="appusfknr" id="appusfknr"></div>
+			<div class="appusfkbottom">
+				<input type="button" onclick="closefk();" value="知道了" class="myubaoc-b">
+			</div>
+		</div>
+		
+	</div>
+	
+	<div class="usddlistfk" onclick="clwcldd();"></div>
+	<div class="usddlist">
+	    <div class="usddtop">未处理订单</div>
+		<div class="usddnr">
+		<div class="usddnrtop">
+					<li style="width: 80px;">ID</li>
+					<li>用户账号</li>
+					<li>游戏名字</li>
+					<li style="width: 195px;">充值来源</li>
+					<!-- <li style="width: 120px;">角色名</li> -->
+					<!-- <li style="width: 150px;">角色ID</li> -->
+					<!-- <li style="width: 80px;">区服</li> -->
+					<li style="width: 220px;">游戏账号</li>
+					<!-- <li style="width: 120px;">账号密码</li> -->
+					<li style="width: 180px;">充值金额</li>
+					<li style="width: 180px;">充值时间</li>
+					<li>成功</li>
+					<li style="width: 111px;">失败</li>
+			</div>
+			<div class="usddnrk" id="usddlb">
+				<!--{loop $ddlist $key $val}-->
+				<div class="usddnrnr" id="d_$val['id']">
+				<li style="width: 80px;">$val['id']</li>
+				<li>
+				<!--{if $val['usname']}-->
+					$val['usname']
+				<!--{else}-->
+					第三方
+				<!--{/if}-->
+				</li>
+				<li>$val['gmname']</li>
+				<li style="width: 195px;">$val['laiyuan']</li>
+				<!-- <li style="width: 120px;">$val['jsnick']</li> -->
+				<!-- <li style="width: 150px;">$val['jsid']</li> -->
+				<!-- <li style="width: 80px;">$val['qufu']</li> -->
+				<li style="width: 220px;">$val['jsnm']</li> 
+				<!-- <li style="width: 120px;">$val['jspas']</li> -->
+				<li style="width: 180px;">$val['czml']</li>
+				<li style="width: 180px;"><!--{eval echo mb_substr($val['cztm'],5,11,'utf8')}--></li>
+				<li><em id="fhl$val['id']" onclick="opqd('$val['ddhao']','$val['id']',1);">完成</em></li>
+				<li style="width: 111px;"><em id="fhl$val['id']" onclick="opqd('$val['uid']','$val['id']',2);">失败</em></li>
+				</div>
+			<!--{/loop}-->
+			</div>
+		</div>
+	
+	</div>
+	
+	<!---------到期列表----------->
+	<div class="usdqlistfk" onclick="clgqcx();"></div>
+	<div class="usdqlist">
+	    <div class="usdqtop">应用到期列表</div>
+		<div class="usdqnr">
+		<div class="usdqnrtop">
+					<li style="width: 80px;">ID</li>
+					<li>用户账号</li>
+					<li>代理</li>
+					<li>联系方式</li>
+					<li style="width: 155px;">模板</li>
+					<li style="width: 110px;">应用名</li>
+					<li style="width: 154px;">到期时间</li>
+					<li style="width: 150px">操作</li>
+			</div>
+			<div class="usdqnrk" id="usdqlb">
+			</div>
+		</div>
+	</div>
+	<!---------到期列表----------->
+	<input type="hidden" class="uslogourl" value="" id="uslogourl" >
+	<div id="ajcome"></div>
+	<div id="ajerro"></div>
+	<div id="ajsuccess"></div>
+	<div id="ajqr"></div>
+	<audio id="ply"><source src="../mc/txi.mp3" type="audio/mpeg"></audio>
+	<script type="text/javascript" src="/template/sysadmin/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/template/sysadmin/script/upimg.js"></script>
+	<script type="text/javascript" src="/template/sysadmin/js/bui/bui.js"></script>
+	<script type="text/javascript" src="/template/sysadmin/js/bui/main.js"></script>
+	<script type="text/javascript" src="/template/sysadmin/js/header.js"></script>
+	<script type="text/javascript" src="/template/sysadmin/js/mue.js"></script>
+	<script type="text/javascript" src="/template/sysadmin/js/quan.js"></script>
+	<script>
+	var closefk =function(){
+		$("#appfklist").hide();
+	}
+	var opusfkxx = function(id){
+		$("#appfklist").show();
+		$.ajax({
+			url:'./sysadmin.php?to=index&op=getappfk',
+			type:'GET', 
+			data:{
+			   'ckaappfk':'go',
+			   'cfkid':id,
+			},
+			dataTyep:'json',
+			success:function(ret){ 
+				$.each(JSON.parse(ret), function(kk, vv){
+					if(ret){
+						$("#fkuslogo").html('<img src="../'+vv.uslogo+'">');
+						$("#fkusname").html(vv.usnick);
+						$("#appusfknr").html(vv.umsg);
+					}
+				});
+			}
+		});
+		
+	}
+	window.onload=function(){
+		$("#ulogo").html('<img src="../$G_ulogo">');
+		$("#nick").html('$G_unick');
+	}
+
+	$('.bui-menu-item').click(function(e){
+		if($(this).hasClass("bui-menu-item")){
+			$(".dl-second-tree ul li").css("background",'#fff');
+			$(".dl-second-tree ul li").addClass("bui-menu-item-collapsed");
+			$(".dl-second-tree ul li span").css("color",'#656565');
+			/*$(".dl-second-tree ul li span").css("fontSize",'13px');
+			$(".dl-second-tree ul li span img").css("width",'16px');
+			$(".dl-second-tree ul li span img").css("height",'16px');*/
+		}
+		$("#"+$(this).attr('id')).removeClass("bui-menu-item-collapsed");
+		$("#"+$(this).attr('id')+" span").css("color",'#60bafd');
+		/*$("#"+$(this).attr('id')+" span").css("fontSize",'15px');
+		$("#"+$(this).attr('id')+" span").css("fontWeight",'bold');
+		$("#"+$(this).attr('id')+" span img").css("width",'18px');
+		$("#"+$(this).attr('id')+" span img").css("height",'18px');*/
+	});
+	</script>

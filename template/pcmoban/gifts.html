@@ -1,0 +1,94 @@
+<!--{load header}-->
+    <div class="banxin content clearfix">
+      <div class="left information-list">
+          <div class="hot-new">
+            <span  <!--{if $lbsyss=='qb'}-->class="cur"<!--{/if}-->>
+                <a href="/index.php?to=gifts">全部礼包</a>
+                <p></p>
+            </span>
+            <span <!--{if $lbsyss=='an'}-->class="cur"<!--{/if}-->>
+                <a href="/index.php?to=gifts&type=an">安卓礼包</a>
+                <p></p>
+            </span>
+            <span <!--{if $lbsyss=='ios'}-->class="cur"<!--{/if}-->>
+                <a href="/index.php?to=gifts&type=ios">IOS礼包</a>
+                <p></p>
+            </span>
+        </div>
+          <ul>	
+			<!--{loop $lblb $key $value}-->
+              <li>
+                    <img src="$value['lblogo']">
+                    <div>
+                        <h3>{$value['gmname']}{$value['lbname']}</h3>
+                        <p>$value['lbjj']</p>
+                        <i>剩余：<!--{eval echo mb_substr(($value['lbsy'] / $value['lbzs']) * 100,0,4,'utf8')}-->%</i>
+                    </div>
+                    <div class="system">
+					<!--{if $value['lbxt']=='苹果'}-->
+                        <img src="./template/pcmoban/images/ios.png">
+					<!--{/if}-->	
+					<!--{if $value['lbxt']=='安卓'}-->
+                        <img src="./template/pcmoban/images/an.png">
+					<!--{/if}-->
+					<!--{if $value['lbxt']=='通用'}-->
+						<img src="./template/pcmoban/images/ios.png">
+                        <img src="./template/pcmoban/images/an.png">
+					<!--{/if}-->
+                    </div>
+                    <a href="./index.php?to=gifts_id&id=$value['id']" target="_blank" class="right">领取礼包</a>
+              </li>
+			  <!--{/loop}-->
+          </ul>
+          <div class="page">
+            <a href="./index.php?to=gifts&type=$lbsyss&pages=$pagestrL"><span></span></a>
+				<b>$pagestrC/$pagenum</b>
+			<a href="./index.php?to=gifts&type=$lbsyss&pages=$pagestrR"><span class="next"></span></a>
+          </div>
+      </div>
+      <div class="right hot-information">
+          <h3><i></i>热门礼包</h3>
+          <ul class="hot-gifts">
+			<!--{loop $hotgmlb $key $value}-->
+              <li <!--{if $key=='0'}-->class="on"<!--{/if}-->>
+                  <a href="./index.php?to=gifts_id&id=$value['id']" target="_blank">
+                      <p>{$value['gmname']}{$value['lbname']}<span class="right">领取</span></p>
+                      <div>
+                          <img src="$value['lblogo']">
+                          <em>
+                              <h4>{$value['gmname']}{$value['lbname']}</h4>
+                              <i>剩余：<!--{eval echo mb_substr(($value['lbsy'] / $value['lbzs']) * 100,0,4,'utf8')}-->%</i>
+                          </em>
+                      </div>
+                  </a>
+              </li>
+            <!--{/loop}-->
+          </ul>
+          <h3 class="hot-game"><i></i>热门游戏</h3>
+          <ul class="kaifu">
+              <!--{loop $sosolist $key $value}-->
+              <li>
+                <a href="./index.php?to=game_id&id=$value['id']" class="clearfix">
+                  <img src="$value['gmlogo']" class="left">
+                  <div class="left">
+                    <h4>$value['gmname']</h4>
+                    <p>$value['gmbq']</p>
+                    <p>{$value['gmmb']}M <!--{eval echo mb_substr($value['gmjj'],0,10,'utf8')}--></p>
+                  </div>
+                  <img src="./template/pcmoban/images/right1.png" class="right">
+                </a>
+              </li>
+			<!--{/loop}-->
+          </ul>
+      </div>
+    </div>
+
+<!--{load footer}-->
+ 	<script>
+        $(document).on('click','.hot-new span',function(){
+            $(this).addClass('cur').siblings().removeClass('cur');
+        })
+        $(document).on('mouseover','.hot-gifts li',function(){
+            $(this).addClass('on').siblings().removeClass('on');
+        })
+    </script>

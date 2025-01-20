@@ -1,0 +1,48 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="template/sysadmin/css/style.css" rel="stylesheet">
+	<link href="template/sysadmin/css/home.css" rel="stylesheet">
+	<link rel="icon" href="icon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="icon.ico" type="image/x-icon">
+  </head>
+<body >
+	<div class="main">
+	<div class="minihead">
+	<div class="dataleft"><em>公告列表</em><span>最多展示5条公告</span></div>
+	</div>
+	<div class="userfk">
+	<div class="xzdata"><a href="/sysadmin.php?to=sys&amp;op=gg-con"><div class="xzdata-input">新增公告</div></a></div>
+	
+	<table class="">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>公告内容</th>
+					<th>发布时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody class="tbody" id="gglbs">	
+				<?php if(is_array($gglist)===true){foreach($gglist AS $key => $value){ ?>
+            	<tr id="d_'+vv.id+'">
+					<td><?php echo $value['id']?></td>
+					<td><?php echo $value['ggtp']?></td>
+					<td><?php echo $value['times']?></td>
+					<td>
+					
+					<a href="../sysadmin.php?to=sys&amp;op=gg-xg&amp;ggid=<?php echo $value['id']?>"><span>编辑</span></a>
+					<a href="../sysadmin.php?to=sys&amp;op=gg-del&amp;ggid=<?php echo $value['id']?>"><span>删除</span></a>
+					</td>
+				</tr>
+				<?php }} ?>
+			</tbody>
+		</table>
+	</div>
+	</div>
+    <script src="template/sysadmin/js/jquery.min.js" type="text/javascript"></script>
+  </body>
+</html>

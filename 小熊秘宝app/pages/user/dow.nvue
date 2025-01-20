@@ -1,0 +1,141 @@
+<template>
+	<list class="m">
+		<cell class="li" v-for="(item,index) in list" :key="index">
+			<view class="lis" :render-whole="true">
+			<text class="li_l">&#xe881;</text>
+			<view class="li_c" :render-whole="true">
+				<text class="li_c_t">{{item.dow_name}}</text>
+				<text class="li_c_b">{{(item.dow_mb / 1024 /1024).toFixed(2)}}M</text>
+			</view>
+			<view class="li_r" :render-whole="true">
+				<progress  v-if="item.dow_zt==0" :percent="item.dow_jd" stroke-width="20"  border-radius="10" activeColor="#ffda08" backgroundColor="#ddd" />
+				<text class="li_r_jd" v-if="item.dow_zt==0">{{item.dow_jd}}%</text>
+				<text class="li_r_t98" v-if="item.dow_zt==0" @click="ztdow(item.dow_id,index)">暂停下载</text>
+				<text class="li_r_t" v-if="item.dow_zt==98" @click="jxdow(item.dow_id,index)">继续下载</text>
+				<text class="li_r_t" v-if="item.dow_zt==66" @click="openazb(index)">安装</text>
+				<text class="li_r_t" v-if="item.dow_zt==99">下载失败</text>
+				<text class="li_r_b" v-if="item.dow_zt==99 || item.dow_zt==98 || item.dow_zt==66" @click="delazb(index,item.dow_id)">删除</text>
+			</view>
+			</view>
+		</cell>
+	</list>
+</template>
+<script>
+	import G_APP from '@/common/ip.js';
+	const domModule = uni.requireNativePlugin('dom');
+	export default {
+		data() {
+			return {
+				list: [],
+				isdowtm:"",//计时器
+				jcnum:0,//进程ID
+				isdowtms:"",
+				dow_a_index:[],//重要
+			}
+		},
+		onLoad() {
+			domModule.addRule('fontFace', {
+				'fontFamily': "iconfont",
+				'src': "url('http://www.268yx.cn/ttf/iconfontd.ttf')"
+			});
+		},
+		onShow() {
+			this.sql_c();
+		},
+		onHide() {
+			this.list=[];
+			clearInterval(this.isdowtms);
+			this.jcnum=0;
+		},
+		methods: {
+			gototm(){
+				let thi=this;
+				thi.isdowtms = setInterval(() => {
+					thi.getjd();
+				}, 1000);
+			},
+			getjd() {//获取进度
+				let thi=this;
+				plus.sqlite.selectSql({
+					name: 'dowlist',
+					sql: 'select dow_id,dow_jd,dow_mb from dowgmlist where dow_zt="0" limit 1',
+					success: function(data){
+						if(data.length>0){
+							let nums=thi.dow_a_index.lastIndexOf(''+data[0].dow_id+'');
+							thi.list[nums].dow_jd=data[0].dow_jd;
+							thi.list[nums].dow_mb=data[0].dow_mb;
+						}
+					}
+				});
+			},
+			sql_c(){
+				let thi=this;
+				plus.sqlite.selectSql({
+					name: 'dowlist',
+					sql: 'select * from dowgmlist limit 50',
+					success: function(data){
+						if(data.length>0){
+							for(let i=0; i<data.length; i++){
+								thi.list=thi.list.concat(data[i]);
+								thi.dow_a_index.push(''+data[i].dow_id+'');
+							}
+							thi.gototm();//开启计时器
+						}
+					}
+				});
+			},
+			openazb(i) {
+				plus.runtime.install(this.list[i].dow_fd,{force:true},{},function(error){
+					uni.showToast({icon:"none", title: '安装失败',   mask: false,  duration: 1500});  
+				}) 
+			},
+			jxdow(gmid){//继续下载
+				let thi=this;
+				plus.sqlite.executeSql({
+					name: 'dowlist',
+					sql: "UPDATE dowgmlist set dow_zt='97' where dow_id='"+gmid+"'",
+					success: function(e){
+						let nums=thi.dow_a_index.lastIndexOf(''+gmid+'');
+						thi.list[nums].dow_jd=0;
+						thi.list[nums].dow_zt=0;
+					}
+				});
+			},
+			ztdow(gmid,index){//暂停下载
+				let thi=this;
+				plus.sqlite.executeSql({
+					name: 'dowlist',
+					sql: "UPDATE dowgmlist set dow_zt='98' where dow_id='"+gmid+"'",
+					success: function(e){
+						thi.list[index].dow_zt=98;
+						uni.$emit('updowzt',{msg:'暂停游戏ID'+gmid})
+					}
+				});
+			},
+			delazb(index,id){//删除进程+包体+队列
+				let thi=this;
+				plus.sqlite.executeSql({
+					name: 'dowlist',
+					sql: "DELETE FROM dowgmlist where dow_id='"+id+"'",
+					success: function(e){
+						uni.removeSavedFile({
+							filePath: thi.list[index].dow_fd,
+							complete: function (res) {
+								thi.list.splice(index, 1);
+							}
+						});
+						uni.showToast({icon:"none", title: ' 删除成功 ',   mask: false,  duration: 1500});  
+					}
+				});
+			}
+		},
+		onNavigationBarButtonTap(e) {
+			if (e.index == "0") {
+				uni.navigateBack();
+			}
+		}
+	}
+</script>
+<style>
+	@import "../../common/dow.css";
+</style>

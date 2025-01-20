@@ -1,0 +1,134 @@
+<template>
+	<list class="lb_m">
+		<cell class="lb_m_t">
+			<image class="lb_m_t_l" :src="lb_logo"></image>
+			<view class="lb_m_t_r">
+				<text class="lb_m_t_r_t1">{{lb_name}}</text>
+				<text class="lb_m_t_r_t2">{{lb_jj}}</text>
+				<text class="lb_m_t_r_t3">剩余：{{lb_lbsy}}枚</text>
+			</view>
+		</cell>
+		<cell class="lb_cell">
+			<text class="lb_tit">礼包简介</text>
+			<text class="lb_jj">{{lb_jj}}</text>
+		</cell>
+		<cell class="lb_cell">
+			<text class="lb_tit">使用方式</text>
+			<text class="lb_jj">{{lb_sm}}</text>
+		</cell>
+		<cell class="lb_cell" v-if="gmjj">
+			<text class="lb_tit">游戏简介</text>
+			<text class="lb_jj">{{gmjj}}</text>
+		</cell>
+		
+		<cell class="lb_cells">
+			<text class="lb_m_an" v-if="!lb_key" @click="potlq">领取礼包</text>
+			<text class="lb_m_an2" v-if="lb_key" @click="fz">复制礼包KEY</text>
+		</cell>
+		
+	</list>
+</template>
+<script>
+import G_APP from '@/common/ip.js'
+export default {
+    data() {
+		return {
+			ip:G_APP.ip,
+			apph:G_APP.apph,
+			lb_logo:"",
+			lb_name:"",
+			lb_jj:"",
+			lb_sm:"",
+			lb_lbsy:"",
+			lb_key:"",
+			keyid:"",
+			lb_txt:"",
+			gmjj:"",
+		}
+    },
+	onLoad(option){
+		this.id=option.id;
+	},
+	onReady() {
+		this.getzt();
+	},
+    methods: {
+		getzt(){
+			let thi=this;
+			uni.request({
+				url: G_APP.ip + 'appapi.php?to=libaoxx',
+				method: "GET",
+				dataType: "json",
+				enableCache: true, //缓存
+				defer: true, //控制当前请求是否延时至首屏内容渲染后发送
+				data: {
+					id: thi.id,
+				},
+				success: (ret) => {
+					if(ret.data.lbxx[0]){
+						thi.lb_logo=thi.ip+ret.data.lbxx[0].lblogo;
+						thi.lb_name=ret.data.lbxx[0].gmname+' - '+ret.data.lbxx[0].lbname ;
+						thi.lb_jj=ret.data.lbxx[0].lbjj;
+						thi.lb_sm=ret.data.lbxx[0].lbsm;
+						thi.lb_key=ret.data.lbkey;
+						thi.lb_lbsy=ret.data.lbxx[0].lbsy;
+						thi.gmjj=ret.data.gmjj;
+						thi.keyid=ret.data.lbxx[0].keyid;
+					}
+				}
+			});
+		},
+		potlq(){
+			let thi=this;
+			uni.showLoading({
+				title: '请稍后....'
+			});
+			uni.request({
+				url: G_APP.ip+'appapi.php?to=gmxx&op=gmxx_getlb',
+				method:"POST",
+				header: {
+					'content-type': 'application/x-www-form-urlencoded'
+				},
+				dataType:"json",
+				enableCache:false,//缓存
+				defer:false,//控制当前请求是否延时至首屏内容渲染后发送
+				data: {
+					golq:'go',
+					lbkey:thi.keyid,
+					lbid:thi.id,
+				},
+				success: (ret) => {
+					if(ret.data==0){
+						uni.showToast({icon:"none",title: ' 请先登录 ',   mask: false,  duration: 1500});  
+					}
+					if(ret.data.msg==1){
+						thi.lb_key=ret.data.keys;
+					}
+					if(ret.data==2){
+						uni.showToast({icon:"none",title: ' 无卡了！',   mask: false,  duration: 1500});  
+					}
+					if(ret.data==3){
+						uni.showToast({icon:"none",title: ' 无领取条件! ',   mask: false,  duration: 1500});  
+					}
+					if(ret.data.msg==66){
+						thi.lb_key=ret.data.keys;
+						uni.showToast({icon:"none",title: ' 领取成功! ',   mask: false,  duration: 1500});  
+					}
+					uni.hideLoading();
+				}
+			});
+		},
+		fz(){
+			uni.setClipboardData({
+				data: this.lb_key,
+				success: function () {
+					uni.showToast({icon:"none",title: ' 复制成功! ',   mask: false,  duration: 1500});  
+				}
+			});
+		}
+    },
+}
+</script>
+<style>
+@import "../../common/lb.css";
+</style>

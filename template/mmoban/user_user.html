@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<title>$config['sy_title']</title>
+<meta name="keywords" content="$config['sy_keyword']" />
+   <meta name="description" content="$config['sy_description']" />
+<link rel="shortcut icon" href="../icon.ico" />
+<link rel="stylesheet" href="./template/mmoban/css/main.css">
+</head>
+<body style="background: #f1f1f1;">
+<div class="main" style="padding-top: 0rem;">
+	<div class="us_main">
+		<div class="us_logo">
+			<!--{if $G_uid}-->
+			{if $G_ulogo}
+			<img src="../$G_ulogo">
+			{else}
+			<img src="./template/mmoban/images/uslogo.png">
+			{/if}
+			<span>$G_unick</span>
+			<a href="./mobile.php?to=out"><em>退出</em></a>
+			<!--{else}-->
+			<a href="./mobile.php?to=login">
+				<img src="./template/mmoban/images/uslogo.png">
+				<span>登录有惊喜哦！</span>
+				<em>登录</em>
+			</a>
+			<!--{/if}-->
+		</div>
+		<div class="us_list">
+			<!--{if $G_uid}-->
+			<a href="./mobile.php?to=user&op=lb_list"><li><img src="./template/mmoban/images/us_libao.png"><span>礼包记录</span><em></em></li></a>
+			<a href="./mobile.php?to=appdow"><li><img src="./template/mmoban/images/us_dd.png"><span>下载APP，充值更优惠</span><em></em></li></a>
+			<li><img src="./template/mmoban/images/us_set.png"><span>修改资料</span><em></em></li>
+			<!--{else}-->
+			<a href="./mobile.php?to=login"><li><img src="./template/mmoban/images/us_libao.png"><span>礼包记录</span><em></em></li></a>
+			<a href="./mobile.php?to=appdow"><li><img src="./template/mmoban/images/us_dd.png"><span>下载APP，充值更优惠</span><em></em></li></a>
+			<a href="./mobile.php?to=login"><li><img src="./template/mmoban/images/us_set.png"><span>修改资料</span><em></em></li></a>
+			<!--{/if}-->
+			<a href="./mobile.php?to=user&op=kefu"><li><img src="./template/mmoban/images/us_kefu.png"><span>客服中心</span><em></em></li></a>
+			
+		</div>
+	</div>
+</div>
+<!--{load footer}-->

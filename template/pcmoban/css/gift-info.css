@@ -1,0 +1,268 @@
+.content{
+	margin-top: 30px;
+}
+
+.information-list{
+	background-color: #fff;
+	width: 820px;
+	padding: 35px 30px 50px;
+	border-radius: 5px;
+}
+.hot-information{
+	background-color: #fff;
+	width: 280px;
+	padding: 30px 0 0;
+	border-radius: 5px;
+}
+.information-list .gift-info{
+	padding-bottom: 30px;
+	border-bottom: 1px solid #f5f6f5;
+	font-size: 0;
+}
+.information-list .gift-info img{
+	width: 100px;
+	height: 100px;
+	border-radius: 10px;
+	margin-right: 30px;
+}
+.information-list .gift-info div{
+	display: inline-block;
+	vertical-align: middle;
+	width: 450px;font-size: 14px;
+	color:#333;
+}
+.information-list .gift-info .system{
+	width: auto;
+}
+.information-list .gift-info .system img{
+	width: 20px;height: 20px;
+	margin-right: 10px;
+}
+.information-list .gift-info div h3{
+	font-size: 18px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	margin-bottom: 10px;
+}
+.information-list .gift-info .right{
+	width: 68px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 3px;
+  border: 1px solid #fddd85;
+  color: #fddd85;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 35px;
+}
+.information-list .gift-info .right:hover{
+	background-color: #fddd85;
+	color:#FFF;
+}
+.information-list .gift-info div p{
+	overflow : hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	line-height: 24px;
+	margin-bottom: 10px;
+	color:#666;
+}
+.information-list .gift-info div i{
+	color:#fddd85;
+}
+.information-list li{
+	padding: 30px 0;
+	border-top: 1px solid #f5f6f5;
+	font-size: 0;
+}
+.information-list li img{
+	width: 100px;
+	height: 100px;
+	border-radius: 10px;
+	margin-right: 30px;
+}
+.information-list li div{
+	display: inline-block;
+	vertical-align: middle;
+	width: 450px;font-size: 14px;
+	color:#333;
+}
+.information-list li .system{
+	width: auto;
+}
+.information-list li .system img{
+	width: 20px;height: 20px;
+	margin-right: 10px;
+}
+.information-list li div h3{
+	font-size: 18px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	margin-bottom: 10px;
+}
+.information-list li .right{
+	width: 68px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 3px;
+  border: 1px solid #fddd85;
+  color: #fddd85;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 35px;
+}
+.information-list li .right:hover{
+	background-color: #fddd85;
+	color:#FFF;
+}
+.information-list li div p{
+	overflow : hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	line-height: 24px;
+	margin-bottom: 10px;
+	color:#666;
+}
+.information-list li:last-child{
+	border-bottom: 1px solid #f5f6f5;
+}
+.information-list li div i{
+	color:#fddd85;
+}
+.intro{
+	padding: 30px 0;
+	border-bottom: 1px solid #f5f6f5;
+}
+.intro:last-child{
+	padding-bottom: 0;
+	border: 0;
+}
+.intro h3{
+	font-size: 20px;
+	margin-bottom: 20px;
+}
+.intro p{
+	line-height: 26px;
+	font-size: 14px;
+}
+.intro h3 i{
+	display: inline-block;
+	margin-right: 10px;
+	width: 4px;height: 23px;
+	background-color: #fddd85;
+	border-radius: 2px;
+	vertical-align: -5px;
+}
+.hot-information h3{
+	font-size: 20px;
+	padding: 0 15px;
+	font-weight: bold;
+	margin-bottom: 30px;
+}
+.hot-information h3 i{
+	display: inline-block;
+	margin-right: 10px;
+	width: 4px;height: 23px;
+	background-color: #fddd85;
+	border-radius: 2px;
+	vertical-align: -5px;
+}
+.hot-information ul:nth-child(2){
+	padding: 0 15px;
+}
+.hot-information li{
+	padding: 18px 0;
+	border-top: 1px solid #f5f6f5;
+}
+.hot-information li a{
+	display: block;
+}
+.hot-information li p{
+	color:#333;font-size: 14px;
+	text-overflow: ellipsis;overflow: hidden;
+	white-space: normal;
+	line-height: 27px;
+	width: 100%;
+}
+.hot-information li.on p{
+	display: none;
+}
+.hot-information li.on div{
+	display: block;;
+}
+.hot-information li p span{
+	width: 50px;height: 25px;
+	line-height: 25px;
+	text-align: center;
+	border: 1px solid #ededed;
+	border-radius: 3px;
+}
+.hot-information li div{
+	display: none;
+}
+.hot-information li div img{
+	width: 68px;height: 68px;
+	border-radius: 10px;
+	margin-right: 10px;
+}
+.hot-information li div em{
+	display: inline-block;
+	width: 160px;color:#333;
+	vertical-align: middle;
+}
+.hot-information li div h4{
+	font-size: 14px;width: 100%;
+	text-overflow: ellipsis;overflow: hidden;
+	white-space: normal;margin-bottom: 10px;
+}
+.hot-information li div i{
+	font-size: 13px;
+	color:#fddd85;
+}
+.hot-information li:last-child{
+	border-bottom: 1px solid #f5f6f5;
+}
+.hot-information h3.hot-game{
+	margin-top: 30px;
+}
+
+.kaifu li{
+	padding: 0;
+	border: 0 !important;
+}
+.kaifu li a{
+	display: block;
+	padding: 19px 15px;
+	border-top: 1px solid #f5f6f5;
+	color:#333;
+}
+.kaifu li a:hover{
+	background-color: #eee;
+}
+.kaifu a .right{
+	margin-top: 20px;
+	width: 15px;height: 28px;
+}
+.kaifu a img.left{
+	width: 68px;
+	height: 68px;
+	border-radius: 10px;
+}
+.kaifu a div{
+	margin-left: 10px;
+}
+.kaifu a div.left{
+	display: block;
+}
+.kaifu a div.left p{
+	margin-top: 5px;
+	font-size: 14px;
+	color:#999;
+	line-height: 18px;
+}

@@ -1,0 +1,87 @@
+<template>
+	<list class="m" @loadmore="get(2)">
+		<cell class="cell" v-for="(item,i) in list" :key="item.id">
+			<view class="li">
+			<view class="li_t">
+				<image class="li_t_l" :src="ip+item.gmlogo"></image>
+				<view class="li_t_r">
+					<text class="li_t_r_t">{{item.gmname}} - {{item.lbname}}</text>
+					<text class="li_t_r_b">到期时间：{{item.lbtm}}</text>
+				</view>
+			</view>
+			<text class="li_c">KEY: {{item.lbkey}}</text>
+			<text class="li_a" @click="fz(1,i)">复制KEY</text>
+			</view>
+		</cell>
+	</list>
+</template>
+<script>
+	import G_APP from '@/common/ip.js'
+	export default {
+		data() {
+			return {
+				ip:G_APP.ip,
+				appsys:G_APP.appsys,
+				list:[],
+				pag:0,
+				zpag:1
+			}
+		},
+		onReady() {
+			this.get(1)
+		},
+		methods: {
+			fz(pd,i){
+				let thi=this;
+				if(pd==1){
+					uni.setClipboardData({
+						data: thi.list[i].lbkey,
+						success: function () {
+							uni.showToast({icon:"none",title:' 复制礼包KEY成功! ',mask: false,duration: 1500});  
+						}
+					});
+				}
+				if(pd==2){
+					uni.setClipboardData({
+						data:thi.list[i].gmurl,
+						success: function () {
+							uni.showToast({icon:"none",title:' 复制下载链接成功! ',mask: false,duration: 1500});  
+						}
+					});
+				}
+			},
+			get(pd) {
+				let thi = this;
+				let npag=thi.pag+1;
+				thi.pag=npag;
+				if(npag<=thi.zpag){
+					uni.request({
+						url: G_APP.ip + 'appapi.php?to=user&op=user-lblist',
+						method: "GET",
+						dataType: "json",
+						enableCache: true, //缓存
+						defer: true, //控制当前请求是否延时至首屏内容渲染后发送
+						data: {
+							'myuslb':'go',
+							'pages':npag,
+						},
+						success: (ret) => {
+							if (ret.data.data) {
+								if(pd==1){
+									thi.zpag=ret.data.pagenum;
+									thi.list= ret.data.data;
+								}
+								if(pd==2){
+									thi.list=thi.list.concat(ret.data.data);
+								}
+							}
+						}
+					});
+				}
+			}
+		}
+	}
+</script>
+<style>
+@import "../../common/ckx.css";
+</style>

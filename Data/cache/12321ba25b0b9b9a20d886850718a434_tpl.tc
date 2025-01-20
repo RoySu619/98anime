@@ -1,0 +1,95 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><?php include $this->Template('header');?>
+
+<div class="main">
+	<div class="lb_xx_top">
+		<div class="lb_xx_logo"><img src="./<?php echo $lbinfo['lblogo']?>"></div>
+		<div class="lb_xx_cen">
+			<b><?php echo $lbinfo['lbname']?></b>
+			<em><?php echo $lbinfo['gmname']?> | 剩余：<?php echo $lbinfo['lbsy']?>个</em>
+			<?php if($lbkey['lbkey']){ ?>
+			<span id="keylogin">卡密：<?php echo $lbkey['lbkey']?></span>
+			<?php } else { ?>
+			<span id="keylogin">系统：<?php echo $lbinfo['lbxt']?></span>
+			<?php } ?>
+		</div>
+		<div id="lqzt">
+		<?php if($lbkey['lbkey']){ ?>
+			<button data-clipboard-text="<?php echo $lbkey['lbkey']?>" class="lb_xx_right"  onclick="btns()">复制</button>
+		<?php } else { ?>
+			<div class="lb_xx_right" onclick="getlbkeys('<?php echo $lbinfo['keyid']?>','<?php echo $lbinfo['id']?>');">领取</div>
+		<?php } ?>
+		</div>
+	</div>
+	<div class="lb_xx_jj">
+		<b>礼包简介</b>
+		<em><?php echo $lbinfo['lbjj']?></em>
+	</div>
+	<div class="lb_xx_js">
+		<b>礼包介绍</b>
+		<em><?php echo $lbinfo['lbsm']?></em>
+	</div>
+	<div class="lb_xx_gm">
+		<b>游戏介绍</b>
+		<em><?php echo $appinfo['gmjj']?></em>
+	</div>
+</div>
+<script src="./template/mmoban/js/main_rem.js" type="text/javascript"></script>
+<script src="./template/pcmoban/js/clipboard.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+var btns = document.querySelectorAll('button');
+var clipboard = new ClipboardJS(btns);
+	clipboard.on('success', function(e) {
+		alert('复制成功！');
+	});
+	clipboard.on('error', function(e) {
+		alert('复制失败！请手动复制');
+	})
+var getfz = function(){
+	var btns = document.querySelectorAll('button');
+	var clipboard = new ClipboardJS(btns);
+		clipboard.on('success', function(e) {
+			alert('复制成功！');
+		});
+		clipboard.on('error', function(e) {
+			alert('复制失败！请手动复制');
+	})
+}
+var getlbkeys = function(lkey,id){
+	$.ajax({
+		url:'./mobile.php?to=libao_id&op=gelibao',
+		type:'POST', 
+		dataType:'json',
+		data:{
+			'golq':'go',
+			'lbkey':lkey,
+			'lbid':id
+		},
+		beforeSend:function(XMLHttpRequest){ 
+			$(".lb_xx_right").html('领取中');
+		}, 
+		success:function(ret){
+			if(ret.msg==66){
+				$("#keylogin").html('卡密：'+ret.keys);
+				$("#lqzt").html('<button data-clipboard-text="'+ret.keys+'" class="lb_xx_right">复制</button>');
+				getfz();
+			}
+			if(ret.msg==1){
+				$(".lb_xx_right").html('复制');
+			}
+			if(ret==3){
+				$(".lb_xx_right").html('失败');
+				$(".lb_xx_right").css('background','#ddd');
+			}
+			if(ret==2){
+				$(".lb_xx_right").html('领完了');
+				$(".lb_xx_right").css('background','#ddd');
+			}
+			if(ret==0){
+				window.location.href="./mobile.php?to=login"; 
+			}
+		}  
+	});
+}
+</script>
+
+

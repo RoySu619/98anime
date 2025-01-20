@@ -1,0 +1,14 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><?php include $this->Template('header');?>
+
+<div class="main">
+	<div class="gg_xx_main">
+		<div class="gg_xx_tit">
+			<b><?php echo $gginfo['ggtp']?></b>
+			<span><?php echo $gginfo['times']?></span>
+		</div>
+		<div class="gg_xx_nr">
+			<?php echo $gginfo['mygg']?>
+		</div>
+	</div>
+</div>
+<?php include $this->Template('footer');?>

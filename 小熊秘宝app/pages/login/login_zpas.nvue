@@ -1,0 +1,165 @@
+<template>
+<list>
+	<cell class="top"></cell>
+	<cell class="li"><text class="tis">需找回账号</text></cell>
+	<cell class="li">
+		<view class="li_tell">
+			<text class="li_tell_l">&#xe7b2;</text>
+			<input class="li_input" :value="tell" @input="inputtel" type="text" maxlength="11" placeholder="请输入要找回密码的账号" confirm-type="next" controlled="true" focus auto-blur hold-keyboard="true" />
+		</view>
+	</cell>
+	<cell class="li"><text class="tis">设置新密码（密码允许特殊符号 .）</text></cell>
+	<cell class="li">
+		<view class="li_tell">
+			<text class="li_tell_l">&#xe7d0;</text>
+			<input class="li_input" :value="pas" @input="inputpas" type="text" password="true" maxlength="18" placeholder="请输入新密码" confirm-type="next" controlled="true" auto-blur hold-keyboard="true" />
+		</view>
+	</cell>
+	<cell class="li"><text class="tis">验证码</text></cell>
+	<cell class="li">
+		<view class="li_tell">
+			<text class="li_tell_l">&#xe7eb;</text>
+			<input class="li_inputs" :value="yzm"  @input="inputtz" type="number" maxlength="6" placeholder="请输入验证码" confirm-type="next" controlled="true" auto-blur hold-keyboard="true" />
+			<text class="li_tell_yzm" @click="getyzm()">{{yzmnum}}</text>
+		</view>
+	</cell>
+	<cell class="li"><text class="tis"></text></cell>
+	<cell class="li"><text class="pot" @click="potdata">确定找回</text></cell>
+</list>
+</template>
+<script>
+import G_APP from '@/common/ip.js'
+export default {
+	name:"login_dx",
+    data() {
+		return {
+			pas:"",
+			tell:"",
+			yzm:"",
+			yzmnumtm:"",
+			yzmzt:false,
+			yzmnum:"获取验证码",
+			yzmnums:"60",
+		}
+    },
+	onLoad(){
+	},
+    methods: {
+		potdata(){
+			uni.showLoading({
+				title: '请稍后...',
+				mask:true
+			});
+			uni.hideKeyboard()
+			let thi=this;
+			if(thi.pas &&  thi.tell && thi.yzm){
+				uni.request({
+				    url: G_APP.ip+'appapi.php?to=pass',
+					method:"POST",
+					header: {
+					    'content-type': 'application/x-www-form-urlencoded'
+					},
+					dataType:"json",
+					enableCache:false,//缓存
+					defer:false,//控制当前请求是否延时至首屏内容渲染后发送
+				    data: {
+				        zhpass: 'go',
+						myname: thi.tell,
+						mypass:thi.pas,
+						yzma:thi.yzm
+				    },
+					success: (res) => {
+						let msg=res.data[0];
+						uni.hideLoading();
+						if(msg=='1'){
+							uni.showToast({icon:"none",title: ' 验证码错误！ ',duration: 2000});
+						}
+						if(msg=='3'){
+							uni.showToast({icon:"none",title: ' 账号不存在！ ',duration: 2000});
+						}
+						if(msg=='2'){
+							uni.showToast({icon:"none",title: ' 新密码不能为空或密码有非法字符！ ',duration: 2000});
+						}
+						if(msg=='66'){
+							uni.$emit('login',{msg:'yes'});
+							setTimeout(()=>{uni.navigateBack({delta: 1});},1000);
+							uni.showToast({icon:"none",title: ' 修改密码成功，请使用新密码登录 ',duration: 2000});
+						}
+						if(res.data.msg=='4'){
+							uni.showToast({icon:"none",title: ' 账号不存在！ ',duration: 2000});
+						}
+				    }
+				});
+			}else{
+				if(thi.tell==''){
+					uni.showToast({icon:"none",title: ' 请输入登录手机号 ',duration: 2000});
+				}else if(thi.pas==''){
+					uni.showToast({icon:"none",title: ' 请输入登录密码 ',duration: 2000});
+				}else if(thi.yzm==''){
+					uni.showToast({icon:"none",title: ' 请输入短信验证码 ',duration: 2000});
+				}
+			}
+		},
+		getyzm(){
+			let thi=this;
+			if(thi.tell && thi.yzmzt==false){
+				uni.request({
+				    url: G_APP.ip+'appapi.php?to=seccode&op=gethui',
+					method:'POST',
+					header: {
+					    'content-type': 'application/x-www-form-urlencoded'
+					},
+					dataType:'json',
+					enableCache:false,//缓存
+					defer:false,//控制当前请求是否延时至首屏内容渲染后发送
+				    data: {
+				        yzma:'go',
+						tell:thi.tell
+				    },
+					success: (res) => {
+						if(res.data.Message=='OK'){
+							thi.yzm=res.data.code;
+							thi.gotopotzt=1;
+							uni.hideLoading();
+							thi.yzmzt=true;
+							thi.setyzmnum();
+							uni.showToast({icon:"none",title: ' 获取验证码成功 ',duration: 2000});
+						}else{
+							uni.showToast({icon:"none",title: ' 请求被限制，请稍后再试！ ',duration: 2000});
+						}
+				    }
+				});
+			}
+		},
+		setyzmnum(){
+			this.yzmnumtm = setInterval(() => {
+			    this.yzmnums=this.yzmnums-1;
+				this.yzmnum=this.yzmnums+"s后再试";
+				if(this.yzmnums==1){
+					clearInterval(this.yzmnumtm);
+					this.yzmzt=false;
+					this.yzmnum="获取验证码";
+					this.yzmnums=60;
+				}
+			}, 1000);
+		},
+		inputtel(e){
+			this.tell=e.detail.value;	
+		},
+		inputpas(e){
+			this.pas=e.detail.value;	
+		},
+		inputtz(e){
+			this.yzm=e.detail.value;	
+		}
+    },
+	onNavigationBarButtonTap(e){
+		if(e.index=="0"){
+			uni.navigateBack();
+		}
+	}
+}
+</script>
+<style>
+@import "../../common/pass.css";
+</style>

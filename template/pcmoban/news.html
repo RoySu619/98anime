@@ -1,0 +1,69 @@
+<!--{load header}-->
+    <div class="banxin content clearfix">
+      <div class="left information-list">
+          <div class="hot-new">
+            <span <!--{if $nefl=='qb'}-->class="cur"<!--{/if}-->>
+                <a href="./index.php?to=news">全部</a>
+                <p></p>
+            </span>
+            <span <!--{if $nefl=='new'}-->class="cur"<!--{/if}-->>
+                <a href="./index.php?to=news&type=new">资讯</a>
+                <p></p>
+            </span>
+            <span <!--{if $nefl=='gl'}-->class="cur"<!--{/if}-->>
+                <a href="./index.php?to=news&type=gl">攻略</a>
+                <p></p>
+            </span>
+        </div>
+          <ul>
+			<!--{loop $newslb $key $value}-->
+              <li>
+                  <a href="./index.php?to=news_id&id=$value['id']" target="_blank">
+                      <img src="$value['zxlogo']">
+                      <div>
+                          <span <!--{if $value['zxlb']=='攻略'}-->style="background: url(./template/pcmoban/images/gonglue.png) no-repeat center center;"<!--{/if}-->></span>
+                          <h3>$value['zxname']</h3>
+                          <p>$value['zxjj']</p>
+                          <i>$value['times']</i>
+                      </div>
+                  </a>
+              </li>
+			<!--{/loop}-->
+          </ul>                                                                                                           
+           <div class="page">
+              <a href="./index.php?to=news&type=$nefl&pages=$pagestrL"><span></span></a>
+			  <b>$pagestrC/$pagenum</b>
+			  <a href="./index.php?to=news&type=$nefl&pages=$pagestrR"><span class="next"></span></a>
+          </div>
+      </div>
+      <div class="right hot-information">
+          <h3><i></i>热门资讯</h3>
+          <ul>
+			<!--{loop $hotnewlb $key $value}-->
+              <li>
+                  <a href="./index.php?to=news_id&id=$value['id']" target="_blank">
+                      <img src="$value['zxlogo']">
+                      <p>$value['zxname']</p>
+                  </a>
+              </li>
+			<!--{/loop}-->
+          </ul>
+          <h3 class="hot-game"><i></i>热门游戏</h3>
+          <ul class="kaifu">
+			<!--{loop $sosolist $key $value}-->
+              <li>
+                <a href="./index.php?to=game_id&id=$value['id']" class="clearfix">
+                  <img src="$value['gmlogo']" class="left">
+                  <div class="left">
+                    <h4>$value['gmname']</h4>
+                    <p>$value['gmbq']</p>
+                    <p>{$value['gmmb']}M <!--{eval echo mb_substr($value['gmjj'],0,10,'utf8')}--></p>
+                  </div>
+                  <img src="./template/pcmoban/images/right1.png" class="right">
+                </a>
+              </li>
+			<!--{/loop}-->
+          </ul>
+      </div>
+    </div>
+<!--{load footer}-->

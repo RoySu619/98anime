@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<title>$config['sy_title']</title>
+<meta name="keywords" content="$config['sy_keyword']" />
+<meta name="description" content="$config['sy_description']" />
+<link rel="shortcut icon" href="../icon.ico" />
+<link rel="stylesheet" href="./template/mmoban/css/main.css">
+</head>
+<body style="background: #f1f1f1;">
+<div class="header">
+	<div class="us_xx_header_fh">
+		<a href="./mobile.php?to=user"><div class="us_xx_header_left"></div></a>
+		<div class="us_xx_header_tit">充值账单</div>
+		<div class="us_xx_header_right"></div>
+	</div>
+</div>
+<style>
+
+</style>
+<div class="main">
+	<div class="cz_main_li">
+		<!--{loop $data $key $value}-->
+		<li>
+			<div class="cz_main_cen_li">
+			<b>$value['gmname']</b>
+			<em>充值金额：$value['czml']元</em>
+			<span>充值时间：$value[times]</span>
+			</div>
+			<!--{if $value['ddzt']=='0'}-->
+			<div class="czzt_s">未支付</div>
+			<!--{/if}-->
+			<!--{if $value['ddzt']=='1'}-->
+			<div class="czzt_s">支付成功</div>
+			<!--{/if}-->
+			<!--{if $value['ddzt']=='2'}-->
+			<div class="czzt_s">失效订单</div>
+			<!--{/if}-->
+			<!--{if $value['ddzt']=='66'}-->
+			<div class="czzt_s">充值完成</div>
+			<!--{/if}-->
+		</li>
+		<!--{/loop}-->
+	</div>
+</div>
+<!--{load footer}-->

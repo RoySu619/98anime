@@ -1,0 +1,205 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="/template/sysadmin/css/style.css" rel="stylesheet">
+	<link href="/template/sysadmin/css/home.css" rel="stylesheet">
+	<link rel="icon" href="icon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="icon.ico" type="image/x-icon">
+  </head>
+  <style type="text/css">
+    .bq-sel{
+	float: left;
+    width: 70%;
+    height: 35px;
+    border: 1px solid #ddd;
+    margin-bottom: 0px;
+    border-radius: 5px;
+    text-indent: 15px;
+    line-height: 36px;
+    margin-left: 15%;
+    margin-top: 23px;
+	}
+  </style>
+<body >
+	<div class="main">
+	<div class="minihead">
+	<div class="dataleft">
+	<em>新增标签</em>
+	<span>增加游戏标签</span>
+	</div>
+	
+	</div>
+	<div class="gmbqfk">
+	<div class="xzdata"><div class="xzdata-input" onclick="optc();">新增标签</div></div>
+	<table class="">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>标签名字</th>
+					<th>标签简介</th>
+					<th>添加时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody class="tbody" id="bqlb">	
+				<?php if(is_array($gmbq)===true){foreach($gmbq AS $key => $value){ ?>
+			    <tr id="d_<?php echo $value['id']?>" <?php if($key==0 || $key==2 || $key==4 || $key==6 || $key==8 || $key==10 || $key==12 || $key==14){ ?>style="background: #f1f1f1;"<?php } ?>>
+				<td><?php echo $value['id']?></td>
+				<td id="nm_<?php echo $value['id']?>"><?php echo $value['bqname']?></td>
+				<td id="jj_<?php echo $value['id']?>"><?php echo $value['bqjj']?></td>
+				<td><?php echo $value['times']?></td>
+				<td>
+				<em onclick="opbj('<?php echo $value['id']?>','<?php echo $value['bqname']?>','<?php echo $value['bqjj']?>');"><img src="/template/sysadmin/image/sz.png" style="width: 16px;height: 16px;margin-right:20px;"></em>
+				<span id="<?php echo $value['id']?>" onclick="del(this);"><img src="/template/sysadmin/image/del.png" style="width: 16px;height: 16px;"></span>
+				</td>
+				</tr>
+				<?php }} ?>
+			</tbody>
+		</table>
+	</div>
+	<div class="gmbqtc">
+	<div class="gmbqzz"  onclick="closetc();"></div>
+	<div class="gmbqtcfk">
+	<em>添加标签</em> 
+	<input class="bq-txt" type="text" value="" id="bqnames" placeholder="请输入标签名字" style="margin-top: 10px; margin-bottom: 0px;">
+	<input class="bq-txt" type="text" value="" id="bqjjs" placeholder="请输入标签简介" style="margin-top: 10px; margin-bottom: 0px;">
+	<div class="data-conbutton">
+			<input type="button" value="关闭" onClick="closetc();" class="databuttonf">
+			<input type="button" value="保存" onclick="tjiaobq();" id="xgf" class="databuttonb">
+	</div>
+	</div>
+	</div>
+	
+	
+    <div id="ajcome"></div>
+	<div id="ajerro"></div>
+	<div id="ajsuccess"></div>
+	<div id="ajqr"></div>
+	</div>
+    <script src="/template/sysadmin/js/jquery.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		var tjiaobq = function(){
+	    var gmbq = $("#bqnames").val();
+	    var gmjj = $("#bqjjs").val();
+	    var bqlg = $("#lgs").val();
+		$.ajax({
+		url:'../sysadmin.php?to=gmbq&op=setbq',
+		type:'POST', 
+		data:{
+		   'xgmbq':'go',
+		   'key':0,
+		   'bqname':gmbq,
+		   'bqjjs':gmjj,
+		   'bqlogo':bqlg,
+		},
+		dataTyep:'json',
+		beforeSend:function(XMLHttpRequest){ 
+			$("#ajcome").html('<div class="axsucfk"><div class="axsuc"><span><img src="image/logins.png"></span><em>加载中 ...</em></div></div>');
+        }, 
+	    success:function(ret){ 
+		    if(ret=='"err"'){
+			    window.location.href="login.html"; 
+			}else{
+		    $("#ajcome").html('');
+			if(ret=="3"){
+			$("#ajsuccess").html('<div class="axerrfk"><div class="axerr"><span><img src="image/yes.png"></span><em>添加标签成功！</em></div></div>');
+		    setTimeout(function(){$("#ajsuccess").html('');clearTimeout();  window.location.replace('/sysadmin.php?to=gmbq');},300);
+			}
+			if(ret=="2"){
+			$("#ajsuccess").html('<div class="axerrfk"><div class="axerr"><span><img src="image/err.png"></span><em>请输入标签名字！</em></div></div>');
+		    setTimeout(function(){$("#ajsuccess").html('');clearTimeout(); },300);
+			}
+			}
+		}
+		});
+	}
+	var closetc = function(){ 
+	    $(".gmbqtc").css('display','none');
+	}
+	var optc = function(){
+	    $(".gmbqtc").css('display','block');
+		$("#xgf").attr("onclick","tjiaobq();");
+		$("#bqnames").val('');
+	}
+	var opbj = function(id,name,jj){
+	    $(".gmbqtc").css('display','block');
+	    $("#bqnames").val(name);
+	    $("#bqjjs").val(jj);
+		var gmbq = $("#bqnames").val();
+		$("#xgf").attr("onclick","xgbaoc(\""+id+"\",\""+name+"\");");
+	}
+	
+	var xgbaoc = function(id){
+	var gmbq = $("#bqnames").val();
+	var gmjj = $("#bqjjs").val();
+	var bqlg = $("#lgs").val();
+	$.ajax({
+		url:'../sysadmin.php?to=gmbq&op=postbq',
+		type:'POST', 
+		data:{
+		   'bq-xg':'go',
+		   'key':0,
+		   'bqname':gmbq,
+		   'bqjjs':gmjj,
+		   'bqlogo':bqlg,
+		   'bqid':id
+		},
+		dataTyep:'json',
+		beforeSend:function(XMLHttpRequest){ 
+			$("#ajcome").html('<div class="axsucfk"><div class="axsuc"><span><img src="image/logins.png"></span><em>加载中 ...</em></div></div>');
+        }, 
+	    success:function(ret){ 
+		    if(ret=='"err"'){
+			    window.location.href="login.html"; 
+			}else{
+		    $("#ajcome").html('');
+			if(ret=="3"){
+			$("#ajsuccess").html('<div class="axerrfk"><div class="axerr"><span><img src="image/yes.png"></span><em>修改标签成功！</em></div></div>');
+		    setTimeout(function(){$("#ajsuccess").html('');clearTimeout(); },300);
+			$("#nm_"+id+"").html(gmbq);
+			$("#jj_"+id+"").html(gmjj);
+			$(".gmbqtc").css('display','none');
+			
+			}
+			if(ret=="2"){
+			$("#ajsuccess").html('<div class="axerrfk"><div class="axerr"><span><img src="image/err.png"></span><em>请输入标签名字！</em></div></div>');
+		    setTimeout(function(){$("#ajsuccess").html('');clearTimeout(); },300);
+			}
+			}
+		}
+	});
+	}
+	var del = function(obj){
+	    var ids = obj.id;
+	    $.ajax({
+		url:'../sysadmin.php?to=gmbq&op=dellbq',
+		type:'POST', 
+		data:{
+		   'del-bq':'go',
+		   'did':ids
+		},
+		dataTyep:'json',
+		beforeSend:function(XMLHttpRequest){ 
+			$("#ajcome").html('<div class="axsucfk"><div class="axsuc"><span><img src="image/logins.png"></span><em>加载中 ...</em></div></div>');
+        },success:function(ret){ 
+		    if(ret=='"err"'){
+			    window.location.href="login.html"; 
+			}else{
+		    $("#ajcome").html('');
+			$("#d_"+ids+"").remove();
+			if(ret=="1"){
+		    $("#ajsuccess").html('<div class="axerrfk"><div class="axerr"><span><img src="image/yes.png"></span><em>删除成功！</em></div></div>');
+		    setTimeout(function(){$("#ajsuccess").html('');clearTimeout(); },300);
+			}
+			}
+		}
+		});
+	
+	}
+	
+	</script>
+  </body>
+</html>

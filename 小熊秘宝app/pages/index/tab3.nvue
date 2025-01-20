@@ -1,0 +1,116 @@
+<template>
+	<list @loadmore="getlist(2)" loadmoreoffset="10">
+	    <header class="hed" :render-whole="true">
+			<view class="heds" :render-whole="true" :style="'height: '+(appt+55)+'px;'">
+				<text class="hed_l"></text>
+				<text class="hed_l"></text>
+				<text class="hed_c">礼包中心</text>
+				<text class="hed_r" @click="opsoso">&#xe8ef;</text>
+				<text class="hed_r" @click="opmylb">&#xe7d1;</text>
+			</view>
+		</header>
+		<cell class="list" v-if="list" v-for="(item,index) in list" :key="item.id" @click="oplbxx(item.id)">
+			<view class="gm" :render-whole="true">
+				<image class="gm_i" :src="ip+item.lblogo"></image>
+				<view :render-whole="true" class="gm_c">
+					<text class="gm_c_t">{{item.gmname}}{{item.lbname}}</text>
+					<text class="gm_c_c">{{item.lbjj}}</text>
+					<text class="gm_c_b">剩余：{{item.lbsy}}枚</text>
+				</view>
+				<text  class="gm_r">领取</text>
+			</view>
+		</cell>
+		<cell class="nodata" v-if="list==''">
+			<image class="nodata_i" src="../../static/nodata.png"></image>
+		</cell>
+		<cell class="list_b"></cell>
+	</list>
+</template>
+<script>
+	import G_APP from '@/common/ip.js';
+	export default {
+		data() {
+			return {
+				ip:G_APP.ip,
+				appt:G_APP.appt,
+				appb:G_APP.appb,
+				myuid:"0",
+				list:[],
+				pag:0,
+				zpag:1
+			}
+		},
+		onReady() {
+			this.getlist(1);
+		},
+		methods: {
+			opsoso(){
+				uni.navigateTo({
+					url: '../../pages/soso/soso',
+				});
+			},
+			opmylb(){
+				if(this.myuid>0){
+					uni.navigateTo({
+						url: '../user/ckx',
+					});
+				}else{
+					uni.navigateTo({
+						url: '../login/login',
+					});
+				}
+			},
+			oplbxx(id){
+				uni.navigateTo({
+					url: '../libao/lb?id='+id,
+				});
+			},
+			getlist(pd){
+				let thi=this;
+				let npag=Number(thi.pag)+1;
+				thi.pag=npag;
+				if(npag<=thi.zpag){
+					uni.request({
+						url: G_APP.ip + 'appapi.php?to=libao',
+						method: "GET",
+						dataType: "json",
+						enableCache: true, //缓存
+						defer: true, //控制当前请求是否延时至首屏内容渲染后发送
+						data: {
+							'list':'go',
+							'pages':npag
+						},
+						success: (ret) => {
+							if(ret.data.data){
+								uni.hideLoading();
+								if(pd==1){
+									thi.list=ret.data.data;
+									thi.zpag=ret.data.pagenum;
+									uni.stopPullDownRefresh();
+								}
+								if(pd==2){
+									thi.list=thi.list.concat(ret.data.data);
+								}
+							}else{
+								thi.list=[];
+								uni.hideLoading();
+							}
+						}
+					});
+				}
+			},
+		},
+		onPullDownRefresh() {
+			this.pag=0;
+			this.zpag=1;
+			this.getlist(1);
+		},
+		onShow() {
+			let us = uni.getStorageSync('user');
+			this.myuid=us.uid;
+		}
+	}
+</script>
+<style>
+	@import "../../common/tab3.css";
+</style>

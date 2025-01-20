@@ -1,0 +1,137 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><!DOCTYPE html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<?php if($to=='index' || $to=='kefu' || $to=='search' || $to=='about'){ ?>
+	<title><?php echo $config['sy_title']?></title>
+	<meta name="keywords" content="<?php echo $config['sy_keyword']?>" />
+    <meta name="description" content="<?php echo $config['sy_description']?>" />
+<?php }else if($to=='game'){ ?>
+	<title><?php echo $config['gm_title']?></title>
+	<meta name="keywords" content="<?php echo $config['gm_keyword']?>" />
+    <meta name="description" content="<?php echo $config['gm_description']?>" />
+<?php }else if($to=='game_id'){ ?>
+	<title><?php echo $config['gmxx_title']?></title>
+	<meta name="keywords" content="<?php echo $config['gmxx_keyword']?>" />
+    <meta name="description" content="<?php echo $config['gmxx_description']?>" />
+<?php }else if($to=='kaifu'){ ?>
+	<title><?php echo $config['gmkf_title']?></title>
+	<meta name="keywords" content="<?php echo $config['gmkf_keyword']?>" />
+    <meta name="description" content="<?php echo $config['gmkf_description']?>" />
+<?php }else if($to=='gifts'){ ?>
+	<title><?php echo $config['gmlb_title']?></title>
+	<meta name="keywords" content="<?php echo $config['gmlb_keyword']?>" />
+    <meta name="description" content="<?php echo $config['gmlb_description']?>" />
+<?php }else if($to=='gifts_id'){ ?>
+	<title><?php echo $config['lbxx_title']?></title>
+	<meta name="keywords" content="<?php echo $config['lbxx_keyword']?>" />
+    <meta name="description" content="<?php echo $config['lbxx_description']?>" />
+<?php }else if($to=='news'){ ?>
+	<title><?php echo $config['news_title']?></title>
+	<meta name="keywords" content="<?php echo $config['news_keyword']?>" />
+    <meta name="description" content="<?php echo $config['news_description']?>" />
+<?php }else if($to=='news_id'){ ?>
+	<title><?php echo $config['newsxx_title']?></title>
+	<meta name="keywords" content="<?php echo $config['newsxx_keyword']?>" />
+	<meta name="description" content="<?php echo $config['newsxx_description']?>" />
+<?php }else if($to=='activity'){ ?>
+	<title><?php echo $config['activity_title']?></title>
+	<meta name="keywords" content="<?php echo $config['activity_keyword']?>" />
+    <meta name="description" content="<?php echo $config['activity_description']?>" />
+<?php } else { ?>
+	<title><?php echo $config['sy_title']?></title>
+	<meta name="keywords" content="<?php echo $config['sy_keyword']?>" />
+    <meta name="description" content="<?php echo $config['sy_description']?>" />
+<?php } ?>
+<link rel="shortcut icon" href="../icon.ico" />
+<link rel="stylesheet" href="./template/pcmoban/css/base.css">
+<link rel="stylesheet" href="./template/pcmoban/kefu/kf.css">
+<link rel="stylesheet" href="./template/pcmoban/css/public.css">
+<?php if($to=='index' || $to==''){ ?>
+<link rel="stylesheet" href="./template/pcmoban/css/swiper.min.css">
+<link rel="stylesheet" href="./template/pcmoban/css/index.css">
+<?php } ?>
+<?php if($to=='game'){ ?>
+<link rel="stylesheet" href="./template/pcmoban/css/game_list.css">
+<?php } ?>
+<?php if($to=='kaifu'){ ?>
+<link rel="stylesheet" href="./template/pcmoban/css/kaifu.css">
+<?php } ?>
+<?php if($to=='activity'){ ?>
+<link rel="stylesheet" href="./template/pcmoban/css/information.css">
+<?php } ?>
+<?php if($to=='gifts'){ ?>
+<link rel="stylesheet" href="./template/pcmoban/css/gifts.css">
+<?php } ?>
+<?php if($to=='news'){ ?>
+<link rel="stylesheet" href="./template/pcmoban/css/information.css">
+<?php } ?>
+<?php if($to=='news_id'){ ?>
+<link rel="stylesheet" href="./template/pcmoban/css/activity-info.css">
+<?php } ?>
+<?php if($to=='gifts_id'){ ?>
+<link rel="stylesheet" href="./template/pcmoban/css/gift-info.css">
+<?php } ?>
+</head>
+<body>
+	<div class="header">
+        <div class="login">
+          <div class="banxin clearfix">
+            <p class="left">
+				<a href="./index.php?to=help" target="_blank">关于本站</a>
+				<span>|</span><a href="./index.php?to=help" target="_blank">联系我们</a>
+				<span>|</span><a href="./index.php?to=help" target="_blank">帮助中心</a>
+				<span>|</span><a href="./index.php?to=help" target="_blank">隐私政策</a>
+				<span>|</span><a href="./index.php?to=help" target="_blank">用户协议</a>
+				<span>|</span><a href="./index.php?to=appdow" target="_blank">APP下载</a>
+				<span>|</span><a href="./mobile.php" target="_blank">手机版</a>
+			</p>
+            <p class="right">
+			<?php if($G_uid){ ?>
+				<a href="./index.php?to=user">
+					<?php if($G_ulogo){ ?>
+					<img src="<?php echo $G_ulogo?>">
+					<?php } else { ?>
+					<img src="./template/pcmoban/images/head.png">
+					<?php } ?>
+				</a>
+				<?php echo $G_unick?>
+				<a href="./index.php?to=user">个人中心</a>
+				<a href="./index.php?to=out&amp;login=out">退出</a>
+			<?php } else { ?>
+				<a href="./index.php?to=login">登录</a>
+				<a href="./index.php?to=register">注册</a>
+			<?php } ?>
+			</p>
+          </div>
+        </div>
+        <div class="header-con banxin">
+            <div class="header-top clearfix">
+               <h1 class="left"><img src="./image/logo.png" alt=""></h1>
+               <div class="header-top-right right">
+					<form accept="index.php?to=search">
+                   <div class="search">
+                       <input type="text" placeholder="请输入游戏名称" name="keyboard">
+					   <input type="submit" value="搜索">
+					   <input type="hidden" value="search" name="to">
+					   
+                   </div>
+				   </form>
+                   <p>热门搜索：
+					<?php if(is_array($sosolist)===true){foreach($sosolist AS $key => $value){ ?>
+					<a href="index.php?to=game_id&amp;id=<?php echo $value['id']?>" target="_blank"><?php echo $value['gmname']?></a>
+					<?php }} ?>
+				   </p>
+               </div>
+            </div>
+            <div class="header-tab">
+                <a href="/"  <?php if($to=='index' || $to==''){ ?>class="on"<?php } ?>>官方首页<p></p></a>
+                <a href="./index.php?to=game" <?php if($to=='game'){ ?>class="on"<?php } ?>>游戏中心<p></p></a>
+                <a href="./index.php?to=kaifu" <?php if($to=='kaifu'){ ?>class="on"<?php } ?>>开服列表<p></p></a>
+                <a href="./index.php?to=activity" <?php if($to=='activity'){ ?>class="on"<?php } ?>>福利活动<p></p></a>
+                <a href="./index.php?to=gifts" <?php if($to=='gifts'){ ?>class="on"<?php } ?>>礼包中心<p></p></a>
+                <a href="../index.php?to=news" <?php if($to=='news'){ ?>class="on"<?php } ?>>资讯攻略<p></p></a>
+            </div>
+        </div>
+    </div>

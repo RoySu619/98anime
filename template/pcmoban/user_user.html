@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./template/pcmoban/css/base.css">
+  <link rel="stylesheet" href="./template/pcmoban/css/public.css">
+  <link rel="stylesheet" href="./template/pcmoban/css/person.css">
+  <link rel="stylesheet" href="./template/pcmoban/css/cropper.min.css">
+  <link rel="stylesheet" href="./template/pcmoban/css/ImgCropping.css">
+  <link rel="stylesheet" href="./template/pcmoban/css/sweetalert.css">
+  <title>个人中心</title>
+</head>
+<body>
+    <div class="header">
+      <div class="login">
+        <div class="banxin clearfix">
+          <p class="left">
+		  <a href="/" style="color: #fddd85;">返回首页</a>
+		  <span>|</span><a href="../index.php?to=helpl" target="_blank">关于本站</a>
+		  <span>|</span><a href="../index.php?to=helpl" target="_blank">联系我们</a>
+		  <span>|</span><a href="../index.php?to=helpll" target="_blank">帮助中心</a>
+		  <span>|</span><a href="../index.php?to=helpl" target="_blank">版权声明</a>
+		  <span>|</span><a href="../index.php?to=helpl" target="_blank">家长监护</a>
+		  <span>|</span><a href="../index.php?to=helpl" target="_blank">用户协议</a>
+		  </p>
+          <p class="right">
+			<!--{if $G_uid}-->
+				<a href="./index.php?to=user">
+					<!--{if $G_ulogo}-->
+					<img src="$G_ulogo">
+					<!--{else}-->
+					<img src="./template/pcmoban/images/head.png">
+					<!--{/if}-->
+				</a>
+				$G_unick
+				<a href="./index.php?to=user">个人中心</a>
+				<a href="./index.php?to=out&login=out">退出</a>
+			<!--{else}-->
+				<a href="./index.php?to=login">登录</a>
+				<a href="./index.php?to=regsiter">注册</a>
+			<!--{/if}-->
+		  </p>
+        </div>
+      </div>
+    </div>
+    <div class="banxin content clearfix">
+      <div class="information-list">
+          <div class="hot-new">
+            <span class="cur">
+                个人设置
+                <p></p>
+            </span>
+            <span>
+                我的礼包
+                <p></p>
+            </span>
+            <!-- <span> -->
+                <!-- 我的游戏 -->
+                <!-- <p></p> -->
+            <!-- </span> -->
+          </div>
+          <div class="person_info fenlei on">
+              <div class="headigm" id="replaceImg">
+				<!--{if $G_ulogo}-->
+					<img src="./$G_ulogo" alt="" id="finalImg">
+				<!--{else}-->
+					<img src="./template/pcmoban/images/head.png" alt="" id="finalImg">
+				<!--{/if}-->
+                  <p>修改头像</p>
+              </div>
+              <h3>$G_unick</h3>
+              <div class="detail">
+                  <p><span>昵称：</span> <input type="text" id="unick" value="$G_unick"></p>
+                  <p><span>手机：</span> <input type="text" id="utell" value="$G_tell"></p>
+                  <p><span>邮箱：</span> <input type="text" id="umail" value="$G_email"></p>
+                  <p><span>Q  Q：</span> <input type="text" id="uqq" value="$G_qq"></p>
+                  <p><span>微信：</span> <input type="text" id="uwx" value="$G_weixi"></p>
+				  <input type="hidden" value="" class="uslogourl">
+				  <p class="btn"><span onclick="setdate();">保 存</span></p>
+				  
+              </div>
+          </div>
+
+			<div class="my_libao fenlei">
+              <ul>
+				<!--{loop $lblist $key $value}-->
+              <li>
+                    <img src="./$value['gmlogo']">
+                    <div>
+                        <h3>{$value['gmname']}{$value['lbname']}</h3>
+                        <p>$value['lbjj']</p>
+                        <i>截止时间：$value['times']</i>
+                    </div>
+                    <div class="system">
+                        兑换码：$value['lbkey']
+                    </div>
+					<button data-clipboard-text="$value['lbkey']" class="right" onclick="btns()">复制</button>
+				
+              </li>
+			  <!--{/loop}-->
+			</ul>
+			</div>
+      </div>
+    </div>
+    <div style="display: none" class="tailoring-container">
+        <div class="black-cloth" onclick="closeTailor(this)"></div>
+        <div class="tailoring-content">
+            <div class="tailoring-content-one">
+                <label title="上传图片" for="chooseImg" class="l-btn choose-btn">
+                <input type="file" accept="image/jpg,image/jpeg,image/png" name="file" id="chooseImg" class="hidden" onchange="selectImg(this)">
+                选择图片
+                </label>
+                <div class="close-tailoring" onclick="closeTailor(this)">×</div>
+            </div>
+            <div class="tailoring-content-two">
+                <div class="tailoring-box-parcel">
+                    <img id="tailoringImg">
+                </div>
+                <div class="preview-box-parcel">
+                    <p>图片预览：</p>
+                    <div class="square previewImg"></div>
+                    <div class="circular previewImg"></div>
+                </div>
+            </div>
+            <div class="tailoring-content-three">
+                <button class="l-btn cropper-reset-btn">复位</button>
+                <button class="l-btn cropper-rotate-btn">旋转</button>
+                <button class="l-btn cropper-scaleX-btn">换向</button>
+                <button class="l-btn sureCut" id="sureCut">确定</button>
+            </div>
+        </div>
+    </div>
+	<div class="footer">
+		
+		<p> 
+			<a href="./help.html" target="_blank">关于本站</a>
+			<span>|</span><a href="./help.html" target="_blank">联系我们</a>
+			<span>|</span><a href="./help.html" target="_blank">帮助中心</a>
+			<span>|</span><a href="./help.html" target="_blank">版权声明</a>
+			<span>|</span><a href="./help.html" target="_blank">家长监护</a>
+			<span>|</span><a href="./help.html" target="_blank">用户协议</a>
+		</p>
+        <p>健康游戏忠告：抵制不良游戏 拒绝盗版游戏 注意自我保护 谨防上当受骗 适度游戏益脑 沉迷游戏伤身 合理安排时间 享受健康生活</p>
+        <p>COPYRIGHT © 2015-2018 $config['wzname']游戏网络科技有限公司 | $config['footinfos'] </p>
+    </div>
+<script src="./template/pcmoban/js/jquery-1.11.3.min.js" charset="utf-8"></script>
+<script src="./template/pcmoban/js/clipboard.min.js"></script>
+<script src="./template/pcmoban/js/user.js"></script>
+<script src="./template/pcmoban/js/cropper.min.js" charset="utf-8"></script>
+<script src="./template/pcmoban/js/upload.js" charset="utf-8"></script>
+<script src="./template/pcmoban/js/sweetalert.min.js"></script>
+<script>
+var btns = document.querySelectorAll('button');
+var clipboard = new ClipboardJS(btns);
+	clipboard.on('success', function(e) {
+		alert('复制成功！');
+	});
+	clipboard.on('error', function(e) {
+		alert('复制失败！请手动复制');
+	})
+var getfz = function(){
+	var btns = document.querySelectorAll('button');
+	var clipboard = new ClipboardJS(btns);
+		clipboard.on('success', function(e) {
+			alert('复制成功！');
+		});
+		clipboard.on('error', function(e) {
+			alert('复制失败！请手动复制');
+	})
+}
+
+$(document).on('click','.hot-new span',function(){
+    var idx = $(this).index();
+    $(this).addClass('cur').siblings().removeClass('cur');
+    $('.fenlei').eq(idx).addClass('on').siblings().removeClass('on');
+})
+$(document).on('mouseenter','.person_info .headigm img',function(){
+    $('.headigm p').show();
+})
+$(document).on('mouseleave','.person_info .headigm',function(){
+    $('.headigm p').hide();
+});
+</script>
+
+

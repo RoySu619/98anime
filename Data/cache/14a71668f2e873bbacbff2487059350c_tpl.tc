@@ -1,0 +1,117 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><?php include $this->Template('header');?>
+
+
+<div class="main">
+	<?php if($sotype==1){ ?>
+	<div class="gm_gm_list">
+		<div id="gm_gm_list1">
+			<?php if(is_array($solist)===true){foreach($solist AS $key => $value){ ?>
+			<div class="gm_gm_main_li">
+				<li>
+					<div class="gmion_s"><img src="./<?php echo $value['gmlogo']?>" alt="<?php echo $value['gmname']?>"></div>
+					<div class="gmcen_s">
+						<b><?php echo $value['gmname']?><h5></h5></b>
+						<em>类型：<?php echo $value['gmbq']?> </em>
+						<span><?php echo $value['gmjj']?></span>
+					</div>
+					<a href="./mobile.php?to=game_id&amp;id=<?php echo $value['id']?>"><div class="gmdow_s"><span>下载</span></div></a>
+				</li>
+			</div>
+			<div class="gmgang"></div>
+			<?php }} ?>
+		</div>
+		<div class="ajaxjz" id="ajaxjz1"></div>
+	</div>
+	<?php } ?>
+	<?php if($sotype==2){ ?>
+	<div class="gm_gm_list">
+		<div id="gm_gm_list2">
+			<?php if(is_array($solist)===true){foreach($solist AS $key => $value){ ?>
+			<div class="gm_gm_main_li">
+				<li>
+					<div class="kfion_s">
+						<a href="">
+							<img src="./<?php echo $value['lblogo']?>" alt="<?php echo $value['gmname']?>">
+						</a>
+					</div>
+					<div class="kfcen_s">
+						<b><?php echo $value['gmname']?><?php echo $value['lbname']?><h5></h5></b>
+						<em>剩余：<?php echo $value['lbsy']?>枚</em>
+						<span><?php echo $value['lbjj']?></span>
+					</div>
+					<a href=""><div class="kfdow_s"><span>领取</span></div></a>
+				</li>
+			</div>
+			<div class="gmgang"></div>
+			<?php }} ?>
+		</div>
+		<div class="ajaxjz" id="ajaxjz2"></div>
+	</div>
+	<?php } ?>
+</div>
+<input type="hidden" value="1" id="pages" loading="no">
+<input type="hidden" value="<?php echo $pagecount?>" id="pagenum">
+<script type="text/javascript">
+$(window).scroll(function(){
+    if($(document).scrollTop()>=$(document).height()-$(window).height()-100){
+	    var sscroll=$('#pages').attr('loading');
+        if(sscroll=="no"){
+		var pages=$("#pages").val()*1;
+			pages=pages+1;
+			$("#pages").val(pages);
+		var name = $("#name").val();
+		if(name){
+		var pagenum = $("#pagenum").val();
+		var lx = '<?php echo $sotype?>';
+		var htmls="";
+			if(pagenum>=pages){
+				$.ajax({
+					url:'./mobile.php?to=soso&op=sosoname&ty='+lx+'&keyboard='+name+'&pages='+pages+'',
+					type:"GET",
+					dataType:"json",
+					beforeSend:function(){ 
+						$('#ajaxjz'+lx).html('努力加载中...') 
+					},success: function(data){
+						if(lx==1){
+							$.each(data, function(kk, vv){
+								htmls+='<div class="gm_gm_main_li"><li>'
+								htmls+='<div class="gmion_s"><img src="./'+vv['gmlogo']+'"></div>'
+								htmls+='<div class="gmcen_s">'
+								htmls+='<b>'+vv['gmname']+'<h5></h5></b>'
+								htmls+='<em>类型：'+vv['gmbq']+' </em>'
+								htmls+='<span>'+vv['gmjj']+'</span>'
+								htmls+='</div>'
+								htmls+='<a href="./mobile.php?to=game_id&amp;id='+vv['id']+'"><div class="gmdow_s"><span>下载</span></div></a>'
+								htmls+='</li>'
+								htmls+='</div><div class="gmgang"></div>';
+							});
+						}
+						if(lx==2){
+							$.each(data, function(kk, vv){
+								htmls+='<div class="gm_gm_main_li"><li><div class="kfion_s">'
+								htmls+='<a href=""><img src="./'+vv['lblogo']+'" alt=""></a></div><div class="kfcen_s">'
+								htmls+='<b>'+vv['gmname']+''+vv['lbname']+'<h5></h5></b>'
+								htmls+='<em>剩余：'+vv['lbsy']+'个</em>'
+								htmls+='<span>'+vv['lbjj']+'</span>'
+								htmls+='</div>'
+								htmls+='<a href="./mobile.php?to=libao_id&amp;id='+vv['id']+'"><div class="kfdow_s"><span>领取</span></div></a>'
+								htmls+='</li>'
+								htmls+='</div><div class="gmgang"></div>';
+							});
+						}
+						if(htmls!=""){
+							$("#gm_gm_list"+lx).append(htmls);
+							$('#ajaxjz'+lx).html('');
+						}
+					}
+				});	
+				//------
+			}else{
+				$('#ajaxjz'+lx).html('没有更多了');
+			}
+		}
+		}
+    }
+});
+</script>
+<?php include $this->Template('footer');?>

@@ -1,0 +1,90 @@
+.lb_m{
+	width: 750rpx;
+}
+.lb_m_t{
+	width: 750rpx;
+	padding: 50rpx 30rpx;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+	background-color: rgba(0, 0, 0,0.02);
+}
+.lb_m_t_l{
+	width: 120rpx;
+	height: 120rpx;
+	border-radius: 20rpx;
+}
+.lb_m_t_r{
+	padding-left: 20rpx;
+	width: 570rpx;
+	height: 120rpx;
+}
+.lb_m_t_r_t1{
+	width: 500rpx;
+	height: 40rpx;
+	line-height: 40rpx;
+	lines:1;
+	font-size: 30rpx;
+	color: rgba(0, 0, 0,1);
+	font-weight: bold;
+}
+.lb_m_t_r_t2{
+	width: 500rpx;
+	lines:1;
+	height: 40rpx;
+	line-height: 48rpx;
+	font-size: 24rpx;
+	color: rgba(0, 0, 0,0.5);
+}
+.lb_m_t_r_t3{
+	width: 500rpx;
+	lines:1;
+	height: 40rpx;
+	line-height: 40rpx;
+	font-size: 24rpx;
+	color: rgba(255, 0, 0,1);
+}
+.lb_cell{
+	width: 750rpx;
+	padding-left: 30rpx;
+	padding-right: 30rpx;
+}
+.lb_tit{
+	width: 690rpx;
+	height: 120rpx;
+	line-height: 120rpx;
+	font-size: 30rpx;
+}
+.lb_jj{
+	width: 690rpx;
+	line-height: 35rpx;
+	font-size: 26rpx;
+	border-radius: 10rpx;color: rgba(0, 0, 0,0.8);
+}
+.lb_cells{
+	width: 750rpx;
+	padding-left: 30rpx;
+	padding-right: 30rpx;
+	padding-top: 50rpx;
+}
+.lb_m_an{
+	width: 690rpx;
+	height: 80rpx;
+	line-height: 80rpx;
+	background-color: #ffda08;
+	text-align: center;
+	font-size: 30rpx;
+	border-radius: 40rpx;
+}
+.lb_m_an2{
+	width: 690rpx;
+	height: 80rpx;
+	line-height: 80rpx;
+	margin-bottom: 20rpx;
+	background-color: rgba(255, 218, 8, 0.1);
+	color: #ffda08;
+	text-align: center;
+	font-size: 30rpx;
+	border-radius: 40rpx;
+}

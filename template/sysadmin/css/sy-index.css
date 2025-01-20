@@ -1,0 +1,446 @@
+﻿.sy-config{
+    float: left;
+    width: 100%;
+    height: 226px;
+    background: #fff;
+	border-radius: 5px;
+}
+.sy-config-sz{
+    float: left;
+    width: 31.11%;
+	margin-left:1.66%;
+    height: 140px;
+    margin-top: 2%;
+}
+.sy-config-sz-z{
+    max-width: 350px;
+    min-width: 200px;
+    height: 140px;
+    border-radius: 10px;
+    margin: auto;
+   
+    background-size: 170px;
+}
+.sy-config-sz-z b{
+    float: left;
+    width: 100%;
+    height: 75px;
+    font-size: 25px;
+    line-height: 90px;
+}
+.sy-config-sz-z em{
+    float: left;
+    background: none!important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    border-radius: 0px !important;
+    margin-bottom: 0 !important;
+    font-size: 15px;
+}
+.sy-config-sz-z span{
+	
+}
+.sy-config-main{
+    float: left;
+    width: 100%;
+    height: auto;
+    background: #fff;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+.sy-config-main-tit{
+    float: left;
+    width: 100%;
+    height: 50px;
+    background: #fff;
+}
+.sy-config-main-tit i{
+	float: left;
+    width: 2px;
+    height: 20px;
+    background: #60bafd;
+    margin-top: 15px;
+}
+.sy-config-main-tit span{
+    float: left;
+    width: 135px;
+    height: 50px;
+    background: #fff;
+    line-height: 50px;
+    text-align: left;
+    margin-left: 17px;
+    font-size: 15px;
+}
+.sy-config-main-li{
+    float: left;
+    width: 96%;
+    height: auto;
+    margin: 2%;
+    border-left: 1px solid #ddd;
+}
+.sy-config-main-li li{
+    float: left;
+    width: 20%;
+    height: 50px;
+    line-height: 50px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    margin-left: -1px;
+    margin-top: -1px;
+    margin-right: -1px;
+	font-size: 15px;
+}
+
+.sy-config-xt{
+    float: left;
+    width: 100%;
+    height: auto;
+    background: #fff;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+.sy-config-xt-tit{
+    float: left;
+    width: 100%;
+    height: 50px;
+    background: #fff;
+}
+.sy-config-xt-tit i{
+	float: left;
+    width: 2px;
+    height: 20px;
+    background: #60bafd;
+    margin-top: 15px;
+}
+.sy-config-xt-tit span{
+    float: left;
+    width: 135px;
+    height: 50px;
+    background: #fff;
+    line-height: 50px;
+    text-align: left;
+    margin-left: 17px;
+    font-size: 15px;
+}
+.sy-config-xt-li{
+    float: left;
+    width: 96%;
+    height: auto;
+    margin: 2%;
+    border-left: 1px solid #ddd;
+}
+.sy-config-xt-li li{
+    float: left;
+    width: 50%;
+    height: 50px;
+    line-height: 50px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    margin-left: -2px;
+    margin-top: -1px;
+    margin-right: -3px;
+    font-size: 15px;
+}
+
+.sy-index-lb{
+	width: 100%;
+    margin-top: -128px;
+    height: auto;
+    float: left;
+    margin-bottom: 68px;
+}
+.sy-indexf{
+    background: #fff;
+    width: 98%;
+    margin-left: 1%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    border-radius: 2px;
+    float: left;
+}
+.sy-indexf em{
+    float: left;
+    background: #fff;
+    width: 48.5%;
+    margin-left: 1%;
+    border-radius: 2px;
+    margin-bottom: 1%;
+}
+.sy-indexf img{
+    width: 100%;
+    border-radius: 10px 10px 0px 0px;
+    margin-right: 0.3%;
+}
+.sy-index-txt{
+    float: left;
+    width: 100%;
+    height: 40px;
+    border: 0px solid #ddd;
+    text-indent: 15px;
+    line-height: 40px;
+    margin-top: -44px;
+    background: rgba(0, 0, 0, 0.25);
+}
+
+.sy-fileanniu{
+    width: 100%;
+    height: 40px;
+    float: left;
+    border-radius: 0px 0px 10px 10px;
+    font-size: 16px;
+    color: #fff;
+}
+.sy-fileinput-button{
+    position: relative;
+    display: inline-block;
+    left: -15px;
+    width: 100%;	
+}
+.sy-fileinput-button input {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    opacity: 0;
+    width: 100%;
+    height: 40px;
+    -ms-filter: 'alpha(opacity=0)';
+    cursor: pointer;
+}
+.sy-fileimg{
+    float: left;
+    width: 100%;
+    min-height: 166px;
+    background: #fcfcfc;
+    border-radius: 5px;
+    background-size: 100%;
+}
+.sy-textleft{
+	float: left;
+    width: 30%;
+    height: 40px;
+	line-height: 40px;
+	text-indent: 15px;
+    border-radius: 0px 0px 0px 10px;
+    background: -webkit-linear-gradient(#f4f6f9, #e7e8e8);
+    background: -o-linear-gradient(#f4f6f9, #e7e8e8);
+    background: -moz-linear-gradient(#f4f6f9, #e7e8e8);
+    background: linear-gradient(#f4f6f9, #e7e8e8);
+	color: #000;
+	font-size: 13px;
+}
+.sy-textid{
+	float: left;
+    width: 50%;
+    height: 40px;
+	text-indent: 15px;
+    border-radius: 0px 0px 0px 0px;
+    background: -webkit-linear-gradient(#f4f6f9, #e7e8e8);
+    background: -o-linear-gradient(#f4f6f9, #e7e8e8);
+    background: -moz-linear-gradient(#f4f6f9, #e7e8e8);
+    background: linear-gradient(#f4f6f9, #e7e8e8);
+}
+.sy-textbutton{
+    float: left;
+    width: 20%;
+    height: 40px;
+    border-radius: 0px 0px 10px 0px;
+    background: #60bafd;
+    background: -webkit-linear-gradient(#f4f6f9, #e7e8e8);
+    background: -o-linear-gradient(#f4f6f9, #e7e8e8);
+    background: -moz-linear-gradient(#f4f6f9, #e7e8e8);
+    background: linear-gradient(#f4f6f9, #e7e8e8);
+    color: #000;
+	cursor: pointer;
+	font-size: 13px;
+}
+.sy-textright{
+    float: left;
+    width: 25%;
+    height: 40px;
+    border-radius: 0px 0px 0px 0px;
+    background: #60bafd;
+    background: -webkit-linear-gradient(#f4f6f9, #e7e8e8);
+    background: -o-linear-gradient(#f4f6f9, #e7e8e8);
+    background: -moz-linear-gradient(#f4f6f9, #e7e8e8);
+    background: linear-gradient(#f4f6f9, #e7e8e8);
+    color: #000;
+    cursor: pointer;
+    font-size: 13px;
+    border: 0px solid #ddd;
+}
+/*-----设置-----*/
+.sy-index-szf{
+	width: 100%;
+    margin-top: -128px;
+    height: auto;
+    float: left;
+    margin-bottom: 68px;
+}
+.sy-index-sz{
+    background: #fff;
+    width: 98%;
+    margin-left: 1%;
+    padding-top: 1%;
+    border-radius: 6px;
+    float: left;
+    padding-bottom: 2%;
+}
+.sy-index-szn{
+    float: left;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+.sy-index-szn em{
+    float: left;
+    width: 14%;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 1%;
+    font-size: 15px;
+    color: #b7b7b7;
+    text-align: right;
+    padding-right: 1%;
+}
+.sy-index-sztxt{
+    float: left;
+    width: 69%;
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding-left: 1%;
+    margin-top: 1%;
+}
+.sy-index-textarea{
+    float: left;
+    width: 68%;
+    height: 96px;
+    border: 1px solid #ffd7cb;
+    border-radius: 5px;
+    padding-left: 1%;
+    margin-top: 1%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-right: 1%;
+}
+
+.sy-index-szfle{
+    float: left;
+    width: 27%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 1%;
+}
+.sy-index-szfleimg{
+	float: left;
+    width: 80%;
+    height: auto;
+    background: #fcfcfc;
+    border-radius: 5px;
+    background-size: 100%;
+    padding: 10%;
+}
+.sy-index-szbutton{
+    position: relative;
+    display: inline-block;
+    left: 0px;
+    width: 100%;
+    top: 0px;
+    height: 31px;
+}
+.sy-index-szfle input {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    opacity: 0;
+    width: 100%;
+    height: 35px;
+    -ms-filter: 'alpha(opacity=0)';
+    cursor: pointer;
+}
+.sy-index-szan{
+    width: 100%;
+    height: 35px;
+    background: -webkit-linear-gradient(#f4f6f9, #e7e8e8);
+    background: -o-linear-gradient(#f4f6f9, #e7e8e8);
+    background: -moz-linear-gradient(#f4f6f9, #e7e8e8);
+    background: linear-gradient(#f4f6f9, #e7e8e8);
+    float: left;
+    font-size: 16px;
+    color: #888;
+    line-height: 35px;
+}
+
+.sy-index-szfleimg img{
+    width: auto;
+    height: 66px;
+    margin: auto;
+    background: #fcfcfc;
+    border-radius: 5px;
+    background-size: 100%;
+}	
+.sy-index-conse{
+    float: left;
+    width: 100%;
+    height: 35px;
+    border: 0px solid #ddd;
+    border-radius: 5px;
+    text-indent: 0px;
+    color: #000;
+    cursor: pointer;
+}
+
+/*---------模板列表--------*/
+.sy-index-mob-nr{
+    width: 96%;
+    padding: 2%;
+    float: left;
+}
+.sy-mob-xx{
+    float: left;
+    width: 33%;
+    height: auto;
+}
+.sy-mob-xx em{
+    width: 100%;
+    float: left;
+    position: relative;
+    overflow: hidden;
+    height: 425px;
+}
+.sy-mob-xx span{
+    width: 100%;
+    height: 100%;
+    float: left;
+    position: absolute;
+    top: 0px;
+	transform: translateX(101%);
+	-webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    transition: all .5s;
+    left: 0px; 
+	background: rgba(0, 0, 0, 0.32);
+}
+.sy-mob-xx span img{
+    width: 50%;
+    height: auto;
+    float: left;
+    margin-left: 25%;
+    margin-top: 10%;
+}
+.sy-mob-xx b{
+    float: left;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 15px;
+}
+.sy-mob-xx i{
+    font-size: 15px;
+    padding: 5px 5px 5px 5px;
+    cursor: pointer;
+}

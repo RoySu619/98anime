@@ -1,0 +1,65 @@
+<!--{load header}-->
+    <div class="banxin content clearfix">
+      <div class="left information-list">
+          <div class="hot-new">
+            <span <!--{if $sort=='new'}-->class="cur"<!--{/if}-->>
+                <a href="./index.php?to=activity">最新活动</a>
+                <p></p>
+            </span>
+            <span <!--{if $sort=='hot'}-->class="cur"<!--{/if}-->>
+                <a href="./index.php?to=activity&sort=hot">最热活动</a>
+                <p></p>
+            </span>
+        </div>
+          <ul>
+			<!--{loop $hdlb $key $value}-->
+              <li>
+                  <a href="./index.php?to=news_id&id=$value['id']" target="_blank">
+                      <img src="$value['zxlogo']">
+                      <div>
+                          <span class="on1"></span>
+                          <h3>$value['zxname']</h3>
+                          <p>$value['zxjj']</p>
+                          <i>$value['times']</i>
+                      </div>
+                  </a>
+              </li>
+              <!--{/loop}-->
+          </ul>
+          <div class="page">
+              <a href="./index.php?to=activity&sort=$sort&pages=$pagestrL"><span></span></a>
+			  <b>$pagestrC/$pagenum</b>
+			  <a href="./index.php?to=activity&sort=$sort&pages=$pagestrR"><span class="next"></span></a>
+          </div>
+      </div>
+      <div class="right hot-information">
+          <h3><i></i>热门资讯</h3>
+          <ul>
+			<!--{loop $hotnewlb $key $value}-->
+              <li>
+                  <a href="./index.php?to=news_id&id=$value['id']" target="_blank">
+                      <img src="$value['zxlogo']">
+                      <p>$value['zxname']</p>
+                  </a>
+              </li>
+			  <!--{/loop}-->
+          </ul>
+          <h3 class="hot-game"><i></i>热门游戏</h3>
+          <ul class="kaifu">
+			<!--{loop $xflb $key $value}-->
+              <li>
+                <a href="./index.php?to=game_id&id=$value['id']" class="clearfix">
+                  <img src="$value['gmlogo']" class="left">
+                  <div class="left">
+                    <h4>$value['gmname']</h4>
+                    <p>$value['xfname']</p>
+                    <p>$value['kftimes']</p>
+                  </div>
+                  <img src="./template/pcmoban/images/right1.png" class="right">
+                </a>
+              </li>
+			  <!--{/loop}-->
+          </ul>
+      </div>
+    </div>
+<!--{load footer}-->

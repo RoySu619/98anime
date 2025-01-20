@@ -1,0 +1,81 @@
+<template>
+	<list class="m" @loadmore="moerdata">
+		<cell class="list" v-if="list" v-for="(item,index) in list" :key="item.id" @click="opzxxx(item.id)">
+			<view class="news" :render-whole="true">
+				<text class="news_t">{{item.zxname}}</text>
+				<text class="news_c">{{item.zxjj}}</text>
+				<text class="news_b">{{item.times}}</text>
+			</view>
+		</cell>
+		<cell class="list_b"></cell>
+		<cell class="nodata" v-if="list==''">
+			<image class="nodata_i" src="../../static/nodata.png"></image>
+		</cell>
+	</list>
+</template>
+<script>
+import G_APP from '@/common/ip.js'
+export default {
+    data() {
+		return {
+			ip:G_APP.ip,
+			appb:G_APP.appb,
+			list:[],
+			pag:0,
+			zpag:1
+		}
+    },
+	onLoad(){
+		
+	},
+	onReady() {
+		this.get(1);
+	},
+    methods: {
+		opzxxx(id){
+			uni.navigateTo({
+				url: '../../pages/gm/newsxx?id='+id,
+			});
+		},
+		moerdata(){
+			this.get(2);
+		},
+		get(pd){
+			let thi=this;
+			let npag=Number(thi.pag)+1;
+			thi.pag=npag;
+			if(npag<=thi.zpag){
+				uni.request({
+					url: G_APP.ip + 'appapi.php?to=news',
+					method: "GET",
+					dataType: "json",
+					enableCache: true, //缓存
+					defer: true, //控制当前请求是否延时至首屏内容渲染后发送
+					data: {
+						'nelist':'go',
+						'pages':npag
+					},
+					success: (ret) => {
+						if(ret.data.data){
+							uni.hideLoading();
+							if(pd==1){
+								thi.list=ret.data.data;
+								thi.zpag=ret.data.pagenum;
+							}
+							if(pd==2){
+								thi.list=thi.list.concat(ret.data.data);
+							}
+						}else{
+							thi.list=[];
+							uni.hideLoading();
+						}
+					}
+				});
+			}
+		}
+    }
+}
+</script>
+<style>
+@import "../../common/news.css";
+</style>

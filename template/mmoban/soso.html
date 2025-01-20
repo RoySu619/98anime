@@ -1,0 +1,116 @@
+<!--{load header}-->
+
+<div class="main">
+	<!--{if $sotype==1}-->
+	<div class="gm_gm_list">
+		<div id="gm_gm_list1">
+			<!--{loop $solist $key $value}-->
+			<div class="gm_gm_main_li">
+				<li>
+					<div class="gmion_s"><img src="./$value['gmlogo']" alt="$value['gmname']"></div>
+					<div class="gmcen_s">
+						<b>$value['gmname']<h5></h5></b>
+						<em>类型：$value['gmbq'] </em>
+						<span>$value['gmjj']</span>
+					</div>
+					<a href="./mobile.php?to=game_id&id=$value['id']"><div class="gmdow_s"><span>下载</span></div></a>
+				</li>
+			</div>
+			<div class="gmgang"></div>
+			<!--{/loop}-->
+		</div>
+		<div class="ajaxjz" id="ajaxjz1"></div>
+	</div>
+	<!--{/if}-->
+	<!--{if $sotype==2}-->
+	<div class="gm_gm_list">
+		<div id="gm_gm_list2">
+			<!--{loop $solist $key $value}-->
+			<div class="gm_gm_main_li">
+				<li>
+					<div class="kfion_s">
+						<a href="">
+							<img src="./$value['lblogo']" alt="$value['gmname']">
+						</a>
+					</div>
+					<div class="kfcen_s">
+						<b>{$value['gmname']}$value['lbname']<h5></h5></b>
+						<em>剩余：$value['lbsy']枚</em>
+						<span>$value['lbjj']</span>
+					</div>
+					<a href=""><div class="kfdow_s"><span>领取</span></div></a>
+				</li>
+			</div>
+			<div class="gmgang"></div>
+			<!--{/loop}-->
+		</div>
+		<div class="ajaxjz" id="ajaxjz2"></div>
+	</div>
+	<!--{/if}-->
+</div>
+<input type="hidden" value="1" id="pages" loading="no">
+<input type="hidden" value="$pagecount" id="pagenum">
+<script>
+$(window).scroll(function(){
+    if($(document).scrollTop()>=$(document).height()-$(window).height()-100){
+	    var sscroll=$('#pages').attr('loading');
+        if(sscroll=="no"){
+		var pages=$("#pages").val()*1;
+			pages=pages+1;
+			$("#pages").val(pages);
+		var name = $("#name").val();
+		if(name){
+		var pagenum = $("#pagenum").val();
+		var lx = '$sotype';
+		var htmls="";
+			if(pagenum>=pages){
+				$.ajax({
+					url:'./mobile.php?to=soso&op=sosoname&ty='+lx+'&keyboard='+name+'&pages='+pages+'',
+					type:"GET",
+					dataType:"json",
+					beforeSend:function(){ 
+						$('#ajaxjz'+lx).html('努力加载中...') 
+					},success: function(data){
+						if(lx==1){
+							$.each(data, function(kk, vv){
+								htmls+='<div class="gm_gm_main_li"><li>'
+								htmls+='<div class="gmion_s"><img src="./'+vv['gmlogo']+'"></div>'
+								htmls+='<div class="gmcen_s">'
+								htmls+='<b>'+vv['gmname']+'<h5></h5></b>'
+								htmls+='<em>类型：'+vv['gmbq']+' </em>'
+								htmls+='<span>'+vv['gmjj']+'</span>'
+								htmls+='</div>'
+								htmls+='<a href="./mobile.php?to=game_id&id='+vv['id']+'"><div class="gmdow_s"><span>下载</span></div></a>'
+								htmls+='</li>'
+								htmls+='</div><div class="gmgang"></div>';
+							});
+						}
+						if(lx==2){
+							$.each(data, function(kk, vv){
+								htmls+='<div class="gm_gm_main_li"><li><div class="kfion_s">'
+								htmls+='<a href=""><img src="./'+vv['lblogo']+'" alt=""></a></div><div class="kfcen_s">'
+								htmls+='<b>'+vv['gmname']+''+vv['lbname']+'<h5></h5></b>'
+								htmls+='<em>剩余：'+vv['lbsy']+'个</em>'
+								htmls+='<span>'+vv['lbjj']+'</span>'
+								htmls+='</div>'
+								htmls+='<a href="./mobile.php?to=libao_id&id='+vv['id']+'"><div class="kfdow_s"><span>领取</span></div></a>'
+								htmls+='</li>'
+								htmls+='</div><div class="gmgang"></div>';
+							});
+						}
+						if(htmls!=""){
+							$("#gm_gm_list"+lx).append(htmls);
+							$('#ajaxjz'+lx).html('');
+						}
+					}
+				});	
+				//------
+			}else{
+				$('#ajaxjz'+lx).html('没有更多了');
+			}
+		}
+		}
+    }
+});
+</script>
+<!--{load footer}-->

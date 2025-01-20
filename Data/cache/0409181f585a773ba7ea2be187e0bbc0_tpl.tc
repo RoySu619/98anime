@@ -1,0 +1,173 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><!DOCTYPE html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<?php if($to=='index' || $to=='kefu' || $to=='search' || $to=='about'){ ?>
+	<title><?php echo $config['sy_title']?></title>
+	<meta name="keywords" content="<?php echo $config['sy_keyword']?>" />
+    <meta name="description" content="<?php echo $config['sy_description']?>" />
+<?php }else if($to=='game'){ ?>
+	<title><?php echo $config['gm_title']?></title>
+	<meta name="keywords" content="<?php echo $config['gm_keyword']?>" />
+    <meta name="description" content="<?php echo $config['gm_description']?>" />
+<?php }else if($to=='newgame'){ ?>
+	<title><?php echo $config['newgm_title']?></title>
+	<meta name="keywords" content="<?php echo $config['newgm_keyword']?>" />
+    <meta name="description" content="<?php echo $config['newgm_description']?>" />
+<?php }else if($to=='kaifu'){ ?>
+	<title><?php echo $config['gmkf_title']?></title>
+	<meta name="keywords" content="<?php echo $config['gmkf_keyword']?>" />
+    <meta name="description" content="<?php echo $config['gmkf_description']?>" />
+<?php }else if($to=='hot'){ ?>
+	<title><?php echo $config['hotgm_title']?></title>
+	<meta name="keywords" content="<?php echo $config['hotgm_keyword']?>" />
+    <meta name="description" content="<?php echo $config['hotgm_description']?>" />
+<?php }else if($to=='libao'){ ?>
+	<title><?php echo $config['gmlb_title']?></title>
+	<meta name="keywords" content="<?php echo $config['gmlb_keyword']?>" />
+    <meta name="description" content="<?php echo $config['gmlb_description']?>" />
+<?php }else if($to=='libao_id'){ ?>
+	<title><?php echo $config['lbxx_title']?></title>
+	<meta name="keywords" content="<?php echo $config['lbxx_keyword']?>" />
+    <meta name="description" content="<?php echo $config['lbxx_description']?>" />
+<?php }else if($to=='news'){ ?>
+	<title><?php echo $config['news_title']?></title>
+	<meta name="keywords" content="<?php echo $config['news_keyword']?>" />
+    <meta name="description" content="<?php echo $config['news_description']?>" />
+<?php }else if($to=='news_id'){ ?>
+	<title><?php echo $config['newsxx_title']?></title>
+	<meta name="keywords" content="<?php echo $config['newsxx_keyword']?>" />
+	<meta name="description" content="<?php echo $config['newsxx_description']?>" />
+<?php }else if($to=='newgm'){ ?>
+	<title><?php echo $config['newgm_title']?></title>
+	<meta name="keywords" content="<?php echo $config['newgm_keyword']?>" />
+    <meta name="description" content="<?php echo $config['newgm_description']?>" />
+<?php }else if($to=='hd'){ ?>
+	<title><?php echo $config['activity_title']?></title>
+	<meta name="keywords" content="<?php echo $config['activity_keyword']?>" />
+    <meta name="description" content="<?php echo $config['activity_description']?>" />
+<?php } else { ?>
+	<title><?php echo $config['sy_title']?></title>
+	<meta name="keywords" content="<?php echo $config['sy_keyword']?>" />
+    <meta name="description" content="<?php echo $config['sy_description']?>" />
+<?php } ?>
+<link rel="shortcut icon" href="../icon.ico" />
+<link rel="stylesheet" href="./template/mmoban/css/swiper.min.css">
+<link rel="stylesheet" href="./template/mmoban/css/main.css">
+<script src="./template/mmoban/js/jquery.js" type="text/javascript"></script>
+<!-- Google Tag Manager -->
+<script type="text/javascript">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MJDVP2DS');</script>
+<!-- End Google Tag Manager -->
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://beastdatab.com/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+</head>
+<body style="background: #f1f1f1;">
+<div class="header">
+	<?php if($to=='' || $to=='index'){ ?>
+	<div class="sy_top">
+		<div class="sy_top_logo"><img src="../image/logo.png"></div>
+		<div class="sy_top_soso"><a href="./mobile.php?to=soso"><input type="button" value="搜索您喜爱的软件"></a></div>
+		<a href="./mobile.php?to=gg"><div class="sy_top_gg"></div></a>
+	</div>
+	<?php } ?>
+	<?php if($to=='game'){ ?>
+	<div class="gm_header_fh">
+		<a href="../mobile.php"><div class="gm_header_left"></div></a>
+		<div class="gm_header_tit">软件中心</div>
+		<a href="/mobile.php?to=soso"><div class="gm_header_right"></div></a>
+	</div>
+	<?php } ?>
+	<?php if($to=='game_id'){ ?>
+	<div class="gm_header_fh">
+		<a href="javascript:;" onClick="javascript :history.back(-1);"><div class="gm_header_left"></div></a>
+		<div class="gm_header_tit">游戏详细</div>
+	</div>
+	<?php } ?>
+	<?php if($to=='kaifu'){ ?>
+	<div class="gm_header_fh">
+		<a href="../mobile.php"><div class="gm_header_left"></div></a>
+		<div class="gm_header_tit">开服表</div>
+	</div>
+	<?php } ?>
+	<?php if($to=='hd'){ ?>
+	<div class="gm_header_fh">
+		<a href="../mobile.php"><div class="gm_header_left"></div></a>
+		<div class="gm_header_tit">游戏活动</div>
+
+	</div>
+	<?php } ?>
+	<?php if($to=='news'){ ?>
+	<div class="gm_header_fh">
+		<a href="../mobile.php"><div class="gm_header_left"></div></a>
+		<div class="gm_header_tit">新闻资讯</div>
+	</div>
+	<?php } ?>
+	<?php if($to=='news_id'){ ?>
+	<div class="gm_header_fh">
+		<a href="javascript:;" onClick="javascript :history.back(-1);"><div class="gm_header_left"></div></a>
+		<div class="gm_header_tit">资讯详细</div>
+	</div>
+	<?php } ?>
+	<?php if($to=='gg'){ ?>
+	<div class="gm_header_fh">
+		<a href="../mobile.php"><div class="gm_header_left"></div></a>
+		<div class="gm_header_tit">公告</div>
+	</div>
+	<?php } ?>
+	<?php if($to=='gg_id'){ ?>
+	<div class="gm_header_fh">
+		<a href="javascript:;" onClick="javascript :history.back(-1);"><div class="gm_header_left"></div></a>
+		<div class="gm_header_tit">官方公告</div>
+	</div>
+	<?php } ?>
+	<?php if($to=='libao'){ ?>
+	<div class="lb_header_fh">
+		<a href="./mobile.php"><div class="lb_header_left"></div></a>
+		<div class="lb_header_tit">游戏礼包</div>
+		<a href="/mobile.php?to=soso&amp;ty=2"><div class="lb_header_right"></div></a>
+	</div>
+	<?php } ?>
+	<?php if($to=='libao_id'){ ?>
+	<div class="gm_header_fh">
+		<a href="javascript:;" onClick="javascript :history.back(-1);"><div class="gm_header_left"></div></a>
+		<div class="gm_header_tit">礼包详细</div>
+	</div>
+	<?php } ?>
+	<?php if($to=='soso'){ ?>
+	<div class="so_header_fh">
+		<a href="../mobile.php"><div class="so_header_left"></div></a>
+		<form accept="index.php?to=soso">
+		<div class="so_header_tit">
+		<?php if($sotype=='1'){ ?>
+			<input type="text" name="keyboard" value="<?php echo $soname?>" id="name" placeholder="请输入您要搜索的游戏">
+		<?php } ?>
+		<?php if($sotype=='2'){ ?>
+			<input type="text" name="keyboard" value="<?php echo $soname?>" id="name" placeholder="请输入您要搜索的礼包">
+		<?php } ?>
+		</div>
+		<input type="hidden" value="soso" name="to">
+		<input type="hidden" value="<?php echo $sotype?>" name="ty">
+		<input type="submit" class="so_header_right" value=""> 
+		</form>
+	</div>
+	<?php } ?>
+</div>

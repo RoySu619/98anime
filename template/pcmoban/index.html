@@ -1,0 +1,190 @@
+<!--{load header}-->
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+		<!--{loop $sylbt $key $value}-->
+        <div class="swiper-slide"><a href="./index.php?to=game_id&id=$value['id']"><img src="$value['gmpclbt']" alt="$value['gmname']"></a></div>
+		<!--{/loop}-->
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+    <div class="content">
+      <div class="hotlist banxin clearfix">
+        <div class="hot_game left">
+            <h3><i></i>热门游戏<a href="./index.php?to=game" class="right" target="_blank">更多+</a></h3>
+            <ul>
+				<!--{loop $hotlist $key $value}-->
+                <li>
+                    <a href="./index.php?to=game_id&id=$value['id']"><img src="./$value['gmpclbt']" alt="$value['gmname']"></a>
+                    <h4>$value['gmname']</h4>
+                    <p>$value['gmjj']</p>
+                    <div><a href="./index.php?to=game_id&id=$value['id']">进入专区 <span>→</span></a></div>
+                </li>
+				<!--{/loop}-->
+            </ul>
+        </div>
+        <div class="kaifu right">
+            <h3><i></i>新游开服<a href="./index.php?to=kaifu" class="right" target="_blank">更多+</a></h3>
+            <ul>
+			<!--{loop $kflist $key $value}-->
+              <li>
+                <a href="./index.php?to=game_id&id=$value['gid']" class="clearfix" target="_blank">
+                  <img src="$value['gmlogo']" class="left"  alt="$value['gmname']">
+                  <div class="left">
+                    <h4>$value['gmname']</h4>
+                    <p>$value['xfname']</p>
+                    <p><!--{eval echo mb_substr($value['kftimes'],5,11,'utf8')}--></p>
+                  </div>
+                  <img src="./template/pcmoban/images/right1.png" class="right">
+                </a>
+              </li>
+			  <!--{/loop}-->
+
+            </ul>
+        </div>
+      </div>
+      <div class="banxin game-infos">
+          <h3><i></i>游戏资讯<a href="./index.php?to=news" class="right" target="_blank">更多+</a></h3>
+          <div class="game-lists clearfix">
+              <div class="game-info left clearfix">
+                  <div class="game-news left">
+					<!--{loop $news $key $value}-->
+					<!--{if $key<5}-->
+                      <a href="javascript:;" title="$value['zxname']" <!--{if $key==0}-->class="cur"<!--{/if}-->>
+                          <img src="./$value['zxlogo']">
+                          <em>
+                              <span>$value['zxname']</span>
+                              <i>$value['zxjj']</i>
+                          </em>
+                          <i class="i-triangle"></i>
+                      </a>
+					<!--{/if}-->
+					<!--{/loop}-->
+                    
+                  </div>
+                  <div class="big-img left">
+					<!--{loop $news $key $value}-->
+					<!--{if $key<5}-->
+                      <a title="$value['zxname']" href="./index.php?to=news_id&id=$value['id']" style="background-image: url('./$value['zxlogo']')" target="_blank"></a>
+					<!--{/if}-->
+					<!--{/loop}-->
+                  </div>
+              </div>
+              <div class="news-info left">
+                  <a href="./index.php?to=news_id&id=$value['id']" title="$tjnews['zxname']" target="_blank" class="first-info">
+					$tjnews['zxname']
+				  </a>
+				  
+                  <ul>
+					<!--{loop $news $key $value}-->
+						<!--{if $key>5}-->
+						<li>
+						  <a href="./index.php?to=news_id&id=$value['id']" title="$value['zxname']" target="_blank">
+							$value['zxname']
+						  </a>
+						  <span>12-05</span>
+						</li>
+						<!--{/if}-->
+					<!--{/loop}-->
+                  </ul>
+              </div>
+          </div>
+      </div>
+      <div class="banxin groom clearfix">
+          <div class="groom-list left">
+              <h3><i></i>精品推荐<a href="./index.php?to=game" class="right" target="_blank">更多+</a></h3>
+              <ul>
+                  <!--{loop $jplist $key $value}-->
+                  <li>
+                      <a href="./index.php?to=game_id&id=$value['id']" target="_blank" title="$value['gmname']">
+                          <img src="./$value['gmlogo']">
+                          <h4>$value['gmname']</h4>
+                          <span>下载游戏</span>
+                      </a>
+                  </li>
+				  <!--{/loop}-->
+              </ul>
+          </div>
+          <div class="activity right">
+              <h3><i></i>热门活动<a href="./index.php?to=activity" class="right" target="_blank">更多+</a></h3>
+              <ul>
+				<!--{loop $rmnew $key $value}-->
+                  <li>
+                      <a href="./index.php?to=news_id&id=$value['id']" title="$value['zxname']" target="_blank">
+                          <img src="./$value['zxlogo']" alt="$value['zxname']">
+                          <p>$value['zxname']</p>
+                      </a>
+                  </li>
+                  <!--{/loop}-->
+              </ul>
+          </div>
+      </div>
+      <div class="video banxin">
+          <h3><i></i>游戏视频</h3>
+          <ul>
+			<!--{loop $newgmvd $key $value}-->
+              <li>
+                  <a href="./index.php?to=news_id&id=$value['id']" target="_blank" title="$value['zxname']">
+                      <img src="./$value['zxlogo']" alt="$value['zxname']">
+                      <p>$value['zxname']</p>
+                      <span></span>
+                      <i></i>
+                  </a>
+              </li>
+            <!--{/loop}-->
+          </ul>
+      </div>
+      <div class="game-phb banxin">
+          <h3><i></i>游戏排行榜</h3>
+          <ul>
+              <li>
+                  <h4>热游榜单</h4>
+				  <!--{eval $i='1'}-->
+				  <!--{loop $hotgmbd $key $value}-->
+                  <div>
+                      <i>$i</i>
+                      <a href="./index.php?to=game_id&id=$value['id']" target="_blank" ><img src="./$value['gmlogo']" alt="$value['gmname']"></a>
+                      <p>
+                          <b>$value['gmname']</b>
+                          <em>$value['gmbq']</em>
+                      </p>
+                      <a href="./index.php?to=game_id&id=$value['id']" class="right" target="_blank" ><span>下载</span></a>
+                  </div>
+				   <!--{eval $i++}-->
+                  <!--{/loop}-->
+              </li>
+              <li>
+                  <h4>好评榜单</h4>
+				  <!--{eval $i='1'}-->
+				  <!--{loop $newdowlb $key $value}-->
+                  <div>
+                      <i>$i</i>
+                      <a href="./index.php?to=game_id&id=$value['id']" target="_blank" ><img src="./$value['gmlogo']" alt="$value['gmname']"></a>
+                      <p>
+                          <b>$value['gmname']</b>
+                          <em>$value['gmbq']</em>
+                      </p>
+                      <a href="./index.php?to=game_id&id=$value['id']" class="right" target="_blank" ><span>下载</span></a>
+                  </div>
+				  <!--{eval $i++}-->
+                  <!--{/loop}-->
+              </li>
+              <li>
+                <h4>下载榜单</h4>
+				<!--{eval $i='1'}-->
+				<!--{loop $gmdowlb $key $value}-->
+                  <div>
+                      <i>$i</i>
+                     <a href="./index.php?to=game_id&id=$value['id']" target="_blank" ><img src="./$value['gmlogo']" alt="$value['gmname']"></a>
+                      <p>
+                          <b>$value['gmname']</b>
+                          <em>$value['gmbq']</em>
+                      </p>
+                      <a href="./index.php?to=game_id&id=$value['id']" class="right" target="_blank" ><span>下载</span></a>
+                  </div>
+				  <!--{eval $i++}-->
+                  <!--{/loop}-->
+              </li>
+          </ul>
+      </div>
+    </div>
+<!--{load footer}-->

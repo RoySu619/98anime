@@ -1,0 +1,92 @@
+<template>
+	<list class="m" @loadmore="moerdata">
+		<cell class="list" v-if="gmlist" v-for="(item,index) in gmlist" :key="item.id" @click="opgm(item.id)">
+			<view class="gm" :render-whole="true">
+				<image class="gm_i" :src="ip+item.gmlogo"></image>
+				<view :render-whole="true" class="gm_c">
+					<text class="gm_c_t">{{item.gmname}}</text>
+					<text class="gm_c_c">类型： {{item.gmbq}}</text>
+					<text class="gm_c_b">{{item.gmjj}}</text>
+				</view>
+				<text  class="gm_r">下载</text>
+			</view>
+		</cell>
+		<cell class="nodata" v-if="gmlist==''">
+			<image class="nodata_i" src="../../static/nodata.png"></image>
+		</cell>
+	</list>
+</template>
+<script>
+import G_APP from '@/common/ip.js'
+export default {
+    data() {
+		return {
+			ip:G_APP.ip,
+			appb:G_APP.appb,
+			gmlist:[],
+			pag:0,
+			zpag:1
+		}
+    },
+	onLoad(){
+		
+	},
+	onReady() {
+		this.get(1);
+	},
+    methods: {
+		opgm(id){
+			uni.navigateTo({
+				url: '../../pages/gm/gmxx?id='+id,
+			});
+		},
+		moerdata(){
+			this.get(2);
+		},
+		get(pd){
+			let thi=this;
+			let npag=Number(thi.pag)+1;
+			thi.pag=npag;
+			if(npag<=thi.zpag){
+				uni.request({
+					url: G_APP.ip + 'appapi.php?to=gm-ph',
+					method: "GET",
+					dataType: "json",
+					enableCache: true, //缓存
+					defer: true, //控制当前请求是否延时至首屏内容渲染后发送
+					data: {
+						'phlist':'go',
+						'pages':npag
+					},
+					success: (ret) => {
+						if(ret.data.data){
+							uni.hideLoading();
+							if(pd==1){
+								thi.gmlist=ret.data.data;
+								thi.zpag=ret.data.pagenum;
+								uni.stopPullDownRefresh();
+							}
+							if(pd==2){
+								thi.gmlist=thi.gmlist.concat(ret.data.data);
+							}
+						}else{
+							thi.gmlist=[];
+							uni.hideLoading();
+						}
+					}
+				});
+			}
+		}
+    },
+	onNavigationBarButtonTap(e) {
+		if(e.index==0){
+			uni.navigateTo({
+				url: '../../pages/user/dow',
+			});
+		}
+	}
+}
+</script>
+<style>
+@import "../../common/gmtop.css";
+</style>

@@ -1,0 +1,118 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><?php include $this->Template('header');?>
+
+    <div class="banxin content">
+      <div class="hot-new">
+          <span class="cur">
+              今日开服
+              <p></p>
+          </span>
+          <span>
+              <a href="./index.php?to=kaifu&amp;op=kaifu-m">明日开服</a>
+              <p></p>
+          </span>
+          <span>
+              <a href="./index.php?to=kaifu&amp;op=kaifu-l">历史开服</a>
+              <p></p>
+          </span>
+          <i class="right">当前时间：<?php echo $dqtms?></i>
+      </div>
+      <div class="contain">
+          <ul class="now">
+			<?php if(is_array($xflb1)===true){foreach($xflb1 AS $key => $value){ ?>
+              <li>
+                  <i>1</i>
+                  <img src="<?php echo $value['gmlogo']?>" >
+                  <div class="info">
+                      <h4><?php echo $value['gmname']?></h4>
+                      <p><?php echo $value['gmbq']?></p>
+                      <p>开服时间：<?php echo $value['kftimes']?></p>
+                  </div>
+                  <em><?php echo $value['xfname']?></em>
+                  <div class="system">
+					<?php if($value['iosan']=='安卓'){ ?>
+                      <img src="./template/pcmoban/images/an.png" >
+					<?php } ?>
+					<?php if($value['iosan']=='苹果'){ ?>
+					  <img src="./template/pcmoban/images/ios.png" >
+					<?php } ?>
+					<?php if($value['iosan']=='双端'){ ?>
+						<img src="./template/pcmoban/images/ios.png" >
+					  <img src="./template/pcmoban/images/an.png" >
+					<?php } ?>
+                  </div>
+                  <a href="./index.php?to=gift-info&amp;id=<?php echo $value['gid']?>" class="right lqlb">领取礼包</a>
+                  <a href="./index.php?to=game_id&amp;id=<?php echo $value['gid']?>" class="right">进入专区</a>
+              </li>
+             <?php }} ?>
+          </ul>
+          <div class="title">今日已开</div>
+          <ul class="today">
+			<?php $i='1'; ?>
+			<?php if(is_array($xflb02)===true){foreach($xflb02 AS $key => $value){ ?>
+              <li>
+                  <i><?php echo $i?></i>
+                  <img src="<?php echo $value['gmlogo']?>" >
+                  <div class="info">
+                      <h4><?php echo $value['gmname']?></h4>
+                      <p><?php echo $value['gmbq']?></p>
+                      <p>开服时间：<?php echo $value['kftimes']?></p>
+                  </div>
+                  <em><?php echo $value['xfname']?></em>
+                  <div class="system">
+                    <?php if($value['iosan']=='安卓'){ ?>
+                      <img src="./template/pcmoban/images/an.png" >
+					<?php } ?>
+					<?php if($value['iosan']=='苹果'){ ?>
+					  <img src="./template/pcmoban/images/ios.png" >
+					<?php } ?>
+					<?php if($value['iosan']=='双端'){ ?>
+						<img src="./template/pcmoban/images/ios.png" >
+					  <img src="./template/pcmoban/images/an.png" >
+					<?php } ?>
+                  </div>
+                  <a href="./index.php?to=gift-info&amp;id=<?php echo $value['gid']?>" class="right lqlb">领取礼包</a>
+                  <a href="./index.php?to=game_id&amp;id=<?php echo $value['gid']?>" class="right">进入专区</a>
+              </li>
+			<?php $i++; ?>
+            <?php }} ?>
+          </ul>
+          <div class="title">历史已开</div>
+          <ul class="history">
+			<?php $i='1'; ?>
+			<?php if(is_array($xflb2)===true){foreach($xflb2 AS $key => $value){ ?>
+              <li>
+                  <i><?php echo $i?></i>
+                  <img src="<?php echo $value['gmlogo']?>" >
+                  <div class="info">
+                      <h4><?php echo $value['gmname']?></h4>
+                      <p><?php echo $value['gmbq']?></p>
+                      <p>开服时间：<?php echo $value['kftimes']?></p>
+                  </div>
+                  <em><?php echo $value['xfname']?></em>
+                  <div class="system">
+                    <?php if($value['iosan']=='安卓'){ ?>
+                      <img src="./template/pcmoban/images/an.png" >
+					<?php } ?>
+					<?php if($value['iosan']=='苹果'){ ?>
+					  <img src="./template/pcmoban/images/ios.png" >
+					<?php } ?>
+					<?php if($value['iosan']=='双端'){ ?>
+						<img src="./template/pcmoban/images/ios.png" >
+					  <img src="./template/pcmoban/images/an.png" >
+					<?php } ?>
+                  </div>
+                  <a href="./index.php?to=gift-info&amp;id=<?php echo $value['gid']?>" class="right lqlb">领取礼包</a>
+                  <a href="./index.php?to=game_id&amp;id=<?php echo $value['gid']?>" class="right">进入专区</a>
+              </li>
+			  <?php $i++; ?>
+            <?php }} ?>
+          </ul>
+          <div class="page">
+				<a href="./index.php?to=kaifu&amp;pages=<?php echo $pagestrL?>"><span></span></a>
+				<b><?php echo $pagestrC?>/<?php echo $pagenum?></b>
+				<a href="./index.php?to=kaifu&amp;pages=<?php echo $pagestrR?>"><span class="next"></span></a>
+            </div>
+      </div>
+    </div>
+<?php include $this->Template('footer');?>
+

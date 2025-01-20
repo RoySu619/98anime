@@ -1,0 +1,16 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?><?php extract($this->templates_assign);?><!DOCTYPE html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<title>隐私政策</title>
+<link rel="stylesheet" href="./template/mmoban/css/main.css">
+</head>
+<body style="background: #fff;">
+<div style="max-width: 750px; margin: auto; background: #fff;">
+	<div class="ne_xx_nr"><?php echo $hp['nr']?></div>
+</div>
+<script src="./template/mmoban/js/main_rem.js" type="text/javascript"></script>
+</body>
+</html>

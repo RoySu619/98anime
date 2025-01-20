@@ -1,0 +1,140 @@
+<?php defined('TANCHAO') === false && exit('TANCHAO');?>
+<div class="jdc-side" style="display: block;">
+	<div class="mod_hang_qrcode jdc_feedback_qrcode">
+		<div class="mod_hang_qrcode_btn">
+			<img src="./template/pcmoban/images/appdows.png" style="height: 40px; width: 40px;">
+			<span>APP下载</span>
+		</div>
+		<div class="mod_hang_qrcode_show">
+			<div class="mod_hang_qrcode_show_bg">
+				<img src="../image/appdow.png" style="height: 123px; width: 123px;">
+			</div>
+			<p>扫一扫，下载官方APP</p>
+		</div>
+	  </div>
+	  <div class="mod_hang_appeal">
+		<div class="mod_hang_appeal_btn">
+			<img src="./template/pcmoban/images/kefu.png" style="height: 38px; width: 38px; margin-top: 12px;">
+			<span>官方客服</span>
+		</div>
+		<div class="mod_hang_appeal_show">
+		  <ul>
+			<li>
+				<a href="http://wpa.qq.com/msgrd?v=3&amp;uin=<?php echo $config['wzkf1']?>&amp;site=qq&amp;menu=yes" target="_blank">
+					<div class="icon_box">
+						<img src="./template/pcmoban/images/qq.png" style="height: 38px; width: 38px;">
+					</div>
+					<div class="text_box">
+						<h5>在线客服1</h5>
+						<p>7*12 专业客服，服务咨询</p>
+					</div>
+				</a>
+			</li>
+			<li id="entry">
+				<a href="http://wpa.qq.com/msgrd?v=3&amp;uin=<?php echo $config['wzkf2']?>&amp;site=qq&amp;menu=yes" target="_blank" class="f-cb">
+					<div class="icon_box">
+						<img src="./template/pcmoban/images/qq.png" style="height: 38px; width: 38px;">
+					</div>
+					<div class="text_box">
+						<h5>在线客服2</h5>
+						<p>7*12 专业客服，服务咨询</p>
+					</div>
+				</a>
+			</li>
+			<li>
+			<a href="http://wpa.qq.com/msgrd?v=3&amp;uin=<?php echo $config['wzhzqq']?>&amp;site=qq&amp;menu=yes" target="_blank" class="f-cb">
+				<div class="icon_box">
+					<img src="./template/pcmoban/images/qq.png" style="height: 38px; width: 38px;">
+				</div>
+				<div class="text_box">
+					<h5>商务合作</h5>
+					<p>游戏合作，友情链接洽谈</p>
+				</div>
+			</a>
+			</li>
+		  </ul>
+		</div>
+		</div>
+	<div class="mod_hang_qrcode jdc_hang_qrcode">
+		<a class="mod_hang_qrcode_btn">
+			<img src="./template/pcmoban/images/weixin.png" style="height: 38px; width: 38px;">
+			<span>扫码关注</span>
+		</a>
+		<div class="mod_hang_qrcode_show">
+		  <div class="mod_hang_qrcode_show_bg" style="background-image:url(../<?php echo $config['wzwxewm']?>);"></div>
+		  <p>官方微信</p>
+		</div>
+	</div>
+	<div class="mod_hang_qrcode mod_hang_top"><a href="#" class="mod_hang_qrcode_btn">
+		<img src="./template/pcmoban/images/upup.png" style="height: 38px; width: 38px;">
+		<span>返回顶部</span></a>
+	</div>
+	
+	<div class="el-dialog__wrapper" style="display: none;">
+		<div class="el-dialog el-dialog--small" style="top: 15%;">
+			<div class="el-dialog__header">
+				<span class="el-dialog__title"></span>
+				<div type="button" class="el-dialog__headerbtn">
+				<i class="el-dialog__close el-icon el-icon-close"></i></div>
+			</div>
+		</div>
+	</div>
+</div>
+	
+	
+	<div class="footer">
+		<p><span>友情链接：</span>
+		<?php echo $config['youqing']?>
+		</p>
+		<p> 
+			<a href="./index.php?to=help" target="_blank">关于本站</a>
+			<span>|</span><a href="./index.php?to=help" target="_blank">联系我们</a>
+			<span>|</span><a href="./index.php?to=help" target="_blank">帮助中心</a>
+			<span>|</span><a href="./index.php?to=help" target="_blank">版权声明</a>
+			<span>|</span><a href="./index.php?to=help" target="_blank">隐私政策</a>
+			<span>|</span><a href="./index.php?to=help" target="_blank">用户协议</a>
+		</p>
+        <p>健康游戏忠告：抵制不良游戏 拒绝盗版游戏 注意自我保护 谨防上当受骗 适度游戏益脑 沉迷游戏伤身 合理安排时间 享受健康生活</p>
+        <p>COPYRIGHT © 2022 <?php echo $config['wzname']?>网络科技有限公司 | <?php echo $config['footinfos']?> </p>
+    </div>
+	<script src="./template/pcmoban/js/swiper.min.js" type="text/javascript"></script>
+    <script src="./template/pcmoban/js/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script src="./template/pcmoban/js/sweetalert.min.js" type="text/javascript"></script>
+    <script src="./template/pcmoban/js/backtop.js" type="text/javascript"></script>
+    <script type="text/javascript">
+		 /*轮播*/
+		var swiper = new Swiper('.swiper-container', {
+          pagination: {
+            el: '.swiper-pagination',
+			clickable: true,
+          },
+          loop : true,
+          autoplay: 3000,
+		});
+		
+		var swiper = new Swiper('.swiper-container1', {
+	        slidesPerView: 3,
+	        spaceBetween: 20,
+          freeMode: true,
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+	    });
+		 /*游戏资讯*/
+
+      $('.header-tab a').on('click',function(){
+          var idx = $(this).index();
+          $(this).addClass('on').siblings().removeClass('on');
+          $('.information-list>ul').eq(idx).addClass('on').siblings().removeClass('on');
+      })
+		
+		/*游戏资讯*/
+		$(document).on('click','.game-news a',function(){
+          var idx = $(this).index();
+          $(this).addClass('cur').siblings().removeClass('cur');
+          $('.big-img a').eq(idx).show(500).siblings().hide(500);
+		})
+    </script>
+</body>
+</html>
